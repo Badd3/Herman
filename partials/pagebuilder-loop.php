@@ -1,13 +1,13 @@
 <?php
 
-if (have_rows('recrubo_builder')) :
+if (have_rows('herman_builder')) :
 
     // Loop through rows.
-    while (have_rows('recrubo_builder')) : the_row();
+    while (have_rows('herman_builder')) : the_row();
 
-        if (get_row_layout() == 'hero_home') :
+        if (get_row_layout() == 'home_slider') :
 
-            get_template_part('partials/pagebuilder-components/hero-home');
+            get_template_part('partials/pagebuilder-components/home_slider');
 
         // elseif (get_row_layout() == 'client_slider') :
 
