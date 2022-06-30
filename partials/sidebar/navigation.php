@@ -1,4 +1,4 @@
-<section class="bg-white w-1/5 fixed h-full">
+<section class="bg-white w-1/6 fixed h-full">
     <div class="px-7 pb-8 pt-28 h-full">
 
         <div class="text-grey flex flex-col justify-between h-full">
