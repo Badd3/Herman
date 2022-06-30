@@ -26,6 +26,11 @@
           "name": "Light",
           "slug": "light",
           "color": "#F9FAFB"
+        },
+        {
+          "name": "Grey",
+          "slug": "grey",
+          "color": "#B1B1AF"
         }
       ]
     },

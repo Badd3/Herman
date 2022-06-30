@@ -51,12 +51,33 @@
                         "id": ""
                     },
                     "return_format": "array"
-                },
+                }
+            ]
+        },
+        {
+            "key": "field_62bdf72d83f51",
+            "label": "Secondary Navigation",
+            "name": "secondary_navigation",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 0,
+            "max": 0,
+            "layout": "row",
+            "button_label": "",
+            "sub_fields": [
                 {
-                    "key": "field_62aa25cd7f85e",
-                    "label": "Knop",
-                    "name": "button",
-                    "type": "true_false",
+                    "key": "field_62bdf72d83f52",
+                    "label": "Pagina",
+                    "name": "page",
+                    "type": "link",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -65,11 +86,7 @@
                         "class": "",
                         "id": ""
                     },
-                    "message": "",
-                    "default_value": 0,
-                    "ui": 1,
-                    "ui_on_text": "",
-                    "ui_off_text": ""
+                    "return_format": "array"
                 }
             ]
         },
@@ -150,9 +167,9 @@
     "location": [
         [
             {
-                "param": "post_type",
+                "param": "options_page",
                 "operator": "==",
-                "value": "navigation"
+                "value": "acf-options-navigatie"
             }
         ]
     ],
@@ -165,5 +182,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1656438826
+    "modified": 1656616769
 }

@@ -36,8 +36,7 @@ function tailpress_setup()
 
 add_action('after_setup_theme', 'tailpress_setup');
 
-//Add custom post type 'Navigation
-require get_template_directory() . '/inc/custom-post-types/navigation.php';
+
 
 /**
  * Load WooCommerce compatibility file.
@@ -133,3 +132,28 @@ function defer_parsing_of_js($url)
 	return str_replace(' src', ' defer src', $url);
 }
 add_filter('script_loader_tag', 'defer_parsing_of_js', 10);
+
+
+if (function_exists('acf_add_options_page')) {
+
+	acf_add_options_page(array(
+		'page_title' 	=> 'Thema Opties',
+		'menu_title'	=> 'Thema Opties',
+		'menu_slug' 	=> 'theme-general-settings',
+		'capability'	=> 'edit_posts',
+		'redirect'		=> false
+	));
+
+	acf_add_options_sub_page(array(
+		'page_title' 	=> 'Navigatie',
+		'menu_title'	=> 'Navigatie',
+		'parent_slug'	=> 'theme-general-settings',
+	));
+
+	// acf_add_options_sub_page(array(
+	// 	'page_title' 	=> 'Theme Footer Settings',
+	// 	'menu_title'	=> 'Footer',
+	// 	'parent_slug'	=> 'theme-general-settings',
+	// ));
+
+}
