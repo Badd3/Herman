@@ -9,9 +9,9 @@ if (have_rows('herman_builder')) :
 
             get_template_part('partials/pagebuilder-components/home_slider');
 
-        // elseif (get_row_layout() == 'client_slider') :
+        elseif (get_row_layout() == 'info_page') :
 
-        //     get_template_part('partials/pagebuilder-components/client-slider');
+            get_template_part('partials/pagebuilder-components/info-page');
 
 
         endif;
