@@ -123,6 +123,59 @@
                     ],
                     "min": "",
                     "max": ""
+                },
+                "layout_62c1ecf7f2c49": {
+                    "key": "layout_62c1ecf7f2c49",
+                    "name": "brand_page",
+                    "label": "Brand Page",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_62c1ecf7f2c4a",
+                            "label": "Brand Text",
+                            "name": "brand_text",
+                            "type": "wysiwyg",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "70",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "tabs": "all",
+                            "toolbar": "full",
+                            "media_upload": 1,
+                            "delay": 0
+                        },
+                        {
+                            "key": "field_62c1ecf7f2c4b",
+                            "label": "Image Right",
+                            "name": "image_right",
+                            "type": "image",
+                            "instructions": "Plaats hier een afbeelding",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "30",
+                                "class": "",
+                                "id": ""
+                            },
+                            "return_format": "array",
+                            "preview_size": "medium",
+                            "library": "all",
+                            "min_width": "",
+                            "min_height": "",
+                            "min_size": "",
+                            "max_width": "",
+                            "max_height": "",
+                            "max_size": "",
+                            "mime_types": ""
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
                 }
             },
             "button_label": "Add Row",
@@ -148,5 +201,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1656620887
+    "modified": 1656876333
 }
