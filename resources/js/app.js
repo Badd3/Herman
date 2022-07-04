@@ -1,11 +1,12 @@
 import Alpine from "alpinejs";
-import Swiper from "swiper/bundle";
+import Swiper, { Autoplay, Pagination, EffectFade } from "swiper";
 
 window.Alpine = Alpine;
 
 Alpine.start();
 
 const swiper = new Swiper(".swiper", {
+  modules: [Autoplay, Pagination, EffectFade],
   direction: "horizontal",
   loop: true,
   effect: "fade",
@@ -17,16 +18,5 @@ const swiper = new Swiper(".swiper", {
   // If we need pagination
   pagination: {
     el: ".swiper-pagination",
-  },
-
-  // Navigation arrows
-  navigation: {
-    nextEl: ".swiper-button-next",
-    prevEl: ".swiper-button-prev",
-  },
-
-  // And if we need scrollbar
-  scrollbar: {
-    el: ".swiper-scrollbar",
   },
 });
