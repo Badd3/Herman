@@ -76,7 +76,7 @@
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
-                                "width": "",
+                                "width": "50",
                                 "class": "",
                                 "id": ""
                             },
@@ -95,11 +95,30 @@
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
-                                "width": "",
+                                "width": "50",
                                 "class": "",
                                 "id": ""
                             },
                             "return_format": "array"
+                        },
+                        {
+                            "key": "field_62c366a1073ac",
+                            "label": "Overlay",
+                            "name": "overlay",
+                            "type": "true_false",
+                            "instructions": "Vink dit aan indien je een overlay wilt over je afbeeldingen. Zo word de tekst iets beter leesbaar.",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "message": "",
+                            "default_value": 0,
+                            "ui": 1,
+                            "ui_on_text": "",
+                            "ui_off_text": ""
                         }
                     ],
                     "min": "",
@@ -129,5 +148,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1656952150
+    "modified": 1656973001
 }

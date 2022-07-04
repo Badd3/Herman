@@ -2,7 +2,7 @@
 .swiper-pagination-bullets.swiper-pagination-horizontal,
 .swiper-pagination-custom,
 .swiper-pagination-fraction {
-  width: 50px;
+  width: 100px;
   left: 10px;
 }
 
