@@ -8,6 +8,7 @@
 
 .swiper-pagination-bullet {
   border-radius: 0;
+  border: 1px solid white;
 }
 
 .swiper-pagination-bullet-active {

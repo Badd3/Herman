@@ -1,10 +1,16 @@
 <?php
 
+$overlay = get_sub_field('overlay');
 // Check rows exists.
 if (have_rows('slider_afbeeldingen')) :
 ?>
     <section class="h-screen grid z-[0] grid-cols-3 grid-rows-3 relative">
-        <div class="absolute w-full h-full bg-black/[0.4] z-[2]"></div>
+        <?php
+
+        if ($overlay) { ?>
+            <div class="absolute w-full h-full bg-black/[0.4] z-[2]"></div>
+        <?php }; ?>
+
         <!-- Slider main container -->
         <div class="swiper w-screen lg:w-[calc(100vw-16.67vw)] row-span-full row-col-full">
             <!-- Additional required wrapper -->
