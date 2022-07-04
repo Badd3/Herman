@@ -21,7 +21,7 @@
 		<?php get_template_part('partials/sidebar/navigation'); ?>
 
 
-		<div id="content" class="site-content flex-grow w-5/6 ml-auto">
+		<div id="content" class="site-content flex-grow w-full lg:ml-auto lg:w-5/6">
 
 			<?php do_action('tailpress_content_start'); ?>
 

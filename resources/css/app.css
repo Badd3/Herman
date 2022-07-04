@@ -1,5 +1,7 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+@import "swiper/swiper-bundle.min.css";
 
 @import "custom.css";
+@import "home-slider.css";
