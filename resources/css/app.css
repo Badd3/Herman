@@ -2,4 +2,10 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+@import "swiper/swiper.min.css";
+@import "swiper/modules/effect-fade/effect-fade.min.css";
+@import "swiper/modules/pagination/pagination.min.css";
+@import "swiper/modules/autoplay/autoplay.min.css";
+
 @import "custom.css";
+@import "home-slider.css";
