@@ -14,11 +14,14 @@
 
 	<?php do_action('tailpress_site_before'); ?>
 
-	<div id="page" class="min-h-screen flex flex-col">
+	<div x-data="{ navOpen: false }" id="page" class="min-h-screen flex flex-col">
 
 		<?php do_action('tailpress_header'); ?>
 
 		<?php get_template_part('partials/sidebar/navigation'); ?>
+
+		<?php get_template_part('partials/mobile/header'); ?>
+		<?php get_template_part('partials/mobile/off-canvas'); ?>
 
 
 		<div id="content" class="site-content flex-grow w-full lg:ml-auto lg:w-5/6">
