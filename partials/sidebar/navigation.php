@@ -30,7 +30,7 @@
             // Check rows exists.
             if (have_rows('secondary_navigation', 'options')) :
             ?>
-                <ul class="flex flex-col gap-3">
+                <ul class="flex flex-col gap-3 mb-2">
                     <?php
                     // Loop through rows.
                     while (have_rows('secondary_navigation', 'options')) : the_row();
