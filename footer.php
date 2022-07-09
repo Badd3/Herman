@@ -6,8 +6,8 @@
 
 <?php do_action('tailpress_content_after'); ?>
 
-
-</div>
+<?php get_template_part('partials/desktop/footer'); ?>
+</div> <!-- CLOSE #ID PAGE -->
 
 <?php wp_footer(); ?>
 

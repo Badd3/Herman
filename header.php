@@ -20,9 +20,12 @@
 
 		<?php get_template_part('partials/sidebar/navigation'); ?>
 
+		<!-- Mobile header -->
 		<?php get_template_part('partials/mobile/header'); ?>
 		<?php get_template_part('partials/mobile/off-canvas'); ?>
 
+		<!-- Desktop header -->
+		<?php get_template_part('partials/desktop/header'); ?>
 
 		<div id="content" class="site-content flex-grow w-full lg:ml-auto lg:w-5/6">
 

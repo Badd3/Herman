@@ -41,7 +41,7 @@ add_action('after_setup_theme', 'tailpress_setup');
 /**
  * Load WooCommerce compatibility file.
  */
-// if ( class_exists( 'WooCommerce' ) ) {
+// if (class_exists('WooCommerce')) {
 // 	require get_template_directory() . '/inc/woocommerce.php';
 // }
 
