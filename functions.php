@@ -158,7 +158,8 @@ if (function_exists('acf_add_options_page')) {
 
 }
 
-function remove_editor() {
+function remove_editor()
+{
 	remove_post_type_support('page', 'editor');
-  }
-  add_action('admin_init', 'remove_editor');
+}
+add_action('admin_init', 'remove_editor');

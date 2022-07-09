@@ -36,5 +36,9 @@ module.exports = {
       "2xl": "1440px",
     },
   },
-  plugins: [tailpress.tailwind],
+  plugins: [
+    require('@tailwindcss/typography'),
+    require('@tailwindcss/aspect-ratio'),
+    tailpress.tailwind,
+  ],
 };
