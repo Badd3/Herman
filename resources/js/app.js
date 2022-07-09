@@ -3,8 +3,6 @@ import Swiper, { Autoplay, Pagination, EffectFade } from "swiper";
 
 window.Alpine = Alpine;
 
-Alpine.start();
-
 const swiper = new Swiper(".swiper", {
   modules: [Autoplay, Pagination, EffectFade],
   direction: "horizontal",
@@ -20,3 +18,5 @@ const swiper = new Swiper(".swiper", {
     el: ".swiper-pagination",
   },
 });
+
+Alpine.start();
