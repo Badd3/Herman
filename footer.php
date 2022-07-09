@@ -7,7 +7,6 @@
 <?php do_action('tailpress_content_after'); ?>
 
 
-
 </div>
 
 <?php wp_footer(); ?>
