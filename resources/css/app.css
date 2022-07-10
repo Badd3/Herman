@@ -9,3 +9,14 @@
 
 @import "custom.css";
 @import "home-slider.css";
+
+@layer base {
+    @font-face {
+        font-family: "Gotham";
+        src: url('../../public/fonts/Gotham-Light.otf') format('otf')
+    }
+    @font-face {
+        font-family: "GT-Sectra";
+        src: url('../../public/fonts/GT-Sectra-Display-Light.otf') format('otf')
+    }
+}

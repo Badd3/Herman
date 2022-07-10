@@ -9,7 +9,7 @@ $info_text = get_sub_field('info_text');
 <section>
   <div class="flex flex-col sm:flex-row">
     <div class="basis-full sm:basis-2/3">
-      <div class="pt-12 pb-16 px-4 sm:pt-16 sm:px-6 lg:px-8 lg:max-w-5xl text-gray-500">
+      <div class="pt-12 pb-16 px-4 sm:pt-16 sm:px-6 lg:px-8 lg:max-w-5xl">
         <p><?php echo $info_text; ?></p>
       </div>
     </div>

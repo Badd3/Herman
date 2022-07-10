@@ -8,11 +8,6 @@
     "color": {
       "palette": [
         {
-          "name": "Primary",
-          "slug": "primary",
-          "color": "#0EA5E9"
-        },
-        {
           "name": "Secondary",
           "slug": "secondary",
           "color": "#14B8A6"
@@ -28,9 +23,24 @@
           "color": "#F9FAFB"
         },
         {
-          "name": "Grey",
-          "slug": "grey",
-          "color": "#B1B1AF"
+          "name": "Background",
+          "slug": "background",
+          "color": "#FDFDFB"
+        },
+        {
+          "name": "Primary",
+          "slug": "primary",
+          "color": "#000000"
+        },
+        {
+          "name": "Inactive",
+          "slug": "inactive",
+          "color": "#4D000000"
+        },
+        {
+          "name": "Hover",
+          "slug": "hover",
+          "color": "#ffffff"
         }
       ]
     },

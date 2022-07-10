@@ -23,9 +23,16 @@ module.exports = {
       colors: tailpress.colorMapper(
         tailpress.theme("settings.color.palette", theme)
       ),
+      'bg-color': '#FDFDFB',
+      'txt-primary': '#000000',
+      'txt-inactive': '#4D000000',
+      'txt-hover': '#ffffff',
       fontSize: tailpress.fontSizeMapper(
         tailpress.theme("settings.typography.fontSizes", theme)
       ),
+    },
+    fontFamily: {
+      gotham: "'Gotham', serif",
     },
     screens: {
       xs: "480px",
