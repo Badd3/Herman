@@ -163,3 +163,20 @@ function remove_editor()
 	remove_post_type_support('page', 'editor');
 }
 add_action('admin_init', 'remove_editor');
+
+
+add_filter('wpcf7_autop_or_not', '__return_false');
+
+
+
+//redirect non-admins to the coming soon page
+function coming_soon_redirect()
+{
+	global $pagenow;
+
+	if (!current_user_can('manage_options') && !is_page("login") && !is_page("coming-soon") && $page_now != "wp-login.php") {
+		wp_redirect(home_url("coming-soon"));
+		exit;
+	}
+}
+add_action('template_redirect', 'coming_soon_redirect');

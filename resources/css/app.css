@@ -2,6 +2,17 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+/* @layer base {
+  @font-face {
+    font-family: "Gotham";
+    src: url("public/fonts/Gotham-Light.otf") format("otf");
+  }
+  @font-face {
+    font-family: "GT-Sectra";
+    src: url("public/fonts/GT-Sectra-Display-Light.otf") format("otf");
+  }
+} */
+
 @import "swiper/swiper.min.css";
 @import "swiper/modules/effect-fade/effect-fade.min.css";
 @import "swiper/modules/pagination/pagination.min.css";
@@ -10,13 +21,4 @@
 @import "custom.css";
 @import "home-slider.css";
 
-@layer base {
-    @font-face {
-        font-family: "Gotham";
-        src: url('../../public/fonts/Gotham-Light.otf') format('otf')
-    }
-    @font-face {
-        font-family: "GT-Sectra";
-        src: url('../../public/fonts/GT-Sectra-Display-Light.otf') format('otf')
-    }
-}
+@import "contact-form.css";
