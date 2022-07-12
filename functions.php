@@ -126,7 +126,7 @@ add_filter('nav_menu_submenu_css_class', 'tailpress_nav_menu_add_submenu_class',
 //Defer parsing of JS
 function defer_parsing_of_js($url)
 {
-	// if (is_user_logged_in()) return $url; //don't break WP Admin
+	if (is_user_logged_in()) return $url; //don't break WP Admin
 	if (FALSE === strpos($url, '.js')) return $url;
 	if (strpos($url, 'jquery.js')) return $url;
 	return str_replace(' src', ' defer src', $url);
