@@ -1,4 +1,4 @@
-<section class="bg-white w-1/6 hidden lg:block fixed h-full">
+<section class="bg-white-bg w-1/6 hidden lg:block fixed h-full">
     <div class="px-7 pb-8 pt-28 h-full">
 
         <div class="text-grey flex flex-col justify-between h-full uppercase">
@@ -16,7 +16,7 @@
                         $nav_item_title = get_sub_field('page')['title'];
                         $nav_item_url = get_sub_field('page')['url'];
                     ?>
-                        <a class="hover:text-black" href="<?php echo $nav_item_url; ?>"><?php echo $nav_item_title; ?></a>
+                        <a class="hover:text-black duration-300 text-base" href="<?php echo $nav_item_url; ?>"><?php echo $nav_item_title; ?></a>
                     <?php
 
                     endwhile;
@@ -39,7 +39,7 @@
                         $nav_item_title = get_sub_field('page')['title'];
                         $nav_item_url = get_sub_field('page')['url'];
                     ?>
-                        <a class="hover:text-black" href="<?php echo $nav_item_url; ?>"><?php echo $nav_item_title; ?></a>
+                        <a class="duration-300 hover:text-black text-base" href="<?php echo $nav_item_url; ?>"><?php echo $nav_item_title; ?></a>
                     <?php
 
                     endwhile;
@@ -51,6 +51,6 @@
 
             ?>
         </div>
-
+        <h1 class="text-xl">fsdafdsa</h1>
     </div>
 </section>
