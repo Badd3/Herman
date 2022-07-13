@@ -1,0 +1,11 @@
+.wpcf7-spinner {
+  display: none !important;
+}
+
+.wpcf7-email {
+  @apply outline-0;
+}
+
+.wpcf7 {
+  @apply border-b border-black pb-3;
+}
