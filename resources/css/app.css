@@ -2,13 +2,6 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-@font-face {
-  font-family: "gotham";
-  src: url("/wp-content/themes/herman/fonts/Gotham.woff2") format("woff2"),
-    url("/wp-content/themes/herman/fonts/Gotham.woff") format("woff");
-  font-display: auto;
-}
-
 @import "swiper/swiper.min.css";
 @import "swiper/modules/effect-fade/effect-fade.min.css";
 @import "swiper/modules/pagination/pagination.min.css";
@@ -18,3 +11,10 @@
 @import "home-slider.css";
 
 @import "contact-form.css";
+
+@font-face {
+  font-family: "gotham";
+  src: url("/wp-content/themes/herman/fonts/Gotham.woff2") format("woff2"),
+    url("/wp-content/themes/herman/fonts/Gotham.woff") format("woff");
+  font-display: auto;
+}
