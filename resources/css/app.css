@@ -14,7 +14,7 @@
 
 @font-face {
   font-family: "gotham";
-  src: url("/wp-content/themes/herman/fonts/Gotham.woff2") format("woff2"),
-    url("/wp-content/themes/herman/fonts/Gotham.woff") format("woff");
+  src: url("/wp-content/themes/Herman/fonts/Gotham.woff2") format("woff2"),
+    url("/wp-content/themes/Herman/fonts/Gotham.woff") format("woff");
   font-display: auto;
 }
