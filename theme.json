@@ -41,6 +41,11 @@
           "name": "Hover",
           "slug": "hover",
           "color": "#ffffff"
+        },
+        {
+          "name": "Grey",
+          "slug": "grey",
+          "color": "#B2B2B0"
         }
       ]
     },

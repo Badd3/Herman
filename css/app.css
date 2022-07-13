@@ -927,11 +927,6 @@ html {
   border-bottom-width: 1px;
 }
 
-.border-primary {
-  --tw-border-opacity: 1;
-  border-color: rgb(0 0 0 / var(--tw-border-opacity));
-}
-
 .border-white {
   --tw-border-opacity: 1;
   border-color: rgb(255 255 255 / var(--tw-border-opacity));
@@ -942,14 +937,14 @@ html {
   border-color: rgb(0 0 0 / var(--tw-border-opacity));
 }
 
-.bg-primary {
-  --tw-bg-opacity: 1;
-  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
-}
 
-.bg-gray-200 {
   --tw-bg-opacity: 1;
   background-color: rgb(229 231 235 / var(--tw-bg-opacity));
+}
+
+.bg-white {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
 .bg-white {
@@ -963,6 +958,11 @@ html {
 
 .bg-black\/\[0\.4\] {
   background-color: rgb(0 0 0 / 0.4);
+}
+
+.bg-white-bg {
+  --tw-bg-opacity: 1;
+  background-color: rgb(253 253 251 / var(--tw-bg-opacity));
 }
 
 .bg-gradient-to-r {
@@ -1057,24 +1057,29 @@ html {
   text-align: center;
 }
 
-.text-5xl {
-  font-size: 3rem;
-  line-height: 1;
-}
-
 .text-2xl {
-  font-size: 1.5rem;
-  line-height: 2rem;
+  font-size: 30px;
+  line-height: 32px;
 }
 
 .text-sm {
-  font-size: 0.875rem;
-  line-height: 1.25rem;
+  font-size: 12px;
+  line-height: 18px;
 }
 
 .text-lg {
-  font-size: 1.125rem;
-  line-height: 1.75rem;
+  font-size: 20px;
+  line-height: 28px;
+}
+
+.text-base {
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.text-xl {
+  font-size: 24px;
+  line-height: 32px;
 }
 
 .font-light {
@@ -1122,6 +1127,11 @@ html {
   color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
+.text-grey {
+  --tw-text-opacity: 1;
+  color: rgb(178 178 176 / var(--tw-text-opacity));
+}
+
 .text-blue-500 {
   --tw-text-opacity: 1;
   color: rgb(59 130 246 / var(--tw-text-opacity));
@@ -1148,6 +1158,10 @@ html {
 
 .duration-700 {
   transition-duration: 700ms;
+}
+
+.duration-300 {
+  transition-duration: 300ms;
 }
 
 .ease-in-out {
@@ -1209,7 +1223,7 @@ html {
 }
 
 .wp-caption-text {
-  font-size: 0.875rem;
+  font-size: 12px;
   color: #4b5563;
 }
 
@@ -1285,8 +1299,8 @@ html {
   }
 
   .md\:text-3xl {
-    font-size: 1.875rem;
-    line-height: 2.25rem;
+    font-size: 38px;
+    line-height: 32px;
   }
 }
 
@@ -1318,10 +1332,5 @@ html {
   .lg\:px-8 {
     padding-left: 2rem;
     padding-right: 2rem;
-  }
-
-  .lg\:text-5xl {
-    font-size: 3rem;
-    line-height: 1;
   }
 }
