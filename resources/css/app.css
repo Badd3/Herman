@@ -2,17 +2,12 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-@layer base {
-  @font-face {
-    font-family: "Gotham";
-    src: url("public/fonts/Gotham-Light.otf") format("otf");
-  }
+@font-face {
+  font-family: "gotham";
+  src: url("/wp-content/themes/herman/fonts/Gotham.woff2") format("woff2"),
+    url("/wp-content/themes/herman/fonts/Gotham.woff") format("woff");
+  font-display: auto;
 }
-@layer base {
-    html {
-      font-family: Gotham, system-ui, sans-serif;
-    }
-  }
 
 @import "swiper/swiper.min.css";
 @import "swiper/modules/effect-fade/effect-fade.min.css";

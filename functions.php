@@ -168,7 +168,6 @@ add_action('admin_init', 'remove_editor');
 add_filter('wpcf7_autop_or_not', '__return_false');
 
 
-
 //redirect non-admins to the coming soon page
 // function coming_soon_redirect()
 // {

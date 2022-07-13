@@ -51,6 +51,6 @@
 
             ?>
         </div>
-        <h1 class="text-xl">fsdafdsa</h1>
+
     </div>
 </section>
