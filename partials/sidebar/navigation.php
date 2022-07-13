@@ -16,7 +16,7 @@
                         $nav_item_title = get_sub_field('page')['title'];
                         $nav_item_url = get_sub_field('page')['url'];
                     ?>
-                        <a class="hover:text-black" href="<?php echo $nav_item_url; ?>"><?php echo $nav_item_title; ?></a>
+                        <a class="hover:text-black duration-300" href="<?php echo $nav_item_url; ?>"><?php echo $nav_item_title; ?></a>
                     <?php
 
                     endwhile;
@@ -39,7 +39,7 @@
                         $nav_item_title = get_sub_field('page')['title'];
                         $nav_item_url = get_sub_field('page')['url'];
                     ?>
-                        <a class="hover:text-black" href="<?php echo $nav_item_url; ?>"><?php echo $nav_item_title; ?></a>
+                        <a class="duration-300 hover:text-black" href="<?php echo $nav_item_url; ?>"><?php echo $nav_item_title; ?></a>
                     <?php
 
                     endwhile;
