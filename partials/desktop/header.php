@@ -2,7 +2,7 @@
     <div class="flex justify-center">
         <div class="w-40 absolute left-1/2 -translate-x-1/2 top-5">
             <a href="<?php echo home_url(); ?>">
-                <img src="<?php echo esc_url(get_template_directory_uri() . '/images/herman-logo-white.svg'); ?>" alt="logo-white">
+                <img src="<?php echo esc_url(get_template_directory_uri() . '/images/herman-logo-white-1.svg'); ?>" alt="logo-white">
             </a>
         </div>
         <div class="absolute right-8 top-5 text-white">
