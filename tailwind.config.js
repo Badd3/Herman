@@ -32,7 +32,7 @@ module.exports = {
       ),
     },
     fontFamily: {
-      gotham: ["Gotham", "san-serif"],
+      gotham: ["Gotham", "sans-serif"],
     },
     screens: {
       xs: "480px",
