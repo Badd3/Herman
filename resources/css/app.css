@@ -2,16 +2,17 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-/* @layer base {
+@layer base {
   @font-face {
     font-family: "Gotham";
     src: url("public/fonts/Gotham-Light.otf") format("otf");
   }
-  @font-face {
-    font-family: "GT-Sectra";
-    src: url("public/fonts/GT-Sectra-Display-Light.otf") format("otf");
+}
+@layer base {
+    html {
+      font-family: Gotham, system-ui, sans-serif;
+    }
   }
-} */
 
 @import "swiper/swiper.min.css";
 @import "swiper/modules/effect-fade/effect-fade.min.css";

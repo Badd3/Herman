@@ -51,7 +51,7 @@ module.exports = {
       // ),
     },
     fontFamily: {
-      serif: "'Gotham', serif",
+      gotham: ["Gotham", "sans-serif"],
     },
     screens: {
       xs: "480px",
@@ -63,7 +63,6 @@ module.exports = {
     },
   },
   plugins: [
-    require("@tailwindcss/typography"),
     require("@tailwindcss/aspect-ratio"),
     tailpress.tailwind,
   ],
