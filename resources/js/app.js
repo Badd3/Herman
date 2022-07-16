@@ -20,3 +20,7 @@ const swiper = new Swiper(".swiper", {
 });
 
 Alpine.start();
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelector('.wpcf7-email').focus();
+});
