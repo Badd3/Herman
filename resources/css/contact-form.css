@@ -9,3 +9,24 @@
 .wpcf7 {
   @apply border-b border-black pb-3;
 }
+
+.wpcf7-submit {
+  cursor: pointer;
+}
+
+.wpcf7-validates-as-email:focus-visible {
+  outline: unset;
+}
+
+form.invalid .wpcf7-response-output,
+.wpcf7 form.sent .wpcf7-response-output {
+  border: none;
+  font-family: 'Gotham', 'sans-serif';
+  text-transform: uppercase;
+  padding: unset;
+}
+
+.wpcf7-not-valid-tip {
+  font-family: 'Gotham', 'sans-serif';
+  text-transform: uppercase;
+}
