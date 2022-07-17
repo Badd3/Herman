@@ -36,7 +36,7 @@ function tailpress_setup()
 
 add_action('after_setup_theme', 'tailpress_setup');
 
-
+require 'inc/navigation.php';
 
 /**
  * Load WooCommerce compatibility file.
