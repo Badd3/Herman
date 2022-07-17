@@ -3,9 +3,23 @@
 }
 
 .wpcf7-email {
-  @apply outline-0;
+  @apply text-base outline-0;
 }
 
 .wpcf7 {
-  @apply border-b border-black pb-3;
+  @apply border-b border-grey pb-3;
+}
+
+.wpcf7-text {
+  @apply text-base border-b w-full border-grey py-3;
+}
+
+.wpcf7-textarea {
+  @apply text-base w-9/12 py-3;
+  resize: none;
+}
+
+.wpcf7-submit {
+  @apply text-base;
+  cursor: pointer;
 }
