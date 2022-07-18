@@ -673,6 +673,10 @@ video {
   z-index: 2;
 }
 
+.order-first {
+  order: -9999;
+}
+
 .col-start-2 {
   grid-column-start: 2;
 }
@@ -853,10 +857,6 @@ video {
   cursor: pointer;
 }
 
-.resize {
-  resize: both;
-}
-
 .list-disc {
   list-style-type: disc;
 }
@@ -995,6 +995,11 @@ video {
      object-position: center;
 }
 
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
 .px-4 {
   padding-left: 1rem;
   padding-right: 1rem;
@@ -1018,11 +1023,6 @@ video {
 .px-6 {
   padding-left: 1.5rem;
   padding-right: 1.5rem;
-}
-
-.py-3 {
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
 }
 
 .px-2 {
@@ -1714,17 +1714,26 @@ article > *:not(.entry-content),
 
 .wpcf7-textarea {
   width: 75%;
+  resize: none;
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
   font-size: 14px;
   line-height: 22px;
-  resize: none;
+}
+
+.wpcf7-textarea:focus-visible {
+  outline-width: 0px;
 }
 
 .wpcf7-submit {
+  cursor: pointer;
   font-size: 14px;
   line-height: 22px;
-  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.wpcf7-form-control-wrap:focus-visible {
+  outline-width: 0px;
 }
 
 @font-face {
@@ -1741,6 +1750,10 @@ article > *:not(.entry-content),
   color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
+.focus-visible\:outline-0:focus-visible {
+  outline-width: 0px;
+}
+
 @media (min-width: 600px) {
   .sm\:sticky {
     position: -webkit-sticky;
@@ -1749,6 +1762,10 @@ article > *:not(.entry-content),
 
   .sm\:top-0 {
     top: 0px;
+  }
+
+  .sm\:order-first {
+    order: -9999;
   }
 
   .sm\:h-screen {
@@ -1767,8 +1784,21 @@ article > *:not(.entry-content),
     flex-basis: 33.333333%;
   }
 
+  .sm\:basis-3\/5 {
+    flex-basis: 60%;
+  }
+
   .sm\:flex-row {
     flex-direction: row;
+  }
+
+  .sm\:border-y {
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+  }
+
+  .sm\:border-b {
+    border-bottom-width: 1px;
   }
 
   .sm\:px-6 {
@@ -1846,8 +1876,25 @@ article > *:not(.entry-content),
     max-width: 64rem;
   }
 
+  .lg\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .lg\:border-y {
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+  }
+
+  .lg\:border-b {
+    border-bottom-width: 1px;
+  }
+
   .lg\:px-8 {
     padding-left: 2rem;
     padding-right: 2rem;
+  }
+
+  .lg\:text-right {
+    text-align: right;
   }
 }
