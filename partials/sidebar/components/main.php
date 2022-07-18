@@ -8,7 +8,7 @@ $main_navigation = get_field('main_nav', 'option');
 // Check rows exists.
 if (have_rows('navigation_items', $main_navigation)) :
 ?>
-    <ul x-data="{openSidebar : false}" class="flex flex-col gap-3">
+    <ul x-data="{ selected: null }" class="flex flex-col gap-3">
         <?php
         // Loop through rows.
         $i = 0;
@@ -21,8 +21,8 @@ if (have_rows('navigation_items', $main_navigation)) :
 
         ?>
             <?php if ($submenu) { ?>
-                <li x-ref="has-sidebar-<?php echo $i; ?>" x-data="{ open: false }">
-                    <a @click.stop @click.prevent="open = !open; console.log($el); " class="hover:text-black duration-300 text-base" href="<?php echo $nav_item_link; ?>"><?php echo $nav_item_label; ?></a>
+                <li>
+                    <a @click.stop @click.prevent="selected !== <?php echo $i; ?> ? selected = <?php echo $i; ?> : selected = null;" class="hover:text-black duration-300 text-base" href="<?php echo $nav_item_link; ?>"><?php echo $nav_item_label; ?></a>
                     <?php
                     if ($submenu) {
                         get_template_part('partials/sidebar/components/submenu', null, array('count' => $i));
