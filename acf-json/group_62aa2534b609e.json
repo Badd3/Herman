@@ -34,23 +34,50 @@
             "collapsed": "",
             "min": 0,
             "max": 0,
-            "layout": "row",
+            "layout": "block",
             "button_label": "",
             "sub_fields": [
                 {
                     "key": "field_62aa25b37f85d",
-                    "label": "Pagina",
-                    "name": "page",
-                    "type": "link",
+                    "label": "Item Link",
+                    "name": "item_link",
+                    "type": "page_link",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
-                        "width": "",
+                        "width": "40",
                         "class": "",
                         "id": ""
                     },
-                    "return_format": "array"
+                    "post_type": [
+                        "page",
+                        "post",
+                        "product"
+                    ],
+                    "taxonomy": "",
+                    "allow_null": 0,
+                    "allow_archives": 1,
+                    "multiple": 0
+                },
+                {
+                    "key": "field_62d429554f168",
+                    "label": "Item Label",
+                    "name": "item_label",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "40",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
                 },
                 {
                     "key": "field_62d3e9540e147",
@@ -72,11 +99,11 @@
                     "ui_off_text": ""
                 },
                 {
-                    "key": "field_62d3e9790e148",
-                    "label": "Selecteer Submenu",
-                    "name": "selected_submenu",
-                    "type": "post_object",
-                    "instructions": "",
+                    "key": "field_62d428077f098",
+                    "label": "Sub Menu",
+                    "name": "submenu_items",
+                    "type": "repeater",
+                    "instructions": "Selecteer items die in het submenu getoond moeten worden",
                     "required": 0,
                     "conditional_logic": [
                         [
@@ -92,14 +119,113 @@
                         "class": "",
                         "id": ""
                     },
-                    "post_type": [
-                        "navigation"
-                    ],
-                    "taxonomy": "",
-                    "allow_null": 0,
-                    "multiple": 0,
-                    "return_format": "id",
-                    "ui": 1
+                    "collapsed": "",
+                    "min": 0,
+                    "max": 0,
+                    "layout": "block",
+                    "button_label": "",
+                    "sub_fields": [
+                        {
+                            "key": "field_62d42e8ce7161",
+                            "label": "Link Type",
+                            "name": "link_type",
+                            "type": "radio",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "page_link": "Standaard link",
+                                "product_category": "Product Categorie"
+                            },
+                            "allow_null": 0,
+                            "other_choice": 0,
+                            "default_value": "",
+                            "layout": "horizontal",
+                            "return_format": "value",
+                            "save_other_choice": 0
+                        },
+                        {
+                            "key": "field_62d42ed5e7162",
+                            "label": "Submenu Link",
+                            "name": "submenu_link_default",
+                            "type": "page_link",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_62d42e8ce7161",
+                                        "operator": "==",
+                                        "value": "page_link"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
+                            "post_type": "",
+                            "taxonomy": "",
+                            "allow_null": 0,
+                            "allow_archives": 1,
+                            "multiple": 0
+                        },
+                        {
+                            "key": "field_62d42898f5358",
+                            "label": "Submenu Link",
+                            "name": "submenu_link_product",
+                            "type": "taxonomy",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_62d42e8ce7161",
+                                        "operator": "==",
+                                        "value": "product_category"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
+                            "taxonomy": "product_cat",
+                            "field_type": "select",
+                            "allow_null": 0,
+                            "add_term": 1,
+                            "save_terms": 0,
+                            "load_terms": 0,
+                            "return_format": "id",
+                            "multiple": 0
+                        },
+                        {
+                            "key": "field_62d42bc666aeb",
+                            "label": "Submenu Label",
+                            "name": "submenu_label",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        }
+                    ]
                 }
             ]
         }
@@ -122,5 +248,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1658055142
+    "modified": 1658072862
 }
