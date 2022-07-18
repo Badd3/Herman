@@ -27,11 +27,11 @@ $phone_display = get_sub_field('phone_display');
       <?php
       if ($email_info != "" && $email_info != NULL) {
       ?>
-        <div class="grid py-2 lg:grid-cols-2 sm:border-y border-grey">
-          <div class="text-base py-1">
+        <div class="flex py-2 lg:grid-cols-2 border-y border-grey">
+          <div class="text-base w-1/4 py-1">
             EMAIL
           </div>
-          <div class="text-base py-1 lg:text-right">
+          <div class="text-base w-3/4 py-1 text-right">
             <a href="mailto:<?php echo $email_info; ?>"><?php echo $email_info; ?></a>
           </div>
         </div>
@@ -42,11 +42,11 @@ $phone_display = get_sub_field('phone_display');
       <?php
       if ($phone_info != "" && $phone_info != NULL) {
       ?>
-        <div class="grid lg:grid-cols-2 sm:border-b border-grey py-2">
-          <div class="text-base py-1">
+        <div class="flex py-2 lg:grid-cols-2 border-b border-grey">
+          <div class="text-base w-1/4 py-1">
             PHONE
           </div>
-          <div class="text-base lg:text-right py-1">
+          <div class="text-base w-3/4 py-1 text-right">
             <a href="tel:<?php echo $phone_info; ?>"><?php echo $phone_display; ?></a>
           </div>
         </div>
@@ -54,7 +54,7 @@ $phone_display = get_sub_field('phone_display');
       };
       ?>
     </div>
-    <div class="sm:order-first basis-full sm:basis-1/3 sm:basis-3/5">
+    <div class="sm:order-first basis-full sm:basis-3/5">
       <img class="sm:h-screen sm:w-full object-cover grayscale sm:sticky sm:top-0" src="<?php echo $image_url; ?>" alt="<?php echo $image_alt; ?>">
     </div>
   </div>
