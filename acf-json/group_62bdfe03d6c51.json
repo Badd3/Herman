@@ -229,6 +229,137 @@
                     ],
                     "min": "",
                     "max": ""
+                },
+                "layout_62d2cd497e7cd": {
+                    "key": "layout_62d2cd497e7cd",
+                    "name": "contact_page",
+                    "label": "Contact Page",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_62d2cd497e7cf",
+                            "label": "Image Left",
+                            "name": "image_left",
+                            "type": "image",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
+                            "return_format": "array",
+                            "preview_size": "medium",
+                            "library": "all",
+                            "min_width": "",
+                            "min_height": "",
+                            "min_size": "",
+                            "max_width": "",
+                            "max_height": "",
+                            "max_size": "",
+                            "mime_types": ""
+                        },
+                        {
+                            "key": "field_62d2cdbf86177",
+                            "label": "Contact Shortcode",
+                            "name": "contact_shortcode",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
+                            "key": "field_62d41b7594bfe",
+                            "label": "Contact Title",
+                            "name": "contact_title",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "CONTACT US",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
+                            "key": "field_62d41b9d94bff",
+                            "label": "Email Info",
+                            "name": "email_info",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
+                            "key": "field_62d41bdf94c00",
+                            "label": "Phone Number",
+                            "name": "phone_info",
+                            "type": "number",
+                            "instructions": "Vul hier je tel nummer in aan elkaar",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "min": "",
+                            "max": "",
+                            "step": ""
+                        },
+                        {
+                            "key": "field_62d4609c608ed",
+                            "label": "Phone Display",
+                            "name": "phone_display",
+                            "type": "text",
+                            "instructions": "Vul hier je tel nummer in hoe je die wil laten zien op de website",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
                 }
             },
             "button_label": "Add Row",
@@ -254,5 +385,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1657729318
+    "modified": 1658085652
 }
