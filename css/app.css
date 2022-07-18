@@ -653,8 +653,8 @@ video {
   left: -100%;
 }
 
-.left-\[188px\] {
-  left: 188px;
+.left-\[16\.6667\%\] {
+  left: 16.6667%;
 }
 
 .z-10 {
@@ -677,8 +677,8 @@ video {
   z-index: 2;
 }
 
-.z-\[-1\] {
-  z-index: -1;
+.z-\[1\] {
+  z-index: 1;
 }
 
 .col-start-2 {

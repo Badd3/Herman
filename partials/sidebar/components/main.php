@@ -8,9 +8,10 @@ $main_navigation = get_field('main_nav', 'option');
 // Check rows exists.
 if (have_rows('navigation_items', $main_navigation)) :
 ?>
-    <ul x-data="{openSidebar : false}" @slideout="openSidebar =! openSidebar" class="flex flex-col gap-3">
+    <ul x-data="{openSidebar : false}" class="flex flex-col gap-3">
         <?php
         // Loop through rows.
+        $i = 0;
         while (have_rows('navigation_items', $main_navigation)) : the_row();
 
             // Load sub field value.
@@ -20,11 +21,11 @@ if (have_rows('navigation_items', $main_navigation)) :
 
         ?>
             <?php if ($submenu) { ?>
-                <li x-data="{ open: false }">
-                    <a @click.stop @click.prevent="open = !open" class="hover:text-black duration-300 text-base" href="<?php echo $nav_item_link; ?>"><?php echo $nav_item_label; ?></a>
+                <li x-ref="has-sidebar-<?php echo $i; ?>" x-data="{ open: false }">
+                    <a @click.stop @click.prevent="open = !open; console.log($el); " class="hover:text-black duration-300 text-base" href="<?php echo $nav_item_link; ?>"><?php echo $nav_item_label; ?></a>
                     <?php
                     if ($submenu) {
-                        get_template_part('partials/sidebar/components/submenu');
+                        get_template_part('partials/sidebar/components/submenu', null, array('count' => $i));
                     }
                     ?>
                 </li>
@@ -36,7 +37,7 @@ if (have_rows('navigation_items', $main_navigation)) :
         <?php
             }
 
-
+            $i++;
         endwhile;
         ?>
     </ul>
