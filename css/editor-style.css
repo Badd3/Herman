@@ -120,10 +120,6 @@
   z-index: 2
 }
 
-.order-first {
-  order: -9999
-}
-
 .col-start-2 {
   grid-column-start: 2
 }
@@ -304,24 +300,12 @@
   cursor: pointer
 }
 
-.resize-none {
-  resize: none
-}
-
-.resize {
-  resize: both
-}
-
 .list-disc {
   list-style-type: disc
 }
 
 .list-decimal {
   list-style-type: decimal
-}
-
-.grid-cols-2 {
-  grid-template-columns: repeat(2, minmax(0, 1fr))
 }
 
 .grid-cols-3 {
@@ -382,11 +366,6 @@
 
 .border {
   border-width: 1px
-}
-
-.border-y {
-  border-top-width: 1px;
-  border-bottom-width: 1px
 }
 
 .border-b {
@@ -527,10 +506,6 @@
   text-align: center
 }
 
-.text-right {
-  text-align: right
-}
-
 .text-2xl {
   font-size: 30px;
   line-height: 32px
@@ -614,6 +589,10 @@
 .antialiased {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale
+}
+
+.outline {
+  outline-style: solid
 }
 
 .grayscale {
@@ -783,10 +762,6 @@ body {
 }
 
 @media (min-width: 782px) {
-  .md\:order-first {
-    order: -9999
-  }
-
   .md\:my-6 {
     margin-top: 1.5rem;
     margin-bottom: 1.5rem
@@ -845,15 +820,6 @@ body {
 
   .lg\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr))
-  }
-
-  .lg\:border-y {
-    border-top-width: 1px;
-    border-bottom-width: 1px
-  }
-
-  .lg\:border-b {
-    border-bottom-width: 1px
   }
 
   .lg\:px-8 {

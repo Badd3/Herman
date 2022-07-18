@@ -7930,4 +7930,9 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     }
   });
   module_default.start();
+  if (document.querySelector(".page-template-page-coming-soon")) {
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelector(".wpcf7-email").focus();
+    });
+  }
 })();

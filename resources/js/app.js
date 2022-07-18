@@ -20,3 +20,10 @@ const swiper = new Swiper(".swiper", {
 });
 
 Alpine.start();
+
+//Alleen op coming soon template runnen
+if (document.querySelector(".page-template-page-coming-soon")) {
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelector(".wpcf7-email").focus();
+  });
+}
