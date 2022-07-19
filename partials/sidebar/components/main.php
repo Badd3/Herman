@@ -22,7 +22,7 @@ if (have_rows('navigation_items', $main_navigation)) :
         ?>
             <?php if ($submenu) { ?>
                 <li>
-                    <a @click.stop @click.prevent="selected !== <?php echo $i; ?> ? selected = <?php echo $i; ?> : selected = null;" class="hover:text-black duration-300 text-base" href="<?php echo $nav_item_link; ?>"><?php echo $nav_item_label; ?></a>
+                    <a @click.prevent.stop="selected !== <?php echo $i; ?> ? selected = <?php echo $i; ?> : selected = null;" class="hover:text-black duration-300 text-base" href="<?php echo $nav_item_link; ?>"><?php echo $nav_item_label; ?></a>
                     <?php
                     if ($submenu) {
                         get_template_part('partials/sidebar/components/submenu', null, array('count' => $i));
