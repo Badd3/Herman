@@ -41,9 +41,9 @@ require 'inc/navigation.php';
 /**
  * Load WooCommerce compatibility file.
  */
-// if (class_exists('WooCommerce')) {
-// 	require get_template_directory() . '/inc/woocommerce.php';
-// }
+if (class_exists('WooCommerce')) {
+	require get_template_directory() . '/inc/woocommerce.php';
+}
 
 /**
  * Enqueue theme assets.
