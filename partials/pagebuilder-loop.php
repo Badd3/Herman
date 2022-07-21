@@ -17,6 +17,9 @@ if (have_rows('herman_builder')) :
 
             get_template_part('partials/pagebuilder-components/brand-page');
 
+        elseif (get_row_layout() == 'contact_page') :
+
+            get_template_part('partials/pagebuilder-components/contact-page');
 
         endif;
 
