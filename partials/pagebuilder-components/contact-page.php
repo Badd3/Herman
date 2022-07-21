@@ -14,7 +14,7 @@ $phone_display = get_sub_field('phone_display');
 <section>
   <div class="flex flex-col sm:flex-row">
     <div class="px-7 pb-8 pt-16 sm:pt-28 sm:basis-2/3 md:basis-2/5 text-gray-900">
-      <h1 class="mb-8"><?php the_field('titel'); ?></h1>
+      <!-- <h1 class="mb-8"><?php the_field('titel'); ?></h1> -->
       <?php
 
 

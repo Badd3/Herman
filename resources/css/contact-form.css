@@ -46,3 +46,15 @@ form.invalid .wpcf7-response-output,
   font-family: 'Gotham', 'sans-serif';
   text-transform: uppercase;
 }
+
+.coming-soon .wpcf7-form.init {
+  display: flex;
+}
+
+.coming-soon .wpcf7-text {
+  border-bottom: unset;
+}
+
+.coming-soon .wpcf7 {
+  padding-bottom: unset;
+}
