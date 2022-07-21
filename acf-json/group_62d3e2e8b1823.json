@@ -1,0 +1,69 @@
+{
+    "key": "group_62d3e2e8b1823",
+    "title": "Thema Opties - Navigatie",
+    "fields": [
+        {
+            "key": "field_62d3e2efae32f",
+            "label": "Main Navigation",
+            "name": "main_nav",
+            "type": "post_object",
+            "instructions": "Selecteer hier de navigatie die standaard door de website gebruikt word. Maak deze aan in je WP Dashboard onder 'Navigation'.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "navigation"
+            ],
+            "taxonomy": "",
+            "allow_null": 0,
+            "multiple": 0,
+            "return_format": "id",
+            "ui": 1
+        },
+        {
+            "key": "field_62d3e4e06c404",
+            "label": "Secondary Navigation",
+            "name": "secondary_nav",
+            "type": "post_object",
+            "instructions": "Selecteer hier de navigatie die linksonder verschijnt. Maak deze aan in je WP Dashboard onder 'Navigation'.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "navigation"
+            ],
+            "taxonomy": "",
+            "allow_null": 0,
+            "multiple": 0,
+            "return_format": "id",
+            "ui": 1
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "acf-options-navigatie"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1658053913
+}

@@ -20,8 +20,8 @@
         },
         {
             "key": "field_62aa25387f85c",
-            "label": "Main Navigatie",
-            "name": "main_navigation",
+            "label": "Navigation",
+            "name": "navigation_items",
             "type": "repeater",
             "instructions": "",
             "required": 0,
@@ -34,117 +34,56 @@
             "collapsed": "",
             "min": 0,
             "max": 0,
-            "layout": "row",
+            "layout": "block",
             "button_label": "",
             "sub_fields": [
                 {
                     "key": "field_62aa25b37f85d",
-                    "label": "Pagina",
-                    "name": "page",
-                    "type": "link",
+                    "label": "Item Link",
+                    "name": "item_link",
+                    "type": "page_link",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
-                        "width": "",
+                        "width": "40",
                         "class": "",
                         "id": ""
                     },
-                    "return_format": "array"
-                }
-            ]
-        },
-        {
-            "key": "field_62bdf72d83f51",
-            "label": "Secondary Navigation",
-            "name": "secondary_navigation",
-            "type": "repeater",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "collapsed": "",
-            "min": 0,
-            "max": 0,
-            "layout": "row",
-            "button_label": "",
-            "sub_fields": [
-                {
-                    "key": "field_62bdf72d83f52",
-                    "label": "Pagina",
-                    "name": "page",
-                    "type": "link",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "return_format": "array"
-                }
-            ]
-        },
-        {
-            "key": "field_62ba297736cc5",
-            "label": "CTA's",
-            "name": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "placement": "top",
-            "endpoint": 0
-        },
-        {
-            "key": "field_62ba298236cc6",
-            "label": "CTA Repeater",
-            "name": "cta_repeater",
-            "type": "repeater",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "collapsed": "",
-            "min": 0,
-            "max": 0,
-            "layout": "table",
-            "button_label": "",
-            "sub_fields": [
-                {
-                    "key": "field_62ba29a436cc7",
-                    "label": "cta link",
-                    "name": "cta_link",
-                    "type": "link",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "return_format": "array"
+                    "post_type": [
+                        "page",
+                        "post",
+                        "product"
+                    ],
+                    "taxonomy": "",
+                    "allow_null": 0,
+                    "allow_archives": 1,
+                    "multiple": 0
                 },
                 {
-                    "key": "field_62bb305364ba8",
-                    "label": "Button Styles",
-                    "name": "button_styles",
-                    "type": "clone",
+                    "key": "field_62d429554f168",
+                    "label": "Item Label",
+                    "name": "item_label",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "40",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_62d3e9540e147",
+                    "label": "Submenu",
+                    "name": "submenu",
+                    "type": "true_false",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -153,13 +92,140 @@
                         "class": "",
                         "id": ""
                     },
-                    "clone": [
-                        "group_62bb3006816bc"
+                    "message": "",
+                    "default_value": 0,
+                    "ui": 1,
+                    "ui_on_text": "",
+                    "ui_off_text": ""
+                },
+                {
+                    "key": "field_62d428077f098",
+                    "label": "Sub Menu",
+                    "name": "submenu_items",
+                    "type": "repeater",
+                    "instructions": "Selecteer items die in het submenu getoond moeten worden",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_62d3e9540e147",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
                     ],
-                    "display": "seamless",
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "collapsed": "",
+                    "min": 0,
+                    "max": 0,
                     "layout": "block",
-                    "prefix_label": 0,
-                    "prefix_name": 0
+                    "button_label": "",
+                    "sub_fields": [
+                        {
+                            "key": "field_62d42e8ce7161",
+                            "label": "Link Type",
+                            "name": "link_type",
+                            "type": "radio",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "page_link": "Standaard link",
+                                "product_category": "Product Categorie"
+                            },
+                            "allow_null": 0,
+                            "other_choice": 0,
+                            "default_value": "",
+                            "layout": "horizontal",
+                            "return_format": "value",
+                            "save_other_choice": 0
+                        },
+                        {
+                            "key": "field_62d42ed5e7162",
+                            "label": "Submenu Link",
+                            "name": "submenu_link_default",
+                            "type": "page_link",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_62d42e8ce7161",
+                                        "operator": "==",
+                                        "value": "page_link"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
+                            "post_type": "",
+                            "taxonomy": "",
+                            "allow_null": 0,
+                            "allow_archives": 1,
+                            "multiple": 0
+                        },
+                        {
+                            "key": "field_62d42898f5358",
+                            "label": "Submenu Link",
+                            "name": "submenu_link_product",
+                            "type": "taxonomy",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_62d42e8ce7161",
+                                        "operator": "==",
+                                        "value": "product_category"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
+                            "taxonomy": "product_cat",
+                            "field_type": "select",
+                            "allow_null": 0,
+                            "add_term": 1,
+                            "save_terms": 0,
+                            "load_terms": 0,
+                            "return_format": "id",
+                            "multiple": 0
+                        },
+                        {
+                            "key": "field_62d42bc666aeb",
+                            "label": "Submenu Label",
+                            "name": "submenu_label",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        }
+                    ]
                 }
             ]
         }
@@ -167,9 +233,9 @@
     "location": [
         [
             {
-                "param": "options_page",
+                "param": "post_type",
                 "operator": "==",
-                "value": "acf-options-navigatie"
+                "value": "navigation"
             }
         ]
     ],
@@ -182,5 +248,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1657645354
+    "modified": 1658072862
 }
