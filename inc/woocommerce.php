@@ -63,29 +63,20 @@ function disable_woo_commerce_sidebar()
 add_action('wp', 'disable_woo_commerce_sidebar');
 
 /**
- * WooCommerce specific scripts & stylesheets.
- *
- * @return void
+ * Change several of the breadcrumb defaults
  */
-// function herman_woocommerce_scripts()
-// {
-// 	wp_enqueue_style('herman-woocommerce-style', get_template_directory_uri() . '/woocommerce.css', array());
-
-// 	$font_path   = WC()->plugin_url() . '/assets/fonts/';
-// 	$inline_font = '@font-face {
-// 			font-family: "star";
-// 			src: url("' . $font_path . 'star.eot");
-// 			src: url("' . $font_path . 'star.eot?#iefix") format("embedded-opentype"),
-// 				url("' . $font_path . 'star.woff") format("woff"),
-// 				url("' . $font_path . 'star.ttf") format("truetype"),
-// 				url("' . $font_path . 'star.svg#star") format("svg");
-// 			font-weight: normal;
-// 			font-style: normal;
-// 		}';
-
-// 	wp_add_inline_style('herman-woocommerce-style', $inline_font);
-// }
-// add_action('wp_enqueue_scripts', 'herman_woocommerce_scripts');
+add_filter('woocommerce_breadcrumb_defaults', 'jk_woocommerce_breadcrumbs');
+function jk_woocommerce_breadcrumbs()
+{
+	return array(
+		'delimiter'   => ' &#43; ',
+		'wrap_before' => '<nav class="woocommerce-breadcrumb uppercase mb-5 text-grey [&>a:hover]:text-black [&>a:hover]:duration-300" itemprop="breadcrumb">',
+		'wrap_after'  => '</nav>',
+		'before'      => '',
+		'after'       => '',
+		'home'        => _x('Home', 'breadcrumb', 'woocommerce'),
+	);
+}
 
 /**
  * Disable the default WooCommerce stylesheet.
@@ -95,7 +86,7 @@ add_action('wp', 'disable_woo_commerce_sidebar');
  *
  * @link https://docs.woocommerce.com/document/disable-the-default-stylesheet/
  */
-// add_filter( 'woocommerce_enqueue_styles', '__return_empty_array' );
+add_filter('woocommerce_enqueue_styles', '__return_empty_array');
 
 /**
  * Add 'woocommerce-active' class to the body tag.
@@ -185,11 +176,11 @@ if (!function_exists('herman_woocommerce_flex_wrapper_before')) {
 	 */
 	function herman_woocommerce_flex_wrapper_before()
 	{
-		if (is_shop()) {
+		if (is_shop() || is_product_category()) {
 		?>
 
-			<section class="herman-shop">
-				<div class="px-8">
+			<section class="py-16 lg:py-36">
+				<div class="px-2.5 lg:px-8">
 
 				<?php
 			}
@@ -208,7 +199,7 @@ if (!function_exists('herman_woocommerce_flex_wrapper_before')) {
 		function herman_woocommerce_flex_wrapper_after()
 		{
 
-			if (is_shop()) {
+			if (is_shop() || is_product_category()) {
 				?>
 
 				</div>

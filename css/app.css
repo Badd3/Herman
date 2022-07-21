@@ -784,6 +784,10 @@ video {
   margin-bottom: 0.5rem;
 }
 
+.mb-5 {
+  margin-bottom: 1.25rem;
+}
+
 .block {
   display: block;
 }
@@ -1106,6 +1110,21 @@ video {
   padding-right: 2rem;
 }
 
+.py-36 {
+  padding-top: 9rem;
+  padding-bottom: 9rem;
+}
+
+.py-16 {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.px-2\.5 {
+  padding-left: 0.625rem;
+  padding-right: 0.625rem;
+}
+
 .pl-5 {
   padding-left: 1.25rem;
 }
@@ -1132,6 +1151,10 @@ video {
 
 .pb-16 {
   padding-bottom: 4rem;
+}
+
+.pt-36 {
+  padding-top: 9rem;
 }
 
 .text-center {
@@ -1174,8 +1197,20 @@ video {
   font-weight: 800;
 }
 
+.font-normal {
+  font-weight: 400;
+}
+
+.font-medium {
+  font-weight: 500;
+}
+
 .uppercase {
   text-transform: uppercase;
+}
+
+.capitalize {
+  text-transform: capitalize;
 }
 
 .leading-tight {
@@ -1975,6 +2010,11 @@ form.invalid .wpcf7-response-output,
     padding-right: 2rem;
   }
 
+  .lg\:py-36 {
+    padding-top: 9rem;
+    padding-bottom: 9rem;
+  }
+
   .lg\:text-base {
     font-size: 14px;
     line-height: 22px;
@@ -1989,4 +2029,13 @@ form.invalid .wpcf7-response-output,
     font-size: 16px;
     line-height: 22px;
   }
+}
+
+.\[\&\>a\:hover\]\:text-black>a:hover {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+}
+
+.\[\&\>a\:hover\]\:duration-300>a:hover {
+  transition-duration: 300ms;
 }
