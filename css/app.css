@@ -808,6 +808,10 @@ video {
   width: 100%;
 }
 
+.w-9\/12 {
+  width: 75%;
+}
+
 .w-16 {
   width: 4rem;
 }
@@ -842,10 +846,6 @@ video {
 
 .w-1\/6 {
   width: 16.666667%;
-}
-
-.w-9\/12 {
-  width: 75%;
 }
 
 .max-w-sm {
@@ -929,12 +929,12 @@ video {
   border-radius: 0.75rem;
 }
 
-.border-2 {
-  border-width: 2px;
-}
-
 .border {
   border-width: 1px;
+}
+
+.border-2 {
+  border-width: 2px;
 }
 
 .border-y {
@@ -946,14 +946,14 @@ video {
   border-bottom-width: 1px;
 }
 
-.border-white {
-  --tw-border-opacity: 1;
-  border-color: rgb(255 255 255 / var(--tw-border-opacity));
-}
-
 .border-grey {
   --tw-border-opacity: 1;
   border-color: rgb(178 178 176 / var(--tw-border-opacity));
+}
+
+.border-white {
+  --tw-border-opacity: 1;
+  border-color: rgb(255 255 255 / var(--tw-border-opacity));
 }
 
 .bg-gray-200 {
@@ -1003,6 +1003,11 @@ video {
      object-position: center;
 }
 
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
 .px-4 {
   padding-left: 1rem;
   padding-right: 1rem;
@@ -1026,11 +1031,6 @@ video {
 .px-6 {
   padding-left: 1.5rem;
   padding-right: 1.5rem;
-}
-
-.py-3 {
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
 }
 
 .px-2 {
@@ -1084,6 +1084,11 @@ video {
   text-align: right;
 }
 
+.text-base {
+  font-size: 14px;
+  line-height: 22px;
+}
+
 .text-2xl {
   font-size: 30px;
   line-height: 32px;
@@ -1092,11 +1097,6 @@ video {
 .text-sm {
   font-size: 12px;
   line-height: 18px;
-}
-
-.text-base {
-  font-size: 14px;
-  line-height: 22px;
 }
 
 .text-lg {
@@ -1767,6 +1767,18 @@ form.invalid .wpcf7-response-output,
 .wpcf7-not-valid-tip {
   font-family: 'Gotham', 'sans-serif';
   text-transform: uppercase;
+}
+
+.coming-soon .wpcf7-form.init {
+  display: flex;
+}
+
+.coming-soon .wpcf7-text {
+  border-bottom: unset;
+}
+
+.coming-soon .wpcf7 {
+  padding-bottom: unset;
 }
 
 @font-face {
