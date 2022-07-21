@@ -22,8 +22,8 @@ function herman_woocommerce_setup()
 	add_theme_support(
 		'woocommerce',
 		array(
-			'thumbnail_image_width' => 500,
-			'single_image_width'    => 300,
+			'thumbnail_image_width' => 530,
+			'single_image_width'    => 500,
 			'product_grid'          => array(
 				'default_rows'    => 3,
 				'min_rows'        => 1,
@@ -33,6 +33,18 @@ function herman_woocommerce_setup()
 			),
 		)
 	);
+
+	// change woocommerce thumbnail image size
+	add_filter('woocommerce_get_image_size_gallery_thumbnail', 'override_woocommerce_image_size_gallery_thumbnail');
+	function override_woocommerce_image_size_gallery_thumbnail($size)
+	{
+		// Gallery thumbnails: proportional, max width 200px
+		return array(
+			'width'  => 540,
+			'height' => 730,
+			'crop'   => 0,
+		);
+	}
 	// add_theme_support('wc-product-gallery-zoom');
 	// add_theme_support('wc-product-gallery-lightbox');
 	// add_theme_support('wc-product-gallery-slider');
@@ -177,7 +189,7 @@ if (!function_exists('herman_woocommerce_flex_wrapper_before')) {
 		?>
 
 			<section class="herman-shop">
-				<div class="container">
+				<div class="px-8">
 
 				<?php
 			}
@@ -301,30 +313,10 @@ if (!function_exists('herman_woocommerce_flex_wrapper_before')) {
 	/* PRODUCT ARCHIVE */
 
 
-	remove_action('woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30);
-	remove_action('woocommerce_before_shop_loop', 'woocommerce_result_count', 20);
-	remove_action('woocommerce_after_shop_loop', 'woocommerce_pagination', 10);
-	remove_action('woocommerce_before_shop_loop', 'woocommerce-products-header');
 
+	function remove_on_shop_page()
+	{
+		get_template_part('inc/shop-loop/include');
+	}
 
-
-	/*** PRODUCT LOOP ***/
-
-
-		// remove_action('woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10);
-
-
-
-		//Product categorie toevoegen aan product loop
-		// add_action('woocommerce_before_shop_loop_item_title', 'display_category_shop_loop', 10);
-		// add_action('woocommerce_after_shop_loop_item_title', 'close_flex_divs', 9);
-		// add_action('woocommerce_after_shop_loop_item_title', 'close_flex_divs_after_price', 11);
-
-
-
-		// function facetwp_flyout()
-		// {
-
-		// 	echo '<button class="facetwp-flyout-open">filter</button>';
-		// }
-		// add_action('woocommerce_before_shop_loop', 'facetwp_flyout');
+	add_action('wp', 'remove_on_shop_page');
