@@ -5,11 +5,12 @@ window.Alpine = Alpine;
 
 const swiper = new Swiper(".swiper", {
   modules: [Autoplay, Pagination, EffectFade],
-  direction: "horizontal",
+  direction: "vertical",
   loop: true,
-  effect: "fade",
+  speed: 2000,
+  // effect: "fade",
   autoplay: {
-    delay: 3000,
+    delay: 5000,
   },
 
   allowTouchMove: false,
