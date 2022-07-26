@@ -124,6 +124,10 @@
   left: 16.6667%
 }
 
+.-right-full {
+  right: -100%
+}
+
 .z-20 {
   z-index: 20
 }

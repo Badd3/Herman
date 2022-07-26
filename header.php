@@ -27,6 +27,9 @@
 		<!-- Desktop header -->
 		<?php get_template_part('partials/desktop/header'); ?>
 
+		<!-- Core -->
+		<?php get_template_part('partials/core/off-canvas-bag'); ?>
+
 		<div id="content" class="site-content flex-grow w-full lg:ml-auto lg:w-5/6">
 
 			<?php do_action('tailpress_content_start'); ?>

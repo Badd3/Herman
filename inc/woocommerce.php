@@ -210,17 +210,12 @@ if (!function_exists('herman_woocommerce_flex_wrapper_before')) {
 	}
 	add_action('woocommerce_sidebar', 'herman_woocommerce_flex_wrapper_after', 11);
 
-	/**
-	 * Sample implementation of the WooCommerce Mini Cart.
-	 *
-	 * You can add the WooCommerce Mini Cart to header.php like so ...
-	 *
-	<?php
-		if ( function_exists( 'herman_woocommerce_header_cart' ) ) {
-			herman_woocommerce_header_cart();
-		}
-	?>
-	 */
+
+	
+	if ( function_exists( 'herman_woocommerce_header_cart' ) ) {
+		herman_woocommerce_header_cart();
+	}
+
 
 	if (!function_exists('herman_woocommerce_cart_link_fragment')) {
 		/**
