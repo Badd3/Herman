@@ -7918,11 +7918,12 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   window.Alpine = module_default;
   var swiper = new core_default(".swiper", {
     modules: [Autoplay, Pagination, EffectFade],
-    direction: "horizontal",
+
+    direction: "vertical",
     loop: true,
-    effect: "fade",
+    speed: 2e3,
     autoplay: {
-      delay: 3e3
+      delay: 5e3
     },
     allowTouchMove: false,
     pagination: {
