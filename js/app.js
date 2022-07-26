@@ -7918,6 +7918,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   window.Alpine = module_default;
   var swiper = new core_default(".swiper", {
     modules: [Autoplay, Pagination, EffectFade],
+
     direction: "vertical",
     loop: true,
     speed: 2e3,
