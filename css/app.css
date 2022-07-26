@@ -800,6 +800,10 @@ video {
   display: flex;
 }
 
+.table {
+  display: table;
+}
+
 .grid {
   display: grid;
 }
@@ -1167,6 +1171,10 @@ video {
   line-height: 28px;
 }
 
+.text-\[100px\] {
+  font-size: 100px;
+}
+
 .font-light {
   font-weight: 300;
 }
@@ -1224,6 +1232,11 @@ video {
 .text-blue-500 {
   --tw-text-opacity: 1;
   color: rgb(59 130 246 / var(--tw-text-opacity));
+}
+
+.text-red-900 {
+  --tw-text-opacity: 1;
+  color: rgb(127 29 29 / var(--tw-text-opacity));
 }
 
 .underline {

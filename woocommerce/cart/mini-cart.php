@@ -64,7 +64,8 @@ do_action('woocommerce_before_mini_cart'); ?>
 					<?php endif; ?>
 					<?php echo wc_get_formatted_cart_item_data($cart_item); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
 					?>
-					<?php echo apply_filters('woocommerce_widget_cart_item_quantity', '<span class="quantity">' . sprintf('%s &times; %s', $cart_item['quantity'], $product_price) . '</span>', $cart_item, $cart_item_key); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
+					<h1>hoi</h1>
+					<?php echo apply_filters('woocommerce_widget_cart_item_quantity', '<span class="quantity text-[100px] text-red-900">' . sprintf('%s &times; %s', $cart_item['quantity'], $product_price) . '</span>', $cart_item, $cart_item_key); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
 					?>
 				</li>
 		<?php
