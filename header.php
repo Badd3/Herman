@@ -14,7 +14,7 @@
 
 	<?php do_action('tailpress_site_before'); ?>
 
-	<div x-data="{ navOpen: false }" id="page" class="min-h-screen flex flex-col">
+	<div x-data="{ navOpen: false, bagOpen: false }" id="page" class="min-h-screen flex flex-col">
 
 		<?php do_action('tailpress_header'); ?>
 
