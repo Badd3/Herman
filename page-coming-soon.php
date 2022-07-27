@@ -4,7 +4,7 @@
 
 <?php get_header('minimal'); ?>
 
-<section class="grid content-center coming-soon items-center min-h-full justify-center">
+<section class="grid content-center bg-white-bg coming-soon items-center min-h-full justify-center">
 	<div class="container">
 		<h1 class="mb-8"><?php the_field('titel'); ?></h1>
 		<?php
