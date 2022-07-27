@@ -1879,6 +1879,17 @@ article > *:not(.entry-content),
   margin-left: 0 !important;
 }
 
+.wpcf7-not-valid-tip,  
+.wpcf7-response-output {
+  font-size: 10px;
+  line-height: 16px;
+}
+
+.wpcf7-response-output {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+}
+
 form.invalid .wpcf7-response-output,
 .wpcf7 form.sent .wpcf7-response-output {
   border: none;

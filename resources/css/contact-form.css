@@ -50,6 +50,15 @@
   margin-left: 0 !important;
 }
 
+.wpcf7-not-valid-tip, 
+.wpcf7-response-output {
+  @apply text-xs;
+}
+
+.wpcf7-response-output {
+  @apply text-black;
+}
+
 form.invalid .wpcf7-response-output,
 .wpcf7 form.sent .wpcf7-response-output {
   border: none;

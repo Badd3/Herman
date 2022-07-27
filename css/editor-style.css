@@ -235,14 +235,6 @@
   margin-top: -3.5rem
 }
 
-.mt-\[3rem\] {
-  margin-top: 3rem
-}
-
-.mb-2 {
-  margin-bottom: 0.5rem
-}
-
 .mt-\[4rem\] {
   margin-top: 4rem
 }
@@ -251,8 +243,8 @@
   margin-left: 0px
 }
 
-.mt-\[6rem\] {
-  margin-top: 6rem
+.mb-2 {
+  margin-bottom: 0.5rem
 }
 
 .block {
@@ -523,10 +515,6 @@
   padding: 0.5rem
 }
 
-.p-\[2rem\] {
-  padding: 2rem
-}
-
 .px-4 {
   padding-left: 1rem;
   padding-right: 1rem
@@ -641,11 +629,6 @@
 .text-xs {
   font-size: 10px;
   line-height: 16px
-}
-
-.text-md {
-  font-size: 16px;
-  line-height: 22px
 }
 
 .font-light {
