@@ -3,7 +3,7 @@
 }
 
 .wpcf7-email {
-  @apply text-md outline-0;
+  @apply text-base outline-0;
 }
 
 .wpcf7 {
@@ -78,4 +78,8 @@ form.invalid .wpcf7-response-output,
 .coming-soon .wpcf7-form
 {
   @apply flex;
+}
+
+.coming-soon .wpcf7-form-control.wpcf7-text.wpcf7-email.wpcf7-validates-as-required.wpcf7-validates-as-email {
+  @apply text-md;
 }
