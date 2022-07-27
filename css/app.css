@@ -1159,6 +1159,11 @@ video {
   text-align: right;
 }
 
+.text-md {
+  font-size: 16px;
+  line-height: 22px;
+}
+
 .text-base {
   font-size: 14px;
   line-height: 22px;
@@ -1789,7 +1794,7 @@ article > *:not(.entry-content),
 }
 
 .wpcf7-email {
-  font-size: 14px;
+  font-size: 16px;
   line-height: 22px;
   outline-width: 0px;
 }

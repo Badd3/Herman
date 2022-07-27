@@ -3,7 +3,7 @@
 }
 
 .wpcf7-email {
-  @apply text-base outline-0;
+  @apply text-md outline-0;
 }
 
 .wpcf7 {

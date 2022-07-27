@@ -523,6 +523,10 @@
   padding: 0.5rem
 }
 
+.p-\[2rem\] {
+  padding: 2rem
+}
+
 .px-4 {
   padding-left: 1rem;
   padding-right: 1rem
@@ -637,6 +641,11 @@
 .text-xs {
   font-size: 10px;
   line-height: 16px
+}
+
+.text-md {
+  font-size: 16px;
+  line-height: 22px
 }
 
 .font-light {
