@@ -46,7 +46,7 @@
 
 .coming-soon .wpcf7-response-output {
   @apply absolute text-black text-xs;
-  margin-top: 3rem !important;
+  margin-top: 4rem !important;
   margin-left: 0 !important;
 }
 
