@@ -64,8 +64,7 @@ do_action('woocommerce_before_mini_cart'); ?>
 					<?php endif; ?>
 					<?php echo wc_get_formatted_cart_item_data($cart_item); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
 					?>
-					<h1>hoi</h1>
-					<?php echo apply_filters('woocommerce_widget_cart_item_quantity', '<span class="quantity text-[100px] text-red-900">' . sprintf('%s &times; %s', $cart_item['quantity'], $product_price) . '</span>', $cart_item, $cart_item_key); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
+					<?php echo apply_filters('woocommerce_widget_cart_item_quantity', '<span class="quantity' . sprintf('%s &times; %s', $cart_item['quantity'], $product_price) . '</span>', $cart_item, $cart_item_key); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
 					?>
 				</li>
 		<?php
@@ -76,20 +75,36 @@ do_action('woocommerce_before_mini_cart'); ?>
 		?>
 	</ul>
 
-	<p class="woocommerce-mini-cart__total total">
-		<?php
-		/**
-		 * Hook: woocommerce_widget_shopping_cart_total.
-		 *
-		 * @hooked woocommerce_widget_shopping_cart_subtotal - 10
-		 */
-		do_action('woocommerce_widget_shopping_cart_total');
-		?>
-	</p>
+	<div class="border-t border-gray-200 py-6 px-4 sm:px-6">
+        <div class="flex justify-between text-base font-medium text-gray-900">
+        	<p>Subtotal</p>
+            <p class="woocommerce-mini-cart__total total">
+				<?php
+					/**
+					 * Hook: woocommerce_widget_shopping_cart_total.
+					 *
+					 * @hooked woocommerce_widget_shopping_cart_subtotal - 10
+					 */
+					do_action('woocommerce_widget_shopping_cart_total');
+				?>
+			</p>
+        </div>
+              
+		<?php do_action('woocommerce_widget_shopping_cart_before_buttons'); ?>
 
-	<?php do_action('woocommerce_widget_shopping_cart_before_buttons'); ?>
+		<p class="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
+              <div class="mt-6">
+                <a href="#" class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 ">Checkout</a>
+              </div>
+              <div class="mt-6 flex justify-center text-center text-sm text-gray-500">
+                <p>
+                  or <button type="button" class="font-medium text-indigo-600 hover:text-indigo-500">Continue Shopping<span aria-hidden="true"> &rarr;</span></button>
+                </p>
+              </div>
+            </div>
 
-	<p class="woocommerce-mini-cart__buttons buttons"><?php do_action('woocommerce_widget_shopping_cart_buttons'); ?></p>
+
+	
 
 	<?php do_action('woocommerce_widget_shopping_cart_after_buttons'); ?>
 
