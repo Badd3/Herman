@@ -11,6 +11,8 @@ if (is_shop() || is_product_category() || is_product()) {
 
 
 
+
+
     add_action('woocommerce_before_shop_loop_item', 'herman_template_loop_product_link_open', 10);
 
     function herman_template_loop_product_link_open()
