@@ -303,8 +303,6 @@ if (!function_exists('herman_woocommerce_flex_wrapper_before')) {
 
 	/* PRODUCT ARCHIVE */
 
-
-
 	function remove_on_shop_page()
 	{
 		get_template_part('inc/shop-loop/include');
