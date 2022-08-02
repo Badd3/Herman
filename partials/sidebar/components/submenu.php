@@ -2,11 +2,8 @@
     <?php
     $i = $args['count'];
     ?>
-    <section x-data="{open : false}" :open="selected == <? echo $i; ?> ? open = true : open = false" @click.outside="open ? selected = null : '' " class="duration-300 absolute h-full left-0 top-0 w-1/6 bg-white z-[1] hidden lg:block" :class="selected == <? echo $i; ?> ? 'left-[16.6667%]' : ''">
-
-
+    <section x-data="{open : false}" :open="selected == <? echo $i; ?> ? open = true : open = false" @click.outside="open ? selected = null : '' " class="duration-300 fixed h-full left-0 top-0 w-1/6 bg-white z-[1] hidden lg:block border-l border-black" :class="selected == <? echo $i; ?> ? 'left-[16.6667%]' : ''">
         <?php
-
 
         if (have_rows('submenu_items')) : ?>
             <div class="px-7 pb-8 pt-28 h-full">
@@ -36,13 +33,9 @@
                     <?php endwhile; ?>
                 </ul>
             </div>
-        <?php endif; //if( get_sub_field('items') ): 
+        <?php endif;
         ?>
 
-
-
     </section>
-
-
 
 </template>
