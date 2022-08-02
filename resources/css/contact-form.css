@@ -11,7 +11,7 @@
 }
 
 .wpcf7-text {
-  @apply text-base outline-0 border-b w-full border-grey py-3 bg-white-bg;
+  @apply text-base outline-0 border-b w-full border-grey py-3 bg-white-bg leading-4;
 }
 
 .wpcf7-textarea {
@@ -19,7 +19,7 @@
 }
 
 .wpcf7-submit {
-  @apply text-base uppercase cursor-pointer;
+  @apply text-base uppercase cursor-pointer justify-items-end;
 }
 
 .wpcf7-form-control-wrap {
