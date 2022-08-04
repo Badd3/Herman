@@ -6,7 +6,6 @@
             </a>
         </div>
         <div class="absolute right-8 top-5 text-white">
-
             <button @click="bagOpen = !bagOpen" class="uppercase">bag (<?php echo WC()->cart->get_cart_contents_count() ?>)</button>
         </div>
     </div>

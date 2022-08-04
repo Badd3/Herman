@@ -34,7 +34,6 @@ do_action('woocommerce_before_mini_cart'); ?>
 				$attribute_color = $cart_item['variation']['attribute_color'];
 				$attribute_size = $cart_item['variation']['attribute_size'];
 				$attribute_length = $cart_item['variation']['attribute_length'];
-
 		 }
 			$_product   = apply_filters('woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key);
 			$product_id = apply_filters('woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key);
@@ -46,7 +45,7 @@ do_action('woocommerce_before_mini_cart'); ?>
 				$product_permalink = apply_filters('woocommerce_cart_item_permalink', $_product->is_visible() ? $_product->get_permalink($cart_item) : '', $cart_item, $cart_item_key);
 
 		?>
-				<li class="woocommerce-mini-cart-item <?php echo esc_attr(apply_filters('woocommerce_mini_cart_item_class', 'mini_cart_item', $cart_item, $cart_item_key)); ?>">
+				<li class="flex flex-col md:flex-row woocommerce-mini-cart-item <?php echo esc_attr(apply_filters('woocommerce_mini_cart_item_class', 'mini_cart_item', $cart_item, $cart_item_key)); ?>">
 					
 					<?php if (empty($product_permalink)) : ?>
 						 <?php echo $thumbnail . wp_kses_post($product_name); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
@@ -58,7 +57,7 @@ do_action('woocommerce_before_mini_cart'); ?>
 									<li class="flex pt-6 pb-4">
 									<div class="h-24 w-24 flex-shrink-0 overflow-hidden">
 										<a href="<?php echo esc_url($product_permalink); ?>">
-										<?php echo $thumbnail . wp_kses_post($product_name); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
+										<?php echo $thumbnail; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
 										?>
 										</a>
 									</div>
@@ -67,9 +66,9 @@ do_action('woocommerce_before_mini_cart'); ?>
 
 					<div class="ml-4 flex flex-1 flex-col">
                         <div>
-                          <div class="flex justify-between text-base font-medium text-black">
+                          <div class="flex justify-between text-base text-black">
                             <h3>
-                              <a href="#"> <?php echo $product_name ?> </a>
+                              <a href="<?php echo esc_url($product_permalink); ?>"> <?php echo $product_name ?> </a>
                             </h3>
                             <p class="ml-4">
 							<?php echo apply_filters('woocommerce_widget_cart_item_quantity', '<span class="quantity' . sprintf('%s &times; %s', $cart_item['quantity'], $product_price) . '</span>', $cart_item, $cart_item_key); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
@@ -145,8 +144,8 @@ do_action('woocommerce_before_mini_cart'); ?>
 		do_action('woocommerce_mini_cart_contents');
 		?>
 		<div class="border-t border-gray-200 py-6 px-4 sm:px-6">
-        <div class="flex justify-between text-base text-black">
-        	<p>SUBTOTAL</p>
+        <div class="flex flex-row-reverse justify-between md:flex-row text-base text-black">
+        	<p class="hidden md:block">SUBTOTAL</p>
             <p class="woocommerce-mini-cart__total total">
 				<?php
 					/**
@@ -161,14 +160,9 @@ do_action('woocommerce_before_mini_cart'); ?>
               
 		<?php do_action('woocommerce_widget_shopping_cart_before_buttons'); ?>
 
-		<p class="mt-0.5 text-sm text-grey">SHIPPING CALCULATED AT CHECKOUT.</p>
+
               <div class="mt-6">
                 <a href="#" class="flex items-center justify-center border border-black  px-6 py-3 text-base font-base text-black shadow-sm  ">CHECKOUT</a>
-              </div>
-              <div class="mt-6 flex justify-center text-center text-sm text-grey hover:border-black hover:text-black">
-                <p>
-                  OR <button type="button" class="font-medium text-grey hover:border-black hover:text-black">CONTINUE SHOPPING<span aria-hidden="true"> &rarr;</span></button>
-                </p>
               </div>
             </div>
 
