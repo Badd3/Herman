@@ -19,7 +19,7 @@
 }
 
 .wpcf7-submit {
-  @apply text-base uppercase cursor-pointer justify-items-end;
+  @apply text-base uppercase cursor-pointer;
 }
 
 .wpcf7-form-control-wrap {

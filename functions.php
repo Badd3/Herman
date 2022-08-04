@@ -167,6 +167,36 @@ add_action('admin_init', 'remove_editor');
 
 add_filter('wpcf7_autop_or_not', '__return_false');
 
+function get_breadcrumb() {
+    global $post;
+        if (is_category() || is_single()) {
+            the_category(' / ');
+            if (is_single()) {
+                echo ' / ';
+                the_title();
+            }
+        } elseif (is_page()) {
+            if($post->post_parent){
+                $anc = get_post_ancestors( $post->ID );
+                $title = get_the_title();
+                foreach ( $anc as $ancestor ) {
+                    // $output = '<a class="uppercase text-xs inline" href="'.get_permalink($ancestor).'" title="'.get_the_title($ancestor).'">'.get_the_title($ancestor).'</a> <p class="text-xs inline">></p>';
+					$output = '<p class="uppercase text-xs inline" title="'.get_the_title($ancestor).'">'.get_the_title($ancestor).'</p> <p class="text-xs inline">></p>';
+				}
+                echo $output;
+                echo '<p class="uppercase text-xs inline" title="'.$title.'"> '.$title.'</p>';
+            } else {
+                echo '<strong> '.get_the_title().'</strong>';
+            }
+        }
+    elseif (is_tag()) {single_tag_title();}
+    elseif (is_day()) {echo"Archive for "; the_time('F jS, Y');}
+    elseif (is_month()) {echo"Archive for "; the_time('F, Y');}
+    elseif (is_year()) {echo"Archive for "; the_time('Y');}
+    elseif (is_author()) {echo"Author Archive";}
+    elseif (isset($_GET['paged']) && !empty($_GET['paged'])) {echo "Blog Archives";}
+    elseif (is_search()) {echo"Search Results";}
+}
 
 //redirect non-admins to the coming soon page
 // function coming_soon_redirect()
