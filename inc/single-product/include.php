@@ -39,6 +39,11 @@ function single_product_images()
     echo '</div>';
 }
 
+function wc_remove_all_quantity_fields($return, $product)
+{
+    return true;
+}
+add_filter('woocommerce_is_sold_individually', 'wc_remove_all_quantity_fields', 10, 2);
 
 add_action('woocommerce_single_product_summary', 'single_product_description', 20);
 
@@ -50,6 +55,15 @@ function single_product_description()
     $history_content = get_field('history_content');
 
 ?>
+    <section class="mb-5">
+        <div class="flex flex-col border-b border-black pb-3">
+            <div class="w-full flex flex-row justify-between">
+                <div><?php the_title(); ?></div>
+                <div><?php woocommerce_template_single_price(); ?></div>
+            </div>
+        </div>
+        <?php woocommerce_template_single_add_to_cart(); ?>
+    </section>
     <?php if ($description_content || $care_guide_content || $size_guide_content || $history_content) { ?>
         <section class="space-y-5">
             <?php if (get_the_content()) { ?>
