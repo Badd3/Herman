@@ -144,7 +144,7 @@ if (!function_exists('herman_woocommerce_flex_wrapper_before')) {
 		if (is_shop() || is_product_category() || is_product()) {
 ?>
 
-			<section class="py-16 lg:py-36">
+			<section class="py-16 lg:py-28">
 				<div class="px-2.5 lg:px-8">
 
 				<?php
