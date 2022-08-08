@@ -24,12 +24,13 @@ add_action('woocommerce_before_single_product_summary', 'single_product_images',
 
 function single_product_images()
 {
-    echo '<div class="product-images flex flex-col gap-y-5">';
+    global $product;
+    $attachment_ids = $product->get_gallery_attachment_ids();
+    echo '<div class="product-images  flex-col gap-y-5 hidden lg:flex">';
     echo '<div class="aspect-w-[54] aspect-h-[73] [&>*]:object-cover">';
     the_post_thumbnail();
     echo '</div>';
-    global $product;
-    $attachment_ids = $product->get_gallery_attachment_ids();
+
 
     foreach ($attachment_ids as $attachment_id) {
         echo '<div class="aspect-w-[54] aspect-h-[73] [&>*]:object-cover">';
@@ -37,6 +38,26 @@ function single_product_images()
         echo '</div>';
     }
     echo '</div>';
+
+    echo '<div class="swiper-single-product overflow-hidden relative lg:hidden">';
+    echo '<div class="swiper-wrapper">';
+    echo '<div class="aspect-w-[54] aspect-h-[73] [&>*]:object-cover swiper-slide">';
+    the_post_thumbnail();
+    echo '</div>';
+
+
+    foreach ($attachment_ids as $attachment_id) {
+        echo '<div class="aspect-w-[54] aspect-h-[73] [&>*]:object-cover swiper-slide">';
+        echo wp_get_attachment_image($attachment_id, 'full');
+        echo '</div>';
+    }
+    echo '</div>';
+    echo '<div class="swiper-pagination !left-[5px] !w-[50px]"></div>';
+    echo '</div>';
+
+?>
+
+<?php
 }
 
 function wc_remove_all_quantity_fields($return, $product)

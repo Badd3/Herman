@@ -33,7 +33,7 @@ if (post_password_required()) {
 }
 ?>
 <div id="product-<?php the_ID(); ?>" <?php wc_product_class('', $product); ?>>
-	<div class="grid grid-cols-2">
+	<div class="grid grid-cols-1 md:grid-cols-2">
 		<?php
 		/**
 		 * Hook: woocommerce_before_single_product_summary.
@@ -45,7 +45,7 @@ if (post_password_required()) {
 		?>
 
 		<div class="summary entry-summary">
-			<div class="max-w-lg mx-auto sticky top-40 mt-40 px-5">
+			<div class="max-w-lg mx-auto sticky top-40 mt-6 lg:mt-40 lg:px-5">
 				<?php
 				/**
 				 * Hook: woocommerce_single_product_summary.

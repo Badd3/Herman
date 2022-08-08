@@ -38,3 +38,7 @@
 .variable-item.button-variable-item.selected {
   @apply !shadow-none !font-bold;
 }
+
+.woocommerce-variation-add-to-cart {
+  @apply flex justify-end;
+}

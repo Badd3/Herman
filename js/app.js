@@ -8023,6 +8023,14 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       el: ".swiper-pagination"
     }
   });
+  var swiperSingleProduct = new core_default(".swiper-single-product", {
+    modules: [Pagination],
+    direction: "horizontal",
+    loop: false,
+    pagination: {
+      el: ".swiper-pagination"
+    }
+  });
   if (document.querySelector(".page-template-page-coming-soon")) {
     document.addEventListener("DOMContentLoaded", () => {
       document.querySelector(".wpcf7-email").focus();
