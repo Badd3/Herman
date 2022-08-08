@@ -1,7 +1,7 @@
 import Alpine from "alpinejs";
+import collapse from "@alpinejs/collapse";
 import Swiper, { Autoplay, Pagination, EffectFade } from "swiper";
-
-window.Alpine = Alpine;
+Alpine.plugin(collapse);
 
 const swiper = new Swiper(".swiper", {
   modules: [Autoplay, Pagination, EffectFade],
@@ -19,7 +19,14 @@ const swiper = new Swiper(".swiper", {
   },
 });
 
-Alpine.start();
+const swiperSingleProduct = new Swiper(".swiper-single-product", {
+  modules: [Pagination],
+  direction: "horizontal",
+  loop: false,
+  pagination: {
+    el: ".swiper-pagination",
+  },
+});
 
 //Alleen op coming soon template runnen
 if (document.querySelector(".page-template-page-coming-soon")) {
@@ -27,3 +34,5 @@ if (document.querySelector(".page-template-page-coming-soon")) {
     document.querySelector(".wpcf7-email").focus();
   });
 }
+
+Alpine.start();
