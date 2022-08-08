@@ -184,31 +184,6 @@
                     "display": "block",
                     "sub_fields": [
                         {
-                            "key": "field_62da30ee1600f",
-                            "label": "Header Color",
-                            "name": "header_color",
-                            "type": "select",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "choices": {
-                                "White": "White",
-                                "Black": "Black"
-                            },
-                            "default_value": false,
-                            "allow_null": 0,
-                            "multiple": 0,
-                            "ui": 0,
-                            "return_format": "value",
-                            "ajax": 0,
-                            "placeholder": ""
-                        },
-                        {
                             "key": "field_62cef059ce95d",
                             "label": "Brand Text",
                             "name": "brand_text",
@@ -261,25 +236,6 @@
                     "label": "Contact Page",
                     "display": "block",
                     "sub_fields": [
-                        {
-                            "key": "field_62e984e9c67ca",
-                            "label": "Title",
-                            "name": "title",
-                            "type": "text",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "default_value": "ANY QUESTIONS? WE ARE HERE TO HELP",
-                            "placeholder": "",
-                            "prepend": "",
-                            "append": "",
-                            "maxlength": ""
-                        },
                         {
                             "key": "field_62d2cd497e7cf",
                             "label": "Image Left",
@@ -404,59 +360,6 @@
                     ],
                     "min": "",
                     "max": ""
-                },
-                "layout_62e0357e8aa4a": {
-                    "key": "layout_62e0357e8aa4a",
-                    "name": "login_page",
-                    "label": "Login Page",
-                    "display": "block",
-                    "sub_fields": [
-                        {
-                            "key": "field_62e0357e8aa4b",
-                            "label": "Image Left",
-                            "name": "image_left",
-                            "type": "image",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "50",
-                                "class": "",
-                                "id": ""
-                            },
-                            "return_format": "array",
-                            "preview_size": "medium",
-                            "library": "all",
-                            "min_width": "",
-                            "min_height": "",
-                            "min_size": "",
-                            "max_width": "",
-                            "max_height": "",
-                            "max_size": "",
-                            "mime_types": ""
-                        },
-                        {
-                            "key": "field_62e0357e8aa4c",
-                            "label": "Login Shortcode",
-                            "name": "login_shortcode",
-                            "type": "text",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "50",
-                                "class": "",
-                                "id": ""
-                            },
-                            "default_value": "",
-                            "placeholder": "",
-                            "prepend": "",
-                            "append": "",
-                            "maxlength": ""
-                        }
-                    ],
-                    "min": "",
-                    "max": ""
                 }
             },
             "button_label": "Add Row",
@@ -482,5 +385,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1659471123
+    "modified": 1658085652
 }

@@ -11,7 +11,7 @@
 }
 
 .wpcf7-text {
-  @apply text-base outline-0 border-b w-full border-grey py-3 bg-white-bg leading-4;
+  @apply text-base outline-0 border-b w-full border-grey py-3 bg-white-bg;
 }
 
 .wpcf7-textarea {

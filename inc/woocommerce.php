@@ -129,41 +129,6 @@ remove_action('woocommerce_after_main_content', 'woocommerce_output_content_wrap
 
 
 
-if (!function_exists('herman_woocommerce_wrapper_before')) {
-	/**
-	 * Before Content.
-	 *
-	 * Wraps all WooCommerce content in wrappers which match the theme markup.
-	 *
-	 * @return void
-	 */
-	function herman_woocommerce_wrapper_before()
-	{
-?>
-		<main id="primary" class="site-main">
-
-		<?php
-	}
-}
-add_action('woocommerce_before_main_content', 'herman_woocommerce_wrapper_before');
-
-if (!function_exists('herman_woocommerce_wrapper_after')) {
-	/**
-	 * After Content.
-	 *
-	 * Closes the wrapping divs.
-	 *
-	 * @return void
-	 */
-	function herman_woocommerce_wrapper_after()
-	{
-		?>
-		</main><!-- #main -->
-		<?php
-	}
-}
-add_action('woocommerce_after_main_content', 'herman_woocommerce_wrapper_after');
-
 //CUSTOM WRAPPERS
 
 if (!function_exists('herman_woocommerce_flex_wrapper_before')) {
@@ -176,10 +141,10 @@ if (!function_exists('herman_woocommerce_flex_wrapper_before')) {
 	 */
 	function herman_woocommerce_flex_wrapper_before()
 	{
-		if (is_shop() || is_product_category()) {
-		?>
+		if (is_shop() || is_product_category() || is_product()) {
+?>
 
-			<section class="py-16 lg:py-36">
+			<section class="py-16 lg:py-28">
 				<div class="px-2.5 lg:px-8">
 
 				<?php
@@ -199,7 +164,7 @@ if (!function_exists('herman_woocommerce_flex_wrapper_before')) {
 		function herman_woocommerce_flex_wrapper_after()
 		{
 
-			if (is_shop() || is_product_category()) {
+			if (is_shop() || is_product_category() || is_product()) {
 				?>
 
 				</div>
@@ -303,11 +268,10 @@ if (!function_exists('herman_woocommerce_flex_wrapper_before')) {
 
 	/* PRODUCT ARCHIVE */
 
-
-
-	function remove_on_shop_page()
+	function custom_includes()
 	{
 		get_template_part('inc/shop-loop/include');
+		get_template_part('inc/single-product/include');
 	}
 
-	add_action('wp', 'remove_on_shop_page');
+	add_action('wp', 'custom_includes');

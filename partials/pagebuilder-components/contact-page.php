@@ -1,5 +1,4 @@
 <?php
-$title = get_sub_field('title');
 $image = get_sub_field('image_left');
 $image_url = get_sub_field('image_left')['url'];
 $image_alt = get_sub_field('image_left')['alt'];
@@ -12,26 +11,23 @@ $phone_display = get_sub_field('phone_display');
 
 ?>
 
-<section class="bg-white-bg">
+<section>
   <div class="flex flex-col sm:flex-row">
-    <div class="px-7 pb-8 pt-16 sm:pt-40 sm:basis-2/3 md:basis-2/5 text-gray-900">
+    <div class="px-7 pb-8 pt-16 sm:pt-28 sm:basis-2/3 md:basis-2/5 text-gray-900">
       <!-- <h1 class="mb-8"><?php the_field('titel'); ?></h1> -->
-      
-      <h2 class="text-base text-black mb-8"><?php echo $title ?></h2>
-
       <?php
-      
+
 
       if (get_sub_field('contact_shortcode')) {
         echo do_shortcode(get_sub_field('contact_shortcode'));
       };
       ?>
-      <h2 class="text-base text-black mt-32 mb-8"><?php echo $contact_title ?></h2>
+      <h2 class="mt-5 mb-8"><?php echo $contact_title ?></h2>
       <!-- Email invuld laten zien -->
       <?php
       if ($email_info != "" && $email_info != NULL) {
       ?>
-        <div class="flex py-1 lg:grid-cols-2 border-y border-grey">
+        <div class="flex py-2 lg:grid-cols-2 border-y border-grey">
           <div class="text-base w-1/4 py-1">
             EMAIL
           </div>
