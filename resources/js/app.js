@@ -5,12 +5,11 @@ Alpine.plugin(collapse);
 
 const swiper = new Swiper(".swiper", {
   modules: [Autoplay, Pagination, EffectFade],
-  direction: "vertical",
+  direction: "horizontal",
   loop: true,
-  speed: 2000,
-  // effect: "fade",
+  effect: "fade",
   autoplay: {
-    delay: 5000,
+    delay: 3000,
   },
 
   allowTouchMove: false,

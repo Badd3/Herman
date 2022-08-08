@@ -8012,11 +8012,11 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   module_default.plugin(module_default2);
   var swiper = new core_default(".swiper", {
     modules: [Autoplay, Pagination, EffectFade],
-    direction: "vertical",
+    direction: "horizontal",
     loop: true,
-    speed: 2e3,
+    effect: "fade",
     autoplay: {
-      delay: 5e3
+      delay: 3e3
     },
     allowTouchMove: false,
     pagination: {
