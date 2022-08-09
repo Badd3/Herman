@@ -24,8 +24,8 @@ if (get_field('header_kleur') == 'light') {
             </a>
         </div>
 
-        <div class="absolute right-5 top-5">
-            <span class="<?php echo $text_color; ?>">(<?php echo WC()->cart->get_cart_contents_count() ?>)</span>
+        <div class="absolute right-5 top-5 text-white">
+            <button @click="bagOpen = !bagOpen" class="uppercase">[<?php echo WC()->cart->get_cart_contents_count() ?>]</button>
         </div>
     </div>
 </section>

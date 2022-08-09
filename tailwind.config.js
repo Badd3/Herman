@@ -58,6 +58,7 @@ module.exports = {
       sans: ["Gotham", "sans-serif"],
     },
     screens: {
+      xx: "375px",
       xs: "480px",
       sm: "600px",
       md: "782px",

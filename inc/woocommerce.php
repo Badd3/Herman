@@ -175,17 +175,12 @@ if (!function_exists('herman_woocommerce_flex_wrapper_before')) {
 	}
 	add_action('woocommerce_sidebar', 'herman_woocommerce_flex_wrapper_after', 11);
 
-	/**
-	 * Sample implementation of the WooCommerce Mini Cart.
-	 *
-	 * You can add the WooCommerce Mini Cart to header.php like so ...
-	 *
-	<?php
-		if ( function_exists( 'herman_woocommerce_header_cart' ) ) {
-			herman_woocommerce_header_cart();
-		}
-	?>
-	 */
+
+	
+	if ( function_exists( 'herman_woocommerce_header_cart' ) ) {
+		herman_woocommerce_header_cart();
+	}
+
 
 	if (!function_exists('herman_woocommerce_cart_link_fragment')) {
 		/**
@@ -218,7 +213,8 @@ if (!function_exists('herman_woocommerce_flex_wrapper_before')) {
 		function herman_woocommerce_cart_link()
 		{
 		?>
-		<a class="cart-contents" href="<?php echo esc_url(wc_get_cart_url()); ?>" title="<?php esc_attr_e('View your shopping cart', 'herman'); ?>">
+
+		<a class="cart-contents flex" href="" title="<?php esc_attr_e('View your shopping cart', 'herman'); ?>">
 			<?php
 			$item_count_text = sprintf(
 				/* translators: number of items in the mini cart. */
@@ -226,7 +222,7 @@ if (!function_exists('herman_woocommerce_flex_wrapper_before')) {
 				WC()->cart->get_cart_contents_count()
 			);
 			?>
-			<span class="amount"><?php echo wp_kses_data(WC()->cart->get_cart_subtotal()); ?></span> <span class="count"><?php echo esc_html($item_count_text); ?></span>
+			<span class="flex text-base ml-6 mt-6 h-8">SHOPPINGBAG</span>
 		</a>
 	<?php
 		}

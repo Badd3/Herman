@@ -7,14 +7,12 @@
     queueJob(callback);
   }
   function queueJob(job) {
-    if (!queue.includes(job))
-      queue.push(job);
+    if (!queue.includes(job)) queue.push(job);
     queueFlush();
   }
   function dequeueJob(job) {
     let index2 = queue.indexOf(job);
-    if (index2 !== -1)
-      queue.splice(index2, 1);
+    if (index2 !== -1) queue.splice(index2, 1);
   }
   function queueFlush() {
     if (!flushing && !flushPending) {
@@ -44,21 +42,23 @@
   function setReactivityEngine(engine) {
     reactive = engine.reactive;
     release = engine.release;
-    effect = (callback) => engine.effect(callback, { scheduler: (task) => {
-      if (shouldSchedule) {
-        scheduler(task);
-      } else {
-        task();
-      }
-    } });
+    effect = (callback) =>
+      engine.effect(callback, {
+        scheduler: (task) => {
+          if (shouldSchedule) {
+            scheduler(task);
+          } else {
+            task();
+          }
+        },
+      });
     raw = engine.raw;
   }
   function overrideEffect(override) {
     effect = override;
   }
   function elementBoundEffect(el) {
-    let cleanup2 = () => {
-    };
+    let cleanup2 = () => {};
     let wrappedEffect = (callback) => {
       let effectReference = effect(callback);
       if (!el._x_effects) {
@@ -69,16 +69,18 @@
       }
       el._x_effects.add(effectReference);
       cleanup2 = () => {
-        if (effectReference === void 0)
-          return;
+        if (effectReference === void 0) return;
         el._x_effects.delete(effectReference);
         release(effectReference);
       };
       return effectReference;
     };
-    return [wrappedEffect, () => {
-      cleanup2();
-    }];
+    return [
+      wrappedEffect,
+      () => {
+        cleanup2();
+      },
+    ];
   }
   var onAttributeAddeds = [];
   var onElRemoveds = [];
@@ -88,8 +90,7 @@
   }
   function onElRemoved(el, callback) {
     if (typeof callback === "function") {
-      if (!el._x_cleanups)
-        el._x_cleanups = [];
+      if (!el._x_cleanups) el._x_cleanups = [];
       el._x_cleanups.push(callback);
     } else {
       callback = el;
@@ -100,15 +101,12 @@
     onAttributeAddeds.push(callback);
   }
   function onAttributeRemoved(el, name, callback) {
-    if (!el._x_attributeCleanups)
-      el._x_attributeCleanups = {};
-    if (!el._x_attributeCleanups[name])
-      el._x_attributeCleanups[name] = [];
+    if (!el._x_attributeCleanups) el._x_attributeCleanups = {};
+    if (!el._x_attributeCleanups[name]) el._x_attributeCleanups[name] = [];
     el._x_attributeCleanups[name].push(callback);
   }
   function cleanupAttributes(el, names) {
-    if (!el._x_attributeCleanups)
-      return;
+    if (!el._x_attributeCleanups) return;
     Object.entries(el._x_attributeCleanups).forEach(([name, value]) => {
       if (names === void 0 || names.includes(name)) {
         value.forEach((i) => i());
@@ -119,7 +117,12 @@
   var observer = new MutationObserver(onMutate);
   var currentlyObserving = false;
   function startObservingMutations() {
-    observer.observe(document, { subtree: true, childList: true, attributes: true, attributeOldValue: true });
+    observer.observe(document, {
+      subtree: true,
+      childList: true,
+      attributes: true,
+      attributeOldValue: true,
+    });
     currentlyObserving = true;
   }
   function stopObservingMutations() {
@@ -144,8 +147,7 @@
     recordQueue.length = 0;
   }
   function mutateDom(callback) {
-    if (!currentlyObserving)
-      return callback();
+    if (!currentlyObserving) return callback();
     stopObservingMutations();
     let result = callback();
     startObservingMutations();
@@ -171,24 +173,25 @@
     let addedAttributes = new Map();
     let removedAttributes = new Map();
     for (let i = 0; i < mutations.length; i++) {
-      if (mutations[i].target._x_ignoreMutationObserver)
-        continue;
+      if (mutations[i].target._x_ignoreMutationObserver) continue;
       if (mutations[i].type === "childList") {
-        mutations[i].addedNodes.forEach((node) => node.nodeType === 1 && addedNodes.push(node));
-        mutations[i].removedNodes.forEach((node) => node.nodeType === 1 && removedNodes.push(node));
+        mutations[i].addedNodes.forEach(
+          (node) => node.nodeType === 1 && addedNodes.push(node)
+        );
+        mutations[i].removedNodes.forEach(
+          (node) => node.nodeType === 1 && removedNodes.push(node)
+        );
       }
       if (mutations[i].type === "attributes") {
         let el = mutations[i].target;
         let name = mutations[i].attributeName;
         let oldValue = mutations[i].oldValue;
         let add2 = () => {
-          if (!addedAttributes.has(el))
-            addedAttributes.set(el, []);
+          if (!addedAttributes.has(el)) addedAttributes.set(el, []);
           addedAttributes.get(el).push({ name, value: el.getAttribute(name) });
         };
         let remove2 = () => {
-          if (!removedAttributes.has(el))
-            removedAttributes.set(el, []);
+          if (!removedAttributes.has(el)) removedAttributes.set(el, []);
           removedAttributes.get(el).push(name);
         };
         if (el.hasAttribute(name) && oldValue === null) {
@@ -208,12 +211,10 @@
       onAttributeAddeds.forEach((i) => i(el, attrs));
     });
     for (let node of removedNodes) {
-      if (addedNodes.includes(node))
-        continue;
+      if (addedNodes.includes(node)) continue;
       onElRemoveds.forEach((i) => i(node));
       if (node._x_cleanups) {
-        while (node._x_cleanups.length)
-          node._x_cleanups.pop()();
+        while (node._x_cleanups.length) node._x_cleanups.pop()();
       }
     }
     addedNodes.forEach((node) => {
@@ -221,10 +222,8 @@
       node._x_ignore = true;
     });
     for (let node of addedNodes) {
-      if (removedNodes.includes(node))
-        continue;
-      if (!node.isConnected)
-        continue;
+      if (removedNodes.includes(node)) continue;
+      if (!node.isConnected) continue;
       delete node._x_ignoreSelf;
       delete node._x_ignore;
       onElAddeds.forEach((i) => i(node));
@@ -256,8 +255,7 @@
     });
   }
   function closestDataStack(node) {
-    if (node._x_dataStack)
-      return node._x_dataStack;
+    if (node._x_dataStack) return node._x_dataStack;
     if (typeof ShadowRoot === "function" && node instanceof ShadowRoot) {
       return closestDataStack(node.host);
     }
@@ -267,83 +265,108 @@
     return closestDataStack(node.parentNode);
   }
   function mergeProxies(objects) {
-    let thisProxy = new Proxy({}, {
-      ownKeys: () => {
-        return Array.from(new Set(objects.flatMap((i) => Object.keys(i))));
-      },
-      has: (target, name) => {
-        return objects.some((obj) => obj.hasOwnProperty(name));
-      },
-      get: (target, name) => {
-        return (objects.find((obj) => {
-          if (obj.hasOwnProperty(name)) {
-            let descriptor = Object.getOwnPropertyDescriptor(obj, name);
-            if (descriptor.get && descriptor.get._x_alreadyBound || descriptor.set && descriptor.set._x_alreadyBound) {
+    let thisProxy = new Proxy(
+      {},
+      {
+        ownKeys: () => {
+          return Array.from(new Set(objects.flatMap((i) => Object.keys(i))));
+        },
+        has: (target, name) => {
+          return objects.some((obj) => obj.hasOwnProperty(name));
+        },
+        get: (target, name) => {
+          return (objects.find((obj) => {
+            if (obj.hasOwnProperty(name)) {
+              let descriptor = Object.getOwnPropertyDescriptor(obj, name);
+              if (
+                (descriptor.get && descriptor.get._x_alreadyBound) ||
+                (descriptor.set && descriptor.set._x_alreadyBound)
+              ) {
+                return true;
+              }
+              if ((descriptor.get || descriptor.set) && descriptor.enumerable) {
+                let getter = descriptor.get;
+                let setter = descriptor.set;
+                let property = descriptor;
+                getter = getter && getter.bind(thisProxy);
+                setter = setter && setter.bind(thisProxy);
+                if (getter) getter._x_alreadyBound = true;
+                if (setter) setter._x_alreadyBound = true;
+                Object.defineProperty(obj, name, {
+                  ...property,
+                  get: getter,
+                  set: setter,
+                });
+              }
               return true;
             }
-            if ((descriptor.get || descriptor.set) && descriptor.enumerable) {
-              let getter = descriptor.get;
-              let setter = descriptor.set;
-              let property = descriptor;
-              getter = getter && getter.bind(thisProxy);
-              setter = setter && setter.bind(thisProxy);
-              if (getter)
-                getter._x_alreadyBound = true;
-              if (setter)
-                setter._x_alreadyBound = true;
-              Object.defineProperty(obj, name, {
-                ...property,
-                get: getter,
-                set: setter
-              });
-            }
-            return true;
+            return false;
+          }) || {})[name];
+        },
+        set: (target, name, value) => {
+          let closestObjectWithKey = objects.find((obj) =>
+            obj.hasOwnProperty(name)
+          );
+          if (closestObjectWithKey) {
+            closestObjectWithKey[name] = value;
+          } else {
+            objects[objects.length - 1][name] = value;
           }
-          return false;
-        }) || {})[name];
-      },
-      set: (target, name, value) => {
-        let closestObjectWithKey = objects.find((obj) => obj.hasOwnProperty(name));
-        if (closestObjectWithKey) {
-          closestObjectWithKey[name] = value;
-        } else {
-          objects[objects.length - 1][name] = value;
-        }
-        return true;
+          return true;
+        },
       }
-    });
+    );
     return thisProxy;
   }
   function initInterceptors(data2) {
-    let isObject22 = (val) => typeof val === "object" && !Array.isArray(val) && val !== null;
+    let isObject22 = (val) =>
+      typeof val === "object" && !Array.isArray(val) && val !== null;
     let recurse = (obj, basePath = "") => {
-      Object.entries(Object.getOwnPropertyDescriptors(obj)).forEach(([key, { value, enumerable }]) => {
-        if (enumerable === false || value === void 0)
-          return;
-        let path = basePath === "" ? key : `${basePath}.${key}`;
-        if (typeof value === "object" && value !== null && value._x_interceptor) {
-          obj[key] = value.initialize(data2, path, key);
-        } else {
-          if (isObject22(value) && value !== obj && !(value instanceof Element)) {
-            recurse(value, path);
+      Object.entries(Object.getOwnPropertyDescriptors(obj)).forEach(
+        ([key, { value, enumerable }]) => {
+          if (enumerable === false || value === void 0) return;
+          let path = basePath === "" ? key : `${basePath}.${key}`;
+          if (
+            typeof value === "object" &&
+            value !== null &&
+            value._x_interceptor
+          ) {
+            obj[key] = value.initialize(data2, path, key);
+          } else {
+            if (
+              isObject22(value) &&
+              value !== obj &&
+              !(value instanceof Element)
+            ) {
+              recurse(value, path);
+            }
           }
         }
-      });
+      );
     };
     return recurse(data2);
   }
-  function interceptor(callback, mutateObj = () => {
-  }) {
+  function interceptor(callback, mutateObj = () => {}) {
     let obj = {
       initialValue: void 0,
       _x_interceptor: true,
       initialize(data2, path, key) {
-        return callback(this.initialValue, () => get(data2, path), (value) => set(data2, path, value), path, key);
-      }
+        return callback(
+          this.initialValue,
+          () => get(data2, path),
+          (value) => set(data2, path, value),
+          path,
+          key
+        );
+      },
     };
     mutateObj(obj);
     return (initialValue) => {
-      if (typeof initialValue === "object" && initialValue !== null && initialValue._x_interceptor) {
+      if (
+        typeof initialValue === "object" &&
+        initialValue !== null &&
+        initialValue._x_interceptor
+      ) {
         let initialize = obj.initialize.bind(obj);
         obj.initialize = (data2, path, key) => {
           let innerValue = initialValue.initialize(data2, path, key);
@@ -360,15 +383,11 @@
     return path.split(".").reduce((carry, segment) => carry[segment], obj);
   }
   function set(obj, path, value) {
-    if (typeof path === "string")
-      path = path.split(".");
-    if (path.length === 1)
-      obj[path[0]] = value;
-    else if (path.length === 0)
-      throw error;
+    if (typeof path === "string") path = path.split(".");
+    if (path.length === 1) obj[path[0]] = value;
+    else if (path.length === 0) throw error;
     else {
-      if (obj[path[0]])
-        return set(obj[path[0]], path.slice(1), value);
+      if (obj[path[0]]) return set(obj[path[0]], path.slice(1), value);
       else {
         obj[path[0]] = {};
         return set(obj[path[0]], path.slice(1), value);
@@ -388,7 +407,7 @@
           onElRemoved(el, cleanup2);
           return callback(el, utilities);
         },
-        enumerable: false
+        enumerable: false,
       });
     });
     return obj;
@@ -402,9 +421,12 @@
   }
   function handleError(error2, el, expression = void 0) {
     Object.assign(error2, { el, expression });
-    console.warn(`Alpine Expression Error: ${error2.message}
+    console.warn(
+      `Alpine Expression Error: ${error2.message}
 
-${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
+${expression ? 'Expression: "' + expression + '"\n\n' : ""}`,
+      el
+    );
     setTimeout(() => {
       throw error2;
     }, 0);
@@ -418,7 +440,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   }
   function evaluate(el, expression, extras = {}) {
     let result;
-    evaluateLater(el, expression)((value) => result = value, extras);
+    evaluateLater(el, expression)((value) => (result = value), extras);
     return result;
   }
   function evaluateLater(...args) {
@@ -439,8 +461,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     return tryCatch.bind(null, el, expression, evaluator);
   }
   function generateEvaluatorFromFunction(dataStack, func) {
-    return (receiver = () => {
-    }, { scope: scope2 = {}, params = [] } = {}) => {
+    return (receiver = () => {}, { scope: scope2 = {}, params = [] } = {}) => {
       let result = func.apply(mergeProxies([scope2, ...dataStack]), params);
       runIfTypeOfFunction(receiver, result);
     };
@@ -450,12 +471,17 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     if (evaluatorMemo[expression]) {
       return evaluatorMemo[expression];
     }
-    let AsyncFunction = Object.getPrototypeOf(async function() {
-    }).constructor;
-    let rightSideSafeExpression = /^[\n\s]*if.*\(.*\)/.test(expression) || /^(let|const)\s/.test(expression) ? `(() => { ${expression} })()` : expression;
+    let AsyncFunction = Object.getPrototypeOf(async function () {}).constructor;
+    let rightSideSafeExpression =
+      /^[\n\s]*if.*\(.*\)/.test(expression) || /^(let|const)\s/.test(expression)
+        ? `(() => { ${expression} })()`
+        : expression;
     const safeAsyncFunction = () => {
       try {
-        return new AsyncFunction(["__self", "scope"], `with (scope) { __self.result = ${rightSideSafeExpression} }; __self.finished = true; return __self.result;`);
+        return new AsyncFunction(
+          ["__self", "scope"],
+          `with (scope) { __self.result = ${rightSideSafeExpression} }; __self.finished = true; return __self.result;`
+        );
       } catch (error2) {
         handleError(error2, el, expression);
         return Promise.resolve();
@@ -467,20 +493,24 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   }
   function generateEvaluatorFromString(dataStack, expression, el) {
     let func = generateFunctionFromString(expression, el);
-    return (receiver = () => {
-    }, { scope: scope2 = {}, params = [] } = {}) => {
+    return (receiver = () => {}, { scope: scope2 = {}, params = [] } = {}) => {
       func.result = void 0;
       func.finished = false;
       let completeScope = mergeProxies([scope2, ...dataStack]);
       if (typeof func === "function") {
-        let promise = func(func, completeScope).catch((error2) => handleError(error2, el, expression));
+        let promise = func(func, completeScope).catch((error2) =>
+          handleError(error2, el, expression)
+        );
         if (func.finished) {
           runIfTypeOfFunction(receiver, func.result, completeScope, params, el);
           func.result = void 0;
         } else {
-          promise.then((result) => {
-            runIfTypeOfFunction(receiver, result, completeScope, params, el);
-          }).catch((error2) => handleError(error2, el, expression)).finally(() => func.result = void 0);
+          promise
+            .then((result) => {
+              runIfTypeOfFunction(receiver, result, completeScope, params, el);
+            })
+            .catch((error2) => handleError(error2, el, expression))
+            .finally(() => (func.result = void 0));
         }
       }
     };
@@ -489,7 +519,9 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     if (shouldAutoEvaluateFunctions && typeof value === "function") {
       let result = value.apply(scope2, params);
       if (result instanceof Promise) {
-        result.then((i) => runIfTypeOfFunction(receiver, i, scope2, params)).catch((error2) => handleError(error2, el, value));
+        result
+          .then((i) => runIfTypeOfFunction(receiver, i, scope2, params))
+          .catch((error2) => handleError(error2, el, value));
       } else {
         receiver(result);
       }
@@ -510,13 +542,25 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   }
   function directives(el, attributes, originalAttributeOverride) {
     let transformedAttributeMap = {};
-    let directives2 = Array.from(attributes).map(toTransformedAttributes((newName, oldName) => transformedAttributeMap[newName] = oldName)).filter(outNonAlpineAttributes).map(toParsedDirectives(transformedAttributeMap, originalAttributeOverride)).sort(byPriority);
+    let directives2 = Array.from(attributes)
+      .map(
+        toTransformedAttributes(
+          (newName, oldName) => (transformedAttributeMap[newName] = oldName)
+        )
+      )
+      .filter(outNonAlpineAttributes)
+      .map(
+        toParsedDirectives(transformedAttributeMap, originalAttributeOverride)
+      )
+      .sort(byPriority);
     return directives2.map((directive2) => {
       return getDirectiveHandler(el, directive2);
     });
   }
   function attributesOnly(attributes) {
-    return Array.from(attributes).map(toTransformedAttributes()).filter((attr2) => !outNonAlpineAttributes(attr2));
+    return Array.from(attributes)
+      .map(toTransformedAttributes())
+      .filter((attr2) => !outNonAlpineAttributes(attr2));
   }
   var isDeferringHandlers = false;
   var directiveHandlerStacks = new Map();
@@ -548,41 +592,43 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       effect: effect3,
       cleanup: cleanup2,
       evaluateLater: evaluateLater.bind(evaluateLater, el),
-      evaluate: evaluate.bind(evaluate, el)
+      evaluate: evaluate.bind(evaluate, el),
     };
     let doCleanup = () => cleanups.forEach((i) => i());
     return [utilities, doCleanup];
   }
   function getDirectiveHandler(el, directive2) {
-    let noop = () => {
-    };
+    let noop = () => {};
     let handler3 = directiveHandlers[directive2.type] || noop;
     let [utilities, cleanup2] = getElementBoundUtilities(el);
     onAttributeRemoved(el, directive2.original, cleanup2);
     let fullHandler = () => {
-      if (el._x_ignore || el._x_ignoreSelf)
-        return;
+      if (el._x_ignore || el._x_ignoreSelf) return;
       handler3.inline && handler3.inline(el, directive2, utilities);
       handler3 = handler3.bind(handler3, el, directive2, utilities);
-      isDeferringHandlers ? directiveHandlerStacks.get(currentHandlerStackKey).push(handler3) : handler3();
+      isDeferringHandlers
+        ? directiveHandlerStacks.get(currentHandlerStackKey).push(handler3)
+        : handler3();
     };
     fullHandler.runCleanups = cleanup2;
     return fullHandler;
   }
-  var startingWith = (subject, replacement) => ({ name, value }) => {
-    if (name.startsWith(subject))
-      name = name.replace(subject, replacement);
-    return { name, value };
-  };
+  var startingWith =
+    (subject, replacement) =>
+    ({ name, value }) => {
+      if (name.startsWith(subject)) name = name.replace(subject, replacement);
+      return { name, value };
+    };
   var into = (i) => i;
-  function toTransformedAttributes(callback = () => {
-  }) {
+  function toTransformedAttributes(callback = () => {}) {
     return ({ name, value }) => {
-      let { name: newName, value: newValue } = attributeTransformers.reduce((carry, transform2) => {
-        return transform2(carry);
-      }, { name, value });
-      if (newName !== name)
-        callback(newName, name);
+      let { name: newName, value: newValue } = attributeTransformers.reduce(
+        (carry, transform2) => {
+          return transform2(carry);
+        },
+        { name, value }
+      );
+      if (newName !== name) callback(newName, name);
       return { name: newName, value: newValue };
     };
   }
@@ -594,18 +640,22 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     return alpineAttributeRegex().test(name);
   }
   var alpineAttributeRegex = () => new RegExp(`^${prefixAsString}([^:^.]+)\\b`);
-  function toParsedDirectives(transformedAttributeMap, originalAttributeOverride) {
+  function toParsedDirectives(
+    transformedAttributeMap,
+    originalAttributeOverride
+  ) {
     return ({ name, value }) => {
       let typeMatch = name.match(alpineAttributeRegex());
       let valueMatch = name.match(/:([a-zA-Z0-9\-:]+)/);
       let modifiers = name.match(/\.[^.\]]+(?=[^\]]*$)/g) || [];
-      let original = originalAttributeOverride || transformedAttributeMap[name] || name;
+      let original =
+        originalAttributeOverride || transformedAttributeMap[name] || name;
       return {
         type: typeMatch ? typeMatch[1] : null,
         value: valueMatch ? valueMatch[1] : null,
         modifiers: modifiers.map((i) => i.replace(".", "")),
         expression: value,
-        original
+        original,
       };
     };
   }
@@ -626,7 +676,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     "if",
     DEFAULT,
     "teleport",
-    "element"
+    "element",
   ];
   function byPriority(a, b) {
     let typeA = directiveOrder.indexOf(a.type) === -1 ? DEFAULT : a.type;
@@ -634,21 +684,23 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     return directiveOrder.indexOf(typeA) - directiveOrder.indexOf(typeB);
   }
   function dispatch(el, name, detail = {}) {
-    el.dispatchEvent(new CustomEvent(name, {
-      detail,
-      bubbles: true,
-      composed: true,
-      cancelable: true
-    }));
+    el.dispatchEvent(
+      new CustomEvent(name, {
+        detail,
+        bubbles: true,
+        composed: true,
+        cancelable: true,
+      })
+    );
   }
   var tickStack = [];
   var isHolding = false;
-  function nextTick(callback = () => {
-  }) {
+  function nextTick(callback = () => {}) {
     queueMicrotask(() => {
-      isHolding || setTimeout(() => {
-        releaseNextTicks();
-      });
+      isHolding ||
+        setTimeout(() => {
+          releaseNextTicks();
+        });
     });
     return new Promise((res) => {
       tickStack.push(() => {
@@ -659,8 +711,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   }
   function releaseNextTicks() {
     isHolding = false;
-    while (tickStack.length)
-      tickStack.shift()();
+    while (tickStack.length) tickStack.shift()();
   }
   function holdNextTicks() {
     isHolding = true;
@@ -671,9 +722,8 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       return;
     }
     let skip = false;
-    callback(el, () => skip = true);
-    if (skip)
-      return;
+    callback(el, () => (skip = true));
+    if (skip) return;
     let node = el.firstElementChild;
     while (node) {
       walk(node, callback, false);
@@ -685,7 +735,9 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   }
   function start() {
     if (!document.body)
-      warn("Unable to initialize. Trying to load Alpine before `<body>` is available. Did you forget to add `defer` in Alpine's `<script>` tag?");
+      warn(
+        "Unable to initialize. Trying to load Alpine before `<body>` is available. Did you forget to add `defer` in Alpine's `<script>` tag?"
+      );
     dispatch(document, "alpine:init");
     dispatch(document, "alpine:initializing");
     startObservingMutations();
@@ -695,9 +747,11 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       directives(el, attrs).forEach((handle) => handle());
     });
     let outNestedComponents = (el) => !closestRoot(el.parentElement, true);
-    Array.from(document.querySelectorAll(allSelectors())).filter(outNestedComponents).forEach((el) => {
-      initTree(el);
-    });
+    Array.from(document.querySelectorAll(allSelectors()))
+      .filter(outNestedComponents)
+      .forEach((el) => {
+        initTree(el);
+      });
     dispatch(document, "alpine:initialized");
   }
   var rootSelectorCallbacks = [];
@@ -706,7 +760,9 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     return rootSelectorCallbacks.map((fn) => fn());
   }
   function allSelectors() {
-    return rootSelectorCallbacks.concat(initSelectorCallbacks).map((fn) => fn());
+    return rootSelectorCallbacks
+      .concat(initSelectorCallbacks)
+      .map((fn) => fn());
   }
   function addRootSelector(selectorCallback) {
     rootSelectorCallbacks.push(selectorCallback);
@@ -717,19 +773,14 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   function closestRoot(el, includeInitSelectors = false) {
     return findClosest(el, (element) => {
       const selectors = includeInitSelectors ? allSelectors() : rootSelectors();
-      if (selectors.some((selector) => element.matches(selector)))
-        return true;
+      if (selectors.some((selector) => element.matches(selector))) return true;
     });
   }
   function findClosest(el, callback) {
-    if (!el)
-      return;
-    if (callback(el))
-      return el;
-    if (el._x_teleportBack)
-      el = el._x_teleportBack;
-    if (!el.parentElement)
-      return;
+    if (!el) return;
+    if (callback(el)) return el;
+    if (el._x_teleportBack) el = el._x_teleportBack;
+    if (!el.parentElement) return;
     return findClosest(el.parentElement, callback);
   }
   function isRoot(el) {
@@ -758,20 +809,28 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   }
   function setClassesFromString(el, classString) {
     let split = (classString2) => classString2.split(" ").filter(Boolean);
-    let missingClasses = (classString2) => classString2.split(" ").filter((i) => !el.classList.contains(i)).filter(Boolean);
+    let missingClasses = (classString2) =>
+      classString2
+        .split(" ")
+        .filter((i) => !el.classList.contains(i))
+        .filter(Boolean);
     let addClassesAndReturnUndo = (classes) => {
       el.classList.add(...classes);
       return () => {
         el.classList.remove(...classes);
       };
     };
-    classString = classString === true ? classString = "" : classString || "";
+    classString = classString === true ? (classString = "") : classString || "";
     return addClassesAndReturnUndo(missingClasses(classString));
   }
   function setClassesFromObject(el, classObject) {
     let split = (classString) => classString.split(" ").filter(Boolean);
-    let forAdd = Object.entries(classObject).flatMap(([classString, bool]) => bool ? split(classString) : false).filter(Boolean);
-    let forRemove = Object.entries(classObject).flatMap(([classString, bool]) => !bool ? split(classString) : false).filter(Boolean);
+    let forAdd = Object.entries(classObject)
+      .flatMap(([classString, bool]) => (bool ? split(classString) : false))
+      .filter(Boolean);
+    let forRemove = Object.entries(classObject)
+      .flatMap(([classString, bool]) => (!bool ? split(classString) : false))
+      .filter(Boolean);
     let added = [];
     let removed = [];
     forRemove.forEach((i) => {
@@ -825,10 +884,9 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   function kebabCase(subject) {
     return subject.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase();
   }
-  function once(callback, fallback = () => {
-  }) {
+  function once(callback, fallback = () => {}) {
     let called = false;
-    return function() {
+    return function () {
       if (!called) {
         called = true;
         callback.apply(this, arguments);
@@ -837,15 +895,17 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       }
     };
   }
-  directive("transition", (el, { value, modifiers, expression }, { evaluate: evaluate2 }) => {
-    if (typeof expression === "function")
-      expression = evaluate2(expression);
-    if (!expression) {
-      registerTransitionsFromHelper(el, modifiers, value);
-    } else {
-      registerTransitionsFromClassString(el, expression, value);
+  directive(
+    "transition",
+    (el, { value, modifiers, expression }, { evaluate: evaluate2 }) => {
+      if (typeof expression === "function") expression = evaluate2(expression);
+      if (!expression) {
+        registerTransitionsFromHelper(el, modifiers, value);
+      } else {
+        registerTransitionsFromClassString(el, expression, value);
+      }
     }
-  });
+  );
   function registerTransitionsFromClassString(el, classString, stage) {
     registerTransitionObject(el, setClasses, "");
     let directiveStorageMap = {
@@ -866,26 +926,36 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       },
       "leave-end": (classes) => {
         el._x_transition.leave.end = classes;
-      }
+      },
     };
     directiveStorageMap[stage](classString);
   }
   function registerTransitionsFromHelper(el, modifiers, stage) {
     registerTransitionObject(el, setStyles);
-    let doesntSpecify = !modifiers.includes("in") && !modifiers.includes("out") && !stage;
-    let transitioningIn = doesntSpecify || modifiers.includes("in") || ["enter"].includes(stage);
-    let transitioningOut = doesntSpecify || modifiers.includes("out") || ["leave"].includes(stage);
+    let doesntSpecify =
+      !modifiers.includes("in") && !modifiers.includes("out") && !stage;
+    let transitioningIn =
+      doesntSpecify || modifiers.includes("in") || ["enter"].includes(stage);
+    let transitioningOut =
+      doesntSpecify || modifiers.includes("out") || ["leave"].includes(stage);
     if (modifiers.includes("in") && !doesntSpecify) {
-      modifiers = modifiers.filter((i, index2) => index2 < modifiers.indexOf("out"));
+      modifiers = modifiers.filter(
+        (i, index2) => index2 < modifiers.indexOf("out")
+      );
     }
     if (modifiers.includes("out") && !doesntSpecify) {
-      modifiers = modifiers.filter((i, index2) => index2 > modifiers.indexOf("out"));
+      modifiers = modifiers.filter(
+        (i, index2) => index2 > modifiers.indexOf("out")
+      );
     }
-    let wantsAll = !modifiers.includes("opacity") && !modifiers.includes("scale");
+    let wantsAll =
+      !modifiers.includes("opacity") && !modifiers.includes("scale");
     let wantsOpacity = wantsAll || modifiers.includes("opacity");
     let wantsScale = wantsAll || modifiers.includes("scale");
     let opacityValue = wantsOpacity ? 0 : 1;
-    let scaleValue = wantsScale ? modifierValue(modifiers, "scale", 95) / 100 : 1;
+    let scaleValue = wantsScale
+      ? modifierValue(modifiers, "scale", 95) / 100
+      : 1;
     let delay = modifierValue(modifiers, "delay", 0);
     let origin = modifierValue(modifiers, "origin", "center");
     let property = "opacity, transform";
@@ -898,15 +968,15 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         transitionDelay: delay,
         transitionProperty: property,
         transitionDuration: `${durationIn}s`,
-        transitionTimingFunction: easing
+        transitionTimingFunction: easing,
       };
       el._x_transition.enter.start = {
         opacity: opacityValue,
-        transform: `scale(${scaleValue})`
+        transform: `scale(${scaleValue})`,
       };
       el._x_transition.enter.end = {
         opacity: 1,
-        transform: `scale(1)`
+        transform: `scale(1)`,
       };
     }
     if (transitioningOut) {
@@ -915,15 +985,15 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         transitionDelay: delay,
         transitionProperty: property,
         transitionDuration: `${durationOut}s`,
-        transitionTimingFunction: easing
+        transitionTimingFunction: easing,
       };
       el._x_transition.leave.start = {
         opacity: 1,
-        transform: `scale(1)`
+        transform: `scale(1)`,
       };
       el._x_transition.leave.end = {
         opacity: opacityValue,
-        transform: `scale(${scaleValue})`
+        transform: `scale(${scaleValue})`,
       };
     }
   }
@@ -932,63 +1002,92 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       el._x_transition = {
         enter: { during: defaultValue, start: defaultValue, end: defaultValue },
         leave: { during: defaultValue, start: defaultValue, end: defaultValue },
-        in(before = () => {
-        }, after = () => {
-        }) {
-          transition(el, setFunction, {
-            during: this.enter.during,
-            start: this.enter.start,
-            end: this.enter.end
-          }, before, after);
+        in(before = () => {}, after = () => {}) {
+          transition(
+            el,
+            setFunction,
+            {
+              during: this.enter.during,
+              start: this.enter.start,
+              end: this.enter.end,
+            },
+            before,
+            after
+          );
         },
-        out(before = () => {
-        }, after = () => {
-        }) {
-          transition(el, setFunction, {
-            during: this.leave.during,
-            start: this.leave.start,
-            end: this.leave.end
-          }, before, after);
-        }
+        out(before = () => {}, after = () => {}) {
+          transition(
+            el,
+            setFunction,
+            {
+              during: this.leave.during,
+              start: this.leave.start,
+              end: this.leave.end,
+            },
+            before,
+            after
+          );
+        },
       };
   }
-  window.Element.prototype._x_toggleAndCascadeWithTransitions = function(el, value, show, hide) {
+  window.Element.prototype._x_toggleAndCascadeWithTransitions = function (
+    el,
+    value,
+    show,
+    hide
+  ) {
     let clickAwayCompatibleShow = () => {
-      document.visibilityState === "visible" ? requestAnimationFrame(show) : setTimeout(show);
+      document.visibilityState === "visible"
+        ? requestAnimationFrame(show)
+        : setTimeout(show);
     };
     if (value) {
-      if (el._x_transition && (el._x_transition.enter || el._x_transition.leave)) {
-        el._x_transition.enter && (Object.entries(el._x_transition.enter.during).length || Object.entries(el._x_transition.enter.start).length || Object.entries(el._x_transition.enter.end).length) ? el._x_transition.in(show) : clickAwayCompatibleShow();
+      if (
+        el._x_transition &&
+        (el._x_transition.enter || el._x_transition.leave)
+      ) {
+        el._x_transition.enter &&
+        (Object.entries(el._x_transition.enter.during).length ||
+          Object.entries(el._x_transition.enter.start).length ||
+          Object.entries(el._x_transition.enter.end).length)
+          ? el._x_transition.in(show)
+          : clickAwayCompatibleShow();
       } else {
-        el._x_transition ? el._x_transition.in(show) : clickAwayCompatibleShow();
+        el._x_transition
+          ? el._x_transition.in(show)
+          : clickAwayCompatibleShow();
       }
       return;
     }
-    el._x_hidePromise = el._x_transition ? new Promise((resolve, reject) => {
-      el._x_transition.out(() => {
-      }, () => resolve(hide));
-      el._x_transitioning.beforeCancel(() => reject({ isFromCancelledTransition: true }));
-    }) : Promise.resolve(hide);
+    el._x_hidePromise = el._x_transition
+      ? new Promise((resolve, reject) => {
+          el._x_transition.out(
+            () => {},
+            () => resolve(hide)
+          );
+          el._x_transitioning.beforeCancel(() =>
+            reject({ isFromCancelledTransition: true })
+          );
+        })
+      : Promise.resolve(hide);
     queueMicrotask(() => {
       let closest2 = closestHide(el);
       if (closest2) {
-        if (!closest2._x_hideChildren)
-          closest2._x_hideChildren = [];
+        if (!closest2._x_hideChildren) closest2._x_hideChildren = [];
         closest2._x_hideChildren.push(el);
       } else {
         queueMicrotask(() => {
           let hideAfterChildren = (el2) => {
             let carry = Promise.all([
               el2._x_hidePromise,
-              ...(el2._x_hideChildren || []).map(hideAfterChildren)
+              ...(el2._x_hideChildren || []).map(hideAfterChildren),
             ]).then(([i]) => i());
             delete el2._x_hidePromise;
             delete el2._x_hideChildren;
             return carry;
           };
           hideAfterChildren(el).catch((e) => {
-            if (!e.isFromCancelledTransition)
-              throw e;
+            if (!e.isFromCancelledTransition) throw e;
           });
         });
       }
@@ -996,16 +1095,22 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   };
   function closestHide(el) {
     let parent2 = el.parentNode;
-    if (!parent2)
-      return;
+    if (!parent2) return;
     return parent2._x_hidePromise ? parent2 : closestHide(parent2);
   }
-  function transition(el, setFunction, { during, start: start2, end } = {}, before = () => {
-  }, after = () => {
-  }) {
-    if (el._x_transitioning)
-      el._x_transitioning.cancel();
-    if (Object.keys(during).length === 0 && Object.keys(start2).length === 0 && Object.keys(end).length === 0) {
+  function transition(
+    el,
+    setFunction,
+    { during, start: start2, end } = {},
+    before = () => {},
+    after = () => {}
+  ) {
+    if (el._x_transitioning) el._x_transitioning.cancel();
+    if (
+      Object.keys(during).length === 0 &&
+      Object.keys(start2).length === 0 &&
+      Object.keys(end).length === 0
+    ) {
       before();
       after();
       return;
@@ -1027,7 +1132,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       cleanup() {
         undoDuring();
         undoEnd();
-      }
+      },
     });
   }
   function performTransition(el, stages) {
@@ -1035,15 +1140,13 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     let finish = once(() => {
       mutateDom(() => {
         interrupted = true;
-        if (!reachedBefore)
-          stages.before();
+        if (!reachedBefore) stages.before();
         if (!reachedEnd) {
           stages.end();
           releaseNextTicks();
         }
         stages.after();
-        if (el.isConnected)
-          stages.cleanup();
+        if (el.isConnected) stages.cleanup();
         delete el._x_transitioning;
       });
     });
@@ -1052,14 +1155,13 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       beforeCancel(callback) {
         this.beforeCancels.push(callback);
       },
-      cancel: once(function() {
+      cancel: once(function () {
         while (this.beforeCancels.length) {
           this.beforeCancels.shift()();
         }
-        ;
         finish();
       }),
-      finish
+      finish,
     };
     mutateDom(() => {
       stages.start();
@@ -1067,19 +1169,28 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     });
     holdNextTicks();
     requestAnimationFrame(() => {
-      if (interrupted)
-        return;
-      let duration = Number(getComputedStyle(el).transitionDuration.replace(/,.*/, "").replace("s", "")) * 1e3;
-      let delay = Number(getComputedStyle(el).transitionDelay.replace(/,.*/, "").replace("s", "")) * 1e3;
+      if (interrupted) return;
+      let duration =
+        Number(
+          getComputedStyle(el)
+            .transitionDuration.replace(/,.*/, "")
+            .replace("s", "")
+        ) * 1e3;
+      let delay =
+        Number(
+          getComputedStyle(el)
+            .transitionDelay.replace(/,.*/, "")
+            .replace("s", "")
+        ) * 1e3;
       if (duration === 0)
-        duration = Number(getComputedStyle(el).animationDuration.replace("s", "")) * 1e3;
+        duration =
+          Number(getComputedStyle(el).animationDuration.replace("s", "")) * 1e3;
       mutateDom(() => {
         stages.before();
       });
       reachedBefore = true;
       requestAnimationFrame(() => {
-        if (interrupted)
-          return;
+        if (interrupted) return;
         mutateDom(() => {
           stages.end();
         });
@@ -1090,35 +1201,33 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     });
   }
   function modifierValue(modifiers, key, fallback) {
-    if (modifiers.indexOf(key) === -1)
-      return fallback;
+    if (modifiers.indexOf(key) === -1) return fallback;
     const rawValue = modifiers[modifiers.indexOf(key) + 1];
-    if (!rawValue)
-      return fallback;
+    if (!rawValue) return fallback;
     if (key === "scale") {
-      if (isNaN(rawValue))
-        return fallback;
+      if (isNaN(rawValue)) return fallback;
     }
     if (key === "duration") {
       let match = rawValue.match(/([0-9]+)ms/);
-      if (match)
-        return match[1];
+      if (match) return match[1];
     }
     if (key === "origin") {
-      if (["top", "right", "left", "center", "bottom"].includes(modifiers[modifiers.indexOf(key) + 2])) {
+      if (
+        ["top", "right", "left", "center", "bottom"].includes(
+          modifiers[modifiers.indexOf(key) + 2]
+        )
+      ) {
         return [rawValue, modifiers[modifiers.indexOf(key) + 2]].join(" ");
       }
     }
     return rawValue;
   }
   var isCloning = false;
-  function skipDuringClone(callback, fallback = () => {
-  }) {
-    return (...args) => isCloning ? fallback(...args) : callback(...args);
+  function skipDuringClone(callback, fallback = () => {}) {
+    return (...args) => (isCloning ? fallback(...args) : callback(...args));
   }
   function clone(oldEl, newEl) {
-    if (!newEl._x_dataStack)
-      newEl._x_dataStack = oldEl._x_dataStack;
+    if (!newEl._x_dataStack) newEl._x_dataStack = oldEl._x_dataStack;
     isCloning = true;
     dontRegisterReactiveSideEffects(() => {
       cloneTree(newEl);
@@ -1129,8 +1238,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     let hasRunThroughFirstEl = false;
     let shallowWalker = (el2, callback) => {
       walk(el2, (el3, skip) => {
-        if (hasRunThroughFirstEl && isRoot(el3))
-          return skip();
+        if (hasRunThroughFirstEl && isRoot(el3)) return skip();
         hasRunThroughFirstEl = true;
         callback(el3, skip);
       });
@@ -1142,15 +1250,13 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     overrideEffect((callback2, el) => {
       let storedEffect = cache(callback2);
       release(storedEffect);
-      return () => {
-      };
+      return () => {};
     });
     callback();
     overrideEffect(cache);
   }
   function bind(el, name, value, modifiers = []) {
-    if (!el._x_bindings)
-      el._x_bindings = reactive({});
+    if (!el._x_bindings) el._x_bindings = reactive({});
     el._x_bindings[name] = value;
     name = modifiers.includes("camel") ? camelCase(name) : name;
     switch (name) {
@@ -1179,11 +1285,18 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     } else if (el.type === "checkbox") {
       if (Number.isInteger(value)) {
         el.value = value;
-      } else if (!Number.isInteger(value) && !Array.isArray(value) && typeof value !== "boolean" && ![null, void 0].includes(value)) {
+      } else if (
+        !Number.isInteger(value) &&
+        !Array.isArray(value) &&
+        typeof value !== "boolean" &&
+        ![null, void 0].includes(value)
+      ) {
         el.value = String(value);
       } else {
         if (Array.isArray(value)) {
-          el.checked = value.some((val) => checkedAttrLooseCompare(val, el.value));
+          el.checked = value.some((val) =>
+            checkedAttrLooseCompare(val, el.value)
+          );
         } else {
           el.checked = !!value;
         }
@@ -1191,27 +1304,26 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     } else if (el.tagName === "SELECT") {
       updateSelect(el, value);
     } else {
-      if (el.value === value)
-        return;
+      if (el.value === value) return;
       el.value = value;
     }
   }
   function bindClasses(el, value) {
-    if (el._x_undoAddedClasses)
-      el._x_undoAddedClasses();
+    if (el._x_undoAddedClasses) el._x_undoAddedClasses();
     el._x_undoAddedClasses = setClasses(el, value);
   }
   function bindStyles(el, value) {
-    if (el._x_undoAddedStyles)
-      el._x_undoAddedStyles();
+    if (el._x_undoAddedStyles) el._x_undoAddedStyles();
     el._x_undoAddedStyles = setStyles(el, value);
   }
   function bindAttribute(el, name, value) {
-    if ([null, void 0, false].includes(value) && attributeShouldntBePreservedIfFalsy(name)) {
+    if (
+      [null, void 0, false].includes(value) &&
+      attributeShouldntBePreservedIfFalsy(name)
+    ) {
       el.removeAttribute(name);
     } else {
-      if (isBooleanAttr(name))
-        value = name;
+      if (isBooleanAttr(name)) value = name;
       setIfChanged(el, name, value);
     }
   }
@@ -1229,7 +1341,9 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     });
   }
   function camelCase(subject) {
-    return subject.toLowerCase().replace(/-(\w)/g, (match, char) => char.toUpperCase());
+    return subject
+      .toLowerCase()
+      .replace(/-(\w)/g, (match, char) => char.toUpperCase());
   }
   function checkedAttrLooseCompare(valueA, valueB) {
     return valueA == valueB;
@@ -1260,12 +1374,17 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       "reversed",
       "async",
       "defer",
-      "nomodule"
+      "nomodule",
     ];
     return booleanAttributes.includes(attrName);
   }
   function attributeShouldntBePreservedIfFalsy(name) {
-    return !["aria-pressed", "aria-checked", "aria-expanded", "aria-selected"].includes(name);
+    return ![
+      "aria-pressed",
+      "aria-checked",
+      "aria-expanded",
+      "aria-selected",
+    ].includes(name);
   }
   function getBinding(el, name, fallback) {
     if (el._x_bindings && el._x_bindings[name] !== void 0)
@@ -1276,15 +1395,15 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     if (isBooleanAttr(name)) {
       return !![name, "true"].includes(attr2);
     }
-    if (attr2 === "")
-      return true;
+    if (attr2 === "") return true;
     return attr2;
   }
   function debounce(func, wait) {
     var timeout;
-    return function() {
-      var context = this, args = arguments;
-      var later = function() {
+    return function () {
+      var context = this,
+        args = arguments;
+      var later = function () {
         timeout = null;
         func.apply(context, args);
       };
@@ -1294,12 +1413,13 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   }
   function throttle(func, limit) {
     let inThrottle;
-    return function() {
-      let context = this, args = arguments;
+    return function () {
+      let context = this,
+        args = arguments;
       if (!inThrottle) {
         func.apply(context, args);
         inThrottle = true;
-        setTimeout(() => inThrottle = false, limit);
+        setTimeout(() => (inThrottle = false), limit);
       }
     };
   }
@@ -1317,7 +1437,12 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       return stores[name];
     }
     stores[name] = value;
-    if (typeof value === "object" && value !== null && value.hasOwnProperty("init") && typeof value.init === "function") {
+    if (
+      typeof value === "object" &&
+      value !== null &&
+      value.hasOwnProperty("init") &&
+      typeof value.init === "function"
+    ) {
       stores[name].init();
     }
     initInterceptors(stores[name]);
@@ -1336,7 +1461,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
           return (...args) => {
             return callback(...args);
           };
-        }
+        },
       });
     });
     return obj;
@@ -1353,7 +1478,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
             return callback.bind(context)(...args);
           };
         },
-        enumerable: false
+        enumerable: false,
       });
     });
     return obj;
@@ -1408,7 +1533,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     bound: getBinding,
     $data: scope,
     data,
-    bind: bind2
+    bind: bind2,
   };
   var alpine_default = Alpine;
   function makeMap(str, expectsLowerCase) {
@@ -1417,7 +1542,9 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     for (let i = 0; i < list.length; i++) {
       map[list[i]] = true;
     }
-    return expectsLowerCase ? (val) => !!map[val.toLowerCase()] : (val) => !!map[val];
+    return expectsLowerCase
+      ? (val) => !!map[val.toLowerCase()]
+      : (val) => !!map[val];
   }
   var PatchFlagNames = {
     [1]: `TEXT`,
@@ -1433,15 +1560,18 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     [1024]: `DYNAMIC_SLOTS`,
     [2048]: `DEV_ROOT_FRAGMENT`,
     [-1]: `HOISTED`,
-    [-2]: `BAIL`
+    [-2]: `BAIL`,
   };
   var slotFlagsText = {
     [1]: "STABLE",
     [2]: "DYNAMIC",
-    [3]: "FORWARDED"
+    [3]: "FORWARDED",
   };
   var specialBooleanAttrs = `itemscope,allowfullscreen,formnovalidate,ismap,nomodule,novalidate,readonly`;
-  var isBooleanAttr2 = /* @__PURE__ */ makeMap(specialBooleanAttrs + `,async,autofocus,autoplay,controls,default,defer,disabled,hidden,loop,open,required,reversed,scoped,seamless,checked,muted,multiple,selected`);
+  var isBooleanAttr2 = /* @__PURE__ */ makeMap(
+    specialBooleanAttrs +
+      `,async,autofocus,autoplay,controls,default,defer,disabled,hidden,loop,open,required,reversed,scoped,seamless,checked,muted,multiple,selected`
+  );
   var EMPTY_OBJ = false ? Object.freeze({}) : {};
   var EMPTY_ARR = false ? Object.freeze([]) : [];
   var extend = Object.assign;
@@ -1457,7 +1587,11 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   var toRawType = (value) => {
     return toTypeString(value).slice(8, -1);
   };
-  var isIntegerKey = (key) => isString(key) && key !== "NaN" && key[0] !== "-" && "" + parseInt(key, 10) === key;
+  var isIntegerKey = (key) =>
+    isString(key) &&
+    key !== "NaN" &&
+    key[0] !== "-" &&
+    "" + parseInt(key, 10) === key;
   var cacheStringFunction = (fn) => {
     const cache = Object.create(null);
     return (str) => {
@@ -1467,13 +1601,20 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   };
   var camelizeRE = /-(\w)/g;
   var camelize = cacheStringFunction((str) => {
-    return str.replace(camelizeRE, (_, c) => c ? c.toUpperCase() : "");
+    return str.replace(camelizeRE, (_, c) => (c ? c.toUpperCase() : ""));
   });
   var hyphenateRE = /\B([A-Z])/g;
-  var hyphenate = cacheStringFunction((str) => str.replace(hyphenateRE, "-$1").toLowerCase());
-  var capitalize = cacheStringFunction((str) => str.charAt(0).toUpperCase() + str.slice(1));
-  var toHandlerKey = cacheStringFunction((str) => str ? `on${capitalize(str)}` : ``);
-  var hasChanged = (value, oldValue) => value !== oldValue && (value === value || oldValue === oldValue);
+  var hyphenate = cacheStringFunction((str) =>
+    str.replace(hyphenateRE, "-$1").toLowerCase()
+  );
+  var capitalize = cacheStringFunction(
+    (str) => str.charAt(0).toUpperCase() + str.slice(1)
+  );
+  var toHandlerKey = cacheStringFunction((str) =>
+    str ? `on${capitalize(str)}` : ``
+  );
+  var hasChanged = (value, oldValue) =>
+    value !== oldValue && (value === value || oldValue === oldValue);
   var targetMap = new WeakMap();
   var effectStack = [];
   var activeEffect;
@@ -1559,11 +1700,11 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     }
     let depsMap = targetMap.get(target);
     if (!depsMap) {
-      targetMap.set(target, depsMap = new Map());
+      targetMap.set(target, (depsMap = new Map()));
     }
     let dep = depsMap.get(key);
     if (!dep) {
-      depsMap.set(key, dep = new Set());
+      depsMap.set(key, (dep = new Set()));
     }
     if (!dep.has(activeEffect)) {
       dep.add(activeEffect);
@@ -1573,7 +1714,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
           effect: activeEffect,
           target,
           type,
-          key
+          key,
         });
       }
     }
@@ -1640,7 +1781,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
           type,
           newValue,
           oldValue,
-          oldTarget
+          oldTarget,
         });
       }
       if (effect3.options.scheduler) {
@@ -1651,8 +1792,14 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     };
     effects.forEach(run);
   }
-  var isNonTrackableKeys = /* @__PURE__ */ makeMap(`__proto__,__v_isRef,__isVue`);
-  var builtInSymbols = new Set(Object.getOwnPropertyNames(Symbol).map((key) => Symbol[key]).filter(isSymbol));
+  var isNonTrackableKeys = /* @__PURE__ */ makeMap(
+    `__proto__,__v_isRef,__isVue`
+  );
+  var builtInSymbols = new Set(
+    Object.getOwnPropertyNames(Symbol)
+      .map((key) => Symbol[key])
+      .filter(isSymbol)
+  );
   var get2 = /* @__PURE__ */ createGetter();
   var shallowGet = /* @__PURE__ */ createGetter(false, true);
   var readonlyGet = /* @__PURE__ */ createGetter(true);
@@ -1660,7 +1807,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   var arrayInstrumentations = {};
   ["includes", "indexOf", "lastIndexOf"].forEach((key) => {
     const method = Array.prototype[key];
-    arrayInstrumentations[key] = function(...args) {
+    arrayInstrumentations[key] = function (...args) {
       const arr = toRaw(this);
       for (let i = 0, l = this.length; i < l; i++) {
         track(arr, "get", i + "");
@@ -1675,7 +1822,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   });
   ["push", "pop", "shift", "unshift", "splice"].forEach((key) => {
     const method = Array.prototype[key];
-    arrayInstrumentations[key] = function(...args) {
+    arrayInstrumentations[key] = function (...args) {
       pauseTracking();
       const res = method.apply(this, args);
       resetTracking();
@@ -1688,7 +1835,18 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         return !isReadonly;
       } else if (key === "__v_isReadonly") {
         return isReadonly;
-      } else if (key === "__v_raw" && receiver === (isReadonly ? shallow ? shallowReadonlyMap : readonlyMap : shallow ? shallowReactiveMap : reactiveMap).get(target)) {
+      } else if (
+        key === "__v_raw" &&
+        receiver ===
+          (isReadonly
+            ? shallow
+              ? shallowReadonlyMap
+              : readonlyMap
+            : shallow
+            ? shallowReactiveMap
+            : reactiveMap
+          ).get(target)
+      ) {
         return target;
       }
       const targetIsArray = isArray(target);
@@ -1728,7 +1886,10 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
           return true;
         }
       }
-      const hadKey = isArray(target) && isIntegerKey(key) ? Number(key) < target.length : hasOwn(target, key);
+      const hadKey =
+        isArray(target) && isIntegerKey(key)
+          ? Number(key) < target.length
+          : hasOwn(target, key);
       const result = Reflect.set(target, key, value, receiver);
       if (target === toRaw(receiver)) {
         if (!hadKey) {
@@ -1765,32 +1926,40 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     set: set2,
     deleteProperty,
     has,
-    ownKeys
+    ownKeys,
   };
   var readonlyHandlers = {
     get: readonlyGet,
     set(target, key) {
       if (false) {
-        console.warn(`Set operation on key "${String(key)}" failed: target is readonly.`, target);
+        console.warn(
+          `Set operation on key "${String(key)}" failed: target is readonly.`,
+          target
+        );
       }
       return true;
     },
     deleteProperty(target, key) {
       if (false) {
-        console.warn(`Delete operation on key "${String(key)}" failed: target is readonly.`, target);
+        console.warn(
+          `Delete operation on key "${String(
+            key
+          )}" failed: target is readonly.`,
+          target
+        );
       }
       return true;
-    }
+    },
   };
   var shallowReactiveHandlers = extend({}, mutableHandlers, {
     get: shallowGet,
-    set: shallowSet
+    set: shallowSet,
   });
   var shallowReadonlyHandlers = extend({}, readonlyHandlers, {
-    get: shallowReadonlyGet
+    get: shallowReadonlyGet,
   });
-  var toReactive = (value) => isObject(value) ? reactive2(value) : value;
-  var toReadonly = (value) => isObject(value) ? readonly(value) : value;
+  var toReactive = (value) => (isObject(value) ? reactive2(value) : value);
+  var toReadonly = (value) => (isObject(value) ? readonly(value) : value);
   var toShallow = (value) => value;
   var getProto = (v) => Reflect.getPrototypeOf(v);
   function get$1(target, key, isReadonly = false, isShallow = false) {
@@ -1819,7 +1988,9 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       !isReadonly && track(rawTarget, "has", key);
     }
     !isReadonly && track(rawTarget, "has", rawKey);
-    return key === rawKey ? target.has(key) : target.has(key) || target.has(rawKey);
+    return key === rawKey
+      ? target.has(key)
+      : target.has(key) || target.has(rawKey);
   }
   function size(target, isReadonly = false) {
     target = target["__v_raw"];
@@ -1877,7 +2048,11 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   function clear() {
     const target = toRaw(this);
     const hadItems = target.size !== 0;
-    const oldTarget = false ? isMap(target) ? new Map(target) : new Set(target) : void 0;
+    const oldTarget = false
+      ? isMap(target)
+        ? new Map(target)
+        : new Set(target)
+      : void 0;
     const result = target.clear();
     if (hadItems) {
       trigger(target, "clear", void 0, void 0, oldTarget);
@@ -1897,34 +2072,45 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     };
   }
   function createIterableMethod(method, isReadonly, isShallow) {
-    return function(...args) {
+    return function (...args) {
       const target = this["__v_raw"];
       const rawTarget = toRaw(target);
       const targetIsMap = isMap(rawTarget);
-      const isPair = method === "entries" || method === Symbol.iterator && targetIsMap;
+      const isPair =
+        method === "entries" || (method === Symbol.iterator && targetIsMap);
       const isKeyOnly = method === "keys" && targetIsMap;
       const innerIterator = target[method](...args);
       const wrap = isShallow ? toShallow : isReadonly ? toReadonly : toReactive;
-      !isReadonly && track(rawTarget, "iterate", isKeyOnly ? MAP_KEY_ITERATE_KEY : ITERATE_KEY);
+      !isReadonly &&
+        track(
+          rawTarget,
+          "iterate",
+          isKeyOnly ? MAP_KEY_ITERATE_KEY : ITERATE_KEY
+        );
       return {
         next() {
           const { value, done } = innerIterator.next();
-          return done ? { value, done } : {
-            value: isPair ? [wrap(value[0]), wrap(value[1])] : wrap(value),
-            done
-          };
+          return done
+            ? { value, done }
+            : {
+                value: isPair ? [wrap(value[0]), wrap(value[1])] : wrap(value),
+                done,
+              };
         },
         [Symbol.iterator]() {
           return this;
-        }
+        },
       };
     };
   }
   function createReadonlyMethod(type) {
-    return function(...args) {
+    return function (...args) {
       if (false) {
         const key = args[0] ? `on key "${args[0]}" ` : ``;
-        console.warn(`${capitalize(type)} operation ${key}failed: target is readonly.`, toRaw(this));
+        console.warn(
+          `${capitalize(type)} operation ${key}failed: target is readonly.`,
+          toRaw(this)
+        );
       }
       return type === "delete" ? false : this;
     };
@@ -1941,7 +2127,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     set: set$1,
     delete: deleteEntry,
     clear,
-    forEach: createForEach(false, false)
+    forEach: createForEach(false, false),
   };
   var shallowInstrumentations = {
     get(key) {
@@ -1955,7 +2141,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     set: set$1,
     delete: deleteEntry,
     clear,
-    forEach: createForEach(false, true)
+    forEach: createForEach(false, true),
   };
   var readonlyInstrumentations = {
     get(key) {
@@ -1971,7 +2157,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     set: createReadonlyMethod("set"),
     delete: createReadonlyMethod("delete"),
     clear: createReadonlyMethod("clear"),
-    forEach: createForEach(true, false)
+    forEach: createForEach(true, false),
   };
   var shallowReadonlyInstrumentations = {
     get(key) {
@@ -1987,17 +2173,35 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     set: createReadonlyMethod("set"),
     delete: createReadonlyMethod("delete"),
     clear: createReadonlyMethod("clear"),
-    forEach: createForEach(true, true)
+    forEach: createForEach(true, true),
   };
   var iteratorMethods = ["keys", "values", "entries", Symbol.iterator];
   iteratorMethods.forEach((method) => {
-    mutableInstrumentations[method] = createIterableMethod(method, false, false);
-    readonlyInstrumentations[method] = createIterableMethod(method, true, false);
+    mutableInstrumentations[method] = createIterableMethod(
+      method,
+      false,
+      false
+    );
+    readonlyInstrumentations[method] = createIterableMethod(
+      method,
+      true,
+      false
+    );
     shallowInstrumentations[method] = createIterableMethod(method, false, true);
-    shallowReadonlyInstrumentations[method] = createIterableMethod(method, true, true);
+    shallowReadonlyInstrumentations[method] = createIterableMethod(
+      method,
+      true,
+      true
+    );
   });
   function createInstrumentationGetter(isReadonly, shallow) {
-    const instrumentations = shallow ? isReadonly ? shallowReadonlyInstrumentations : shallowInstrumentations : isReadonly ? readonlyInstrumentations : mutableInstrumentations;
+    const instrumentations = shallow
+      ? isReadonly
+        ? shallowReadonlyInstrumentations
+        : shallowInstrumentations
+      : isReadonly
+      ? readonlyInstrumentations
+      : mutableInstrumentations;
     return (target, key, receiver) => {
       if (key === "__v_isReactive") {
         return !isReadonly;
@@ -2006,20 +2210,26 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       } else if (key === "__v_raw") {
         return target;
       }
-      return Reflect.get(hasOwn(instrumentations, key) && key in target ? instrumentations : target, key, receiver);
+      return Reflect.get(
+        hasOwn(instrumentations, key) && key in target
+          ? instrumentations
+          : target,
+        key,
+        receiver
+      );
     };
   }
   var mutableCollectionHandlers = {
-    get: createInstrumentationGetter(false, false)
+    get: createInstrumentationGetter(false, false),
   };
   var shallowCollectionHandlers = {
-    get: createInstrumentationGetter(false, true)
+    get: createInstrumentationGetter(false, true),
   };
   var readonlyCollectionHandlers = {
-    get: createInstrumentationGetter(true, false)
+    get: createInstrumentationGetter(true, false),
   };
   var shallowReadonlyCollectionHandlers = {
-    get: createInstrumentationGetter(true, true)
+    get: createInstrumentationGetter(true, true),
   };
   var reactiveMap = new WeakMap();
   var shallowReactiveMap = new WeakMap();
@@ -2040,18 +2250,38 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     }
   }
   function getTargetType(value) {
-    return value["__v_skip"] || !Object.isExtensible(value) ? 0 : targetTypeMap(toRawType(value));
+    return value["__v_skip"] || !Object.isExtensible(value)
+      ? 0
+      : targetTypeMap(toRawType(value));
   }
   function reactive2(target) {
     if (target && target["__v_isReadonly"]) {
       return target;
     }
-    return createReactiveObject(target, false, mutableHandlers, mutableCollectionHandlers, reactiveMap);
+    return createReactiveObject(
+      target,
+      false,
+      mutableHandlers,
+      mutableCollectionHandlers,
+      reactiveMap
+    );
   }
   function readonly(target) {
-    return createReactiveObject(target, true, readonlyHandlers, readonlyCollectionHandlers, readonlyMap);
+    return createReactiveObject(
+      target,
+      true,
+      readonlyHandlers,
+      readonlyCollectionHandlers,
+      readonlyMap
+    );
   }
-  function createReactiveObject(target, isReadonly, baseHandlers, collectionHandlers, proxyMap) {
+  function createReactiveObject(
+    target,
+    isReadonly,
+    baseHandlers,
+    collectionHandlers,
+    proxyMap
+  ) {
     if (!isObject(target)) {
       if (false) {
         console.warn(`value cannot be made reactive: ${String(target)}`);
@@ -2069,42 +2299,50 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     if (targetType === 0) {
       return target;
     }
-    const proxy = new Proxy(target, targetType === 2 ? collectionHandlers : baseHandlers);
+    const proxy = new Proxy(
+      target,
+      targetType === 2 ? collectionHandlers : baseHandlers
+    );
     proxyMap.set(target, proxy);
     return proxy;
   }
   function toRaw(observed) {
-    return observed && toRaw(observed["__v_raw"]) || observed;
+    return (observed && toRaw(observed["__v_raw"])) || observed;
   }
   function isRef(r) {
     return Boolean(r && r.__v_isRef === true);
   }
   magic("nextTick", () => nextTick);
   magic("dispatch", (el) => dispatch.bind(dispatch, el));
-  magic("watch", (el, { evaluateLater: evaluateLater2, effect: effect3 }) => (key, callback) => {
-    let evaluate2 = evaluateLater2(key);
-    let firstTime = true;
-    let oldValue;
-    let effectReference = effect3(() => evaluate2((value) => {
-      JSON.stringify(value);
-      if (!firstTime) {
-        queueMicrotask(() => {
-          callback(value, oldValue);
-          oldValue = value;
-        });
-      } else {
-        oldValue = value;
+  magic(
+    "watch",
+    (el, { evaluateLater: evaluateLater2, effect: effect3 }) =>
+      (key, callback) => {
+        let evaluate2 = evaluateLater2(key);
+        let firstTime = true;
+        let oldValue;
+        let effectReference = effect3(() =>
+          evaluate2((value) => {
+            JSON.stringify(value);
+            if (!firstTime) {
+              queueMicrotask(() => {
+                callback(value, oldValue);
+                oldValue = value;
+              });
+            } else {
+              oldValue = value;
+            }
+            firstTime = false;
+          })
+        );
+        el._x_effects.delete(effectReference);
       }
-      firstTime = false;
-    }));
-    el._x_effects.delete(effectReference);
-  });
+  );
   magic("store", getStores);
   magic("data", (el) => scope(el));
   magic("root", (el) => closestRoot(el));
   magic("refs", (el) => {
-    if (el._x_refs_proxy)
-      return el._x_refs_proxy;
+    if (el._x_refs_proxy) return el._x_refs_proxy;
     el._x_refs_proxy = mergeProxies(getArrayOfRefObject(el));
     return el._x_refs_proxy;
   });
@@ -2112,29 +2350,24 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     let refObjects = [];
     let currentEl = el;
     while (currentEl) {
-      if (currentEl._x_refs)
-        refObjects.push(currentEl._x_refs);
+      if (currentEl._x_refs) refObjects.push(currentEl._x_refs);
       currentEl = currentEl.parentNode;
     }
     return refObjects;
   }
   var globalIdMemo = {};
   function findAndIncrementId(name) {
-    if (!globalIdMemo[name])
-      globalIdMemo[name] = 0;
+    if (!globalIdMemo[name]) globalIdMemo[name] = 0;
     return ++globalIdMemo[name];
   }
   function closestIdRoot(el, name) {
     return findClosest(el, (element) => {
-      if (element._x_ids && element._x_ids[name])
-        return true;
+      if (element._x_ids && element._x_ids[name]) return true;
     });
   }
   function setIdRoot(el, name) {
-    if (!el._x_ids)
-      el._x_ids = {};
-    if (!el._x_ids[name])
-      el._x_ids[name] = findAndIncrementId(name);
+    if (!el._x_ids) el._x_ids = {};
+    if (!el._x_ids[name]) el._x_ids[name] = findAndIncrementId(name);
   }
   magic("id", (el) => (name, key = null) => {
     let root = closestIdRoot(el, name);
@@ -2145,30 +2378,41 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   warnMissingPluginMagic("Focus", "focus", "focus");
   warnMissingPluginMagic("Persist", "persist", "persist");
   function warnMissingPluginMagic(name, magicName, slug) {
-    magic(magicName, (el) => warn(`You can't use [$${directiveName}] without first installing the "${name}" plugin here: https://alpinejs.dev/plugins/${slug}`, el));
+    magic(magicName, (el) =>
+      warn(
+        `You can't use [$${directiveName}] without first installing the "${name}" plugin here: https://alpinejs.dev/plugins/${slug}`,
+        el
+      )
+    );
   }
-  directive("modelable", (el, { expression }, { effect: effect3, evaluateLater: evaluateLater2 }) => {
-    let func = evaluateLater2(expression);
-    let innerGet = () => {
-      let result;
-      func((i) => result = i);
-      return result;
-    };
-    let evaluateInnerSet = evaluateLater2(`${expression} = __placeholder`);
-    let innerSet = (val) => evaluateInnerSet(() => {
-    }, { scope: { __placeholder: val } });
-    let initialValue = innerGet();
-    innerSet(initialValue);
-    queueMicrotask(() => {
-      if (!el._x_model)
-        return;
-      el._x_removeModelListeners["default"]();
-      let outerGet = el._x_model.get;
-      let outerSet = el._x_model.set;
-      effect3(() => innerSet(outerGet()));
-      effect3(() => outerSet(innerGet()));
-    });
-  });
+  directive(
+    "modelable",
+    (
+      el,
+      { expression },
+      { effect: effect3, evaluateLater: evaluateLater2 }
+    ) => {
+      let func = evaluateLater2(expression);
+      let innerGet = () => {
+        let result;
+        func((i) => (result = i));
+        return result;
+      };
+      let evaluateInnerSet = evaluateLater2(`${expression} = __placeholder`);
+      let innerSet = (val) =>
+        evaluateInnerSet(() => {}, { scope: { __placeholder: val } });
+      let initialValue = innerGet();
+      innerSet(initialValue);
+      queueMicrotask(() => {
+        if (!el._x_model) return;
+        el._x_removeModelListeners["default"]();
+        let outerGet = el._x_model.get;
+        let outerSet = el._x_model.set;
+        effect3(() => innerSet(outerGet()));
+        effect3(() => outerSet(innerGet()));
+      });
+    }
+  );
   directive("teleport", (el, { expression }, { cleanup: cleanup2 }) => {
     if (el.tagName.toLowerCase() !== "template")
       warn("x-teleport can only be used on a <template> tag", el);
@@ -2194,33 +2438,32 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     });
     cleanup2(() => clone2.remove());
   });
-  var handler = () => {
-  };
+  var handler = () => {};
   handler.inline = (el, { modifiers }, { cleanup: cleanup2 }) => {
-    modifiers.includes("self") ? el._x_ignoreSelf = true : el._x_ignore = true;
+    modifiers.includes("self")
+      ? (el._x_ignoreSelf = true)
+      : (el._x_ignore = true);
     cleanup2(() => {
-      modifiers.includes("self") ? delete el._x_ignoreSelf : delete el._x_ignore;
+      modifiers.includes("self")
+        ? delete el._x_ignoreSelf
+        : delete el._x_ignore;
     });
   };
   directive("ignore", handler);
-  directive("effect", (el, { expression }, { effect: effect3 }) => effect3(evaluateLater(el, expression)));
+  directive("effect", (el, { expression }, { effect: effect3 }) =>
+    effect3(evaluateLater(el, expression))
+  );
   function on(el, event2, modifiers, callback) {
     let listenerTarget = el;
     let handler3 = (e) => callback(e);
     let options = {};
     let wrapHandler = (callback2, wrapper) => (e) => wrapper(callback2, e);
-    if (modifiers.includes("dot"))
-      event2 = dotSyntax(event2);
-    if (modifiers.includes("camel"))
-      event2 = camelCase2(event2);
-    if (modifiers.includes("passive"))
-      options.passive = true;
-    if (modifiers.includes("capture"))
-      options.capture = true;
-    if (modifiers.includes("window"))
-      listenerTarget = window;
-    if (modifiers.includes("document"))
-      listenerTarget = document;
+    if (modifiers.includes("dot")) event2 = dotSyntax(event2);
+    if (modifiers.includes("camel")) event2 = camelCase2(event2);
+    if (modifiers.includes("passive")) options.passive = true;
+    if (modifiers.includes("capture")) options.capture = true;
+    if (modifiers.includes("window")) listenerTarget = window;
+    if (modifiers.includes("document")) listenerTarget = document;
     if (modifiers.includes("prevent"))
       handler3 = wrapHandler(handler3, (next2, e) => {
         e.preventDefault();
@@ -2238,14 +2481,10 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     if (modifiers.includes("away") || modifiers.includes("outside")) {
       listenerTarget = document;
       handler3 = wrapHandler(handler3, (next2, e) => {
-        if (el.contains(e.target))
-          return;
-        if (e.target.isConnected === false)
-          return;
-        if (el.offsetWidth < 1 && el.offsetHeight < 1)
-          return;
-        if (el._x_isShown === false)
-          return;
+        if (el.contains(e.target)) return;
+        if (e.target.isConnected === false) return;
+        if (el.offsetWidth < 1 && el.offsetHeight < 1) return;
+        if (el._x_isShown === false) return;
         next2(e);
       });
     }
@@ -2264,13 +2503,19 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       next2(e);
     });
     if (modifiers.includes("debounce")) {
-      let nextModifier = modifiers[modifiers.indexOf("debounce") + 1] || "invalid-wait";
-      let wait = isNumeric(nextModifier.split("ms")[0]) ? Number(nextModifier.split("ms")[0]) : 250;
+      let nextModifier =
+        modifiers[modifiers.indexOf("debounce") + 1] || "invalid-wait";
+      let wait = isNumeric(nextModifier.split("ms")[0])
+        ? Number(nextModifier.split("ms")[0])
+        : 250;
       handler3 = debounce(handler3, wait);
     }
     if (modifiers.includes("throttle")) {
-      let nextModifier = modifiers[modifiers.indexOf("throttle") + 1] || "invalid-wait";
-      let wait = isNumeric(nextModifier.split("ms")[0]) ? Number(nextModifier.split("ms")[0]) : 250;
+      let nextModifier =
+        modifiers[modifiers.indexOf("throttle") + 1] || "invalid-wait";
+      let wait = isNumeric(nextModifier.split("ms")[0])
+        ? Number(nextModifier.split("ms")[0])
+        : 250;
       handler3 = throttle(handler3, wait);
     }
     listenerTarget.addEventListener(event2, handler3, options);
@@ -2282,13 +2527,18 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     return subject.replace(/-/g, ".");
   }
   function camelCase2(subject) {
-    return subject.toLowerCase().replace(/-(\w)/g, (match, char) => char.toUpperCase());
+    return subject
+      .toLowerCase()
+      .replace(/-(\w)/g, (match, char) => char.toUpperCase());
   }
   function isNumeric(subject) {
     return !Array.isArray(subject) && !isNaN(subject);
   }
   function kebabCase2(subject) {
-    return subject.replace(/([a-z])([A-Z])/g, "$1-$2").replace(/[_\s]/, "-").toLowerCase();
+    return subject
+      .replace(/([a-z])([A-Z])/g, "$1-$2")
+      .replace(/[_\s]/, "-")
+      .toLowerCase();
   }
   function isKeyEvent(event2) {
     return ["keydown", "keyup"].includes(event2);
@@ -2299,31 +2549,45 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     });
     if (keyModifiers.includes("debounce")) {
       let debounceIndex = keyModifiers.indexOf("debounce");
-      keyModifiers.splice(debounceIndex, isNumeric((keyModifiers[debounceIndex + 1] || "invalid-wait").split("ms")[0]) ? 2 : 1);
+      keyModifiers.splice(
+        debounceIndex,
+        isNumeric(
+          (keyModifiers[debounceIndex + 1] || "invalid-wait").split("ms")[0]
+        )
+          ? 2
+          : 1
+      );
     }
-    if (keyModifiers.length === 0)
-      return false;
-    if (keyModifiers.length === 1 && keyToModifiers(e.key).includes(keyModifiers[0]))
+    if (keyModifiers.length === 0) return false;
+    if (
+      keyModifiers.length === 1 &&
+      keyToModifiers(e.key).includes(keyModifiers[0])
+    )
       return false;
     const systemKeyModifiers = ["ctrl", "shift", "alt", "meta", "cmd", "super"];
-    const selectedSystemKeyModifiers = systemKeyModifiers.filter((modifier) => keyModifiers.includes(modifier));
-    keyModifiers = keyModifiers.filter((i) => !selectedSystemKeyModifiers.includes(i));
+    const selectedSystemKeyModifiers = systemKeyModifiers.filter((modifier) =>
+      keyModifiers.includes(modifier)
+    );
+    keyModifiers = keyModifiers.filter(
+      (i) => !selectedSystemKeyModifiers.includes(i)
+    );
     if (selectedSystemKeyModifiers.length > 0) {
-      const activelyPressedKeyModifiers = selectedSystemKeyModifiers.filter((modifier) => {
-        if (modifier === "cmd" || modifier === "super")
-          modifier = "meta";
-        return e[`${modifier}Key`];
-      });
-      if (activelyPressedKeyModifiers.length === selectedSystemKeyModifiers.length) {
-        if (keyToModifiers(e.key).includes(keyModifiers[0]))
-          return false;
+      const activelyPressedKeyModifiers = selectedSystemKeyModifiers.filter(
+        (modifier) => {
+          if (modifier === "cmd" || modifier === "super") modifier = "meta";
+          return e[`${modifier}Key`];
+        }
+      );
+      if (
+        activelyPressedKeyModifiers.length === selectedSystemKeyModifiers.length
+      ) {
+        if (keyToModifiers(e.key).includes(keyModifiers[0])) return false;
       }
     }
     return true;
   }
   function keyToModifiers(key) {
-    if (!key)
-      return [];
+    if (!key) return [];
     key = kebabCase2(key);
     let modifierToKeyMap = {
       ctrl: "control",
@@ -2337,63 +2601,76 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       left: "arrow-left",
       right: "arrow-right",
       period: ".",
-      equal: "="
+      equal: "=",
     };
     modifierToKeyMap[key] = key;
-    return Object.keys(modifierToKeyMap).map((modifier) => {
-      if (modifierToKeyMap[modifier] === key)
-        return modifier;
-    }).filter((modifier) => modifier);
+    return Object.keys(modifierToKeyMap)
+      .map((modifier) => {
+        if (modifierToKeyMap[modifier] === key) return modifier;
+      })
+      .filter((modifier) => modifier);
   }
-  directive("model", (el, { modifiers, expression }, { effect: effect3, cleanup: cleanup2 }) => {
-    let evaluate2 = evaluateLater(el, expression);
-    let assignmentExpression = `${expression} = rightSideOfExpression($event, ${expression})`;
-    let evaluateAssignment = evaluateLater(el, assignmentExpression);
-    var event2 = el.tagName.toLowerCase() === "select" || ["checkbox", "radio"].includes(el.type) || modifiers.includes("lazy") ? "change" : "input";
-    let assigmentFunction = generateAssignmentFunction(el, modifiers, expression);
-    let removeListener = on(el, event2, modifiers, (e) => {
-      evaluateAssignment(() => {
-      }, { scope: {
-        $event: e,
-        rightSideOfExpression: assigmentFunction
-      } });
-    });
-    if (!el._x_removeModelListeners)
-      el._x_removeModelListeners = {};
-    el._x_removeModelListeners["default"] = removeListener;
-    cleanup2(() => el._x_removeModelListeners["default"]());
-    let evaluateSetModel = evaluateLater(el, `${expression} = __placeholder`);
-    el._x_model = {
-      get() {
-        let result;
-        evaluate2((value) => result = value);
-        return result;
-      },
-      set(value) {
-        evaluateSetModel(() => {
-        }, { scope: { __placeholder: value } });
-      }
-    };
-    el._x_forceModelUpdate = () => {
-      evaluate2((value) => {
-        if (value === void 0 && expression.match(/\./))
-          value = "";
-        window.fromModel = true;
-        mutateDom(() => bind(el, "value", value));
-        delete window.fromModel;
+  directive(
+    "model",
+    (el, { modifiers, expression }, { effect: effect3, cleanup: cleanup2 }) => {
+      let evaluate2 = evaluateLater(el, expression);
+      let assignmentExpression = `${expression} = rightSideOfExpression($event, ${expression})`;
+      let evaluateAssignment = evaluateLater(el, assignmentExpression);
+      var event2 =
+        el.tagName.toLowerCase() === "select" ||
+        ["checkbox", "radio"].includes(el.type) ||
+        modifiers.includes("lazy")
+          ? "change"
+          : "input";
+      let assigmentFunction = generateAssignmentFunction(
+        el,
+        modifiers,
+        expression
+      );
+      let removeListener = on(el, event2, modifiers, (e) => {
+        evaluateAssignment(() => {}, {
+          scope: {
+            $event: e,
+            rightSideOfExpression: assigmentFunction,
+          },
+        });
       });
-    };
-    effect3(() => {
-      if (modifiers.includes("unintrusive") && document.activeElement.isSameNode(el))
-        return;
-      el._x_forceModelUpdate();
-    });
-  });
+      if (!el._x_removeModelListeners) el._x_removeModelListeners = {};
+      el._x_removeModelListeners["default"] = removeListener;
+      cleanup2(() => el._x_removeModelListeners["default"]());
+      let evaluateSetModel = evaluateLater(el, `${expression} = __placeholder`);
+      el._x_model = {
+        get() {
+          let result;
+          evaluate2((value) => (result = value));
+          return result;
+        },
+        set(value) {
+          evaluateSetModel(() => {}, { scope: { __placeholder: value } });
+        },
+      };
+      el._x_forceModelUpdate = () => {
+        evaluate2((value) => {
+          if (value === void 0 && expression.match(/\./)) value = "";
+          window.fromModel = true;
+          mutateDom(() => bind(el, "value", value));
+          delete window.fromModel;
+        });
+      };
+      effect3(() => {
+        if (
+          modifiers.includes("unintrusive") &&
+          document.activeElement.isSameNode(el)
+        )
+          return;
+        el._x_forceModelUpdate();
+      });
+    }
+  );
   function generateAssignmentFunction(el, modifiers, expression) {
     if (el.type === "radio") {
       mutateDom(() => {
-        if (!el.hasAttribute("name"))
-          el.setAttribute("name", expression);
+        if (!el.hasAttribute("name")) el.setAttribute("name", expression);
       });
     }
     return (event2, currentValue) => {
@@ -2402,21 +2679,33 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
           return event2.detail || event2.target.value;
         } else if (el.type === "checkbox") {
           if (Array.isArray(currentValue)) {
-            let newValue = modifiers.includes("number") ? safeParseNumber(event2.target.value) : event2.target.value;
-            return event2.target.checked ? currentValue.concat([newValue]) : currentValue.filter((el2) => !checkedAttrLooseCompare2(el2, newValue));
+            let newValue = modifiers.includes("number")
+              ? safeParseNumber(event2.target.value)
+              : event2.target.value;
+            return event2.target.checked
+              ? currentValue.concat([newValue])
+              : currentValue.filter(
+                  (el2) => !checkedAttrLooseCompare2(el2, newValue)
+                );
           } else {
             return event2.target.checked;
           }
         } else if (el.tagName.toLowerCase() === "select" && el.multiple) {
-          return modifiers.includes("number") ? Array.from(event2.target.selectedOptions).map((option) => {
-            let rawValue = option.value || option.text;
-            return safeParseNumber(rawValue);
-          }) : Array.from(event2.target.selectedOptions).map((option) => {
-            return option.value || option.text;
-          });
+          return modifiers.includes("number")
+            ? Array.from(event2.target.selectedOptions).map((option) => {
+                let rawValue = option.value || option.text;
+                return safeParseNumber(rawValue);
+              })
+            : Array.from(event2.target.selectedOptions).map((option) => {
+                return option.value || option.text;
+              });
         } else {
           let rawValue = event2.target.value;
-          return modifiers.includes("number") ? safeParseNumber(rawValue) : modifiers.includes("trim") ? rawValue.trim() : rawValue;
+          return modifiers.includes("number")
+            ? safeParseNumber(rawValue)
+            : modifiers.includes("trim")
+            ? rawValue.trim()
+            : rawValue;
         }
       });
     };
@@ -2431,104 +2720,133 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   function isNumeric2(subject) {
     return !Array.isArray(subject) && !isNaN(subject);
   }
-  directive("cloak", (el) => queueMicrotask(() => mutateDom(() => el.removeAttribute(prefix("cloak")))));
+  directive("cloak", (el) =>
+    queueMicrotask(() => mutateDom(() => el.removeAttribute(prefix("cloak"))))
+  );
   addInitSelector(() => `[${prefix("init")}]`);
-  directive("init", skipDuringClone((el, { expression }, { evaluate: evaluate2 }) => {
-    if (typeof expression === "string") {
-      return !!expression.trim() && evaluate2(expression, {}, false);
+  directive(
+    "init",
+    skipDuringClone((el, { expression }, { evaluate: evaluate2 }) => {
+      if (typeof expression === "string") {
+        return !!expression.trim() && evaluate2(expression, {}, false);
+      }
+      return evaluate2(expression, {}, false);
+    })
+  );
+  directive(
+    "text",
+    (
+      el,
+      { expression },
+      { effect: effect3, evaluateLater: evaluateLater2 }
+    ) => {
+      let evaluate2 = evaluateLater2(expression);
+      effect3(() => {
+        evaluate2((value) => {
+          mutateDom(() => {
+            el.textContent = value;
+          });
+        });
+      });
     }
-    return evaluate2(expression, {}, false);
-  }));
-  directive("text", (el, { expression }, { effect: effect3, evaluateLater: evaluateLater2 }) => {
-    let evaluate2 = evaluateLater2(expression);
-    effect3(() => {
-      evaluate2((value) => {
-        mutateDom(() => {
-          el.textContent = value;
+  );
+  directive(
+    "html",
+    (
+      el,
+      { expression },
+      { effect: effect3, evaluateLater: evaluateLater2 }
+    ) => {
+      let evaluate2 = evaluateLater2(expression);
+      effect3(() => {
+        evaluate2((value) => {
+          mutateDom(() => {
+            el.innerHTML = value;
+            el._x_ignoreSelf = true;
+            initTree(el);
+            delete el._x_ignoreSelf;
+          });
         });
       });
-    });
-  });
-  directive("html", (el, { expression }, { effect: effect3, evaluateLater: evaluateLater2 }) => {
-    let evaluate2 = evaluateLater2(expression);
-    effect3(() => {
-      evaluate2((value) => {
-        mutateDom(() => {
-          el.innerHTML = value;
-          el._x_ignoreSelf = true;
-          initTree(el);
-          delete el._x_ignoreSelf;
-        });
-      });
-    });
-  });
+    }
+  );
   mapAttributes(startingWith(":", into(prefix("bind:"))));
-  directive("bind", (el, { value, modifiers, expression, original }, { effect: effect3 }) => {
-    if (!value) {
-      return applyBindingsObject(el, expression, original, effect3);
+  directive(
+    "bind",
+    (el, { value, modifiers, expression, original }, { effect: effect3 }) => {
+      if (!value) {
+        return applyBindingsObject(el, expression, original, effect3);
+      }
+      if (value === "key") return storeKeyForXFor(el, expression);
+      let evaluate2 = evaluateLater(el, expression);
+      effect3(() =>
+        evaluate2((result) => {
+          if (result === void 0 && expression.match(/\./)) result = "";
+          mutateDom(() => bind(el, value, result, modifiers));
+        })
+      );
     }
-    if (value === "key")
-      return storeKeyForXFor(el, expression);
-    let evaluate2 = evaluateLater(el, expression);
-    effect3(() => evaluate2((result) => {
-      if (result === void 0 && expression.match(/\./))
-        result = "";
-      mutateDom(() => bind(el, value, result, modifiers));
-    }));
-  });
+  );
   function applyBindingsObject(el, expression, original, effect3) {
     let bindingProviders = {};
     injectBindingProviders(bindingProviders);
     let getBindings = evaluateLater(el, expression);
     let cleanupRunners = [];
-    while (cleanupRunners.length)
-      cleanupRunners.pop()();
-    getBindings((bindings) => {
-      let attributes = Object.entries(bindings).map(([name, value]) => ({ name, value }));
-      let staticAttributes = attributesOnly(attributes);
-      attributes = attributes.map((attribute) => {
-        if (staticAttributes.find((attr2) => attr2.name === attribute.name)) {
-          return {
-            name: `x-bind:${attribute.name}`,
-            value: `"${attribute.value}"`
-          };
-        }
-        return attribute;
-      });
-      directives(el, attributes, original).map((handle) => {
-        cleanupRunners.push(handle.runCleanups);
-        handle();
-      });
-    }, { scope: bindingProviders });
+    while (cleanupRunners.length) cleanupRunners.pop()();
+    getBindings(
+      (bindings) => {
+        let attributes = Object.entries(bindings).map(([name, value]) => ({
+          name,
+          value,
+        }));
+        let staticAttributes = attributesOnly(attributes);
+        attributes = attributes.map((attribute) => {
+          if (staticAttributes.find((attr2) => attr2.name === attribute.name)) {
+            return {
+              name: `x-bind:${attribute.name}`,
+              value: `"${attribute.value}"`,
+            };
+          }
+          return attribute;
+        });
+        directives(el, attributes, original).map((handle) => {
+          cleanupRunners.push(handle.runCleanups);
+          handle();
+        });
+      },
+      { scope: bindingProviders }
+    );
   }
   function storeKeyForXFor(el, expression) {
     el._x_keyExpression = expression;
   }
   addRootSelector(() => `[${prefix("data")}]`);
-  directive("data", skipDuringClone((el, { expression }, { cleanup: cleanup2 }) => {
-    expression = expression === "" ? "{}" : expression;
-    let magicContext = {};
-    injectMagics(magicContext, el);
-    let dataProviderContext = {};
-    injectDataProviders(dataProviderContext, magicContext);
-    let data2 = evaluate(el, expression, { scope: dataProviderContext });
-    if (data2 === void 0)
-      data2 = {};
-    injectMagics(data2, el);
-    let reactiveData = reactive(data2);
-    initInterceptors(reactiveData);
-    let undo = addScopeToNode(el, reactiveData);
-    reactiveData["init"] && evaluate(el, reactiveData["init"]);
-    cleanup2(() => {
-      reactiveData["destroy"] && evaluate(el, reactiveData["destroy"]);
-      undo();
-    });
-  }));
+  directive(
+    "data",
+    skipDuringClone((el, { expression }, { cleanup: cleanup2 }) => {
+      expression = expression === "" ? "{}" : expression;
+      let magicContext = {};
+      injectMagics(magicContext, el);
+      let dataProviderContext = {};
+      injectDataProviders(dataProviderContext, magicContext);
+      let data2 = evaluate(el, expression, { scope: dataProviderContext });
+      if (data2 === void 0) data2 = {};
+      injectMagics(data2, el);
+      let reactiveData = reactive(data2);
+      initInterceptors(reactiveData);
+      let undo = addScopeToNode(el, reactiveData);
+      reactiveData["init"] && evaluate(el, reactiveData["init"]);
+      cleanup2(() => {
+        reactiveData["destroy"] && evaluate(el, reactiveData["destroy"]);
+        undo();
+      });
+    })
+  );
   directive("show", (el, { modifiers, expression }, { effect: effect3 }) => {
     let evaluate2 = evaluateLater(el, expression);
     if (!el._x_doHide)
       el._x_doHide = () => {
-        mutateDom(() => el.style.display = "none");
+        mutateDom(() => (el.style.display = "none"));
       };
     if (!el._x_doShow)
       el._x_doShow = () => {
@@ -2549,38 +2867,45 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       el._x_isShown = true;
     };
     let clickAwayCompatibleShow = () => setTimeout(show);
-    let toggle = once((value) => value ? show() : hide(), (value) => {
-      if (typeof el._x_toggleAndCascadeWithTransitions === "function") {
-        el._x_toggleAndCascadeWithTransitions(el, value, show, hide);
-      } else {
-        value ? clickAwayCompatibleShow() : hide();
+    let toggle = once(
+      (value) => (value ? show() : hide()),
+      (value) => {
+        if (typeof el._x_toggleAndCascadeWithTransitions === "function") {
+          el._x_toggleAndCascadeWithTransitions(el, value, show, hide);
+        } else {
+          value ? clickAwayCompatibleShow() : hide();
+        }
       }
-    });
+    );
     let oldValue;
     let firstTime = true;
-    effect3(() => evaluate2((value) => {
-      if (!firstTime && value === oldValue)
-        return;
-      if (modifiers.includes("immediate"))
-        value ? clickAwayCompatibleShow() : hide();
-      toggle(value);
-      oldValue = value;
-      firstTime = false;
-    }));
+    effect3(() =>
+      evaluate2((value) => {
+        if (!firstTime && value === oldValue) return;
+        if (modifiers.includes("immediate"))
+          value ? clickAwayCompatibleShow() : hide();
+        toggle(value);
+        oldValue = value;
+        firstTime = false;
+      })
+    );
   });
-  directive("for", (el, { expression }, { effect: effect3, cleanup: cleanup2 }) => {
-    let iteratorNames = parseForExpression(expression);
-    let evaluateItems = evaluateLater(el, iteratorNames.items);
-    let evaluateKey = evaluateLater(el, el._x_keyExpression || "index");
-    el._x_prevKeys = [];
-    el._x_lookup = {};
-    effect3(() => loop(el, iteratorNames, evaluateItems, evaluateKey));
-    cleanup2(() => {
-      Object.values(el._x_lookup).forEach((el2) => el2.remove());
-      delete el._x_prevKeys;
-      delete el._x_lookup;
-    });
-  });
+  directive(
+    "for",
+    (el, { expression }, { effect: effect3, cleanup: cleanup2 }) => {
+      let iteratorNames = parseForExpression(expression);
+      let evaluateItems = evaluateLater(el, iteratorNames.items);
+      let evaluateKey = evaluateLater(el, el._x_keyExpression || "index");
+      el._x_prevKeys = [];
+      el._x_lookup = {};
+      effect3(() => loop(el, iteratorNames, evaluateItems, evaluateKey));
+      cleanup2(() => {
+        Object.values(el._x_lookup).forEach((el2) => el2.remove());
+        delete el._x_prevKeys;
+        delete el._x_lookup;
+      });
+    }
+  );
   function loop(el, iteratorNames, evaluateItems, evaluateKey) {
     let isObject22 = (i) => typeof i === "object" && !Array.isArray(i);
     let templateEl = el;
@@ -2588,22 +2913,35 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       if (isNumeric3(items) && items >= 0) {
         items = Array.from(Array(items).keys(), (i) => i + 1);
       }
-      if (items === void 0)
-        items = [];
+      if (items === void 0) items = [];
       let lookup = el._x_lookup;
       let prevKeys = el._x_prevKeys;
       let scopes = [];
       let keys = [];
       if (isObject22(items)) {
         items = Object.entries(items).map(([key, value]) => {
-          let scope2 = getIterationScopeVariables(iteratorNames, value, key, items);
-          evaluateKey((value2) => keys.push(value2), { scope: { index: key, ...scope2 } });
+          let scope2 = getIterationScopeVariables(
+            iteratorNames,
+            value,
+            key,
+            items
+          );
+          evaluateKey((value2) => keys.push(value2), {
+            scope: { index: key, ...scope2 },
+          });
           scopes.push(scope2);
         });
       } else {
         for (let i = 0; i < items.length; i++) {
-          let scope2 = getIterationScopeVariables(iteratorNames, items[i], i, items);
-          evaluateKey((value) => keys.push(value), { scope: { index: i, ...scope2 } });
+          let scope2 = getIterationScopeVariables(
+            iteratorNames,
+            items[i],
+            i,
+            items
+          );
+          evaluateKey((value) => keys.push(value), {
+            scope: { index: i, ...scope2 },
+          });
           scopes.push(scope2);
         }
       }
@@ -2613,8 +2951,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       let sames = [];
       for (let i = 0; i < prevKeys.length; i++) {
         let key = prevKeys[i];
-        if (keys.indexOf(key) === -1)
-          removes.push(key);
+        if (keys.indexOf(key) === -1) removes.push(key);
       }
       prevKeys = prevKeys.filter((key) => !removes.includes(key));
       let lastKey = "template";
@@ -2662,18 +2999,23 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       for (let i = 0; i < adds.length; i++) {
         let [lastKey2, index2] = adds[i];
         let lastEl = lastKey2 === "template" ? templateEl : lookup[lastKey2];
-        if (lastEl._x_currentIfEl)
-          lastEl = lastEl._x_currentIfEl;
+        if (lastEl._x_currentIfEl) lastEl = lastEl._x_currentIfEl;
         let scope2 = scopes[index2];
         let key = keys[index2];
-        let clone2 = document.importNode(templateEl.content, true).firstElementChild;
+        let clone2 = document.importNode(
+          templateEl.content,
+          true
+        ).firstElementChild;
         addScopeToNode(clone2, reactive(scope2), templateEl);
         mutateDom(() => {
           lastEl.after(clone2);
           initTree(clone2);
         });
         if (typeof key === "object") {
-          warn("x-for key cannot be an object, it must be a string or an integer", templateEl);
+          warn(
+            "x-for key cannot be an object, it must be a string or an integer",
+            templateEl
+          );
         }
         lookup[key] = clone2;
       }
@@ -2688,8 +3030,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     let stripParensRE = /^\s*\(|\)\s*$/g;
     let forAliasRE = /([\s\S]*?)\s+(?:in|of)\s+([\s\S]*)/;
     let inMatch = expression.match(forAliasRE);
-    if (!inMatch)
-      return;
+    if (!inMatch) return;
     let res = {};
     res.items = inMatch[2].trim();
     let item = inMatch[1].replace(stripParensRE, "").trim();
@@ -2708,20 +3049,31 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   function getIterationScopeVariables(iteratorNames, item, index2, items) {
     let scopeVariables = {};
     if (/^\[.*\]$/.test(iteratorNames.item) && Array.isArray(item)) {
-      let names = iteratorNames.item.replace("[", "").replace("]", "").split(",").map((i) => i.trim());
+      let names = iteratorNames.item
+        .replace("[", "")
+        .replace("]", "")
+        .split(",")
+        .map((i) => i.trim());
       names.forEach((name, i) => {
         scopeVariables[name] = item[i];
       });
-    } else if (/^\{.*\}$/.test(iteratorNames.item) && !Array.isArray(item) && typeof item === "object") {
-      let names = iteratorNames.item.replace("{", "").replace("}", "").split(",").map((i) => i.trim());
+    } else if (
+      /^\{.*\}$/.test(iteratorNames.item) &&
+      !Array.isArray(item) &&
+      typeof item === "object"
+    ) {
+      let names = iteratorNames.item
+        .replace("{", "")
+        .replace("}", "")
+        .split(",")
+        .map((i) => i.trim());
       names.forEach((name) => {
         scopeVariables[name] = item[name];
       });
     } else {
       scopeVariables[iteratorNames.item] = item;
     }
-    if (iteratorNames.index)
-      scopeVariables[iteratorNames.index] = index2;
+    if (iteratorNames.index) scopeVariables[iteratorNames.index] = index2;
     if (iteratorNames.collection)
       scopeVariables[iteratorNames.collection] = items;
     return scopeVariables;
@@ -2729,199 +3081,123 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   function isNumeric3(subject) {
     return !Array.isArray(subject) && !isNaN(subject);
   }
-  function handler2() {
-  }
+  function handler2() {}
   handler2.inline = (el, { expression }, { cleanup: cleanup2 }) => {
     let root = closestRoot(el);
-    if (!root._x_refs)
-      root._x_refs = {};
+    if (!root._x_refs) root._x_refs = {};
     root._x_refs[expression] = el;
     cleanup2(() => delete root._x_refs[expression]);
   };
   directive("ref", handler2);
-  directive("if", (el, { expression }, { effect: effect3, cleanup: cleanup2 }) => {
-    let evaluate2 = evaluateLater(el, expression);
-    let show = () => {
-      if (el._x_currentIfEl)
-        return el._x_currentIfEl;
-      let clone2 = el.content.cloneNode(true).firstElementChild;
-      addScopeToNode(clone2, {}, el);
-      mutateDom(() => {
-        el.after(clone2);
-        initTree(clone2);
-      });
-      el._x_currentIfEl = clone2;
-      el._x_undoIf = () => {
-        walk(clone2, (node) => {
-          if (!!node._x_effects) {
-            node._x_effects.forEach(dequeueJob);
-          }
+  directive(
+    "if",
+    (el, { expression }, { effect: effect3, cleanup: cleanup2 }) => {
+      let evaluate2 = evaluateLater(el, expression);
+      let show = () => {
+        if (el._x_currentIfEl) return el._x_currentIfEl;
+        let clone2 = el.content.cloneNode(true).firstElementChild;
+        addScopeToNode(clone2, {}, el);
+        mutateDom(() => {
+          el.after(clone2);
+          initTree(clone2);
         });
-        clone2.remove();
-        delete el._x_currentIfEl;
+        el._x_currentIfEl = clone2;
+        el._x_undoIf = () => {
+          walk(clone2, (node) => {
+            if (!!node._x_effects) {
+              node._x_effects.forEach(dequeueJob);
+            }
+          });
+          clone2.remove();
+          delete el._x_currentIfEl;
+        };
+        return clone2;
       };
-      return clone2;
-    };
-    let hide = () => {
-      if (!el._x_undoIf)
-        return;
-      el._x_undoIf();
-      delete el._x_undoIf;
-    };
-    effect3(() => evaluate2((value) => {
-      value ? show() : hide();
-    }));
-    cleanup2(() => el._x_undoIf && el._x_undoIf());
-  });
+      let hide = () => {
+        if (!el._x_undoIf) return;
+        el._x_undoIf();
+        delete el._x_undoIf;
+      };
+      effect3(() =>
+        evaluate2((value) => {
+          value ? show() : hide();
+        })
+      );
+      cleanup2(() => el._x_undoIf && el._x_undoIf());
+    }
+  );
   directive("id", (el, { expression }, { evaluate: evaluate2 }) => {
     let names = evaluate2(expression);
     names.forEach((name) => setIdRoot(el, name));
   });
   mapAttributes(startingWith("@", into(prefix("on:"))));
-  directive("on", skipDuringClone((el, { value, modifiers, expression }, { cleanup: cleanup2 }) => {
-    let evaluate2 = expression ? evaluateLater(el, expression) : () => {
-    };
-    if (el.tagName.toLowerCase() === "template") {
-      if (!el._x_forwardEvents)
-        el._x_forwardEvents = [];
-      if (!el._x_forwardEvents.includes(value))
-        el._x_forwardEvents.push(value);
-    }
-    let removeListener = on(el, value, modifiers, (e) => {
-      evaluate2(() => {
-      }, { scope: { $event: e }, params: [e] });
-    });
-    cleanup2(() => removeListener());
-  }));
+  directive(
+    "on",
+    skipDuringClone(
+      (el, { value, modifiers, expression }, { cleanup: cleanup2 }) => {
+        let evaluate2 = expression ? evaluateLater(el, expression) : () => {};
+        if (el.tagName.toLowerCase() === "template") {
+          if (!el._x_forwardEvents) el._x_forwardEvents = [];
+          if (!el._x_forwardEvents.includes(value))
+            el._x_forwardEvents.push(value);
+        }
+        let removeListener = on(el, value, modifiers, (e) => {
+          evaluate2(() => {}, { scope: { $event: e }, params: [e] });
+        });
+        cleanup2(() => removeListener());
+      }
+    )
+  );
   warnMissingPluginDirective("Collapse", "collapse", "collapse");
   warnMissingPluginDirective("Intersect", "intersect", "intersect");
   warnMissingPluginDirective("Focus", "trap", "focus");
   warnMissingPluginDirective("Mask", "mask", "mask");
   function warnMissingPluginDirective(name, directiveName2, slug) {
-    directive(directiveName2, (el) => warn(`You can't use [x-${directiveName2}] without first installing the "${name}" plugin here: https://alpinejs.dev/plugins/${slug}`, el));
+    directive(directiveName2, (el) =>
+      warn(
+        `You can't use [x-${directiveName2}] without first installing the "${name}" plugin here: https://alpinejs.dev/plugins/${slug}`,
+        el
+      )
+    );
   }
   alpine_default.setEvaluator(normalEvaluator);
-  alpine_default.setReactivityEngine({ reactive: reactive2, effect: effect2, release: stop, raw: toRaw });
+  alpine_default.setReactivityEngine({
+    reactive: reactive2,
+    effect: effect2,
+    release: stop,
+    raw: toRaw,
+  });
   var src_default = alpine_default;
   var module_default = src_default;
 
-  // node_modules/@alpinejs/collapse/dist/module.esm.js
-  function src_default2(Alpine2) {
-    Alpine2.directive("collapse", collapse);
-    collapse.inline = (el, { modifiers }) => {
-      if (!modifiers.includes("min"))
-        return;
-      el._x_doShow = () => {
-      };
-      el._x_doHide = () => {
-      };
-    };
-    function collapse(el, { modifiers }) {
-      let duration = modifierValue2(modifiers, "duration", 250) / 1e3;
-      let floor = modifierValue2(modifiers, "min", 0);
-      let fullyHide = !modifiers.includes("min");
-      if (!el._x_isShown)
-        el.style.height = `${floor}px`;
-      if (!el._x_isShown && fullyHide)
-        el.hidden = true;
-      if (!el._x_isShown)
-        el.style.overflow = "hidden";
-      let setFunction = (el2, styles2) => {
-        let revertFunction = Alpine2.setStyles(el2, styles2);
-        return styles2.height ? () => {
-        } : revertFunction;
-      };
-      let transitionStyles = {
-        transitionProperty: "height",
-        transitionDuration: `${duration}s`,
-        transitionTimingFunction: "cubic-bezier(0.4, 0.0, 0.2, 1)"
-      };
-      el._x_transition = {
-        in(before = () => {
-        }, after = () => {
-        }) {
-          if (fullyHide)
-            el.hidden = false;
-          if (fullyHide)
-            el.style.display = null;
-          let current = el.getBoundingClientRect().height;
-          el.style.height = "auto";
-          let full = el.getBoundingClientRect().height;
-          if (current === full) {
-            current = floor;
-          }
-          Alpine2.transition(el, Alpine2.setStyles, {
-            during: transitionStyles,
-            start: { height: current + "px" },
-            end: { height: full + "px" }
-          }, () => el._x_isShown = true, () => {
-            if (el.style.height == `${full}px`) {
-              el.style.overflow = null;
-            }
-          });
-        },
-        out(before = () => {
-        }, after = () => {
-        }) {
-          let full = el.getBoundingClientRect().height;
-          Alpine2.transition(el, setFunction, {
-            during: transitionStyles,
-            start: { height: full + "px" },
-            end: { height: floor + "px" }
-          }, () => el.style.overflow = "hidden", () => {
-            el._x_isShown = false;
-            if (el.style.height == `${floor}px` && fullyHide) {
-              el.style.display = "none";
-              el.hidden = true;
-            }
-          });
-        }
-      };
-    }
-  }
-  function modifierValue2(modifiers, key, fallback) {
-    if (modifiers.indexOf(key) === -1)
-      return fallback;
-    const rawValue = modifiers[modifiers.indexOf(key) + 1];
-    if (!rawValue)
-      return fallback;
-    if (key === "duration") {
-      let match = rawValue.match(/([0-9]+)ms/);
-      if (match)
-        return match[1];
-    }
-    if (key === "min") {
-      let match = rawValue.match(/([0-9]+)px/);
-      if (match)
-        return match[1];
-    }
-    return rawValue;
-  }
-  var module_default2 = src_default2;
-
   // node_modules/ssr-window/ssr-window.esm.js
   function isObject2(obj) {
-    return obj !== null && typeof obj === "object" && "constructor" in obj && obj.constructor === Object;
+    return (
+      obj !== null &&
+      typeof obj === "object" &&
+      "constructor" in obj &&
+      obj.constructor === Object
+    );
   }
   function extend2(target = {}, src = {}) {
     Object.keys(src).forEach((key) => {
-      if (typeof target[key] === "undefined")
-        target[key] = src[key];
-      else if (isObject2(src[key]) && isObject2(target[key]) && Object.keys(src[key]).length > 0) {
+      if (typeof target[key] === "undefined") target[key] = src[key];
+      else if (
+        isObject2(src[key]) &&
+        isObject2(target[key]) &&
+        Object.keys(src[key]).length > 0
+      ) {
         extend2(target[key], src[key]);
       }
     });
   }
   var ssrDocument = {
     body: {},
-    addEventListener() {
-    },
-    removeEventListener() {
-    },
+    addEventListener() {},
+    removeEventListener() {},
     activeElement: {
-      blur() {
-      },
-      nodeName: ""
+      blur() {},
+      nodeName: "",
     },
     querySelector() {
       return null;
@@ -2934,8 +3210,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     },
     createEvent() {
       return {
-        initEvent() {
-        }
+        initEvent() {},
       };
     },
     createElement() {
@@ -2943,11 +3218,10 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         children: [],
         childNodes: [],
         style: {},
-        setAttribute() {
-        },
+        setAttribute() {},
         getElementsByTagName() {
           return [];
-        }
+        },
       };
     },
     createElementNS() {
@@ -2964,8 +3238,8 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       origin: "",
       pathname: "",
       protocol: "",
-      search: ""
-    }
+      search: "",
+    },
   };
   function getDocument() {
     const doc = typeof document !== "undefined" ? document : {};
@@ -2975,7 +3249,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   var ssrWindow = {
     document: ssrDocument,
     navigator: {
-      userAgent: ""
+      userAgent: "",
     },
     location: {
       hash: "",
@@ -2985,41 +3259,31 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       origin: "",
       pathname: "",
       protocol: "",
-      search: ""
+      search: "",
     },
     history: {
-      replaceState() {
-      },
-      pushState() {
-      },
-      go() {
-      },
-      back() {
-      }
+      replaceState() {},
+      pushState() {},
+      go() {},
+      back() {},
     },
     CustomEvent: function CustomEvent2() {
       return this;
     },
-    addEventListener() {
-    },
-    removeEventListener() {
-    },
+    addEventListener() {},
+    removeEventListener() {},
     getComputedStyle() {
       return {
         getPropertyValue() {
           return "";
-        }
+        },
       };
     },
-    Image() {
-    },
-    Date() {
-    },
+    Image() {},
+    Date() {},
     screen: {},
-    setTimeout() {
-    },
-    clearTimeout() {
-    },
+    setTimeout() {},
+    clearTimeout() {},
     matchMedia() {
       return {};
     },
@@ -3035,7 +3299,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         return;
       }
       clearTimeout(id);
-    }
+    },
   };
   function getWindow() {
     const win = typeof window !== "undefined" ? window : {};
@@ -3052,7 +3316,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       },
       set(value) {
         proto.__proto__ = value;
-      }
+      },
     });
   }
   var Dom7 = class extends Array {
@@ -3060,7 +3324,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       if (typeof items === "number") {
         super(items);
       } else {
-        super(...items || []);
+        super(...(items || []));
         makeReactive(this);
       }
     }
@@ -3082,8 +3346,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   function arrayUnique(arr) {
     const uniqueArray = [];
     for (let i = 0; i < arr.length; i += 1) {
-      if (uniqueArray.indexOf(arr[i]) === -1)
-        uniqueArray.push(arr[i]);
+      if (uniqueArray.indexOf(arr[i]) === -1) uniqueArray.push(arr[i]);
     }
     return uniqueArray;
   }
@@ -3112,16 +3375,12 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       const html2 = selector.trim();
       if (html2.indexOf("<") >= 0 && html2.indexOf(">") >= 0) {
         let toCreate = "div";
-        if (html2.indexOf("<li") === 0)
-          toCreate = "ul";
-        if (html2.indexOf("<tr") === 0)
-          toCreate = "tbody";
+        if (html2.indexOf("<li") === 0) toCreate = "ul";
+        if (html2.indexOf("<tr") === 0) toCreate = "tbody";
         if (html2.indexOf("<td") === 0 || html2.indexOf("<th") === 0)
           toCreate = "tr";
-        if (html2.indexOf("<tbody") === 0)
-          toCreate = "table";
-        if (html2.indexOf("<option") === 0)
-          toCreate = "select";
+        if (html2.indexOf("<tbody") === 0) toCreate = "table";
+        if (html2.indexOf("<option") === 0) toCreate = "select";
         const tempParent = document2.createElement(toCreate);
         tempParent.innerHTML = html2;
         for (let i = 0; i < tempParent.childNodes.length; i += 1) {
@@ -3130,11 +3389,14 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       } else {
         arr = qsa(selector.trim(), context || document2);
       }
-    } else if (selector.nodeType || selector === window2 || selector === document2) {
+    } else if (
+      selector.nodeType ||
+      selector === window2 ||
+      selector === document2
+    ) {
       arr.push(selector);
     } else if (Array.isArray(selector)) {
-      if (selector instanceof Dom7)
-        return selector;
+      if (selector instanceof Dom7) return selector;
       arr = selector;
     }
     return new Dom7(arrayUnique(arr));
@@ -3164,14 +3426,18 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   }
   function hasClass(...classes) {
     const classNames = arrayFlat(classes.map((c) => c.split(" ")));
-    return arrayFilter(this, (el) => {
-      return classNames.filter((className) => el.classList.contains(className)).length > 0;
-    }).length > 0;
+    return (
+      arrayFilter(this, (el) => {
+        return (
+          classNames.filter((className) => el.classList.contains(className))
+            .length > 0
+        );
+      }).length > 0
+    );
   }
   function attr(attrs, value) {
     if (arguments.length === 1 && typeof attrs === "string") {
-      if (this[0])
-        return this[0].getAttribute(attrs);
+      if (this[0]) return this[0].getAttribute(attrs);
       return void 0;
     }
     for (let i = 0; i < this.length; i += 1) {
@@ -3200,7 +3466,8 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   }
   function transition2(duration) {
     for (let i = 0; i < this.length; i += 1) {
-      this[i].style.transitionDuration = typeof duration !== "string" ? `${duration}ms` : duration;
+      this[i].style.transitionDuration =
+        typeof duration !== "string" ? `${duration}ms` : duration;
     }
     return this;
   }
@@ -3210,18 +3477,15 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       [eventType, listener, capture] = args;
       targetSelector = void 0;
     }
-    if (!capture)
-      capture = false;
+    if (!capture) capture = false;
     function handleLiveEvent(e) {
       const target = e.target;
-      if (!target)
-        return;
+      if (!target) return;
       const eventData = e.target.dom7EventData || [];
       if (eventData.indexOf(e) < 0) {
         eventData.unshift(e);
       }
-      if ($(target).is(targetSelector))
-        listener.apply(target, eventData);
+      if ($(target).is(targetSelector)) listener.apply(target, eventData);
       else {
         const parents2 = $(target).parents();
         for (let k = 0; k < parents2.length; k += 1) {
@@ -3244,26 +3508,22 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       if (!targetSelector) {
         for (j = 0; j < events2.length; j += 1) {
           const event2 = events2[j];
-          if (!el.dom7Listeners)
-            el.dom7Listeners = {};
-          if (!el.dom7Listeners[event2])
-            el.dom7Listeners[event2] = [];
+          if (!el.dom7Listeners) el.dom7Listeners = {};
+          if (!el.dom7Listeners[event2]) el.dom7Listeners[event2] = [];
           el.dom7Listeners[event2].push({
             listener,
-            proxyListener: handleEvent
+            proxyListener: handleEvent,
           });
           el.addEventListener(event2, handleEvent, capture);
         }
       } else {
         for (j = 0; j < events2.length; j += 1) {
           const event2 = events2[j];
-          if (!el.dom7LiveListeners)
-            el.dom7LiveListeners = {};
-          if (!el.dom7LiveListeners[event2])
-            el.dom7LiveListeners[event2] = [];
+          if (!el.dom7LiveListeners) el.dom7LiveListeners = {};
+          if (!el.dom7LiveListeners[event2]) el.dom7LiveListeners[event2] = [];
           el.dom7LiveListeners[event2].push({
             listener,
-            proxyListener: handleLiveEvent
+            proxyListener: handleLiveEvent,
           });
           el.addEventListener(event2, handleLiveEvent, capture);
         }
@@ -3277,8 +3537,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       [eventType, listener, capture] = args;
       targetSelector = void 0;
     }
-    if (!capture)
-      capture = false;
+    if (!capture) capture = false;
     const events2 = eventType.split(" ");
     for (let i = 0; i < events2.length; i += 1) {
       const event2 = events2[i];
@@ -3296,7 +3555,12 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
             if (listener && handler3.listener === listener) {
               el.removeEventListener(event2, handler3.proxyListener, capture);
               handlers.splice(k, 1);
-            } else if (listener && handler3.listener && handler3.listener.dom7proxy && handler3.listener.dom7proxy === listener) {
+            } else if (
+              listener &&
+              handler3.listener &&
+              handler3.listener.dom7proxy &&
+              handler3.listener.dom7proxy === listener
+            ) {
               el.removeEventListener(event2, handler3.proxyListener, capture);
               handlers.splice(k, 1);
             } else if (!listener) {
@@ -3321,7 +3585,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
           const evt = new window2.CustomEvent(event2, {
             detail: eventData,
             bubbles: true,
-            cancelable: true
+            cancelable: true,
           });
           el.dom7EventData = args.filter((data2, dataIndex) => dataIndex > 0);
           el.dispatchEvent(evt);
@@ -3335,8 +3599,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   function transitionEnd(callback) {
     const dom = this;
     function fireCallBack(e) {
-      if (e.target !== this)
-        return;
+      if (e.target !== this) return;
       callback.call(this, e);
       dom.off("transitionend", fireCallBack);
     }
@@ -3349,7 +3612,11 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     if (this.length > 0) {
       if (includeMargins) {
         const styles2 = this.styles();
-        return this[0].offsetWidth + parseFloat(styles2.getPropertyValue("margin-right")) + parseFloat(styles2.getPropertyValue("margin-left"));
+        return (
+          this[0].offsetWidth +
+          parseFloat(styles2.getPropertyValue("margin-right")) +
+          parseFloat(styles2.getPropertyValue("margin-left"))
+        );
       }
       return this[0].offsetWidth;
     }
@@ -3359,7 +3626,11 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     if (this.length > 0) {
       if (includeMargins) {
         const styles2 = this.styles();
-        return this[0].offsetHeight + parseFloat(styles2.getPropertyValue("margin-top")) + parseFloat(styles2.getPropertyValue("margin-bottom"));
+        return (
+          this[0].offsetHeight +
+          parseFloat(styles2.getPropertyValue("margin-top")) +
+          parseFloat(styles2.getPropertyValue("margin-bottom"))
+        );
       }
       return this[0].offsetHeight;
     }
@@ -3378,15 +3649,14 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       const scrollLeft = el === window2 ? window2.scrollX : el.scrollLeft;
       return {
         top: box.top + scrollTop - clientTop,
-        left: box.left + scrollLeft - clientLeft
+        left: box.left + scrollLeft - clientLeft,
       };
     }
     return null;
   }
   function styles() {
     const window2 = getWindow();
-    if (this[0])
-      return window2.getComputedStyle(this[0], null);
+    if (this[0]) return window2.getComputedStyle(this[0], null);
     return {};
   }
   function css(props, value) {
@@ -3395,7 +3665,9 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     if (arguments.length === 1) {
       if (typeof props === "string") {
         if (this[0])
-          return window2.getComputedStyle(this[0], null).getPropertyValue(props);
+          return window2
+            .getComputedStyle(this[0], null)
+            .getPropertyValue(props);
       } else {
         for (i = 0; i < this.length; i += 1) {
           for (const prop in props) {
@@ -3414,8 +3686,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     return this;
   }
   function each(callback) {
-    if (!callback)
-      return this;
+    if (!callback) return this;
     this.forEach((el, index2) => {
       callback.apply(el, [el, index2]);
     });
@@ -3449,19 +3720,14 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     const el = this[0];
     let compareWith;
     let i;
-    if (!el || typeof selector === "undefined")
-      return false;
+    if (!el || typeof selector === "undefined") return false;
     if (typeof selector === "string") {
-      if (el.matches)
-        return el.matches(selector);
-      if (el.webkitMatchesSelector)
-        return el.webkitMatchesSelector(selector);
-      if (el.msMatchesSelector)
-        return el.msMatchesSelector(selector);
+      if (el.matches) return el.matches(selector);
+      if (el.webkitMatchesSelector) return el.webkitMatchesSelector(selector);
+      if (el.msMatchesSelector) return el.msMatchesSelector(selector);
       compareWith = $(selector);
       for (i = 0; i < compareWith.length; i += 1) {
-        if (compareWith[i] === el)
-          return true;
+        if (compareWith[i] === el) return true;
       }
       return false;
     }
@@ -3474,8 +3740,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     if (selector.nodeType || selector instanceof Dom7) {
       compareWith = selector.nodeType ? [selector] : selector;
       for (i = 0; i < compareWith.length; i += 1) {
-        if (compareWith[i] === el)
-          return true;
+        if (compareWith[i] === el) return true;
       }
       return false;
     }
@@ -3487,24 +3752,21 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     if (child) {
       i = 0;
       while ((child = child.previousSibling) !== null) {
-        if (child.nodeType === 1)
-          i += 1;
+        if (child.nodeType === 1) i += 1;
       }
       return i;
     }
     return void 0;
   }
   function eq(index2) {
-    if (typeof index2 === "undefined")
-      return this;
+    if (typeof index2 === "undefined") return this;
     const length = this.length;
     if (index2 > length - 1) {
       return $([]);
     }
     if (index2 < 0) {
       const returnIndex = length + index2;
-      if (returnIndex < 0)
-        return $([]);
+      if (returnIndex < 0) return $([]);
       return $([this[returnIndex]]);
     }
     return $([this[index2]]);
@@ -3556,13 +3818,15 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   function next(selector) {
     if (this.length > 0) {
       if (selector) {
-        if (this[0].nextElementSibling && $(this[0].nextElementSibling).is(selector)) {
+        if (
+          this[0].nextElementSibling &&
+          $(this[0].nextElementSibling).is(selector)
+        ) {
           return $([this[0].nextElementSibling]);
         }
         return $([]);
       }
-      if (this[0].nextElementSibling)
-        return $([this[0].nextElementSibling]);
+      if (this[0].nextElementSibling) return $([this[0].nextElementSibling]);
       return $([]);
     }
     return $([]);
@@ -3570,15 +3834,12 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   function nextAll(selector) {
     const nextEls = [];
     let el = this[0];
-    if (!el)
-      return $([]);
+    if (!el) return $([]);
     while (el.nextElementSibling) {
       const next2 = el.nextElementSibling;
       if (selector) {
-        if ($(next2).is(selector))
-          nextEls.push(next2);
-      } else
-        nextEls.push(next2);
+        if ($(next2).is(selector)) nextEls.push(next2);
+      } else nextEls.push(next2);
       el = next2;
     }
     return $(nextEls);
@@ -3587,13 +3848,15 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     if (this.length > 0) {
       const el = this[0];
       if (selector) {
-        if (el.previousElementSibling && $(el.previousElementSibling).is(selector)) {
+        if (
+          el.previousElementSibling &&
+          $(el.previousElementSibling).is(selector)
+        ) {
           return $([el.previousElementSibling]);
         }
         return $([]);
       }
-      if (el.previousElementSibling)
-        return $([el.previousElementSibling]);
+      if (el.previousElementSibling) return $([el.previousElementSibling]);
       return $([]);
     }
     return $([]);
@@ -3601,15 +3864,12 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   function prevAll(selector) {
     const prevEls = [];
     let el = this[0];
-    if (!el)
-      return $([]);
+    if (!el) return $([]);
     while (el.previousElementSibling) {
       const prev2 = el.previousElementSibling;
       if (selector) {
-        if ($(prev2).is(selector))
-          prevEls.push(prev2);
-      } else
-        prevEls.push(prev2);
+        if ($(prev2).is(selector)) prevEls.push(prev2);
+      } else prevEls.push(prev2);
       el = prev2;
     }
     return $(prevEls);
@@ -3634,8 +3894,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       let parent2 = this[i].parentNode;
       while (parent2) {
         if (selector) {
-          if ($(parent2).is(selector))
-            parents2.push(parent2);
+          if ($(parent2).is(selector)) parents2.push(parent2);
         } else {
           parents2.push(parent2);
         }
@@ -3678,8 +3937,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   }
   function remove() {
     for (let i = 0; i < this.length; i += 1) {
-      if (this[i].parentNode)
-        this[i].parentNode.removeChild(this[i]);
+      if (this[i].parentNode) this[i].parentNode.removeChild(this[i]);
     }
     return this;
   }
@@ -3689,8 +3947,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       if (typeof args[0] === "undefined") {
         for (let i = 0; i < this.length; i += 1) {
           if (noTrigger.indexOf(name) < 0) {
-            if (name in this[i])
-              this[i][name]();
+            if (name in this[i]) this[i][name]();
             else {
               $(this[i]).trigger(name);
             }
@@ -3762,12 +4019,12 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     find,
     children,
     filter,
-    remove
+    remove,
   };
   Object.keys(Methods).forEach((methodName) => {
     Object.defineProperty($.fn, methodName, {
       value: Methods[methodName],
-      writable: true
+      writable: true,
     });
   });
   var dom_default = $;
@@ -3778,12 +4035,10 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     Object.keys(object).forEach((key) => {
       try {
         object[key] = null;
-      } catch (e) {
-      }
+      } catch (e) {}
       try {
         delete object[key];
-      } catch (e) {
-      }
+      } catch (e) {}
     });
   }
   function nextTick2(callback, delay) {
@@ -3821,36 +4076,51 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     if (window2.WebKitCSSMatrix) {
       curTransform = curStyle.transform || curStyle.webkitTransform;
       if (curTransform.split(",").length > 6) {
-        curTransform = curTransform.split(", ").map((a) => a.replace(",", ".")).join(", ");
+        curTransform = curTransform
+          .split(", ")
+          .map((a) => a.replace(",", "."))
+          .join(", ");
       }
-      transformMatrix = new window2.WebKitCSSMatrix(curTransform === "none" ? "" : curTransform);
+      transformMatrix = new window2.WebKitCSSMatrix(
+        curTransform === "none" ? "" : curTransform
+      );
     } else {
-      transformMatrix = curStyle.MozTransform || curStyle.OTransform || curStyle.MsTransform || curStyle.msTransform || curStyle.transform || curStyle.getPropertyValue("transform").replace("translate(", "matrix(1, 0, 0, 1,");
+      transformMatrix =
+        curStyle.MozTransform ||
+        curStyle.OTransform ||
+        curStyle.MsTransform ||
+        curStyle.msTransform ||
+        curStyle.transform ||
+        curStyle
+          .getPropertyValue("transform")
+          .replace("translate(", "matrix(1, 0, 0, 1,");
       matrix = transformMatrix.toString().split(",");
     }
     if (axis === "x") {
-      if (window2.WebKitCSSMatrix)
-        curTransform = transformMatrix.m41;
-      else if (matrix.length === 16)
-        curTransform = parseFloat(matrix[12]);
-      else
-        curTransform = parseFloat(matrix[4]);
+      if (window2.WebKitCSSMatrix) curTransform = transformMatrix.m41;
+      else if (matrix.length === 16) curTransform = parseFloat(matrix[12]);
+      else curTransform = parseFloat(matrix[4]);
     }
     if (axis === "y") {
-      if (window2.WebKitCSSMatrix)
-        curTransform = transformMatrix.m42;
-      else if (matrix.length === 16)
-        curTransform = parseFloat(matrix[13]);
-      else
-        curTransform = parseFloat(matrix[5]);
+      if (window2.WebKitCSSMatrix) curTransform = transformMatrix.m42;
+      else if (matrix.length === 16) curTransform = parseFloat(matrix[13]);
+      else curTransform = parseFloat(matrix[5]);
     }
     return curTransform || 0;
   }
   function isObject3(o) {
-    return typeof o === "object" && o !== null && o.constructor && Object.prototype.toString.call(o).slice(8, -1) === "Object";
+    return (
+      typeof o === "object" &&
+      o !== null &&
+      o.constructor &&
+      Object.prototype.toString.call(o).slice(8, -1) === "Object"
+    );
   }
   function isNode(node) {
-    if (typeof window !== "undefined" && typeof window.HTMLElement !== "undefined") {
+    if (
+      typeof window !== "undefined" &&
+      typeof window.HTMLElement !== "undefined"
+    ) {
       return node instanceof HTMLElement;
     }
     return node && (node.nodeType === 1 || node.nodeType === 11);
@@ -3861,8 +4131,14 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     for (let i = 1; i < arguments.length; i += 1) {
       const nextSource = i < 0 || arguments.length <= i ? void 0 : arguments[i];
       if (nextSource !== void 0 && nextSource !== null && !isNode(nextSource)) {
-        const keysArray = Object.keys(Object(nextSource)).filter((key) => noExtend.indexOf(key) < 0);
-        for (let nextIndex = 0, len = keysArray.length; nextIndex < len; nextIndex += 1) {
+        const keysArray = Object.keys(Object(nextSource)).filter(
+          (key) => noExtend.indexOf(key) < 0
+        );
+        for (
+          let nextIndex = 0, len = keysArray.length;
+          nextIndex < len;
+          nextIndex += 1
+        ) {
           const nextKey = keysArray[nextIndex];
           const desc = Object.getOwnPropertyDescriptor(nextSource, nextKey);
           if (desc !== void 0 && desc.enumerable) {
@@ -3872,7 +4148,10 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
               } else {
                 extend3(to[nextKey], nextSource[nextKey]);
               }
-            } else if (!isObject3(to[nextKey]) && isObject3(nextSource[nextKey])) {
+            } else if (
+              !isObject3(to[nextKey]) &&
+              isObject3(nextSource[nextKey])
+            ) {
               to[nextKey] = {};
               if (nextSource[nextKey].__swiper__) {
                 to[nextKey] = nextSource[nextKey];
@@ -3892,11 +4171,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     el.style.setProperty(varName, varValue);
   }
   function animateCSSModeScroll(_ref) {
-    let {
-      swiper: swiper2,
-      targetPosition,
-      side
-    } = _ref;
+    let { swiper: swiper2, targetPosition, side } = _ref;
     const window2 = getWindow();
     const startPosition = -swiper2.translate;
     let startTime = null;
@@ -3906,7 +4181,10 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     window2.cancelAnimationFrame(swiper2.cssModeFrameID);
     const dir = targetPosition > startPosition ? "next" : "prev";
     const isOutOfBound = (current, target) => {
-      return dir === "next" && current >= target || dir === "prev" && current <= target;
+      return (
+        (dir === "next" && current >= target) ||
+        (dir === "prev" && current <= target)
+      );
     };
     const animate = () => {
       time = new Date().getTime();
@@ -3915,12 +4193,13 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       }
       const progress = Math.max(Math.min((time - startTime) / duration, 1), 0);
       const easeProgress = 0.5 - Math.cos(progress * Math.PI) / 2;
-      let currentPosition = startPosition + easeProgress * (targetPosition - startPosition);
+      let currentPosition =
+        startPosition + easeProgress * (targetPosition - startPosition);
       if (isOutOfBound(currentPosition, targetPosition)) {
         currentPosition = targetPosition;
       }
       swiper2.wrapperEl.scrollTo({
-        [side]: currentPosition
+        [side]: currentPosition,
       });
       if (isOutOfBound(currentPosition, targetPosition)) {
         swiper2.wrapperEl.style.overflow = "hidden";
@@ -3928,7 +4207,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         setTimeout(() => {
           swiper2.wrapperEl.style.overflow = "";
           swiper2.wrapperEl.scrollTo({
-            [side]: currentPosition
+            [side]: currentPosition,
           });
         });
         window2.cancelAnimationFrame(swiper2.cssModeFrameID);
@@ -3945,24 +4224,28 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     const window2 = getWindow();
     const document2 = getDocument();
     return {
-      smoothScroll: document2.documentElement && "scrollBehavior" in document2.documentElement.style,
-      touch: !!("ontouchstart" in window2 || window2.DocumentTouch && document2 instanceof window2.DocumentTouch),
-      passiveListener: function checkPassiveListener() {
+      smoothScroll:
+        document2.documentElement &&
+        "scrollBehavior" in document2.documentElement.style,
+      touch: !!(
+        "ontouchstart" in window2 ||
+        (window2.DocumentTouch && document2 instanceof window2.DocumentTouch)
+      ),
+      passiveListener: (function checkPassiveListener() {
         let supportsPassive = false;
         try {
           const opts = Object.defineProperty({}, "passive", {
             get() {
               supportsPassive = true;
-            }
+            },
           });
           window2.addEventListener("testPassiveListener", null, opts);
-        } catch (e) {
-        }
+        } catch (e) {}
         return supportsPassive;
-      }(),
-      gestures: function checkGestures() {
+      })(),
+      gestures: (function checkGestures() {
         return "ongesturestart" in window2;
-      }()
+      })(),
     };
   }
   function getSupport() {
@@ -3975,16 +4258,14 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   // node_modules/swiper/shared/get-device.js
   var deviceCached;
   function calcDevice(_temp) {
-    let {
-      userAgent
-    } = _temp === void 0 ? {} : _temp;
+    let { userAgent } = _temp === void 0 ? {} : _temp;
     const support2 = getSupport();
     const window2 = getWindow();
     const platform = window2.navigator.platform;
     const ua = userAgent || window2.navigator.userAgent;
     const device = {
       ios: false,
-      android: false
+      android: false,
     };
     const screenWidth = window2.screen.width;
     const screenHeight = window2.screen.height;
@@ -3994,11 +4275,28 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     const iphone = !ipad && ua.match(/(iPhone\sOS|iOS)\s([\d_]+)/);
     const windows = platform === "Win32";
     let macos = platform === "MacIntel";
-    const iPadScreens = ["1024x1366", "1366x1024", "834x1194", "1194x834", "834x1112", "1112x834", "768x1024", "1024x768", "820x1180", "1180x820", "810x1080", "1080x810"];
-    if (!ipad && macos && support2.touch && iPadScreens.indexOf(`${screenWidth}x${screenHeight}`) >= 0) {
+    const iPadScreens = [
+      "1024x1366",
+      "1366x1024",
+      "834x1194",
+      "1194x834",
+      "834x1112",
+      "1112x834",
+      "768x1024",
+      "1024x768",
+      "820x1180",
+      "1180x820",
+      "810x1080",
+      "1080x810",
+    ];
+    if (
+      !ipad &&
+      macos &&
+      support2.touch &&
+      iPadScreens.indexOf(`${screenWidth}x${screenHeight}`) >= 0
+    ) {
       ipad = ua.match(/(Version)\/([\d.]+)/);
-      if (!ipad)
-        ipad = [0, 1, "13_0_0"];
+      if (!ipad) ipad = [0, 1, "13_0_0"];
       macos = false;
     }
     if (android && !windows) {
@@ -4027,11 +4325,17 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     const window2 = getWindow();
     function isSafari() {
       const ua = window2.navigator.userAgent.toLowerCase();
-      return ua.indexOf("safari") >= 0 && ua.indexOf("chrome") < 0 && ua.indexOf("android") < 0;
+      return (
+        ua.indexOf("safari") >= 0 &&
+        ua.indexOf("chrome") < 0 &&
+        ua.indexOf("android") < 0
+      );
     }
     return {
       isSafari: isSafari(),
-      isWebView: /(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)/i.test(window2.navigator.userAgent)
+      isWebView: /(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)/i.test(
+        window2.navigator.userAgent
+      ),
     };
   }
   function getBrowser() {
@@ -4043,41 +4347,31 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
 
   // node_modules/swiper/core/modules/resize/resize.js
   function Resize(_ref) {
-    let {
-      swiper: swiper2,
-      on: on3,
-      emit
-    } = _ref;
+    let { swiper: swiper2, on: on3, emit } = _ref;
     const window2 = getWindow();
     let observer2 = null;
     let animationFrame = null;
     const resizeHandler = () => {
-      if (!swiper2 || swiper2.destroyed || !swiper2.initialized)
-        return;
+      if (!swiper2 || swiper2.destroyed || !swiper2.initialized) return;
       emit("beforeResize");
       emit("resize");
     };
     const createObserver = () => {
-      if (!swiper2 || swiper2.destroyed || !swiper2.initialized)
-        return;
+      if (!swiper2 || swiper2.destroyed || !swiper2.initialized) return;
       observer2 = new ResizeObserver((entries) => {
         animationFrame = window2.requestAnimationFrame(() => {
-          const {
-            width,
-            height
-          } = swiper2;
+          const { width, height } = swiper2;
           let newWidth = width;
           let newHeight = height;
           entries.forEach((_ref2) => {
-            let {
-              contentBoxSize,
-              contentRect,
-              target
-            } = _ref2;
-            if (target && target !== swiper2.el)
-              return;
-            newWidth = contentRect ? contentRect.width : (contentBoxSize[0] || contentBoxSize).inlineSize;
-            newHeight = contentRect ? contentRect.height : (contentBoxSize[0] || contentBoxSize).blockSize;
+            let { contentBoxSize, contentRect, target } = _ref2;
+            if (target && target !== swiper2.el) return;
+            newWidth = contentRect
+              ? contentRect.width
+              : (contentBoxSize[0] || contentBoxSize).inlineSize;
+            newHeight = contentRect
+              ? contentRect.height
+              : (contentBoxSize[0] || contentBoxSize).blockSize;
           });
           if (newWidth !== width || newHeight !== height) {
             resizeHandler();
@@ -4096,12 +4390,14 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       }
     };
     const orientationChangeHandler = () => {
-      if (!swiper2 || swiper2.destroyed || !swiper2.initialized)
-        return;
+      if (!swiper2 || swiper2.destroyed || !swiper2.initialized) return;
       emit("orientationchange");
     };
     on3("init", () => {
-      if (swiper2.params.resizeObserver && typeof window2.ResizeObserver !== "undefined") {
+      if (
+        swiper2.params.resizeObserver &&
+        typeof window2.ResizeObserver !== "undefined"
+      ) {
         createObserver();
         return;
       }
@@ -4111,25 +4407,24 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     on3("destroy", () => {
       removeObserver();
       window2.removeEventListener("resize", resizeHandler);
-      window2.removeEventListener("orientationchange", orientationChangeHandler);
+      window2.removeEventListener(
+        "orientationchange",
+        orientationChangeHandler
+      );
     });
   }
 
   // node_modules/swiper/core/modules/observer/observer.js
   function Observer(_ref) {
-    let {
-      swiper: swiper2,
-      extendParams,
-      on: on3,
-      emit
-    } = _ref;
+    let { swiper: swiper2, extendParams, on: on3, emit } = _ref;
     const observers = [];
     const window2 = getWindow();
-    const attach = function(target, options) {
+    const attach = function (target, options) {
       if (options === void 0) {
         options = {};
       }
-      const ObserverFunc = window2.MutationObserver || window2.WebkitMutationObserver;
+      const ObserverFunc =
+        window2.MutationObserver || window2.WebkitMutationObserver;
       const observer2 = new ObserverFunc((mutations) => {
         if (mutations.length === 1) {
           emit("observerUpdate", mutations[0]);
@@ -4145,15 +4440,19 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         }
       });
       observer2.observe(target, {
-        attributes: typeof options.attributes === "undefined" ? true : options.attributes,
-        childList: typeof options.childList === "undefined" ? true : options.childList,
-        characterData: typeof options.characterData === "undefined" ? true : options.characterData
+        attributes:
+          typeof options.attributes === "undefined" ? true : options.attributes,
+        childList:
+          typeof options.childList === "undefined" ? true : options.childList,
+        characterData:
+          typeof options.characterData === "undefined"
+            ? true
+            : options.characterData,
       });
       observers.push(observer2);
     };
     const init = () => {
-      if (!swiper2.params.observer)
-        return;
+      if (!swiper2.params.observer) return;
       if (swiper2.params.observeParents) {
         const containerParents = swiper2.$el.parents();
         for (let i = 0; i < containerParents.length; i += 1) {
@@ -4161,10 +4460,10 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         }
       }
       attach(swiper2.$el[0], {
-        childList: swiper2.params.observeSlideChildren
+        childList: swiper2.params.observeSlideChildren,
       });
       attach(swiper2.$wrapperEl[0], {
-        attributes: false
+        attributes: false,
       });
     };
     const destroy = () => {
@@ -4176,7 +4475,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     extendParams({
       observer: false,
       observeParents: false,
-      observeSlideChildren: false
+      observeSlideChildren: false,
     });
     on3("init", init);
     on3("destroy", destroy);
@@ -4186,30 +4485,29 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   var events_emitter_default = {
     on(events2, handler3, priority) {
       const self = this;
-      if (!self.eventsListeners || self.destroyed)
-        return self;
-      if (typeof handler3 !== "function")
-        return self;
+      if (!self.eventsListeners || self.destroyed) return self;
+      if (typeof handler3 !== "function") return self;
       const method = priority ? "unshift" : "push";
       events2.split(" ").forEach((event2) => {
-        if (!self.eventsListeners[event2])
-          self.eventsListeners[event2] = [];
+        if (!self.eventsListeners[event2]) self.eventsListeners[event2] = [];
         self.eventsListeners[event2][method](handler3);
       });
       return self;
     },
     once(events2, handler3, priority) {
       const self = this;
-      if (!self.eventsListeners || self.destroyed)
-        return self;
-      if (typeof handler3 !== "function")
-        return self;
+      if (!self.eventsListeners || self.destroyed) return self;
+      if (typeof handler3 !== "function") return self;
       function onceHandler() {
         self.off(events2, onceHandler);
         if (onceHandler.__emitterProxy) {
           delete onceHandler.__emitterProxy;
         }
-        for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+        for (
+          var _len = arguments.length, args = new Array(_len), _key = 0;
+          _key < _len;
+          _key++
+        ) {
           args[_key] = arguments[_key];
         }
         handler3.apply(self, args);
@@ -4219,10 +4517,8 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     },
     onAny(handler3, priority) {
       const self = this;
-      if (!self.eventsListeners || self.destroyed)
-        return self;
-      if (typeof handler3 !== "function")
-        return self;
+      if (!self.eventsListeners || self.destroyed) return self;
+      if (typeof handler3 !== "function") return self;
       const method = priority ? "unshift" : "push";
       if (self.eventsAnyListeners.indexOf(handler3) < 0) {
         self.eventsAnyListeners[method](handler3);
@@ -4231,10 +4527,8 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     },
     offAny(handler3) {
       const self = this;
-      if (!self.eventsListeners || self.destroyed)
-        return self;
-      if (!self.eventsAnyListeners)
-        return self;
+      if (!self.eventsListeners || self.destroyed) return self;
+      if (!self.eventsAnyListeners) return self;
       const index2 = self.eventsAnyListeners.indexOf(handler3);
       if (index2 >= 0) {
         self.eventsAnyListeners.splice(index2, 1);
@@ -4243,16 +4537,18 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     },
     off(events2, handler3) {
       const self = this;
-      if (!self.eventsListeners || self.destroyed)
-        return self;
-      if (!self.eventsListeners)
-        return self;
+      if (!self.eventsListeners || self.destroyed) return self;
+      if (!self.eventsListeners) return self;
       events2.split(" ").forEach((event2) => {
         if (typeof handler3 === "undefined") {
           self.eventsListeners[event2] = [];
         } else if (self.eventsListeners[event2]) {
           self.eventsListeners[event2].forEach((eventHandler, index2) => {
-            if (eventHandler === handler3 || eventHandler.__emitterProxy && eventHandler.__emitterProxy === handler3) {
+            if (
+              eventHandler === handler3 ||
+              (eventHandler.__emitterProxy &&
+                eventHandler.__emitterProxy === handler3)
+            ) {
               self.eventsListeners[event2].splice(index2, 1);
             }
           });
@@ -4262,14 +4558,16 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     },
     emit() {
       const self = this;
-      if (!self.eventsListeners || self.destroyed)
-        return self;
-      if (!self.eventsListeners)
-        return self;
+      if (!self.eventsListeners || self.destroyed) return self;
+      if (!self.eventsListeners) return self;
       let events2;
       let data2;
       let context;
-      for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+      for (
+        var _len2 = arguments.length, args = new Array(_len2), _key2 = 0;
+        _key2 < _len2;
+        _key2++
+      ) {
         args[_key2] = arguments[_key2];
       }
       if (typeof args[0] === "string" || Array.isArray(args[0])) {
@@ -4296,7 +4594,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         }
       });
       return self;
-    }
+    },
   };
 
   // node_modules/swiper/core/update/updateSize.js
@@ -4305,29 +4603,42 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     let width;
     let height;
     const $el = swiper2.$el;
-    if (typeof swiper2.params.width !== "undefined" && swiper2.params.width !== null) {
+    if (
+      typeof swiper2.params.width !== "undefined" &&
+      swiper2.params.width !== null
+    ) {
       width = swiper2.params.width;
     } else {
       width = $el[0].clientWidth;
     }
-    if (typeof swiper2.params.height !== "undefined" && swiper2.params.height !== null) {
+    if (
+      typeof swiper2.params.height !== "undefined" &&
+      swiper2.params.height !== null
+    ) {
       height = swiper2.params.height;
     } else {
       height = $el[0].clientHeight;
     }
-    if (width === 0 && swiper2.isHorizontal() || height === 0 && swiper2.isVertical()) {
+    if (
+      (width === 0 && swiper2.isHorizontal()) ||
+      (height === 0 && swiper2.isVertical())
+    ) {
       return;
     }
-    width = width - parseInt($el.css("padding-left") || 0, 10) - parseInt($el.css("padding-right") || 0, 10);
-    height = height - parseInt($el.css("padding-top") || 0, 10) - parseInt($el.css("padding-bottom") || 0, 10);
-    if (Number.isNaN(width))
-      width = 0;
-    if (Number.isNaN(height))
-      height = 0;
+    width =
+      width -
+      parseInt($el.css("padding-left") || 0, 10) -
+      parseInt($el.css("padding-right") || 0, 10);
+    height =
+      height -
+      parseInt($el.css("padding-top") || 0, 10) -
+      parseInt($el.css("padding-bottom") || 0, 10);
+    if (Number.isNaN(width)) width = 0;
+    if (Number.isNaN(height)) height = 0;
     Object.assign(swiper2, {
       width,
       height,
-      size: swiper2.isHorizontal() ? width : height
+      size: swiper2.isHorizontal() ? width : height,
     });
   }
 
@@ -4339,14 +4650,14 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         return property;
       }
       return {
-        "width": "height",
+        width: "height",
         "margin-top": "margin-left",
         "margin-bottom ": "margin-right",
         "margin-left": "margin-top",
         "margin-right": "margin-bottom",
         "padding-left": "padding-top",
         "padding-right": "padding-bottom",
-        "marginRight": "marginBottom"
+        marginRight: "marginBottom",
       }[property];
     }
     function getDirectionPropertyValue(node, label) {
@@ -4357,12 +4668,16 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       $wrapperEl,
       size: swiperSize,
       rtlTranslate: rtl,
-      wrongRTL
+      wrongRTL,
     } = swiper2;
     const isVirtual = swiper2.virtual && params.virtual.enabled;
-    const previousSlidesLength = isVirtual ? swiper2.virtual.slides.length : swiper2.slides.length;
+    const previousSlidesLength = isVirtual
+      ? swiper2.virtual.slides.length
+      : swiper2.slides.length;
     const slides = $wrapperEl.children(`.${swiper2.params.slideClass}`);
-    const slidesLength = isVirtual ? swiper2.virtual.slides.length : slides.length;
+    const slidesLength = isVirtual
+      ? swiper2.virtual.slides.length
+      : slides.length;
     let snapGrid = [];
     const slidesGrid = [];
     const slidesSizesGrid = [];
@@ -4384,20 +4699,21 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       return;
     }
     if (typeof spaceBetween === "string" && spaceBetween.indexOf("%") >= 0) {
-      spaceBetween = parseFloat(spaceBetween.replace("%", "")) / 100 * swiperSize;
+      spaceBetween =
+        (parseFloat(spaceBetween.replace("%", "")) / 100) * swiperSize;
     }
     swiper2.virtualSize = -spaceBetween;
     if (rtl)
       slides.css({
         marginLeft: "",
         marginBottom: "",
-        marginTop: ""
+        marginTop: "",
       });
     else
       slides.css({
         marginRight: "",
         marginBottom: "",
-        marginTop: ""
+        marginTop: "",
       });
     if (params.centeredSlides && params.cssMode) {
       setCSSProperty(swiper2.wrapperEl, "--swiper-centered-offset-before", "");
@@ -4408,17 +4724,19 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       swiper2.grid.initSlides(slidesLength);
     }
     let slideSize;
-    const shouldResetSlideSize = params.slidesPerView === "auto" && params.breakpoints && Object.keys(params.breakpoints).filter((key) => {
-      return typeof params.breakpoints[key].slidesPerView !== "undefined";
-    }).length > 0;
+    const shouldResetSlideSize =
+      params.slidesPerView === "auto" &&
+      params.breakpoints &&
+      Object.keys(params.breakpoints).filter((key) => {
+        return typeof params.breakpoints[key].slidesPerView !== "undefined";
+      }).length > 0;
     for (let i = 0; i < slidesLength; i += 1) {
       slideSize = 0;
       const slide = slides.eq(i);
       if (gridEnabled) {
         swiper2.grid.updateSlide(i, slide, slidesLength, getDirectionLabel);
       }
-      if (slide.css("display") === "none")
-        continue;
+      if (slide.css("display") === "none") continue;
       if (params.slidesPerView === "auto") {
         if (shouldResetSlideSize) {
           slides[i].style[getDirectionLabel("width")] = ``;
@@ -4433,22 +4751,39 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
           slide[0].style.webkitTransform = "none";
         }
         if (params.roundLengths) {
-          slideSize = swiper2.isHorizontal() ? slide.outerWidth(true) : slide.outerHeight(true);
+          slideSize = swiper2.isHorizontal()
+            ? slide.outerWidth(true)
+            : slide.outerHeight(true);
         } else {
           const width = getDirectionPropertyValue(slideStyles, "width");
-          const paddingLeft = getDirectionPropertyValue(slideStyles, "padding-left");
-          const paddingRight = getDirectionPropertyValue(slideStyles, "padding-right");
-          const marginLeft = getDirectionPropertyValue(slideStyles, "margin-left");
-          const marginRight = getDirectionPropertyValue(slideStyles, "margin-right");
+          const paddingLeft = getDirectionPropertyValue(
+            slideStyles,
+            "padding-left"
+          );
+          const paddingRight = getDirectionPropertyValue(
+            slideStyles,
+            "padding-right"
+          );
+          const marginLeft = getDirectionPropertyValue(
+            slideStyles,
+            "margin-left"
+          );
+          const marginRight = getDirectionPropertyValue(
+            slideStyles,
+            "margin-right"
+          );
           const boxSizing = slideStyles.getPropertyValue("box-sizing");
           if (boxSizing && boxSizing === "border-box") {
             slideSize = width + marginLeft + marginRight;
           } else {
-            const {
-              clientWidth,
-              offsetWidth
-            } = slide[0];
-            slideSize = width + paddingLeft + paddingRight + marginLeft + marginRight + (offsetWidth - clientWidth);
+            const { clientWidth, offsetWidth } = slide[0];
+            slideSize =
+              width +
+              paddingLeft +
+              paddingRight +
+              marginLeft +
+              marginRight +
+              (offsetWidth - clientWidth);
           }
         }
         if (currentTransform) {
@@ -4457,12 +4792,12 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         if (currentWebKitTransform) {
           slide[0].style.webkitTransform = currentWebKitTransform;
         }
-        if (params.roundLengths)
-          slideSize = Math.floor(slideSize);
+        if (params.roundLengths) slideSize = Math.floor(slideSize);
       } else {
-        slideSize = (swiperSize - (params.slidesPerView - 1) * spaceBetween) / params.slidesPerView;
-        if (params.roundLengths)
-          slideSize = Math.floor(slideSize);
+        slideSize =
+          (swiperSize - (params.slidesPerView - 1) * spaceBetween) /
+          params.slidesPerView;
+        if (params.roundLengths) slideSize = Math.floor(slideSize);
         if (slides[i]) {
           slides[i].style[getDirectionLabel("width")] = `${slideSize}px`;
         }
@@ -4472,22 +4807,23 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       }
       slidesSizesGrid.push(slideSize);
       if (params.centeredSlides) {
-        slidePosition = slidePosition + slideSize / 2 + prevSlideSize / 2 + spaceBetween;
+        slidePosition =
+          slidePosition + slideSize / 2 + prevSlideSize / 2 + spaceBetween;
         if (prevSlideSize === 0 && i !== 0)
           slidePosition = slidePosition - swiperSize / 2 - spaceBetween;
         if (i === 0)
           slidePosition = slidePosition - swiperSize / 2 - spaceBetween;
-        if (Math.abs(slidePosition) < 1 / 1e3)
-          slidePosition = 0;
-        if (params.roundLengths)
-          slidePosition = Math.floor(slidePosition);
-        if (index2 % params.slidesPerGroup === 0)
-          snapGrid.push(slidePosition);
+        if (Math.abs(slidePosition) < 1 / 1e3) slidePosition = 0;
+        if (params.roundLengths) slidePosition = Math.floor(slidePosition);
+        if (index2 % params.slidesPerGroup === 0) snapGrid.push(slidePosition);
         slidesGrid.push(slidePosition);
       } else {
-        if (params.roundLengths)
-          slidePosition = Math.floor(slidePosition);
-        if ((index2 - Math.min(swiper2.params.slidesPerGroupSkip, index2)) % swiper2.params.slidesPerGroup === 0)
+        if (params.roundLengths) slidePosition = Math.floor(slidePosition);
+        if (
+          (index2 - Math.min(swiper2.params.slidesPerGroupSkip, index2)) %
+            swiper2.params.slidesPerGroup ===
+          0
+        )
           snapGrid.push(slidePosition);
         slidesGrid.push(slidePosition);
         slidePosition = slidePosition + slideSize + spaceBetween;
@@ -4496,15 +4832,22 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       prevSlideSize = slideSize;
       index2 += 1;
     }
-    swiper2.virtualSize = Math.max(swiper2.virtualSize, swiperSize) + offsetAfter;
-    if (rtl && wrongRTL && (params.effect === "slide" || params.effect === "coverflow")) {
+    swiper2.virtualSize =
+      Math.max(swiper2.virtualSize, swiperSize) + offsetAfter;
+    if (
+      rtl &&
+      wrongRTL &&
+      (params.effect === "slide" || params.effect === "coverflow")
+    ) {
       $wrapperEl.css({
-        width: `${swiper2.virtualSize + params.spaceBetween}px`
+        width: `${swiper2.virtualSize + params.spaceBetween}px`,
       });
     }
     if (params.setWrapperSize) {
       $wrapperEl.css({
-        [getDirectionLabel("width")]: `${swiper2.virtualSize + params.spaceBetween}px`
+        [getDirectionLabel("width")]: `${
+          swiper2.virtualSize + params.spaceBetween
+        }px`,
       });
     }
     if (gridEnabled) {
@@ -4514,51 +4857,57 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       const newSlidesGrid = [];
       for (let i = 0; i < snapGrid.length; i += 1) {
         let slidesGridItem = snapGrid[i];
-        if (params.roundLengths)
-          slidesGridItem = Math.floor(slidesGridItem);
+        if (params.roundLengths) slidesGridItem = Math.floor(slidesGridItem);
         if (snapGrid[i] <= swiper2.virtualSize - swiperSize) {
           newSlidesGrid.push(slidesGridItem);
         }
       }
       snapGrid = newSlidesGrid;
-      if (Math.floor(swiper2.virtualSize - swiperSize) - Math.floor(snapGrid[snapGrid.length - 1]) > 1) {
+      if (
+        Math.floor(swiper2.virtualSize - swiperSize) -
+          Math.floor(snapGrid[snapGrid.length - 1]) >
+        1
+      ) {
         snapGrid.push(swiper2.virtualSize - swiperSize);
       }
     }
-    if (snapGrid.length === 0)
-      snapGrid = [0];
+    if (snapGrid.length === 0) snapGrid = [0];
     if (params.spaceBetween !== 0) {
-      const key = swiper2.isHorizontal() && rtl ? "marginLeft" : getDirectionLabel("marginRight");
-      slides.filter((_, slideIndex) => {
-        if (!params.cssMode)
+      const key =
+        swiper2.isHorizontal() && rtl
+          ? "marginLeft"
+          : getDirectionLabel("marginRight");
+      slides
+        .filter((_, slideIndex) => {
+          if (!params.cssMode) return true;
+          if (slideIndex === slides.length - 1) {
+            return false;
+          }
           return true;
-        if (slideIndex === slides.length - 1) {
-          return false;
-        }
-        return true;
-      }).css({
-        [key]: `${spaceBetween}px`
-      });
+        })
+        .css({
+          [key]: `${spaceBetween}px`,
+        });
     }
     if (params.centeredSlides && params.centeredSlidesBounds) {
       let allSlidesSize = 0;
       slidesSizesGrid.forEach((slideSizeValue) => {
-        allSlidesSize += slideSizeValue + (params.spaceBetween ? params.spaceBetween : 0);
+        allSlidesSize +=
+          slideSizeValue + (params.spaceBetween ? params.spaceBetween : 0);
       });
       allSlidesSize -= params.spaceBetween;
       const maxSnap = allSlidesSize - swiperSize;
       snapGrid = snapGrid.map((snap) => {
-        if (snap < 0)
-          return -offsetBefore;
-        if (snap > maxSnap)
-          return maxSnap + offsetAfter;
+        if (snap < 0) return -offsetBefore;
+        if (snap > maxSnap) return maxSnap + offsetAfter;
         return snap;
       });
     }
     if (params.centerInsufficientSlides) {
       let allSlidesSize = 0;
       slidesSizesGrid.forEach((slideSizeValue) => {
-        allSlidesSize += slideSizeValue + (params.spaceBetween ? params.spaceBetween : 0);
+        allSlidesSize +=
+          slideSizeValue + (params.spaceBetween ? params.spaceBetween : 0);
       });
       allSlidesSize -= params.spaceBetween;
       if (allSlidesSize < swiperSize) {
@@ -4575,11 +4924,25 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       slides,
       snapGrid,
       slidesGrid,
-      slidesSizesGrid
+      slidesSizesGrid,
     });
-    if (params.centeredSlides && params.cssMode && !params.centeredSlidesBounds) {
-      setCSSProperty(swiper2.wrapperEl, "--swiper-centered-offset-before", `${-snapGrid[0]}px`);
-      setCSSProperty(swiper2.wrapperEl, "--swiper-centered-offset-after", `${swiper2.size / 2 - slidesSizesGrid[slidesSizesGrid.length - 1] / 2}px`);
+    if (
+      params.centeredSlides &&
+      params.cssMode &&
+      !params.centeredSlidesBounds
+    ) {
+      setCSSProperty(
+        swiper2.wrapperEl,
+        "--swiper-centered-offset-before",
+        `${-snapGrid[0]}px`
+      );
+      setCSSProperty(
+        swiper2.wrapperEl,
+        "--swiper-centered-offset-after",
+        `${
+          swiper2.size / 2 - slidesSizesGrid[slidesSizesGrid.length - 1] / 2
+        }px`
+      );
       const addToSnapGrid = -swiper2.snapGrid[0];
       const addToSlidesGrid = -swiper2.slidesGrid[0];
       swiper2.snapGrid = swiper2.snapGrid.map((v) => v + addToSnapGrid);
@@ -4589,8 +4952,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       swiper2.emit("slidesLengthChange");
     }
     if (snapGrid.length !== previousSnapGridLength) {
-      if (swiper2.params.watchOverflow)
-        swiper2.checkOverflow();
+      if (swiper2.params.watchOverflow) swiper2.checkOverflow();
       swiper2.emit("snapGridLengthChange");
     }
     if (slidesGrid.length !== previousSlidesGridLength) {
@@ -4599,9 +4961,14 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     if (params.watchSlidesProgress) {
       swiper2.updateSlidesOffset();
     }
-    if (!isVirtual && !params.cssMode && (params.effect === "slide" || params.effect === "fade")) {
+    if (
+      !isVirtual &&
+      !params.cssMode &&
+      (params.effect === "slide" || params.effect === "fade")
+    ) {
       const backFaceHiddenClass = `${params.containerModifierClass}backface-hidden`;
-      const hasClassBackfaceClassAdded = swiper2.$el.hasClass(backFaceHiddenClass);
+      const hasClassBackfaceClassAdded =
+        swiper2.$el.hasClass(backFaceHiddenClass);
       if (slidesLength <= params.maxBackfaceHiddenSlides) {
         if (!hasClassBackfaceClassAdded)
           swiper2.$el.addClass(backFaceHiddenClass);
@@ -4625,11 +4992,17 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     }
     const getSlideByIndex = (index2) => {
       if (isVirtual) {
-        return swiper2.slides.filter((el) => parseInt(el.getAttribute("data-swiper-slide-index"), 10) === index2)[0];
+        return swiper2.slides.filter(
+          (el) =>
+            parseInt(el.getAttribute("data-swiper-slide-index"), 10) === index2
+        )[0];
       }
       return swiper2.slides.eq(index2)[0];
     };
-    if (swiper2.params.slidesPerView !== "auto" && swiper2.params.slidesPerView > 1) {
+    if (
+      swiper2.params.slidesPerView !== "auto" &&
+      swiper2.params.slidesPerView > 1
+    ) {
       if (swiper2.params.centeredSlides) {
         (swiper2.visibleSlides || dom_default([])).each((slide) => {
           activeSlides.push(slide);
@@ -4637,8 +5010,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       } else {
         for (i = 0; i < Math.ceil(swiper2.params.slidesPerView); i += 1) {
           const index2 = swiper2.activeIndex + i;
-          if (index2 > swiper2.slides.length && !isVirtual)
-            break;
+          if (index2 > swiper2.slides.length && !isVirtual) break;
           activeSlides.push(getSlideByIndex(index2));
         }
       }
@@ -4660,29 +5032,25 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     const swiper2 = this;
     const slides = swiper2.slides;
     for (let i = 0; i < slides.length; i += 1) {
-      slides[i].swiperSlideOffset = swiper2.isHorizontal() ? slides[i].offsetLeft : slides[i].offsetTop;
+      slides[i].swiperSlideOffset = swiper2.isHorizontal()
+        ? slides[i].offsetLeft
+        : slides[i].offsetTop;
     }
   }
 
   // node_modules/swiper/core/update/updateSlidesProgress.js
   function updateSlidesProgress(translate) {
     if (translate === void 0) {
-      translate = this && this.translate || 0;
+      translate = (this && this.translate) || 0;
     }
     const swiper2 = this;
     const params = swiper2.params;
-    const {
-      slides,
-      rtlTranslate: rtl,
-      snapGrid
-    } = swiper2;
-    if (slides.length === 0)
-      return;
+    const { slides, rtlTranslate: rtl, snapGrid } = swiper2;
+    if (slides.length === 0) return;
     if (typeof slides[0].swiperSlideOffset === "undefined")
       swiper2.updateSlidesOffset();
     let offsetCenter = -translate;
-    if (rtl)
-      offsetCenter = translate;
+    if (rtl) offsetCenter = translate;
     slides.removeClass(params.slideVisibleClass);
     swiper2.visibleSlidesIndexes = [];
     swiper2.visibleSlides = [];
@@ -4692,18 +5060,32 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       if (params.cssMode && params.centeredSlides) {
         slideOffset -= slides[0].swiperSlideOffset;
       }
-      const slideProgress = (offsetCenter + (params.centeredSlides ? swiper2.minTranslate() : 0) - slideOffset) / (slide.swiperSlideSize + params.spaceBetween);
-      const originalSlideProgress = (offsetCenter - snapGrid[0] + (params.centeredSlides ? swiper2.minTranslate() : 0) - slideOffset) / (slide.swiperSlideSize + params.spaceBetween);
+      const slideProgress =
+        (offsetCenter +
+          (params.centeredSlides ? swiper2.minTranslate() : 0) -
+          slideOffset) /
+        (slide.swiperSlideSize + params.spaceBetween);
+      const originalSlideProgress =
+        (offsetCenter -
+          snapGrid[0] +
+          (params.centeredSlides ? swiper2.minTranslate() : 0) -
+          slideOffset) /
+        (slide.swiperSlideSize + params.spaceBetween);
       const slideBefore = -(offsetCenter - slideOffset);
       const slideAfter = slideBefore + swiper2.slidesSizesGrid[i];
-      const isVisible = slideBefore >= 0 && slideBefore < swiper2.size - 1 || slideAfter > 1 && slideAfter <= swiper2.size || slideBefore <= 0 && slideAfter >= swiper2.size;
+      const isVisible =
+        (slideBefore >= 0 && slideBefore < swiper2.size - 1) ||
+        (slideAfter > 1 && slideAfter <= swiper2.size) ||
+        (slideBefore <= 0 && slideAfter >= swiper2.size);
       if (isVisible) {
         swiper2.visibleSlides.push(slide);
         swiper2.visibleSlidesIndexes.push(i);
         slides.eq(i).addClass(params.slideVisibleClass);
       }
       slide.progress = rtl ? -slideProgress : slideProgress;
-      slide.originalProgress = rtl ? -originalSlideProgress : originalSlideProgress;
+      slide.originalProgress = rtl
+        ? -originalSlideProgress
+        : originalSlideProgress;
     }
     swiper2.visibleSlides = dom_default(swiper2.visibleSlides);
   }
@@ -4713,15 +5095,12 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     const swiper2 = this;
     if (typeof translate === "undefined") {
       const multiplier = swiper2.rtlTranslate ? -1 : 1;
-      translate = swiper2 && swiper2.translate && swiper2.translate * multiplier || 0;
+      translate =
+        (swiper2 && swiper2.translate && swiper2.translate * multiplier) || 0;
     }
     const params = swiper2.params;
     const translatesDiff = swiper2.maxTranslate() - swiper2.minTranslate();
-    let {
-      progress,
-      isBeginning,
-      isEnd
-    } = swiper2;
+    let { progress, isBeginning, isEnd } = swiper2;
     const wasBeginning = isBeginning;
     const wasEnd = isEnd;
     if (translatesDiff === 0) {
@@ -4736,9 +5115,12 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     Object.assign(swiper2, {
       progress,
       isBeginning,
-      isEnd
+      isEnd,
     });
-    if (params.watchSlidesProgress || params.centeredSlides && params.autoHeight)
+    if (
+      params.watchSlidesProgress ||
+      (params.centeredSlides && params.autoHeight)
+    )
       swiper2.updateSlidesProgress(translate);
     if (isBeginning && !wasBeginning) {
       swiper2.emit("reachBeginning toEdge");
@@ -4746,7 +5128,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     if (isEnd && !wasEnd) {
       swiper2.emit("reachEnd toEdge");
     }
-    if (wasBeginning && !isBeginning || wasEnd && !isEnd) {
+    if ((wasBeginning && !isBeginning) || (wasEnd && !isEnd)) {
       swiper2.emit("fromEdge");
     }
     swiper2.emit("progress", progress);
@@ -4755,49 +5137,93 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   // node_modules/swiper/core/update/updateSlidesClasses.js
   function updateSlidesClasses() {
     const swiper2 = this;
-    const {
-      slides,
-      params,
-      $wrapperEl,
-      activeIndex,
-      realIndex
-    } = swiper2;
+    const { slides, params, $wrapperEl, activeIndex, realIndex } = swiper2;
     const isVirtual = swiper2.virtual && params.virtual.enabled;
-    slides.removeClass(`${params.slideActiveClass} ${params.slideNextClass} ${params.slidePrevClass} ${params.slideDuplicateActiveClass} ${params.slideDuplicateNextClass} ${params.slideDuplicatePrevClass}`);
+    slides.removeClass(
+      `${params.slideActiveClass} ${params.slideNextClass} ${params.slidePrevClass} ${params.slideDuplicateActiveClass} ${params.slideDuplicateNextClass} ${params.slideDuplicatePrevClass}`
+    );
     let activeSlide;
     if (isVirtual) {
-      activeSlide = swiper2.$wrapperEl.find(`.${params.slideClass}[data-swiper-slide-index="${activeIndex}"]`);
+      activeSlide = swiper2.$wrapperEl.find(
+        `.${params.slideClass}[data-swiper-slide-index="${activeIndex}"]`
+      );
     } else {
       activeSlide = slides.eq(activeIndex);
     }
     activeSlide.addClass(params.slideActiveClass);
     if (params.loop) {
       if (activeSlide.hasClass(params.slideDuplicateClass)) {
-        $wrapperEl.children(`.${params.slideClass}:not(.${params.slideDuplicateClass})[data-swiper-slide-index="${realIndex}"]`).addClass(params.slideDuplicateActiveClass);
+        $wrapperEl
+          .children(
+            `.${params.slideClass}:not(.${params.slideDuplicateClass})[data-swiper-slide-index="${realIndex}"]`
+          )
+          .addClass(params.slideDuplicateActiveClass);
       } else {
-        $wrapperEl.children(`.${params.slideClass}.${params.slideDuplicateClass}[data-swiper-slide-index="${realIndex}"]`).addClass(params.slideDuplicateActiveClass);
+        $wrapperEl
+          .children(
+            `.${params.slideClass}.${params.slideDuplicateClass}[data-swiper-slide-index="${realIndex}"]`
+          )
+          .addClass(params.slideDuplicateActiveClass);
       }
     }
-    let nextSlide = activeSlide.nextAll(`.${params.slideClass}`).eq(0).addClass(params.slideNextClass);
+    let nextSlide = activeSlide
+      .nextAll(`.${params.slideClass}`)
+      .eq(0)
+      .addClass(params.slideNextClass);
     if (params.loop && nextSlide.length === 0) {
       nextSlide = slides.eq(0);
       nextSlide.addClass(params.slideNextClass);
     }
-    let prevSlide = activeSlide.prevAll(`.${params.slideClass}`).eq(0).addClass(params.slidePrevClass);
+    let prevSlide = activeSlide
+      .prevAll(`.${params.slideClass}`)
+      .eq(0)
+      .addClass(params.slidePrevClass);
     if (params.loop && prevSlide.length === 0) {
       prevSlide = slides.eq(-1);
       prevSlide.addClass(params.slidePrevClass);
     }
     if (params.loop) {
       if (nextSlide.hasClass(params.slideDuplicateClass)) {
-        $wrapperEl.children(`.${params.slideClass}:not(.${params.slideDuplicateClass})[data-swiper-slide-index="${nextSlide.attr("data-swiper-slide-index")}"]`).addClass(params.slideDuplicateNextClass);
+        $wrapperEl
+          .children(
+            `.${params.slideClass}:not(.${
+              params.slideDuplicateClass
+            })[data-swiper-slide-index="${nextSlide.attr(
+              "data-swiper-slide-index"
+            )}"]`
+          )
+          .addClass(params.slideDuplicateNextClass);
       } else {
-        $wrapperEl.children(`.${params.slideClass}.${params.slideDuplicateClass}[data-swiper-slide-index="${nextSlide.attr("data-swiper-slide-index")}"]`).addClass(params.slideDuplicateNextClass);
+        $wrapperEl
+          .children(
+            `.${params.slideClass}.${
+              params.slideDuplicateClass
+            }[data-swiper-slide-index="${nextSlide.attr(
+              "data-swiper-slide-index"
+            )}"]`
+          )
+          .addClass(params.slideDuplicateNextClass);
       }
       if (prevSlide.hasClass(params.slideDuplicateClass)) {
-        $wrapperEl.children(`.${params.slideClass}:not(.${params.slideDuplicateClass})[data-swiper-slide-index="${prevSlide.attr("data-swiper-slide-index")}"]`).addClass(params.slideDuplicatePrevClass);
+        $wrapperEl
+          .children(
+            `.${params.slideClass}:not(.${
+              params.slideDuplicateClass
+            })[data-swiper-slide-index="${prevSlide.attr(
+              "data-swiper-slide-index"
+            )}"]`
+          )
+          .addClass(params.slideDuplicatePrevClass);
       } else {
-        $wrapperEl.children(`.${params.slideClass}.${params.slideDuplicateClass}[data-swiper-slide-index="${prevSlide.attr("data-swiper-slide-index")}"]`).addClass(params.slideDuplicatePrevClass);
+        $wrapperEl
+          .children(
+            `.${params.slideClass}.${
+              params.slideDuplicateClass
+            }[data-swiper-slide-index="${prevSlide.attr(
+              "data-swiper-slide-index"
+            )}"]`
+          )
+          .addClass(params.slideDuplicatePrevClass);
       }
     }
     swiper2.emitSlidesClasses();
@@ -4806,23 +5232,32 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   // node_modules/swiper/core/update/updateActiveIndex.js
   function updateActiveIndex(newActiveIndex) {
     const swiper2 = this;
-    const translate = swiper2.rtlTranslate ? swiper2.translate : -swiper2.translate;
+    const translate = swiper2.rtlTranslate
+      ? swiper2.translate
+      : -swiper2.translate;
     const {
       slidesGrid,
       snapGrid,
       params,
       activeIndex: previousIndex,
       realIndex: previousRealIndex,
-      snapIndex: previousSnapIndex
+      snapIndex: previousSnapIndex,
     } = swiper2;
     let activeIndex = newActiveIndex;
     let snapIndex;
     if (typeof activeIndex === "undefined") {
       for (let i = 0; i < slidesGrid.length; i += 1) {
         if (typeof slidesGrid[i + 1] !== "undefined") {
-          if (translate >= slidesGrid[i] && translate < slidesGrid[i + 1] - (slidesGrid[i + 1] - slidesGrid[i]) / 2) {
+          if (
+            translate >= slidesGrid[i] &&
+            translate <
+              slidesGrid[i + 1] - (slidesGrid[i + 1] - slidesGrid[i]) / 2
+          ) {
             activeIndex = i;
-          } else if (translate >= slidesGrid[i] && translate < slidesGrid[i + 1]) {
+          } else if (
+            translate >= slidesGrid[i] &&
+            translate < slidesGrid[i + 1]
+          ) {
             activeIndex = i + 1;
           }
         } else if (translate >= slidesGrid[i]) {
@@ -4838,10 +5273,10 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       snapIndex = snapGrid.indexOf(translate);
     } else {
       const skip = Math.min(params.slidesPerGroupSkip, activeIndex);
-      snapIndex = skip + Math.floor((activeIndex - skip) / params.slidesPerGroup);
+      snapIndex =
+        skip + Math.floor((activeIndex - skip) / params.slidesPerGroup);
     }
-    if (snapIndex >= snapGrid.length)
-      snapIndex = snapGrid.length - 1;
+    if (snapIndex >= snapGrid.length) snapIndex = snapGrid.length - 1;
     if (activeIndex === previousIndex) {
       if (snapIndex !== previousSnapIndex) {
         swiper2.snapIndex = snapIndex;
@@ -4849,12 +5284,16 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       }
       return;
     }
-    const realIndex = parseInt(swiper2.slides.eq(activeIndex).attr("data-swiper-slide-index") || activeIndex, 10);
+    const realIndex = parseInt(
+      swiper2.slides.eq(activeIndex).attr("data-swiper-slide-index") ||
+        activeIndex,
+      10
+    );
     Object.assign(swiper2, {
       snapIndex,
       realIndex,
       previousIndex,
-      activeIndex
+      activeIndex,
     });
     swiper2.emit("activeIndexChange");
     swiper2.emit("snapIndexChange");
@@ -4885,7 +5324,10 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     if (slide && slideFound) {
       swiper2.clickedSlide = slide;
       if (swiper2.virtual && swiper2.params.virtual.enabled) {
-        swiper2.clickedIndex = parseInt(dom_default(slide).attr("data-swiper-slide-index"), 10);
+        swiper2.clickedIndex = parseInt(
+          dom_default(slide).attr("data-swiper-slide-index"),
+          10
+        );
       } else {
         swiper2.clickedIndex = slideIndex;
       }
@@ -4894,7 +5336,11 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       swiper2.clickedIndex = void 0;
       return;
     }
-    if (params.slideToClickedSlide && swiper2.clickedIndex !== void 0 && swiper2.clickedIndex !== swiper2.activeIndex) {
+    if (
+      params.slideToClickedSlide &&
+      swiper2.clickedIndex !== void 0 &&
+      swiper2.clickedIndex !== swiper2.activeIndex
+    ) {
       swiper2.slideToClickedSlide();
     }
   }
@@ -4909,7 +5355,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     updateProgress,
     updateSlidesClasses,
     updateActiveIndex,
-    updateClickedSlide
+    updateClickedSlide,
   };
 
   // node_modules/swiper/core/translate/getTranslate.js
@@ -4918,12 +5364,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       axis = this.isHorizontal() ? "x" : "y";
     }
     const swiper2 = this;
-    const {
-      params,
-      rtlTranslate: rtl,
-      translate,
-      $wrapperEl
-    } = swiper2;
+    const { params, rtlTranslate: rtl, translate, $wrapperEl } = swiper2;
     if (params.virtualTranslate) {
       return rtl ? -translate : translate;
     }
@@ -4931,8 +5372,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       return translate;
     }
     let currentTranslate = getTranslate($wrapperEl[0], axis);
-    if (rtl)
-      currentTranslate = -currentTranslate;
+    if (rtl) currentTranslate = -currentTranslate;
     return currentTranslate || 0;
   }
 
@@ -4944,7 +5384,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       params,
       $wrapperEl,
       wrapperEl,
-      progress
+      progress,
     } = swiper2;
     let x = 0;
     let y = 0;
@@ -4959,7 +5399,8 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       y = Math.floor(y);
     }
     if (params.cssMode) {
-      wrapperEl[swiper2.isHorizontal() ? "scrollLeft" : "scrollTop"] = swiper2.isHorizontal() ? -x : -y;
+      wrapperEl[swiper2.isHorizontal() ? "scrollLeft" : "scrollTop"] =
+        swiper2.isHorizontal() ? -x : -y;
     } else if (!params.virtualTranslate) {
       $wrapperEl.transform(`translate3d(${x}px, ${y}px, ${z}px)`);
     }
@@ -4989,7 +5430,13 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   }
 
   // node_modules/swiper/core/translate/translateTo.js
-  function translateTo(translate, speed, runCallbacks, translateBounds, internal) {
+  function translateTo(
+    translate,
+    speed,
+    runCallbacks,
+    translateBounds,
+    internal
+  ) {
     if (translate === void 0) {
       translate = 0;
     }
@@ -5003,10 +5450,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       translateBounds = true;
     }
     const swiper2 = this;
-    const {
-      params,
-      wrapperEl
-    } = swiper2;
+    const { params, wrapperEl } = swiper2;
     if (swiper2.animating && params.preventInteractionOnTransition) {
       return false;
     }
@@ -5017,8 +5461,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       newTranslate = minTranslate2;
     else if (translateBounds && translate < maxTranslate2)
       newTranslate = maxTranslate2;
-    else
-      newTranslate = translate;
+    else newTranslate = translate;
     swiper2.updateProgress(newTranslate);
     if (params.cssMode) {
       const isH = swiper2.isHorizontal();
@@ -5029,13 +5472,13 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
           animateCSSModeScroll({
             swiper: swiper2,
             targetPosition: -newTranslate,
-            side: isH ? "left" : "top"
+            side: isH ? "left" : "top",
           });
           return true;
         }
         wrapperEl.scrollTo({
           [isH ? "left" : "top"]: -newTranslate,
-          behavior: "smooth"
+          behavior: "smooth",
         });
       }
       return true;
@@ -5057,13 +5500,19 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       if (!swiper2.animating) {
         swiper2.animating = true;
         if (!swiper2.onTranslateToWrapperTransitionEnd) {
-          swiper2.onTranslateToWrapperTransitionEnd = function transitionEnd3(e) {
-            if (!swiper2 || swiper2.destroyed)
-              return;
-            if (e.target !== this)
-              return;
-            swiper2.$wrapperEl[0].removeEventListener("transitionend", swiper2.onTranslateToWrapperTransitionEnd);
-            swiper2.$wrapperEl[0].removeEventListener("webkitTransitionEnd", swiper2.onTranslateToWrapperTransitionEnd);
+          swiper2.onTranslateToWrapperTransitionEnd = function transitionEnd3(
+            e
+          ) {
+            if (!swiper2 || swiper2.destroyed) return;
+            if (e.target !== this) return;
+            swiper2.$wrapperEl[0].removeEventListener(
+              "transitionend",
+              swiper2.onTranslateToWrapperTransitionEnd
+            );
+            swiper2.$wrapperEl[0].removeEventListener(
+              "webkitTransitionEnd",
+              swiper2.onTranslateToWrapperTransitionEnd
+            );
             swiper2.onTranslateToWrapperTransitionEnd = null;
             delete swiper2.onTranslateToWrapperTransitionEnd;
             if (runCallbacks) {
@@ -5071,8 +5520,14 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
             }
           };
         }
-        swiper2.$wrapperEl[0].addEventListener("transitionend", swiper2.onTranslateToWrapperTransitionEnd);
-        swiper2.$wrapperEl[0].addEventListener("webkitTransitionEnd", swiper2.onTranslateToWrapperTransitionEnd);
+        swiper2.$wrapperEl[0].addEventListener(
+          "transitionend",
+          swiper2.onTranslateToWrapperTransitionEnd
+        );
+        swiper2.$wrapperEl[0].addEventListener(
+          "webkitTransitionEnd",
+          swiper2.onTranslateToWrapperTransitionEnd
+        );
       }
     }
     return true;
@@ -5084,7 +5539,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     setTranslate,
     minTranslate,
     maxTranslate,
-    translateTo
+    translateTo,
   };
 
   // node_modules/swiper/core/transition/setTransition.js
@@ -5098,24 +5553,13 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
 
   // node_modules/swiper/core/transition/transitionEmit.js
   function transitionEmit(_ref) {
-    let {
-      swiper: swiper2,
-      runCallbacks,
-      direction,
-      step
-    } = _ref;
-    const {
-      activeIndex,
-      previousIndex
-    } = swiper2;
+    let { swiper: swiper2, runCallbacks, direction, step } = _ref;
+    const { activeIndex, previousIndex } = swiper2;
     let dir = direction;
     if (!dir) {
-      if (activeIndex > previousIndex)
-        dir = "next";
-      else if (activeIndex < previousIndex)
-        dir = "prev";
-      else
-        dir = "reset";
+      if (activeIndex > previousIndex) dir = "next";
+      else if (activeIndex < previousIndex) dir = "prev";
+      else dir = "reset";
     }
     swiper2.emit(`transition${step}`);
     if (runCallbacks && activeIndex !== previousIndex) {
@@ -5138,11 +5582,8 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       runCallbacks = true;
     }
     const swiper2 = this;
-    const {
-      params
-    } = swiper2;
-    if (params.cssMode)
-      return;
+    const { params } = swiper2;
+    if (params.cssMode) return;
     if (params.autoHeight) {
       swiper2.updateAutoHeight();
     }
@@ -5150,7 +5591,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       swiper: swiper2,
       runCallbacks,
       direction,
-      step: "Start"
+      step: "Start",
     });
   }
 
@@ -5160,18 +5601,15 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       runCallbacks = true;
     }
     const swiper2 = this;
-    const {
-      params
-    } = swiper2;
+    const { params } = swiper2;
     swiper2.animating = false;
-    if (params.cssMode)
-      return;
+    if (params.cssMode) return;
     swiper2.setTransition(0);
     transitionEmit({
       swiper: swiper2,
       runCallbacks,
       direction,
-      step: "End"
+      step: "End",
     });
   }
 
@@ -5179,7 +5617,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   var transition_default = {
     setTransition,
     transitionStart,
-    transitionEnd: transitionEnd2
+    transitionEnd: transitionEnd2,
   };
 
   // node_modules/swiper/core/slide/slideTo.js
@@ -5194,20 +5632,23 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       runCallbacks = true;
     }
     if (typeof index2 !== "number" && typeof index2 !== "string") {
-      throw new Error(`The 'index' argument cannot have type other than 'number' or 'string'. [${typeof index2}] given.`);
+      throw new Error(
+        `The 'index' argument cannot have type other than 'number' or 'string'. [${typeof index2}] given.`
+      );
     }
     if (typeof index2 === "string") {
       const indexAsNumber = parseInt(index2, 10);
       const isValidNumber = isFinite(indexAsNumber);
       if (!isValidNumber) {
-        throw new Error(`The passed-in 'index' (string) couldn't be converted to 'number'. [${index2}] given.`);
+        throw new Error(
+          `The passed-in 'index' (string) couldn't be converted to 'number'. [${index2}] given.`
+        );
       }
       index2 = indexAsNumber;
     }
     const swiper2 = this;
     let slideIndex = index2;
-    if (slideIndex < 0)
-      slideIndex = 0;
+    if (slideIndex < 0) slideIndex = 0;
     const {
       params,
       snapGrid,
@@ -5216,16 +5657,22 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       activeIndex,
       rtlTranslate: rtl,
       wrapperEl,
-      enabled
+      enabled,
     } = swiper2;
-    if (swiper2.animating && params.preventInteractionOnTransition || !enabled && !internal && !initial) {
+    if (
+      (swiper2.animating && params.preventInteractionOnTransition) ||
+      (!enabled && !internal && !initial)
+    ) {
       return false;
     }
     const skip = Math.min(swiper2.params.slidesPerGroupSkip, slideIndex);
-    let snapIndex = skip + Math.floor((slideIndex - skip) / swiper2.params.slidesPerGroup);
-    if (snapIndex >= snapGrid.length)
-      snapIndex = snapGrid.length - 1;
-    if ((activeIndex || params.initialSlide || 0) === (previousIndex || 0) && runCallbacks) {
+    let snapIndex =
+      skip + Math.floor((slideIndex - skip) / swiper2.params.slidesPerGroup);
+    if (snapIndex >= snapGrid.length) snapIndex = snapGrid.length - 1;
+    if (
+      (activeIndex || params.initialSlide || 0) === (previousIndex || 0) &&
+      runCallbacks
+    ) {
       swiper2.emit("beforeSlideChangeStart");
     }
     const translate = -snapGrid[snapIndex];
@@ -5236,9 +5683,16 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         const normalizedGrid = Math.floor(slidesGrid[i] * 100);
         const normalizedGridNext = Math.floor(slidesGrid[i + 1] * 100);
         if (typeof slidesGrid[i + 1] !== "undefined") {
-          if (normalizedTranslate >= normalizedGrid && normalizedTranslate < normalizedGridNext - (normalizedGridNext - normalizedGrid) / 2) {
+          if (
+            normalizedTranslate >= normalizedGrid &&
+            normalizedTranslate <
+              normalizedGridNext - (normalizedGridNext - normalizedGrid) / 2
+          ) {
             slideIndex = i;
-          } else if (normalizedTranslate >= normalizedGrid && normalizedTranslate < normalizedGridNext) {
+          } else if (
+            normalizedTranslate >= normalizedGrid &&
+            normalizedTranslate < normalizedGridNext
+          ) {
             slideIndex = i + 1;
           }
         } else if (normalizedTranslate >= normalizedGrid) {
@@ -5247,22 +5701,29 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       }
     }
     if (swiper2.initialized && slideIndex !== activeIndex) {
-      if (!swiper2.allowSlideNext && translate < swiper2.translate && translate < swiper2.minTranslate()) {
+      if (
+        !swiper2.allowSlideNext &&
+        translate < swiper2.translate &&
+        translate < swiper2.minTranslate()
+      ) {
         return false;
       }
-      if (!swiper2.allowSlidePrev && translate > swiper2.translate && translate > swiper2.maxTranslate()) {
-        if ((activeIndex || 0) !== slideIndex)
-          return false;
+      if (
+        !swiper2.allowSlidePrev &&
+        translate > swiper2.translate &&
+        translate > swiper2.maxTranslate()
+      ) {
+        if ((activeIndex || 0) !== slideIndex) return false;
       }
     }
     let direction;
-    if (slideIndex > activeIndex)
-      direction = "next";
-    else if (slideIndex < activeIndex)
-      direction = "prev";
-    else
-      direction = "reset";
-    if (rtl && -translate === swiper2.translate || !rtl && translate === swiper2.translate) {
+    if (slideIndex > activeIndex) direction = "next";
+    else if (slideIndex < activeIndex) direction = "prev";
+    else direction = "reset";
+    if (
+      (rtl && -translate === swiper2.translate) ||
+      (!rtl && translate === swiper2.translate)
+    ) {
       swiper2.updateActiveIndex(slideIndex);
       if (params.autoHeight) {
         swiper2.updateAutoHeight();
@@ -5298,13 +5759,13 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
           animateCSSModeScroll({
             swiper: swiper2,
             targetPosition: t,
-            side: isH ? "left" : "top"
+            side: isH ? "left" : "top",
           });
           return true;
         }
         wrapperEl.scrollTo({
           [isH ? "left" : "top"]: t,
-          behavior: "smooth"
+          behavior: "smooth",
         });
       }
       return true;
@@ -5321,19 +5782,29 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       swiper2.animating = true;
       if (!swiper2.onSlideToWrapperTransitionEnd) {
         swiper2.onSlideToWrapperTransitionEnd = function transitionEnd3(e) {
-          if (!swiper2 || swiper2.destroyed)
-            return;
-          if (e.target !== this)
-            return;
-          swiper2.$wrapperEl[0].removeEventListener("transitionend", swiper2.onSlideToWrapperTransitionEnd);
-          swiper2.$wrapperEl[0].removeEventListener("webkitTransitionEnd", swiper2.onSlideToWrapperTransitionEnd);
+          if (!swiper2 || swiper2.destroyed) return;
+          if (e.target !== this) return;
+          swiper2.$wrapperEl[0].removeEventListener(
+            "transitionend",
+            swiper2.onSlideToWrapperTransitionEnd
+          );
+          swiper2.$wrapperEl[0].removeEventListener(
+            "webkitTransitionEnd",
+            swiper2.onSlideToWrapperTransitionEnd
+          );
           swiper2.onSlideToWrapperTransitionEnd = null;
           delete swiper2.onSlideToWrapperTransitionEnd;
           swiper2.transitionEnd(runCallbacks, direction);
         };
       }
-      swiper2.$wrapperEl[0].addEventListener("transitionend", swiper2.onSlideToWrapperTransitionEnd);
-      swiper2.$wrapperEl[0].addEventListener("webkitTransitionEnd", swiper2.onSlideToWrapperTransitionEnd);
+      swiper2.$wrapperEl[0].addEventListener(
+        "transitionend",
+        swiper2.onSlideToWrapperTransitionEnd
+      );
+      swiper2.$wrapperEl[0].addEventListener(
+        "webkitTransitionEnd",
+        swiper2.onSlideToWrapperTransitionEnd
+      );
     }
     return true;
   }
@@ -5353,7 +5824,9 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       const indexAsNumber = parseInt(index2, 10);
       const isValidNumber = isFinite(indexAsNumber);
       if (!isValidNumber) {
-        throw new Error(`The passed-in 'index' (string) couldn't be converted to 'number'. [${index2}] given.`);
+        throw new Error(
+          `The passed-in 'index' (string) couldn't be converted to 'number'. [${index2}] given.`
+        );
       }
       index2 = indexAsNumber;
     }
@@ -5374,28 +5847,32 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       runCallbacks = true;
     }
     const swiper2 = this;
-    const {
-      animating,
-      enabled,
-      params
-    } = swiper2;
-    if (!enabled)
-      return swiper2;
+    const { animating, enabled, params } = swiper2;
+    if (!enabled) return swiper2;
     let perGroup = params.slidesPerGroup;
-    if (params.slidesPerView === "auto" && params.slidesPerGroup === 1 && params.slidesPerGroupAuto) {
+    if (
+      params.slidesPerView === "auto" &&
+      params.slidesPerGroup === 1 &&
+      params.slidesPerGroupAuto
+    ) {
       perGroup = Math.max(swiper2.slidesPerViewDynamic("current", true), 1);
     }
-    const increment = swiper2.activeIndex < params.slidesPerGroupSkip ? 1 : perGroup;
+    const increment =
+      swiper2.activeIndex < params.slidesPerGroupSkip ? 1 : perGroup;
     if (params.loop) {
-      if (animating && params.loopPreventsSlide)
-        return false;
+      if (animating && params.loopPreventsSlide) return false;
       swiper2.loopFix();
       swiper2._clientLeft = swiper2.$wrapperEl[0].clientLeft;
     }
     if (params.rewind && swiper2.isEnd) {
       return swiper2.slideTo(0, speed, runCallbacks, internal);
     }
-    return swiper2.slideTo(swiper2.activeIndex + increment, speed, runCallbacks, internal);
+    return swiper2.slideTo(
+      swiper2.activeIndex + increment,
+      speed,
+      runCallbacks,
+      internal
+    );
   }
 
   // node_modules/swiper/core/slide/slidePrev.js
@@ -5407,31 +5884,23 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       runCallbacks = true;
     }
     const swiper2 = this;
-    const {
-      params,
-      animating,
-      snapGrid,
-      slidesGrid,
-      rtlTranslate,
-      enabled
-    } = swiper2;
-    if (!enabled)
-      return swiper2;
+    const { params, animating, snapGrid, slidesGrid, rtlTranslate, enabled } =
+      swiper2;
+    if (!enabled) return swiper2;
     if (params.loop) {
-      if (animating && params.loopPreventsSlide)
-        return false;
+      if (animating && params.loopPreventsSlide) return false;
       swiper2.loopFix();
       swiper2._clientLeft = swiper2.$wrapperEl[0].clientLeft;
     }
     const translate = rtlTranslate ? swiper2.translate : -swiper2.translate;
     function normalize(val) {
-      if (val < 0)
-        return -Math.floor(Math.abs(val));
+      if (val < 0) return -Math.floor(Math.abs(val));
       return Math.floor(val);
     }
     const normalizedTranslate = normalize(translate);
     const normalizedSnapGrid = snapGrid.map((val) => normalize(val));
-    let prevSnap = snapGrid[normalizedSnapGrid.indexOf(normalizedTranslate) - 1];
+    let prevSnap =
+      snapGrid[normalizedSnapGrid.indexOf(normalizedTranslate) - 1];
     if (typeof prevSnap === "undefined" && params.cssMode) {
       let prevSnapIndex;
       snapGrid.forEach((snap, snapIndex) => {
@@ -5440,21 +5909,31 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         }
       });
       if (typeof prevSnapIndex !== "undefined") {
-        prevSnap = snapGrid[prevSnapIndex > 0 ? prevSnapIndex - 1 : prevSnapIndex];
+        prevSnap =
+          snapGrid[prevSnapIndex > 0 ? prevSnapIndex - 1 : prevSnapIndex];
       }
     }
     let prevIndex = 0;
     if (typeof prevSnap !== "undefined") {
       prevIndex = slidesGrid.indexOf(prevSnap);
-      if (prevIndex < 0)
-        prevIndex = swiper2.activeIndex - 1;
-      if (params.slidesPerView === "auto" && params.slidesPerGroup === 1 && params.slidesPerGroupAuto) {
-        prevIndex = prevIndex - swiper2.slidesPerViewDynamic("previous", true) + 1;
+      if (prevIndex < 0) prevIndex = swiper2.activeIndex - 1;
+      if (
+        params.slidesPerView === "auto" &&
+        params.slidesPerGroup === 1 &&
+        params.slidesPerGroupAuto
+      ) {
+        prevIndex =
+          prevIndex - swiper2.slidesPerViewDynamic("previous", true) + 1;
         prevIndex = Math.max(prevIndex, 0);
       }
     }
     if (params.rewind && swiper2.isBeginning) {
-      const lastIndex = swiper2.params.virtual && swiper2.params.virtual.enabled && swiper2.virtual ? swiper2.virtual.slides.length - 1 : swiper2.slides.length - 1;
+      const lastIndex =
+        swiper2.params.virtual &&
+        swiper2.params.virtual.enabled &&
+        swiper2.virtual
+          ? swiper2.virtual.slides.length - 1
+          : swiper2.slides.length - 1;
       return swiper2.slideTo(lastIndex, speed, runCallbacks, internal);
     }
     return swiper2.slideTo(prevIndex, speed, runCallbacks, internal);
@@ -5486,8 +5965,11 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     const swiper2 = this;
     let index2 = swiper2.activeIndex;
     const skip = Math.min(swiper2.params.slidesPerGroupSkip, index2);
-    const snapIndex = skip + Math.floor((index2 - skip) / swiper2.params.slidesPerGroup);
-    const translate = swiper2.rtlTranslate ? swiper2.translate : -swiper2.translate;
+    const snapIndex =
+      skip + Math.floor((index2 - skip) / swiper2.params.slidesPerGroup);
+    const translate = swiper2.rtlTranslate
+      ? swiper2.translate
+      : -swiper2.translate;
     if (translate >= swiper2.snapGrid[snapIndex]) {
       const currentSnap = swiper2.snapGrid[snapIndex];
       const nextSnap = swiper2.snapGrid[snapIndex + 1];
@@ -5509,21 +5991,32 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   // node_modules/swiper/core/slide/slideToClickedSlide.js
   function slideToClickedSlide() {
     const swiper2 = this;
-    const {
-      params,
-      $wrapperEl
-    } = swiper2;
-    const slidesPerView = params.slidesPerView === "auto" ? swiper2.slidesPerViewDynamic() : params.slidesPerView;
+    const { params, $wrapperEl } = swiper2;
+    const slidesPerView =
+      params.slidesPerView === "auto"
+        ? swiper2.slidesPerViewDynamic()
+        : params.slidesPerView;
     let slideToIndex = swiper2.clickedIndex;
     let realIndex;
     if (params.loop) {
-      if (swiper2.animating)
-        return;
-      realIndex = parseInt(dom_default(swiper2.clickedSlide).attr("data-swiper-slide-index"), 10);
+      if (swiper2.animating) return;
+      realIndex = parseInt(
+        dom_default(swiper2.clickedSlide).attr("data-swiper-slide-index"),
+        10
+      );
       if (params.centeredSlides) {
-        if (slideToIndex < swiper2.loopedSlides - slidesPerView / 2 || slideToIndex > swiper2.slides.length - swiper2.loopedSlides + slidesPerView / 2) {
+        if (
+          slideToIndex < swiper2.loopedSlides - slidesPerView / 2 ||
+          slideToIndex >
+            swiper2.slides.length - swiper2.loopedSlides + slidesPerView / 2
+        ) {
           swiper2.loopFix();
-          slideToIndex = $wrapperEl.children(`.${params.slideClass}[data-swiper-slide-index="${realIndex}"]:not(.${params.slideDuplicateClass})`).eq(0).index();
+          slideToIndex = $wrapperEl
+            .children(
+              `.${params.slideClass}[data-swiper-slide-index="${realIndex}"]:not(.${params.slideDuplicateClass})`
+            )
+            .eq(0)
+            .index();
           nextTick2(() => {
             swiper2.slideTo(slideToIndex);
           });
@@ -5532,7 +6025,12 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         }
       } else if (slideToIndex > swiper2.slides.length - slidesPerView) {
         swiper2.loopFix();
-        slideToIndex = $wrapperEl.children(`.${params.slideClass}[data-swiper-slide-index="${realIndex}"]:not(.${params.slideDuplicateClass})`).eq(0).index();
+        slideToIndex = $wrapperEl
+          .children(
+            `.${params.slideClass}[data-swiper-slide-index="${realIndex}"]:not(.${params.slideDuplicateClass})`
+          )
+          .eq(0)
+          .index();
         nextTick2(() => {
           swiper2.slideTo(slideToIndex);
         });
@@ -5552,25 +6050,30 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     slidePrev,
     slideReset,
     slideToClosest,
-    slideToClickedSlide
+    slideToClickedSlide,
   };
 
   // node_modules/swiper/core/loop/loopCreate.js
   function loopCreate() {
     const swiper2 = this;
     const document2 = getDocument();
-    const {
-      params,
-      $wrapperEl
-    } = swiper2;
-    const $selector = $wrapperEl.children().length > 0 ? dom_default($wrapperEl.children()[0].parentNode) : $wrapperEl;
-    $selector.children(`.${params.slideClass}.${params.slideDuplicateClass}`).remove();
+    const { params, $wrapperEl } = swiper2;
+    const $selector =
+      $wrapperEl.children().length > 0
+        ? dom_default($wrapperEl.children()[0].parentNode)
+        : $wrapperEl;
+    $selector
+      .children(`.${params.slideClass}.${params.slideDuplicateClass}`)
+      .remove();
     let slides = $selector.children(`.${params.slideClass}`);
     if (params.loopFillGroupWithBlank) {
-      const blankSlidesNum = params.slidesPerGroup - slides.length % params.slidesPerGroup;
+      const blankSlidesNum =
+        params.slidesPerGroup - (slides.length % params.slidesPerGroup);
       if (blankSlidesNum !== params.slidesPerGroup) {
         for (let i = 0; i < blankSlidesNum; i += 1) {
-          const blankNode = dom_default(document2.createElement("div")).addClass(`${params.slideClass} ${params.slideBlankClass}`);
+          const blankNode = dom_default(
+            document2.createElement("div")
+          ).addClass(`${params.slideClass} ${params.slideBlankClass}`);
           $selector.append(blankNode);
         }
         slides = $selector.children(`.${params.slideClass}`);
@@ -5578,7 +6081,9 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     }
     if (params.slidesPerView === "auto" && !params.loopedSlides)
       params.loopedSlides = slides.length;
-    swiper2.loopedSlides = Math.ceil(parseFloat(params.loopedSlides || params.slidesPerView, 10));
+    swiper2.loopedSlides = Math.ceil(
+      parseFloat(params.loopedSlides || params.slidesPerView, 10)
+    );
     swiper2.loopedSlides += params.loopAdditionalSlides;
     if (swiper2.loopedSlides > slides.length) {
       swiper2.loopedSlides = slides.length;
@@ -5590,16 +6095,27 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       if (index2 < swiper2.loopedSlides) {
         appendSlides.push(el);
       }
-      if (index2 < slides.length && index2 >= slides.length - swiper2.loopedSlides) {
+      if (
+        index2 < slides.length &&
+        index2 >= slides.length - swiper2.loopedSlides
+      ) {
         prependSlides.push(el);
       }
       slide.attr("data-swiper-slide-index", index2);
     });
     for (let i = 0; i < appendSlides.length; i += 1) {
-      $selector.append(dom_default(appendSlides[i].cloneNode(true)).addClass(params.slideDuplicateClass));
+      $selector.append(
+        dom_default(appendSlides[i].cloneNode(true)).addClass(
+          params.slideDuplicateClass
+        )
+      );
     }
     for (let i = prependSlides.length - 1; i >= 0; i -= 1) {
-      $selector.prepend(dom_default(prependSlides[i].cloneNode(true)).addClass(params.slideDuplicateClass));
+      $selector.prepend(
+        dom_default(prependSlides[i].cloneNode(true)).addClass(
+          params.slideDuplicateClass
+        )
+      );
     }
   }
 
@@ -5614,7 +6130,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       allowSlidePrev,
       allowSlideNext,
       snapGrid,
-      rtlTranslate: rtl
+      rtlTranslate: rtl,
     } = swiper2;
     let newIndex;
     swiper2.allowSlidePrev = true;
@@ -5626,14 +6142,18 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       newIndex += loopedSlides;
       const slideChanged = swiper2.slideTo(newIndex, 0, false, true);
       if (slideChanged && diff !== 0) {
-        swiper2.setTranslate((rtl ? -swiper2.translate : swiper2.translate) - diff);
+        swiper2.setTranslate(
+          (rtl ? -swiper2.translate : swiper2.translate) - diff
+        );
       }
     } else if (activeIndex >= slides.length - loopedSlides) {
       newIndex = -slides.length + activeIndex + loopedSlides;
       newIndex += loopedSlides;
       const slideChanged = swiper2.slideTo(newIndex, 0, false, true);
       if (slideChanged && diff !== 0) {
-        swiper2.setTranslate((rtl ? -swiper2.translate : swiper2.translate) - diff);
+        swiper2.setTranslate(
+          (rtl ? -swiper2.translate : swiper2.translate) - diff
+        );
       }
     }
     swiper2.allowSlidePrev = allowSlidePrev;
@@ -5644,12 +6164,12 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   // node_modules/swiper/core/loop/loopDestroy.js
   function loopDestroy() {
     const swiper2 = this;
-    const {
-      $wrapperEl,
-      params,
-      slides
-    } = swiper2;
-    $wrapperEl.children(`.${params.slideClass}.${params.slideDuplicateClass},.${params.slideClass}.${params.slideBlankClass}`).remove();
+    const { $wrapperEl, params, slides } = swiper2;
+    $wrapperEl
+      .children(
+        `.${params.slideClass}.${params.slideDuplicateClass},.${params.slideClass}.${params.slideBlankClass}`
+      )
+      .remove();
     slides.removeAttr("data-swiper-slide-index");
   }
 
@@ -5657,15 +6177,23 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   var loop_default = {
     loopCreate,
     loopFix,
-    loopDestroy
+    loopDestroy,
   };
 
   // node_modules/swiper/core/grab-cursor/setGrabCursor.js
   function setGrabCursor(moving) {
     const swiper2 = this;
-    if (swiper2.support.touch || !swiper2.params.simulateTouch || swiper2.params.watchOverflow && swiper2.isLocked || swiper2.params.cssMode)
+    if (
+      swiper2.support.touch ||
+      !swiper2.params.simulateTouch ||
+      (swiper2.params.watchOverflow && swiper2.isLocked) ||
+      swiper2.params.cssMode
+    )
       return;
-    const el = swiper2.params.touchEventsTarget === "container" ? swiper2.el : swiper2.wrapperEl;
+    const el =
+      swiper2.params.touchEventsTarget === "container"
+        ? swiper2.el
+        : swiper2.wrapperEl;
     el.style.cursor = "move";
     el.style.cursor = moving ? "grabbing" : "grab";
   }
@@ -5673,16 +6201,22 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   // node_modules/swiper/core/grab-cursor/unsetGrabCursor.js
   function unsetGrabCursor() {
     const swiper2 = this;
-    if (swiper2.support.touch || swiper2.params.watchOverflow && swiper2.isLocked || swiper2.params.cssMode) {
+    if (
+      swiper2.support.touch ||
+      (swiper2.params.watchOverflow && swiper2.isLocked) ||
+      swiper2.params.cssMode
+    ) {
       return;
     }
-    swiper2[swiper2.params.touchEventsTarget === "container" ? "el" : "wrapperEl"].style.cursor = "";
+    swiper2[
+      swiper2.params.touchEventsTarget === "container" ? "el" : "wrapperEl"
+    ].style.cursor = "";
   }
 
   // node_modules/swiper/core/grab-cursor/index.js
   var grab_cursor_default = {
     setGrabCursor,
-    unsetGrabCursor
+    unsetGrabCursor,
   };
 
   // node_modules/swiper/core/events/onTouchStart.js
@@ -5691,10 +6225,8 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       base = this;
     }
     function __closestFrom(el) {
-      if (!el || el === getDocument() || el === getWindow())
-        return null;
-      if (el.assignedSlot)
-        el = el.assignedSlot;
+      if (!el || el === getDocument() || el === getWindow()) return null;
+      if (el.assignedSlot) el = el.assignedSlot;
       const found = el.closest(selector);
       if (!found && !el.getRootNode) {
         return null;
@@ -5708,13 +6240,8 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     const document2 = getDocument();
     const window2 = getWindow();
     const data2 = swiper2.touchEventsData;
-    const {
-      params,
-      touches,
-      enabled
-    } = swiper2;
-    if (!enabled)
-      return;
+    const { params, touches, enabled } = swiper2;
+    if (!enabled) return;
     if (swiper2.animating && params.preventInteractionOnTransition) {
       return;
     }
@@ -5722,41 +6249,57 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       swiper2.loopFix();
     }
     let e = event2;
-    if (e.originalEvent)
-      e = e.originalEvent;
+    if (e.originalEvent) e = e.originalEvent;
     let $targetEl = dom_default(e.target);
     if (params.touchEventsTarget === "wrapper") {
-      if (!$targetEl.closest(swiper2.wrapperEl).length)
-        return;
+      if (!$targetEl.closest(swiper2.wrapperEl).length) return;
     }
     data2.isTouchEvent = e.type === "touchstart";
-    if (!data2.isTouchEvent && "which" in e && e.which === 3)
-      return;
-    if (!data2.isTouchEvent && "button" in e && e.button > 0)
-      return;
-    if (data2.isTouched && data2.isMoved)
-      return;
-    const swipingClassHasValue = !!params.noSwipingClass && params.noSwipingClass !== "";
-    if (swipingClassHasValue && e.target && e.target.shadowRoot && event2.path && event2.path[0]) {
+    if (!data2.isTouchEvent && "which" in e && e.which === 3) return;
+    if (!data2.isTouchEvent && "button" in e && e.button > 0) return;
+    if (data2.isTouched && data2.isMoved) return;
+    const swipingClassHasValue =
+      !!params.noSwipingClass && params.noSwipingClass !== "";
+    if (
+      swipingClassHasValue &&
+      e.target &&
+      e.target.shadowRoot &&
+      event2.path &&
+      event2.path[0]
+    ) {
       $targetEl = dom_default(event2.path[0]);
     }
-    const noSwipingSelector = params.noSwipingSelector ? params.noSwipingSelector : `.${params.noSwipingClass}`;
+    const noSwipingSelector = params.noSwipingSelector
+      ? params.noSwipingSelector
+      : `.${params.noSwipingClass}`;
     const isTargetShadow = !!(e.target && e.target.shadowRoot);
-    if (params.noSwiping && (isTargetShadow ? closestElement(noSwipingSelector, $targetEl[0]) : $targetEl.closest(noSwipingSelector)[0])) {
+    if (
+      params.noSwiping &&
+      (isTargetShadow
+        ? closestElement(noSwipingSelector, $targetEl[0])
+        : $targetEl.closest(noSwipingSelector)[0])
+    ) {
       swiper2.allowClick = true;
       return;
     }
     if (params.swipeHandler) {
-      if (!$targetEl.closest(params.swipeHandler)[0])
-        return;
+      if (!$targetEl.closest(params.swipeHandler)[0]) return;
     }
-    touches.currentX = e.type === "touchstart" ? e.targetTouches[0].pageX : e.pageX;
-    touches.currentY = e.type === "touchstart" ? e.targetTouches[0].pageY : e.pageY;
+    touches.currentX =
+      e.type === "touchstart" ? e.targetTouches[0].pageX : e.pageX;
+    touches.currentY =
+      e.type === "touchstart" ? e.targetTouches[0].pageY : e.pageY;
     const startX = touches.currentX;
     const startY = touches.currentY;
-    const edgeSwipeDetection = params.edgeSwipeDetection || params.iOSEdgeSwipeDetection;
-    const edgeSwipeThreshold = params.edgeSwipeThreshold || params.iOSEdgeSwipeThreshold;
-    if (edgeSwipeDetection && (startX <= edgeSwipeThreshold || startX >= window2.innerWidth - edgeSwipeThreshold)) {
+    const edgeSwipeDetection =
+      params.edgeSwipeDetection || params.iOSEdgeSwipeDetection;
+    const edgeSwipeThreshold =
+      params.edgeSwipeThreshold || params.iOSEdgeSwipeThreshold;
+    if (
+      edgeSwipeDetection &&
+      (startX <= edgeSwipeThreshold ||
+        startX >= window2.innerWidth - edgeSwipeThreshold)
+    ) {
       if (edgeSwipeDetection === "prevent") {
         event2.preventDefault();
       } else {
@@ -5768,7 +6311,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       isMoved: false,
       allowTouchCallbacks: true,
       isScrolling: void 0,
-      startMoving: void 0
+      startMoving: void 0,
     });
     touches.startX = startX;
     touches.startY = startY;
@@ -5776,8 +6319,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     swiper2.allowClick = true;
     swiper2.updateSize();
     swiper2.swipeDirection = void 0;
-    if (params.threshold > 0)
-      data2.allowThresholdMove = false;
+    if (params.threshold > 0) data2.allowThresholdMove = false;
     if (e.type !== "touchstart") {
       let preventDefault = true;
       if ($targetEl.is(data2.focusableElements)) {
@@ -5786,15 +6328,31 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
           data2.isTouched = false;
         }
       }
-      if (document2.activeElement && dom_default(document2.activeElement).is(data2.focusableElements) && document2.activeElement !== $targetEl[0]) {
+      if (
+        document2.activeElement &&
+        dom_default(document2.activeElement).is(data2.focusableElements) &&
+        document2.activeElement !== $targetEl[0]
+      ) {
         document2.activeElement.blur();
       }
-      const shouldPreventDefault = preventDefault && swiper2.allowTouchMove && params.touchStartPreventDefault;
-      if ((params.touchStartForcePreventDefault || shouldPreventDefault) && !$targetEl[0].isContentEditable) {
+      const shouldPreventDefault =
+        preventDefault &&
+        swiper2.allowTouchMove &&
+        params.touchStartPreventDefault;
+      if (
+        (params.touchStartForcePreventDefault || shouldPreventDefault) &&
+        !$targetEl[0].isContentEditable
+      ) {
         e.preventDefault();
       }
     }
-    if (swiper2.params.freeMode && swiper2.params.freeMode.enabled && swiper2.freeMode && swiper2.animating && !params.cssMode) {
+    if (
+      swiper2.params.freeMode &&
+      swiper2.params.freeMode.enabled &&
+      swiper2.freeMode &&
+      swiper2.animating &&
+      !params.cssMode
+    ) {
       swiper2.freeMode.onTouchStart();
     }
     swiper2.emit("touchStart", e);
@@ -5805,26 +6363,21 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     const document2 = getDocument();
     const swiper2 = this;
     const data2 = swiper2.touchEventsData;
-    const {
-      params,
-      touches,
-      rtlTranslate: rtl,
-      enabled
-    } = swiper2;
-    if (!enabled)
-      return;
+    const { params, touches, rtlTranslate: rtl, enabled } = swiper2;
+    if (!enabled) return;
     let e = event2;
-    if (e.originalEvent)
-      e = e.originalEvent;
+    if (e.originalEvent) e = e.originalEvent;
     if (!data2.isTouched) {
       if (data2.startMoving && data2.isScrolling) {
         swiper2.emit("touchMoveOpposite", e);
       }
       return;
     }
-    if (data2.isTouchEvent && e.type !== "touchmove")
-      return;
-    const targetTouch = e.type === "touchmove" && e.targetTouches && (e.targetTouches[0] || e.changedTouches[0]);
+    if (data2.isTouchEvent && e.type !== "touchmove") return;
+    const targetTouch =
+      e.type === "touchmove" &&
+      e.targetTouches &&
+      (e.targetTouches[0] || e.changedTouches[0]);
     const pageX = e.type === "touchmove" ? targetTouch.pageX : e.pageX;
     const pageY = e.type === "touchmove" ? targetTouch.pageY : e.pageY;
     if (e.preventedByNestedSwiper) {
@@ -5841,7 +6394,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
           startX: pageX,
           startY: pageY,
           currentX: pageX,
-          currentY: pageY
+          currentY: pageY,
         });
         data2.touchStartTime = now();
       }
@@ -5849,17 +6402,29 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     }
     if (data2.isTouchEvent && params.touchReleaseOnEdges && !params.loop) {
       if (swiper2.isVertical()) {
-        if (pageY < touches.startY && swiper2.translate <= swiper2.maxTranslate() || pageY > touches.startY && swiper2.translate >= swiper2.minTranslate()) {
+        if (
+          (pageY < touches.startY &&
+            swiper2.translate <= swiper2.maxTranslate()) ||
+          (pageY > touches.startY &&
+            swiper2.translate >= swiper2.minTranslate())
+        ) {
           data2.isTouched = false;
           data2.isMoved = false;
           return;
         }
-      } else if (pageX < touches.startX && swiper2.translate <= swiper2.maxTranslate() || pageX > touches.startX && swiper2.translate >= swiper2.minTranslate()) {
+      } else if (
+        (pageX < touches.startX &&
+          swiper2.translate <= swiper2.maxTranslate()) ||
+        (pageX > touches.startX && swiper2.translate >= swiper2.minTranslate())
+      ) {
         return;
       }
     }
     if (data2.isTouchEvent && document2.activeElement) {
-      if (e.target === document2.activeElement && dom_default(e.target).is(data2.focusableElements)) {
+      if (
+        e.target === document2.activeElement &&
+        dom_default(e.target).is(data2.focusableElements)
+      ) {
         data2.isMoved = true;
         swiper2.allowClick = false;
         return;
@@ -5868,22 +6433,30 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     if (data2.allowTouchCallbacks) {
       swiper2.emit("touchMove", e);
     }
-    if (e.targetTouches && e.targetTouches.length > 1)
-      return;
+    if (e.targetTouches && e.targetTouches.length > 1) return;
     touches.currentX = pageX;
     touches.currentY = pageY;
     const diffX = touches.currentX - touches.startX;
     const diffY = touches.currentY - touches.startY;
-    if (swiper2.params.threshold && Math.sqrt(diffX ** 2 + diffY ** 2) < swiper2.params.threshold)
+    if (
+      swiper2.params.threshold &&
+      Math.sqrt(diffX ** 2 + diffY ** 2) < swiper2.params.threshold
+    )
       return;
     if (typeof data2.isScrolling === "undefined") {
       let touchAngle;
-      if (swiper2.isHorizontal() && touches.currentY === touches.startY || swiper2.isVertical() && touches.currentX === touches.startX) {
+      if (
+        (swiper2.isHorizontal() && touches.currentY === touches.startY) ||
+        (swiper2.isVertical() && touches.currentX === touches.startX)
+      ) {
         data2.isScrolling = false;
       } else {
         if (diffX * diffX + diffY * diffY >= 25) {
-          touchAngle = Math.atan2(Math.abs(diffY), Math.abs(diffX)) * 180 / Math.PI;
-          data2.isScrolling = swiper2.isHorizontal() ? touchAngle > params.touchAngle : 90 - touchAngle > params.touchAngle;
+          touchAngle =
+            (Math.atan2(Math.abs(diffY), Math.abs(diffX)) * 180) / Math.PI;
+          data2.isScrolling = swiper2.isHorizontal()
+            ? touchAngle > params.touchAngle
+            : 90 - touchAngle > params.touchAngle;
         }
       }
     }
@@ -5891,7 +6464,10 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       swiper2.emit("touchMoveOpposite", e);
     }
     if (typeof data2.startMoving === "undefined") {
-      if (touches.currentX !== touches.startX || touches.currentY !== touches.startY) {
+      if (
+        touches.currentX !== touches.startX ||
+        touches.currentY !== touches.startY
+      ) {
         data2.startMoving = true;
       }
     }
@@ -5919,7 +6495,10 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         swiper2.$wrapperEl.trigger("webkitTransitionEnd transitionend");
       }
       data2.allowMomentumBounce = false;
-      if (params.grabCursor && (swiper2.allowSlideNext === true || swiper2.allowSlidePrev === true)) {
+      if (
+        params.grabCursor &&
+        (swiper2.allowSlideNext === true || swiper2.allowSlidePrev === true)
+      ) {
         swiper2.setGrabCursor(true);
       }
       swiper2.emit("sliderFirstMove", e);
@@ -5929,8 +6508,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     let diff = swiper2.isHorizontal() ? diffX : diffY;
     touches.diff = diff;
     diff *= params.touchRatio;
-    if (rtl)
-      diff = -diff;
+    if (rtl) diff = -diff;
     swiper2.swipeDirection = diff > 0 ? "prev" : "next";
     data2.currentTranslate = diff + data2.startTranslate;
     let disableParentSwiper = true;
@@ -5941,19 +6519,35 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     if (diff > 0 && data2.currentTranslate > swiper2.minTranslate()) {
       disableParentSwiper = false;
       if (params.resistance)
-        data2.currentTranslate = swiper2.minTranslate() - 1 + (-swiper2.minTranslate() + data2.startTranslate + diff) ** resistanceRatio;
+        data2.currentTranslate =
+          swiper2.minTranslate() -
+          1 +
+          (-swiper2.minTranslate() + data2.startTranslate + diff) **
+            resistanceRatio;
     } else if (diff < 0 && data2.currentTranslate < swiper2.maxTranslate()) {
       disableParentSwiper = false;
       if (params.resistance)
-        data2.currentTranslate = swiper2.maxTranslate() + 1 - (swiper2.maxTranslate() - data2.startTranslate - diff) ** resistanceRatio;
+        data2.currentTranslate =
+          swiper2.maxTranslate() +
+          1 -
+          (swiper2.maxTranslate() - data2.startTranslate - diff) **
+            resistanceRatio;
     }
     if (disableParentSwiper) {
       e.preventedByNestedSwiper = true;
     }
-    if (!swiper2.allowSlideNext && swiper2.swipeDirection === "next" && data2.currentTranslate < data2.startTranslate) {
+    if (
+      !swiper2.allowSlideNext &&
+      swiper2.swipeDirection === "next" &&
+      data2.currentTranslate < data2.startTranslate
+    ) {
       data2.currentTranslate = data2.startTranslate;
     }
-    if (!swiper2.allowSlidePrev && swiper2.swipeDirection === "prev" && data2.currentTranslate > data2.startTranslate) {
+    if (
+      !swiper2.allowSlidePrev &&
+      swiper2.swipeDirection === "prev" &&
+      data2.currentTranslate > data2.startTranslate
+    ) {
       data2.currentTranslate = data2.startTranslate;
     }
     if (!swiper2.allowSlidePrev && !swiper2.allowSlideNext) {
@@ -5966,7 +6560,9 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
           touches.startX = touches.currentX;
           touches.startY = touches.currentY;
           data2.currentTranslate = data2.startTranslate;
-          touches.diff = swiper2.isHorizontal() ? touches.currentX - touches.startX : touches.currentY - touches.startY;
+          touches.diff = swiper2.isHorizontal()
+            ? touches.currentX - touches.startX
+            : touches.currentY - touches.startY;
           return;
         }
       } else {
@@ -5974,13 +6570,19 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         return;
       }
     }
-    if (!params.followFinger || params.cssMode)
-      return;
-    if (params.freeMode && params.freeMode.enabled && swiper2.freeMode || params.watchSlidesProgress) {
+    if (!params.followFinger || params.cssMode) return;
+    if (
+      (params.freeMode && params.freeMode.enabled && swiper2.freeMode) ||
+      params.watchSlidesProgress
+    ) {
       swiper2.updateActiveIndex();
       swiper2.updateSlidesClasses();
     }
-    if (swiper2.params.freeMode && params.freeMode.enabled && swiper2.freeMode) {
+    if (
+      swiper2.params.freeMode &&
+      params.freeMode.enabled &&
+      swiper2.freeMode
+    ) {
       swiper2.freeMode.onTouchMove();
     }
     swiper2.updateProgress(data2.currentTranslate);
@@ -5991,18 +6593,10 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   function onTouchEnd(event2) {
     const swiper2 = this;
     const data2 = swiper2.touchEventsData;
-    const {
-      params,
-      touches,
-      rtlTranslate: rtl,
-      slidesGrid,
-      enabled
-    } = swiper2;
-    if (!enabled)
-      return;
+    const { params, touches, rtlTranslate: rtl, slidesGrid, enabled } = swiper2;
+    if (!enabled) return;
     let e = event2;
-    if (e.originalEvent)
-      e = e.originalEvent;
+    if (e.originalEvent) e = e.originalEvent;
     if (data2.allowTouchCallbacks) {
       swiper2.emit("touchEnd", e);
     }
@@ -6015,14 +6609,19 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       data2.startMoving = false;
       return;
     }
-    if (params.grabCursor && data2.isMoved && data2.isTouched && (swiper2.allowSlideNext === true || swiper2.allowSlidePrev === true)) {
+    if (
+      params.grabCursor &&
+      data2.isMoved &&
+      data2.isTouched &&
+      (swiper2.allowSlideNext === true || swiper2.allowSlidePrev === true)
+    ) {
       swiper2.setGrabCursor(false);
     }
     const touchEndTime = now();
     const timeDiff = touchEndTime - data2.touchStartTime;
     if (swiper2.allowClick) {
-      const pathTree = e.path || e.composedPath && e.composedPath();
-      swiper2.updateClickedSlide(pathTree && pathTree[0] || e.target);
+      const pathTree = e.path || (e.composedPath && e.composedPath());
+      swiper2.updateClickedSlide((pathTree && pathTree[0]) || e.target);
       swiper2.emit("tap click", e);
       if (timeDiff < 300 && touchEndTime - data2.lastClickTime < 300) {
         swiper2.emit("doubleTap doubleClick", e);
@@ -6030,10 +6629,15 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     }
     data2.lastClickTime = now();
     nextTick2(() => {
-      if (!swiper2.destroyed)
-        swiper2.allowClick = true;
+      if (!swiper2.destroyed) swiper2.allowClick = true;
     });
-    if (!data2.isTouched || !data2.isMoved || !swiper2.swipeDirection || touches.diff === 0 || data2.currentTranslate === data2.startTranslate) {
+    if (
+      !data2.isTouched ||
+      !data2.isMoved ||
+      !swiper2.swipeDirection ||
+      touches.diff === 0 ||
+      data2.currentTranslate === data2.startTranslate
+    ) {
       data2.isTouched = false;
       data2.isMoved = false;
       data2.startMoving = false;
@@ -6053,35 +6657,50 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     }
     if (swiper2.params.freeMode && params.freeMode.enabled) {
       swiper2.freeMode.onTouchEnd({
-        currentPos
+        currentPos,
       });
       return;
     }
     let stopIndex = 0;
     let groupSize = swiper2.slidesSizesGrid[0];
-    for (let i = 0; i < slidesGrid.length; i += i < params.slidesPerGroupSkip ? 1 : params.slidesPerGroup) {
-      const increment2 = i < params.slidesPerGroupSkip - 1 ? 1 : params.slidesPerGroup;
+    for (
+      let i = 0;
+      i < slidesGrid.length;
+      i += i < params.slidesPerGroupSkip ? 1 : params.slidesPerGroup
+    ) {
+      const increment2 =
+        i < params.slidesPerGroupSkip - 1 ? 1 : params.slidesPerGroup;
       if (typeof slidesGrid[i + increment2] !== "undefined") {
-        if (currentPos >= slidesGrid[i] && currentPos < slidesGrid[i + increment2]) {
+        if (
+          currentPos >= slidesGrid[i] &&
+          currentPos < slidesGrid[i + increment2]
+        ) {
           stopIndex = i;
           groupSize = slidesGrid[i + increment2] - slidesGrid[i];
         }
       } else if (currentPos >= slidesGrid[i]) {
         stopIndex = i;
-        groupSize = slidesGrid[slidesGrid.length - 1] - slidesGrid[slidesGrid.length - 2];
+        groupSize =
+          slidesGrid[slidesGrid.length - 1] - slidesGrid[slidesGrid.length - 2];
       }
     }
     let rewindFirstIndex = null;
     let rewindLastIndex = null;
     if (params.rewind) {
       if (swiper2.isBeginning) {
-        rewindLastIndex = swiper2.params.virtual && swiper2.params.virtual.enabled && swiper2.virtual ? swiper2.virtual.slides.length - 1 : swiper2.slides.length - 1;
+        rewindLastIndex =
+          swiper2.params.virtual &&
+          swiper2.params.virtual.enabled &&
+          swiper2.virtual
+            ? swiper2.virtual.slides.length - 1
+            : swiper2.slides.length - 1;
       } else if (swiper2.isEnd) {
         rewindFirstIndex = 0;
       }
     }
     const ratio = (currentPos - slidesGrid[stopIndex]) / groupSize;
-    const increment = stopIndex < params.slidesPerGroupSkip - 1 ? 1 : params.slidesPerGroup;
+    const increment =
+      stopIndex < params.slidesPerGroupSkip - 1 ? 1 : params.slidesPerGroup;
     if (timeDiff > params.longSwipesMs) {
       if (!params.longSwipes) {
         swiper2.slideTo(swiper2.activeIndex);
@@ -6089,14 +6708,21 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       }
       if (swiper2.swipeDirection === "next") {
         if (ratio >= params.longSwipesRatio)
-          swiper2.slideTo(params.rewind && swiper2.isEnd ? rewindFirstIndex : stopIndex + increment);
-        else
-          swiper2.slideTo(stopIndex);
+          swiper2.slideTo(
+            params.rewind && swiper2.isEnd
+              ? rewindFirstIndex
+              : stopIndex + increment
+          );
+        else swiper2.slideTo(stopIndex);
       }
       if (swiper2.swipeDirection === "prev") {
         if (ratio > 1 - params.longSwipesRatio) {
           swiper2.slideTo(stopIndex + increment);
-        } else if (rewindLastIndex !== null && ratio < 0 && Math.abs(ratio) > params.longSwipesRatio) {
+        } else if (
+          rewindLastIndex !== null &&
+          ratio < 0 &&
+          Math.abs(ratio) > params.longSwipesRatio
+        ) {
           swiper2.slideTo(rewindLastIndex);
         } else {
           swiper2.slideTo(stopIndex);
@@ -6107,13 +6733,20 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         swiper2.slideTo(swiper2.activeIndex);
         return;
       }
-      const isNavButtonTarget = swiper2.navigation && (e.target === swiper2.navigation.nextEl || e.target === swiper2.navigation.prevEl);
+      const isNavButtonTarget =
+        swiper2.navigation &&
+        (e.target === swiper2.navigation.nextEl ||
+          e.target === swiper2.navigation.prevEl);
       if (!isNavButtonTarget) {
         if (swiper2.swipeDirection === "next") {
-          swiper2.slideTo(rewindFirstIndex !== null ? rewindFirstIndex : stopIndex + increment);
+          swiper2.slideTo(
+            rewindFirstIndex !== null ? rewindFirstIndex : stopIndex + increment
+          );
         }
         if (swiper2.swipeDirection === "prev") {
-          swiper2.slideTo(rewindLastIndex !== null ? rewindLastIndex : stopIndex);
+          swiper2.slideTo(
+            rewindLastIndex !== null ? rewindLastIndex : stopIndex
+          );
         }
       } else if (e.target === swiper2.navigation.nextEl) {
         swiper2.slideTo(stopIndex + increment);
@@ -6126,31 +6759,32 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   // node_modules/swiper/core/events/onResize.js
   function onResize() {
     const swiper2 = this;
-    const {
-      params,
-      el
-    } = swiper2;
-    if (el && el.offsetWidth === 0)
-      return;
+    const { params, el } = swiper2;
+    if (el && el.offsetWidth === 0) return;
     if (params.breakpoints) {
       swiper2.setBreakpoint();
     }
-    const {
-      allowSlideNext,
-      allowSlidePrev,
-      snapGrid
-    } = swiper2;
+    const { allowSlideNext, allowSlidePrev, snapGrid } = swiper2;
     swiper2.allowSlideNext = true;
     swiper2.allowSlidePrev = true;
     swiper2.updateSize();
     swiper2.updateSlides();
     swiper2.updateSlidesClasses();
-    if ((params.slidesPerView === "auto" || params.slidesPerView > 1) && swiper2.isEnd && !swiper2.isBeginning && !swiper2.params.centeredSlides) {
+    if (
+      (params.slidesPerView === "auto" || params.slidesPerView > 1) &&
+      swiper2.isEnd &&
+      !swiper2.isBeginning &&
+      !swiper2.params.centeredSlides
+    ) {
       swiper2.slideTo(swiper2.slides.length - 1, 0, false, true);
     } else {
       swiper2.slideTo(swiper2.activeIndex, 0, false, true);
     }
-    if (swiper2.autoplay && swiper2.autoplay.running && swiper2.autoplay.paused) {
+    if (
+      swiper2.autoplay &&
+      swiper2.autoplay.running &&
+      swiper2.autoplay.paused
+    ) {
       swiper2.autoplay.run();
     }
     swiper2.allowSlidePrev = allowSlidePrev;
@@ -6163,11 +6797,9 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   // node_modules/swiper/core/events/onClick.js
   function onClick(e) {
     const swiper2 = this;
-    if (!swiper2.enabled)
-      return;
+    if (!swiper2.enabled) return;
     if (!swiper2.allowClick) {
-      if (swiper2.params.preventClicks)
-        e.preventDefault();
+      if (swiper2.params.preventClicks) e.preventDefault();
       if (swiper2.params.preventClicksPropagation && swiper2.animating) {
         e.stopPropagation();
         e.stopImmediatePropagation();
@@ -6178,21 +6810,15 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   // node_modules/swiper/core/events/onScroll.js
   function onScroll() {
     const swiper2 = this;
-    const {
-      wrapperEl,
-      rtlTranslate,
-      enabled
-    } = swiper2;
-    if (!enabled)
-      return;
+    const { wrapperEl, rtlTranslate, enabled } = swiper2;
+    if (!enabled) return;
     swiper2.previousTranslate = swiper2.translate;
     if (swiper2.isHorizontal()) {
       swiper2.translate = -wrapperEl.scrollLeft;
     } else {
       swiper2.translate = -wrapperEl.scrollTop;
     }
-    if (swiper2.translate === 0)
-      swiper2.translate = 0;
+    if (swiper2.translate === 0) swiper2.translate = 0;
     swiper2.updateActiveIndex();
     swiper2.updateSlidesClasses();
     let newProgress;
@@ -6200,18 +6826,20 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     if (translatesDiff === 0) {
       newProgress = 0;
     } else {
-      newProgress = (swiper2.translate - swiper2.minTranslate()) / translatesDiff;
+      newProgress =
+        (swiper2.translate - swiper2.minTranslate()) / translatesDiff;
     }
     if (newProgress !== swiper2.progress) {
-      swiper2.updateProgress(rtlTranslate ? -swiper2.translate : swiper2.translate);
+      swiper2.updateProgress(
+        rtlTranslate ? -swiper2.translate : swiper2.translate
+      );
     }
     swiper2.emit("setTranslate", swiper2.translate, false);
   }
 
   // node_modules/swiper/core/events/index.js
   var dummyEventAttached = false;
-  function dummyEventListener() {
-  }
+  function dummyEventListener() {}
   var events = (swiper2, method) => {
     const document2 = getDocument();
     const {
@@ -6220,25 +6848,37 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       el,
       wrapperEl,
       device,
-      support: support2
+      support: support2,
     } = swiper2;
     const capture = !!params.nested;
-    const domMethod = method === "on" ? "addEventListener" : "removeEventListener";
+    const domMethod =
+      method === "on" ? "addEventListener" : "removeEventListener";
     const swiperMethod = method;
     if (!support2.touch) {
       el[domMethod](touchEvents.start, swiper2.onTouchStart, false);
       document2[domMethod](touchEvents.move, swiper2.onTouchMove, capture);
       document2[domMethod](touchEvents.end, swiper2.onTouchEnd, false);
     } else {
-      const passiveListener = touchEvents.start === "touchstart" && support2.passiveListener && params.passiveListeners ? {
-        passive: true,
-        capture: false
-      } : false;
+      const passiveListener =
+        touchEvents.start === "touchstart" &&
+        support2.passiveListener &&
+        params.passiveListeners
+          ? {
+              passive: true,
+              capture: false,
+            }
+          : false;
       el[domMethod](touchEvents.start, swiper2.onTouchStart, passiveListener);
-      el[domMethod](touchEvents.move, swiper2.onTouchMove, support2.passiveListener ? {
-        passive: false,
-        capture
-      } : capture);
+      el[domMethod](
+        touchEvents.move,
+        swiper2.onTouchMove,
+        support2.passiveListener
+          ? {
+              passive: false,
+              capture,
+            }
+          : capture
+      );
       el[domMethod](touchEvents.end, swiper2.onTouchEnd, passiveListener);
       if (touchEvents.cancel) {
         el[domMethod](touchEvents.cancel, swiper2.onTouchEnd, passiveListener);
@@ -6251,7 +6891,13 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       wrapperEl[domMethod]("scroll", swiper2.onScroll);
     }
     if (params.updateOnWindowResize) {
-      swiper2[swiperMethod](device.ios || device.android ? "resize orientationchange observerUpdate" : "resize observerUpdate", onResize, true);
+      swiper2[swiperMethod](
+        device.ios || device.android
+          ? "resize orientationchange observerUpdate"
+          : "resize observerUpdate",
+        onResize,
+        true
+      );
     } else {
       swiper2[swiperMethod]("observerUpdate", onResize, true);
     }
@@ -6259,10 +6905,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   function attachEvents() {
     const swiper2 = this;
     const document2 = getDocument();
-    const {
-      params,
-      support: support2
-    } = swiper2;
+    const { params, support: support2 } = swiper2;
     swiper2.onTouchStart = onTouchStart.bind(swiper2);
     swiper2.onTouchMove = onTouchMove.bind(swiper2);
     swiper2.onTouchEnd = onTouchEnd.bind(swiper2);
@@ -6282,7 +6925,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   }
   var events_default = {
     attachEvents,
-    detachEvents
+    detachEvents,
   };
 
   // node_modules/swiper/core/breakpoints/setBreakpoint.js
@@ -6291,37 +6934,42 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   };
   function setBreakpoint() {
     const swiper2 = this;
-    const {
-      activeIndex,
-      initialized,
-      loopedSlides = 0,
-      params,
-      $el
-    } = swiper2;
+    const { activeIndex, initialized, loopedSlides = 0, params, $el } = swiper2;
     const breakpoints = params.breakpoints;
-    if (!breakpoints || breakpoints && Object.keys(breakpoints).length === 0)
+    if (!breakpoints || (breakpoints && Object.keys(breakpoints).length === 0))
       return;
-    const breakpoint = swiper2.getBreakpoint(breakpoints, swiper2.params.breakpointsBase, swiper2.el);
-    if (!breakpoint || swiper2.currentBreakpoint === breakpoint)
-      return;
-    const breakpointOnlyParams = breakpoint in breakpoints ? breakpoints[breakpoint] : void 0;
+    const breakpoint = swiper2.getBreakpoint(
+      breakpoints,
+      swiper2.params.breakpointsBase,
+      swiper2.el
+    );
+    if (!breakpoint || swiper2.currentBreakpoint === breakpoint) return;
+    const breakpointOnlyParams =
+      breakpoint in breakpoints ? breakpoints[breakpoint] : void 0;
     const breakpointParams = breakpointOnlyParams || swiper2.originalParams;
     const wasMultiRow = isGridEnabled(swiper2, params);
     const isMultiRow = isGridEnabled(swiper2, breakpointParams);
     const wasEnabled = params.enabled;
     if (wasMultiRow && !isMultiRow) {
-      $el.removeClass(`${params.containerModifierClass}grid ${params.containerModifierClass}grid-column`);
+      $el.removeClass(
+        `${params.containerModifierClass}grid ${params.containerModifierClass}grid-column`
+      );
       swiper2.emitContainerClasses();
     } else if (!wasMultiRow && isMultiRow) {
       $el.addClass(`${params.containerModifierClass}grid`);
-      if (breakpointParams.grid.fill && breakpointParams.grid.fill === "column" || !breakpointParams.grid.fill && params.grid.fill === "column") {
+      if (
+        (breakpointParams.grid.fill &&
+          breakpointParams.grid.fill === "column") ||
+        (!breakpointParams.grid.fill && params.grid.fill === "column")
+      ) {
         $el.addClass(`${params.containerModifierClass}grid-column`);
       }
       swiper2.emitContainerClasses();
     }
     ["navigation", "pagination", "scrollbar"].forEach((prop) => {
       const wasModuleEnabled = params[prop] && params[prop].enabled;
-      const isModuleEnabled = breakpointParams[prop] && breakpointParams[prop].enabled;
+      const isModuleEnabled =
+        breakpointParams[prop] && breakpointParams[prop].enabled;
       if (wasModuleEnabled && !isModuleEnabled) {
         swiper2[prop].disable();
       }
@@ -6329,8 +6977,13 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         swiper2[prop].enable();
       }
     });
-    const directionChanged = breakpointParams.direction && breakpointParams.direction !== params.direction;
-    const needsReLoop = params.loop && (breakpointParams.slidesPerView !== params.slidesPerView || directionChanged);
+    const directionChanged =
+      breakpointParams.direction &&
+      breakpointParams.direction !== params.direction;
+    const needsReLoop =
+      params.loop &&
+      (breakpointParams.slidesPerView !== params.slidesPerView ||
+        directionChanged);
     if (directionChanged && initialized) {
       swiper2.changeDirection();
     }
@@ -6339,7 +6992,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     Object.assign(swiper2, {
       allowTouchMove: swiper2.params.allowTouchMove,
       allowSlideNext: swiper2.params.allowSlideNext,
-      allowSlidePrev: swiper2.params.allowSlidePrev
+      allowSlidePrev: swiper2.params.allowSlidePrev,
     });
     if (wasEnabled && !isEnabled) {
       swiper2.disable();
@@ -6352,7 +7005,11 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       swiper2.loopDestroy();
       swiper2.loopCreate();
       swiper2.updateSlides();
-      swiper2.slideTo(activeIndex - loopedSlides + swiper2.loopedSlides, 0, false);
+      swiper2.slideTo(
+        activeIndex - loopedSlides + swiper2.loopedSlides,
+        0,
+        false
+      );
     }
     swiper2.emit("breakpoint", breakpointParams);
   }
@@ -6362,31 +7019,28 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     if (base === void 0) {
       base = "window";
     }
-    if (!breakpoints || base === "container" && !containerEl)
-      return void 0;
+    if (!breakpoints || (base === "container" && !containerEl)) return void 0;
     let breakpoint = false;
     const window2 = getWindow();
-    const currentHeight = base === "window" ? window2.innerHeight : containerEl.clientHeight;
+    const currentHeight =
+      base === "window" ? window2.innerHeight : containerEl.clientHeight;
     const points = Object.keys(breakpoints).map((point) => {
       if (typeof point === "string" && point.indexOf("@") === 0) {
         const minRatio = parseFloat(point.substr(1));
         const value = currentHeight * minRatio;
         return {
           value,
-          point
+          point,
         };
       }
       return {
         value: point,
-        point
+        point,
       };
     });
     points.sort((a, b) => parseInt(a.value, 10) - parseInt(b.value, 10));
     for (let i = 0; i < points.length; i += 1) {
-      const {
-        point,
-        value
-      } = points[i];
+      const { point, value } = points[i];
       if (base === "window") {
         if (window2.matchMedia(`(min-width: ${value}px)`).matches) {
           breakpoint = point;
@@ -6401,7 +7055,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   // node_modules/swiper/core/breakpoints/index.js
   var breakpoints_default = {
     setBreakpoint,
-    getBreakpoint
+    getBreakpoint,
   };
 
   // node_modules/swiper/core/classes/addClasses.js
@@ -6422,37 +7076,50 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   }
   function addClasses() {
     const swiper2 = this;
-    const {
-      classNames,
-      params,
-      rtl,
-      $el,
-      device,
-      support: support2
-    } = swiper2;
-    const suffixes = prepareClasses(["initialized", params.direction, {
-      "pointer-events": !support2.touch
-    }, {
-      "free-mode": swiper2.params.freeMode && params.freeMode.enabled
-    }, {
-      "autoheight": params.autoHeight
-    }, {
-      "rtl": rtl
-    }, {
-      "grid": params.grid && params.grid.rows > 1
-    }, {
-      "grid-column": params.grid && params.grid.rows > 1 && params.grid.fill === "column"
-    }, {
-      "android": device.android
-    }, {
-      "ios": device.ios
-    }, {
-      "css-mode": params.cssMode
-    }, {
-      "centered": params.cssMode && params.centeredSlides
-    }, {
-      "watch-progress": params.watchSlidesProgress
-    }], params.containerModifierClass);
+    const { classNames, params, rtl, $el, device, support: support2 } = swiper2;
+    const suffixes = prepareClasses(
+      [
+        "initialized",
+        params.direction,
+        {
+          "pointer-events": !support2.touch,
+        },
+        {
+          "free-mode": swiper2.params.freeMode && params.freeMode.enabled,
+        },
+        {
+          autoheight: params.autoHeight,
+        },
+        {
+          rtl: rtl,
+        },
+        {
+          grid: params.grid && params.grid.rows > 1,
+        },
+        {
+          "grid-column":
+            params.grid &&
+            params.grid.rows > 1 &&
+            params.grid.fill === "column",
+        },
+        {
+          android: device.android,
+        },
+        {
+          ios: device.ios,
+        },
+        {
+          "css-mode": params.cssMode,
+        },
+        {
+          centered: params.cssMode && params.centeredSlides,
+        },
+        {
+          "watch-progress": params.watchSlidesProgress,
+        },
+      ],
+      params.containerModifierClass
+    );
     classNames.push(...suffixes);
     $el.addClass([...classNames].join(" "));
     swiper2.emitContainerClasses();
@@ -6461,10 +7128,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   // node_modules/swiper/core/classes/removeClasses.js
   function removeClasses() {
     const swiper2 = this;
-    const {
-      $el,
-      classNames
-    } = swiper2;
+    const { $el, classNames } = swiper2;
     $el.removeClass(classNames.join(" "));
     swiper2.emitContainerClasses();
   }
@@ -6472,7 +7136,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   // node_modules/swiper/core/classes/index.js
   var classes_default = {
     addClasses,
-    removeClasses
+    removeClasses,
   };
 
   // node_modules/swiper/core/images/loadImage.js
@@ -6480,8 +7144,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     const window2 = getWindow();
     let image;
     function onReady() {
-      if (callback)
-        callback();
+      if (callback) callback();
     }
     const isPicture = dom_default(imageEl).parent("picture")[0];
     if (!isPicture && (!imageEl.complete || !checkForComplete)) {
@@ -6511,41 +7174,49 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     const swiper2 = this;
     swiper2.imagesToLoad = swiper2.$el.find("img");
     function onReady() {
-      if (typeof swiper2 === "undefined" || swiper2 === null || !swiper2 || swiper2.destroyed)
+      if (
+        typeof swiper2 === "undefined" ||
+        swiper2 === null ||
+        !swiper2 ||
+        swiper2.destroyed
+      )
         return;
-      if (swiper2.imagesLoaded !== void 0)
-        swiper2.imagesLoaded += 1;
+      if (swiper2.imagesLoaded !== void 0) swiper2.imagesLoaded += 1;
       if (swiper2.imagesLoaded === swiper2.imagesToLoad.length) {
-        if (swiper2.params.updateOnImagesReady)
-          swiper2.update();
+        if (swiper2.params.updateOnImagesReady) swiper2.update();
         swiper2.emit("imagesReady");
       }
     }
     for (let i = 0; i < swiper2.imagesToLoad.length; i += 1) {
       const imageEl = swiper2.imagesToLoad[i];
-      swiper2.loadImage(imageEl, imageEl.currentSrc || imageEl.getAttribute("src"), imageEl.srcset || imageEl.getAttribute("srcset"), imageEl.sizes || imageEl.getAttribute("sizes"), true, onReady);
+      swiper2.loadImage(
+        imageEl,
+        imageEl.currentSrc || imageEl.getAttribute("src"),
+        imageEl.srcset || imageEl.getAttribute("srcset"),
+        imageEl.sizes || imageEl.getAttribute("sizes"),
+        true,
+        onReady
+      );
     }
   }
 
   // node_modules/swiper/core/images/index.js
   var images_default = {
     loadImage,
-    preloadImages
+    preloadImages,
   };
 
   // node_modules/swiper/core/check-overflow/index.js
   function checkOverflow() {
     const swiper2 = this;
-    const {
-      isLocked: wasLocked,
-      params
-    } = swiper2;
-    const {
-      slidesOffsetBefore
-    } = params;
+    const { isLocked: wasLocked, params } = swiper2;
+    const { slidesOffsetBefore } = params;
     if (slidesOffsetBefore) {
       const lastSlideIndex = swiper2.slides.length - 1;
-      const lastSlideRightEdge = swiper2.slidesGrid[lastSlideIndex] + swiper2.slidesSizesGrid[lastSlideIndex] + slidesOffsetBefore * 2;
+      const lastSlideRightEdge =
+        swiper2.slidesGrid[lastSlideIndex] +
+        swiper2.slidesSizesGrid[lastSlideIndex] +
+        slidesOffsetBefore * 2;
       swiper2.isLocked = swiper2.size > lastSlideRightEdge;
     } else {
       swiper2.isLocked = swiper2.snapGrid.length === 1;
@@ -6564,7 +7235,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     }
   }
   var check_overflow_default = {
-    checkOverflow
+    checkOverflow,
   };
 
   // node_modules/swiper/core/defaults.js
@@ -6658,7 +7329,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     slideDuplicatePrevClass: "swiper-slide-duplicate-prev",
     wrapperClass: "swiper-wrapper",
     runCallbacksOnInit: true,
-    _emitClasses: false
+    _emitClasses: false,
   };
 
   // node_modules/swiper/core/moduleExtendParams.js
@@ -6673,9 +7344,13 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         extend3(allModulesParams, obj);
         return;
       }
-      if (["navigation", "pagination", "scrollbar"].indexOf(moduleParamName) >= 0 && params[moduleParamName] === true) {
+      if (
+        ["navigation", "pagination", "scrollbar"].indexOf(moduleParamName) >=
+          0 &&
+        params[moduleParamName] === true
+      ) {
         params[moduleParamName] = {
-          auto: true
+          auto: true,
         };
       }
       if (!(moduleParamName in params && "enabled" in moduleParams)) {
@@ -6684,15 +7359,18 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       }
       if (params[moduleParamName] === true) {
         params[moduleParamName] = {
-          enabled: true
+          enabled: true,
         };
       }
-      if (typeof params[moduleParamName] === "object" && !("enabled" in params[moduleParamName])) {
+      if (
+        typeof params[moduleParamName] === "object" &&
+        !("enabled" in params[moduleParamName])
+      ) {
         params[moduleParamName].enabled = true;
       }
       if (!params[moduleParamName])
         params[moduleParamName] = {
-          enabled: false
+          enabled: false,
         };
       extend3(allModulesParams, obj);
     };
@@ -6711,31 +7389,37 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     breakpoints: breakpoints_default,
     checkOverflow: check_overflow_default,
     classes: classes_default,
-    images: images_default
+    images: images_default,
   };
   var extendedDefaults = {};
   var Swiper = class {
     constructor() {
       let el;
       let params;
-      for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      for (
+        var _len = arguments.length, args = new Array(_len), _key = 0;
+        _key < _len;
+        _key++
+      ) {
         args[_key] = arguments[_key];
       }
-      if (args.length === 1 && args[0].constructor && Object.prototype.toString.call(args[0]).slice(8, -1) === "Object") {
+      if (
+        args.length === 1 &&
+        args[0].constructor &&
+        Object.prototype.toString.call(args[0]).slice(8, -1) === "Object"
+      ) {
         params = args[0];
       } else {
         [el, params] = args;
       }
-      if (!params)
-        params = {};
+      if (!params) params = {};
       params = extend3({}, params);
-      if (el && !params.el)
-        params.el = el;
+      if (el && !params.el) params.el = el;
       if (params.el && dom_default(params.el).length > 1) {
         const swipers = [];
         dom_default(params.el).each((containerEl) => {
           const newParams = extend3({}, params, {
-            el: containerEl
+            el: containerEl,
           });
           swipers.push(new Swiper(newParams));
         });
@@ -6745,7 +7429,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       swiper2.__swiper__ = true;
       swiper2.support = getSupport();
       swiper2.device = getDevice({
-        userAgent: params.userAgent
+        userAgent: params.userAgent,
       });
       swiper2.browser = getBrowser();
       swiper2.eventsListeners = {};
@@ -6762,7 +7446,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
           on: swiper2.on.bind(swiper2),
           once: swiper2.once.bind(swiper2),
           off: swiper2.off.bind(swiper2),
-          emit: swiper2.emit.bind(swiper2)
+          emit: swiper2.emit.bind(swiper2),
         });
       });
       const swiperParams = extend3({}, defaults_default, allModulesParams);
@@ -6803,22 +7487,24 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         animating: false,
         allowSlideNext: swiper2.params.allowSlideNext,
         allowSlidePrev: swiper2.params.allowSlidePrev,
-        touchEvents: function touchEvents() {
+        touchEvents: (function touchEvents() {
           const touch = ["touchstart", "touchmove", "touchend", "touchcancel"];
           const desktop = ["pointerdown", "pointermove", "pointerup"];
           swiper2.touchEventsTouch = {
             start: touch[0],
             move: touch[1],
             end: touch[2],
-            cancel: touch[3]
+            cancel: touch[3],
           };
           swiper2.touchEventsDesktop = {
             start: desktop[0],
             move: desktop[1],
-            end: desktop[2]
+            end: desktop[2],
           };
-          return swiper2.support.touch || !swiper2.params.simulateTouch ? swiper2.touchEventsTouch : swiper2.touchEventsDesktop;
-        }(),
+          return swiper2.support.touch || !swiper2.params.simulateTouch
+            ? swiper2.touchEventsTouch
+            : swiper2.touchEventsDesktop;
+        })(),
         touchEventsData: {
           isTouched: void 0,
           isMoved: void 0,
@@ -6834,7 +7520,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
           velocities: [],
           allowMomentumBounce: void 0,
           isTouchEvent: void 0,
-          startMoving: void 0
+          startMoving: void 0,
         },
         allowClick: true,
         allowTouchMove: swiper2.params.allowTouchMove,
@@ -6843,10 +7529,10 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
           startY: 0,
           currentX: 0,
           currentY: 0,
-          diff: 0
+          diff: 0,
         },
         imagesToLoad: [],
-        imagesLoaded: 0
+        imagesLoaded: 0,
       });
       swiper2.emit("_swiper");
       if (swiper2.params.init) {
@@ -6856,8 +7542,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     }
     enable() {
       const swiper2 = this;
-      if (swiper2.enabled)
-        return;
+      if (swiper2.enabled) return;
       swiper2.enabled = true;
       if (swiper2.params.grabCursor) {
         swiper2.setGrabCursor();
@@ -6866,8 +7551,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     }
     disable() {
       const swiper2 = this;
-      if (!swiper2.enabled)
-        return;
+      if (!swiper2.enabled) return;
       swiper2.enabled = false;
       if (swiper2.params.grabCursor) {
         swiper2.unsetGrabCursor();
@@ -6886,31 +7570,37 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     }
     emitContainerClasses() {
       const swiper2 = this;
-      if (!swiper2.params._emitClasses || !swiper2.el)
-        return;
+      if (!swiper2.params._emitClasses || !swiper2.el) return;
       const cls = swiper2.el.className.split(" ").filter((className) => {
-        return className.indexOf("swiper") === 0 || className.indexOf(swiper2.params.containerModifierClass) === 0;
+        return (
+          className.indexOf("swiper") === 0 ||
+          className.indexOf(swiper2.params.containerModifierClass) === 0
+        );
       });
       swiper2.emit("_containerClasses", cls.join(" "));
     }
     getSlideClasses(slideEl) {
       const swiper2 = this;
-      if (swiper2.destroyed)
-        return "";
-      return slideEl.className.split(" ").filter((className) => {
-        return className.indexOf("swiper-slide") === 0 || className.indexOf(swiper2.params.slideClass) === 0;
-      }).join(" ");
+      if (swiper2.destroyed) return "";
+      return slideEl.className
+        .split(" ")
+        .filter((className) => {
+          return (
+            className.indexOf("swiper-slide") === 0 ||
+            className.indexOf(swiper2.params.slideClass) === 0
+          );
+        })
+        .join(" ");
     }
     emitSlidesClasses() {
       const swiper2 = this;
-      if (!swiper2.params._emitClasses || !swiper2.el)
-        return;
+      if (!swiper2.params._emitClasses || !swiper2.el) return;
       const updates = [];
       swiper2.slides.each((slideEl) => {
         const classNames = swiper2.getSlideClasses(slideEl);
         updates.push({
           slideEl,
-          classNames
+          classNames,
         });
         swiper2.emit("_slideClass", slideEl, classNames);
       });
@@ -6930,7 +7620,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         slidesGrid,
         slidesSizesGrid,
         size: swiperSize,
-        activeIndex
+        activeIndex,
       } = swiper2;
       let spv = 1;
       if (params.centeredSlides) {
@@ -6940,29 +7630,31 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
           if (slides[i] && !breakLoop) {
             slideSize += slides[i].swiperSlideSize;
             spv += 1;
-            if (slideSize > swiperSize)
-              breakLoop = true;
+            if (slideSize > swiperSize) breakLoop = true;
           }
         }
         for (let i = activeIndex - 1; i >= 0; i -= 1) {
           if (slides[i] && !breakLoop) {
             slideSize += slides[i].swiperSlideSize;
             spv += 1;
-            if (slideSize > swiperSize)
-              breakLoop = true;
+            if (slideSize > swiperSize) breakLoop = true;
           }
         }
       } else {
         if (view === "current") {
           for (let i = activeIndex + 1; i < slides.length; i += 1) {
-            const slideInView = exact ? slidesGrid[i] + slidesSizesGrid[i] - slidesGrid[activeIndex] < swiperSize : slidesGrid[i] - slidesGrid[activeIndex] < swiperSize;
+            const slideInView = exact
+              ? slidesGrid[i] + slidesSizesGrid[i] - slidesGrid[activeIndex] <
+                swiperSize
+              : slidesGrid[i] - slidesGrid[activeIndex] < swiperSize;
             if (slideInView) {
               spv += 1;
             }
           }
         } else {
           for (let i = activeIndex - 1; i >= 0; i -= 1) {
-            const slideInView = slidesGrid[activeIndex] - slidesGrid[i] < swiperSize;
+            const slideInView =
+              slidesGrid[activeIndex] - slidesGrid[i] < swiperSize;
             if (slideInView) {
               spv += 1;
             }
@@ -6973,12 +7665,8 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     }
     update() {
       const swiper2 = this;
-      if (!swiper2 || swiper2.destroyed)
-        return;
-      const {
-        snapGrid,
-        params
-      } = swiper2;
+      if (!swiper2 || swiper2.destroyed) return;
+      const { snapGrid, params } = swiper2;
       if (params.breakpoints) {
         swiper2.setBreakpoint();
       }
@@ -6987,8 +7675,13 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       swiper2.updateProgress();
       swiper2.updateSlidesClasses();
       function setTranslate2() {
-        const translateValue = swiper2.rtlTranslate ? swiper2.translate * -1 : swiper2.translate;
-        const newTranslate = Math.min(Math.max(translateValue, swiper2.maxTranslate()), swiper2.minTranslate());
+        const translateValue = swiper2.rtlTranslate
+          ? swiper2.translate * -1
+          : swiper2.translate;
+        const newTranslate = Math.min(
+          Math.max(translateValue, swiper2.maxTranslate()),
+          swiper2.minTranslate()
+        );
         swiper2.setTranslate(newTranslate);
         swiper2.updateActiveIndex();
         swiper2.updateSlidesClasses();
@@ -7000,8 +7693,18 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
           swiper2.updateAutoHeight();
         }
       } else {
-        if ((swiper2.params.slidesPerView === "auto" || swiper2.params.slidesPerView > 1) && swiper2.isEnd && !swiper2.params.centeredSlides) {
-          translated = swiper2.slideTo(swiper2.slides.length - 1, 0, false, true);
+        if (
+          (swiper2.params.slidesPerView === "auto" ||
+            swiper2.params.slidesPerView > 1) &&
+          swiper2.isEnd &&
+          !swiper2.params.centeredSlides
+        ) {
+          translated = swiper2.slideTo(
+            swiper2.slides.length - 1,
+            0,
+            false,
+            true
+          );
         } else {
           translated = swiper2.slideTo(swiper2.activeIndex, 0, false, true);
         }
@@ -7021,12 +7724,20 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       const swiper2 = this;
       const currentDirection = swiper2.params.direction;
       if (!newDirection) {
-        newDirection = currentDirection === "horizontal" ? "vertical" : "horizontal";
+        newDirection =
+          currentDirection === "horizontal" ? "vertical" : "horizontal";
       }
-      if (newDirection === currentDirection || newDirection !== "horizontal" && newDirection !== "vertical") {
+      if (
+        newDirection === currentDirection ||
+        (newDirection !== "horizontal" && newDirection !== "vertical")
+      ) {
         return swiper2;
       }
-      swiper2.$el.removeClass(`${swiper2.params.containerModifierClass}${currentDirection}`).addClass(`${swiper2.params.containerModifierClass}${newDirection}`);
+      swiper2.$el
+        .removeClass(
+          `${swiper2.params.containerModifierClass}${currentDirection}`
+        )
+        .addClass(`${swiper2.params.containerModifierClass}${newDirection}`);
       swiper2.emitContainerClasses();
       swiper2.params.direction = newDirection;
       swiper2.slides.each((slideEl) => {
@@ -7037,16 +7748,19 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         }
       });
       swiper2.emit("changeDirection");
-      if (needUpdate)
-        swiper2.update();
+      if (needUpdate) swiper2.update();
       return swiper2;
     }
     changeLanguageDirection(direction) {
       const swiper2 = this;
-      if (swiper2.rtl && direction === "rtl" || !swiper2.rtl && direction === "ltr")
+      if (
+        (swiper2.rtl && direction === "rtl") ||
+        (!swiper2.rtl && direction === "ltr")
+      )
         return;
       swiper2.rtl = direction === "rtl";
-      swiper2.rtlTranslate = swiper2.params.direction === "horizontal" && swiper2.rtl;
+      swiper2.rtlTranslate =
+        swiper2.params.direction === "horizontal" && swiper2.rtl;
       if (swiper2.rtl) {
         swiper2.$el.addClass(`${swiper2.params.containerModifierClass}rtl`);
         swiper2.el.dir = "rtl";
@@ -7058,8 +7772,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     }
     mount(el) {
       const swiper2 = this;
-      if (swiper2.mounted)
-        return true;
+      if (swiper2.mounted) return true;
       const $el = dom_default(el || swiper2.params.el);
       el = $el[0];
       if (!el) {
@@ -7067,11 +7780,16 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       }
       el.swiper = swiper2;
       const getWrapperSelector = () => {
-        return `.${(swiper2.params.wrapperClass || "").trim().split(" ").join(".")}`;
+        return `.${(swiper2.params.wrapperClass || "")
+          .trim()
+          .split(" ")
+          .join(".")}`;
       };
       const getWrapper = () => {
         if (el && el.shadowRoot && el.shadowRoot.querySelector) {
-          const res = dom_default(el.shadowRoot.querySelector(getWrapperSelector()));
+          const res = dom_default(
+            el.shadowRoot.querySelector(getWrapperSelector())
+          );
           res.children = (options) => $el.children(options);
           return res;
         }
@@ -7098,18 +7816,18 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         wrapperEl: $wrapperEl[0],
         mounted: true,
         rtl: el.dir.toLowerCase() === "rtl" || $el.css("direction") === "rtl",
-        rtlTranslate: swiper2.params.direction === "horizontal" && (el.dir.toLowerCase() === "rtl" || $el.css("direction") === "rtl"),
-        wrongRTL: $wrapperEl.css("display") === "-webkit-box"
+        rtlTranslate:
+          swiper2.params.direction === "horizontal" &&
+          (el.dir.toLowerCase() === "rtl" || $el.css("direction") === "rtl"),
+        wrongRTL: $wrapperEl.css("display") === "-webkit-box",
       });
       return true;
     }
     init(el) {
       const swiper2 = this;
-      if (swiper2.initialized)
-        return swiper2;
+      if (swiper2.initialized) return swiper2;
       const mounted = swiper2.mount(el);
-      if (mounted === false)
-        return swiper2;
+      if (mounted === false) return swiper2;
       swiper2.emit("beforeInit");
       if (swiper2.params.breakpoints) {
         swiper2.setBreakpoint();
@@ -7130,9 +7848,21 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         swiper2.preloadImages();
       }
       if (swiper2.params.loop) {
-        swiper2.slideTo(swiper2.params.initialSlide + swiper2.loopedSlides, 0, swiper2.params.runCallbacksOnInit, false, true);
+        swiper2.slideTo(
+          swiper2.params.initialSlide + swiper2.loopedSlides,
+          0,
+          swiper2.params.runCallbacksOnInit,
+          false,
+          true
+        );
       } else {
-        swiper2.slideTo(swiper2.params.initialSlide, 0, swiper2.params.runCallbacksOnInit, false, true);
+        swiper2.slideTo(
+          swiper2.params.initialSlide,
+          0,
+          swiper2.params.runCallbacksOnInit,
+          false,
+          true
+        );
       }
       swiper2.attachEvents();
       swiper2.initialized = true;
@@ -7148,12 +7878,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         cleanStyles = true;
       }
       const swiper2 = this;
-      const {
-        params,
-        $el,
-        $wrapperEl,
-        slides
-      } = swiper2;
+      const { params, $el, $wrapperEl, slides } = swiper2;
       if (typeof swiper2.params === "undefined" || swiper2.destroyed) {
         return null;
       }
@@ -7168,7 +7893,17 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         $el.removeAttr("style");
         $wrapperEl.removeAttr("style");
         if (slides && slides.length) {
-          slides.removeClass([params.slideVisibleClass, params.slideActiveClass, params.slideNextClass, params.slidePrevClass].join(" ")).removeAttr("style").removeAttr("data-swiper-slide-index");
+          slides
+            .removeClass(
+              [
+                params.slideVisibleClass,
+                params.slideActiveClass,
+                params.slideNextClass,
+                params.slidePrevClass,
+              ].join(" ")
+            )
+            .removeAttr("style")
+            .removeAttr("data-swiper-slide-index");
         }
       }
       swiper2.emit("destroy");
@@ -7192,8 +7927,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       return defaults_default;
     }
     static installModule(mod) {
-      if (!Swiper.prototype.__modules__)
-        Swiper.prototype.__modules__ = [];
+      if (!Swiper.prototype.__modules__) Swiper.prototype.__modules__ = [];
       const modules = Swiper.prototype.__modules__;
       if (typeof mod === "function" && modules.indexOf(mod) < 0) {
         modules.push(mod);
@@ -7217,7 +7951,12 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   var core_default = Swiper;
 
   // node_modules/swiper/shared/create-element-if-not-defined.js
-  function createElementIfNotDefined(swiper2, originalParams, params, checkProps) {
+  function createElementIfNotDefined(
+    swiper2,
+    originalParams,
+    params,
+    checkProps
+  ) {
     const document2 = getDocument();
     if (swiper2.params.createElements) {
       Object.keys(checkProps).forEach((key) => {
@@ -7241,17 +7980,15 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     if (classes === void 0) {
       classes = "";
     }
-    return `.${classes.trim().replace(/([\.:!\/])/g, "\\$1").replace(/ /g, ".")}`;
+    return `.${classes
+      .trim()
+      .replace(/([\.:!\/])/g, "\\$1")
+      .replace(/ /g, ".")}`;
   }
 
   // node_modules/swiper/modules/pagination/pagination.js
   function Pagination(_ref) {
-    let {
-      swiper: swiper2,
-      extendParams,
-      on: on3,
-      emit
-    } = _ref;
+    let { swiper: swiper2, extendParams, on: on3, emit } = _ref;
     const pfx = "swiper-pagination";
     extendParams({
       pagination: {
@@ -7281,41 +8018,56 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         lockClass: `${pfx}-lock`,
         horizontalClass: `${pfx}-horizontal`,
         verticalClass: `${pfx}-vertical`,
-        paginationDisabledClass: `${pfx}-disabled`
-      }
+        paginationDisabledClass: `${pfx}-disabled`,
+      },
     });
     swiper2.pagination = {
       el: null,
       $el: null,
-      bullets: []
+      bullets: [],
     };
     let bulletSize;
     let dynamicBulletIndex = 0;
     function isPaginationDisabled() {
-      return !swiper2.params.pagination.el || !swiper2.pagination.el || !swiper2.pagination.$el || swiper2.pagination.$el.length === 0;
+      return (
+        !swiper2.params.pagination.el ||
+        !swiper2.pagination.el ||
+        !swiper2.pagination.$el ||
+        swiper2.pagination.$el.length === 0
+      );
     }
     function setSideBullets($bulletEl, position) {
-      const {
-        bulletActiveClass
-      } = swiper2.params.pagination;
-      $bulletEl[position]().addClass(`${bulletActiveClass}-${position}`)[position]().addClass(`${bulletActiveClass}-${position}-${position}`);
+      const { bulletActiveClass } = swiper2.params.pagination;
+      $bulletEl[position]()
+        .addClass(`${bulletActiveClass}-${position}`)
+        [position]()
+        .addClass(`${bulletActiveClass}-${position}-${position}`);
     }
     function update() {
       const rtl = swiper2.rtl;
       const params = swiper2.params.pagination;
-      if (isPaginationDisabled())
-        return;
-      const slidesLength = swiper2.virtual && swiper2.params.virtual.enabled ? swiper2.virtual.slides.length : swiper2.slides.length;
+      if (isPaginationDisabled()) return;
+      const slidesLength =
+        swiper2.virtual && swiper2.params.virtual.enabled
+          ? swiper2.virtual.slides.length
+          : swiper2.slides.length;
       const $el = swiper2.pagination.$el;
       let current;
-      const total = swiper2.params.loop ? Math.ceil((slidesLength - swiper2.loopedSlides * 2) / swiper2.params.slidesPerGroup) : swiper2.snapGrid.length;
+      const total = swiper2.params.loop
+        ? Math.ceil(
+            (slidesLength - swiper2.loopedSlides * 2) /
+              swiper2.params.slidesPerGroup
+          )
+        : swiper2.snapGrid.length;
       if (swiper2.params.loop) {
-        current = Math.ceil((swiper2.activeIndex - swiper2.loopedSlides) / swiper2.params.slidesPerGroup);
+        current = Math.ceil(
+          (swiper2.activeIndex - swiper2.loopedSlides) /
+            swiper2.params.slidesPerGroup
+        );
         if (current > slidesLength - 1 - swiper2.loopedSlides * 2) {
           current -= slidesLength - swiper2.loopedSlides * 2;
         }
-        if (current > total - 1)
-          current -= total;
+        if (current > total - 1) current -= total;
         if (current < 0 && swiper2.params.paginationType !== "bullets")
           current = total + current;
       } else if (typeof swiper2.snapIndex !== "undefined") {
@@ -7323,16 +8075,29 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       } else {
         current = swiper2.activeIndex || 0;
       }
-      if (params.type === "bullets" && swiper2.pagination.bullets && swiper2.pagination.bullets.length > 0) {
+      if (
+        params.type === "bullets" &&
+        swiper2.pagination.bullets &&
+        swiper2.pagination.bullets.length > 0
+      ) {
         const bullets = swiper2.pagination.bullets;
         let firstIndex;
         let lastIndex;
         let midIndex;
         if (params.dynamicBullets) {
-          bulletSize = bullets.eq(0)[swiper2.isHorizontal() ? "outerWidth" : "outerHeight"](true);
-          $el.css(swiper2.isHorizontal() ? "width" : "height", `${bulletSize * (params.dynamicMainBullets + 4)}px`);
-          if (params.dynamicMainBullets > 1 && swiper2.previousIndex !== void 0) {
-            dynamicBulletIndex += current - (swiper2.previousIndex - swiper2.loopedSlides || 0);
+          bulletSize = bullets
+            .eq(0)
+            [swiper2.isHorizontal() ? "outerWidth" : "outerHeight"](true);
+          $el.css(
+            swiper2.isHorizontal() ? "width" : "height",
+            `${bulletSize * (params.dynamicMainBullets + 4)}px`
+          );
+          if (
+            params.dynamicMainBullets > 1 &&
+            swiper2.previousIndex !== void 0
+          ) {
+            dynamicBulletIndex +=
+              current - (swiper2.previousIndex - swiper2.loopedSlides || 0);
             if (dynamicBulletIndex > params.dynamicMainBullets - 1) {
               dynamicBulletIndex = params.dynamicMainBullets - 1;
             } else if (dynamicBulletIndex < 0) {
@@ -7340,10 +8105,16 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
             }
           }
           firstIndex = Math.max(current - dynamicBulletIndex, 0);
-          lastIndex = firstIndex + (Math.min(bullets.length, params.dynamicMainBullets) - 1);
+          lastIndex =
+            firstIndex +
+            (Math.min(bullets.length, params.dynamicMainBullets) - 1);
           midIndex = (lastIndex + firstIndex) / 2;
         }
-        bullets.removeClass(["", "-next", "-next-next", "-prev", "-prev-prev", "-main"].map((suffix) => `${params.bulletActiveClass}${suffix}`).join(" "));
+        bullets.removeClass(
+          ["", "-next", "-next-next", "-prev", "-prev-prev", "-main"]
+            .map((suffix) => `${params.bulletActiveClass}${suffix}`)
+            .join(" ")
+        );
         if ($el.length > 1) {
           bullets.each((bullet) => {
             const $bullet = dom_default(bullet);
@@ -7376,9 +8147,13 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
             if (swiper2.params.loop) {
               if (bulletIndex >= bullets.length) {
                 for (let i = params.dynamicMainBullets; i >= 0; i -= 1) {
-                  bullets.eq(bullets.length - i).addClass(`${params.bulletActiveClass}-main`);
+                  bullets
+                    .eq(bullets.length - i)
+                    .addClass(`${params.bulletActiveClass}-main`);
                 }
-                bullets.eq(bullets.length - params.dynamicMainBullets - 1).addClass(`${params.bulletActiveClass}-prev`);
+                bullets
+                  .eq(bullets.length - params.dynamicMainBullets - 1)
+                  .addClass(`${params.bulletActiveClass}-prev`);
               } else {
                 setSideBullets($firstDisplayedBullet, "prev");
                 setSideBullets($lastDisplayedBullet, "next");
@@ -7390,22 +8165,38 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
           }
         }
         if (params.dynamicBullets) {
-          const dynamicBulletsLength = Math.min(bullets.length, params.dynamicMainBullets + 4);
-          const bulletsOffset = (bulletSize * dynamicBulletsLength - bulletSize) / 2 - midIndex * bulletSize;
+          const dynamicBulletsLength = Math.min(
+            bullets.length,
+            params.dynamicMainBullets + 4
+          );
+          const bulletsOffset =
+            (bulletSize * dynamicBulletsLength - bulletSize) / 2 -
+            midIndex * bulletSize;
           const offsetProp = rtl ? "right" : "left";
-          bullets.css(swiper2.isHorizontal() ? offsetProp : "top", `${bulletsOffset}px`);
+          bullets.css(
+            swiper2.isHorizontal() ? offsetProp : "top",
+            `${bulletsOffset}px`
+          );
         }
       }
       if (params.type === "fraction") {
-        $el.find(classesToSelector(params.currentClass)).text(params.formatFractionCurrent(current + 1));
-        $el.find(classesToSelector(params.totalClass)).text(params.formatFractionTotal(total));
+        $el
+          .find(classesToSelector(params.currentClass))
+          .text(params.formatFractionCurrent(current + 1));
+        $el
+          .find(classesToSelector(params.totalClass))
+          .text(params.formatFractionTotal(total));
       }
       if (params.type === "progressbar") {
         let progressbarDirection;
         if (params.progressbarOpposite) {
-          progressbarDirection = swiper2.isHorizontal() ? "vertical" : "horizontal";
+          progressbarDirection = swiper2.isHorizontal()
+            ? "vertical"
+            : "horizontal";
         } else {
-          progressbarDirection = swiper2.isHorizontal() ? "horizontal" : "vertical";
+          progressbarDirection = swiper2.isHorizontal()
+            ? "horizontal"
+            : "vertical";
         }
         const scale = (current + 1) / total;
         let scaleX = 1;
@@ -7415,7 +8206,10 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         } else {
           scaleY = scale;
         }
-        $el.find(classesToSelector(params.progressbarFillClass)).transform(`translate3d(0,0,0) scaleX(${scaleX}) scaleY(${scaleY})`).transition(swiper2.params.speed);
+        $el
+          .find(classesToSelector(params.progressbarFillClass))
+          .transform(`translate3d(0,0,0) scaleX(${scaleX}) scaleY(${scaleY})`)
+          .transition(swiper2.params.speed);
       }
       if (params.type === "custom" && params.renderCustom) {
         $el.html(params.renderCustom(swiper2, current + 1, total));
@@ -7429,29 +8223,51 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     }
     function render() {
       const params = swiper2.params.pagination;
-      if (isPaginationDisabled())
-        return;
-      const slidesLength = swiper2.virtual && swiper2.params.virtual.enabled ? swiper2.virtual.slides.length : swiper2.slides.length;
+      if (isPaginationDisabled()) return;
+      const slidesLength =
+        swiper2.virtual && swiper2.params.virtual.enabled
+          ? swiper2.virtual.slides.length
+          : swiper2.slides.length;
       const $el = swiper2.pagination.$el;
       let paginationHTML = "";
       if (params.type === "bullets") {
-        let numberOfBullets = swiper2.params.loop ? Math.ceil((slidesLength - swiper2.loopedSlides * 2) / swiper2.params.slidesPerGroup) : swiper2.snapGrid.length;
-        if (swiper2.params.freeMode && swiper2.params.freeMode.enabled && !swiper2.params.loop && numberOfBullets > slidesLength) {
+        let numberOfBullets = swiper2.params.loop
+          ? Math.ceil(
+              (slidesLength - swiper2.loopedSlides * 2) /
+                swiper2.params.slidesPerGroup
+            )
+          : swiper2.snapGrid.length;
+        if (
+          swiper2.params.freeMode &&
+          swiper2.params.freeMode.enabled &&
+          !swiper2.params.loop &&
+          numberOfBullets > slidesLength
+        ) {
           numberOfBullets = slidesLength;
         }
         for (let i = 0; i < numberOfBullets; i += 1) {
           if (params.renderBullet) {
-            paginationHTML += params.renderBullet.call(swiper2, i, params.bulletClass);
+            paginationHTML += params.renderBullet.call(
+              swiper2,
+              i,
+              params.bulletClass
+            );
           } else {
             paginationHTML += `<${params.bulletElement} class="${params.bulletClass}"></${params.bulletElement}>`;
           }
         }
         $el.html(paginationHTML);
-        swiper2.pagination.bullets = $el.find(classesToSelector(params.bulletClass));
+        swiper2.pagination.bullets = $el.find(
+          classesToSelector(params.bulletClass)
+        );
       }
       if (params.type === "fraction") {
         if (params.renderFraction) {
-          paginationHTML = params.renderFraction.call(swiper2, params.currentClass, params.totalClass);
+          paginationHTML = params.renderFraction.call(
+            swiper2,
+            params.currentClass,
+            params.totalClass
+          );
         } else {
           paginationHTML = `<span class="${params.currentClass}"></span> / <span class="${params.totalClass}"></span>`;
         }
@@ -7459,7 +8275,10 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       }
       if (params.type === "progressbar") {
         if (params.renderProgressbar) {
-          paginationHTML = params.renderProgressbar.call(swiper2, params.progressbarFillClass);
+          paginationHTML = params.renderProgressbar.call(
+            swiper2,
+            params.progressbarFillClass
+          );
         } else {
           paginationHTML = `<span class="${params.progressbarFillClass}"></span>`;
         }
@@ -7470,16 +8289,23 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       }
     }
     function init() {
-      swiper2.params.pagination = createElementIfNotDefined(swiper2, swiper2.originalParams.pagination, swiper2.params.pagination, {
-        el: "swiper-pagination"
-      });
+      swiper2.params.pagination = createElementIfNotDefined(
+        swiper2,
+        swiper2.originalParams.pagination,
+        swiper2.params.pagination,
+        {
+          el: "swiper-pagination",
+        }
+      );
       const params = swiper2.params.pagination;
-      if (!params.el)
-        return;
+      if (!params.el) return;
       let $el = dom_default(params.el);
-      if ($el.length === 0)
-        return;
-      if (swiper2.params.uniqueNavElements && typeof params.el === "string" && $el.length > 1) {
+      if ($el.length === 0) return;
+      if (
+        swiper2.params.uniqueNavElements &&
+        typeof params.el === "string" &&
+        $el.length > 1
+      ) {
         $el = swiper2.$el.find(params.el);
         if ($el.length > 1) {
           $el = $el.filter((el) => {
@@ -7493,7 +8319,9 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         $el.addClass(params.clickableClass);
       }
       $el.addClass(params.modifierClass + params.type);
-      $el.addClass(swiper2.isHorizontal() ? params.horizontalClass : params.verticalClass);
+      $el.addClass(
+        swiper2.isHorizontal() ? params.horizontalClass : params.verticalClass
+      );
       if (params.type === "bullets" && params.dynamicBullets) {
         $el.addClass(`${params.modifierClass}${params.type}-dynamic`);
         dynamicBulletIndex = 0;
@@ -7505,17 +8333,21 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         $el.addClass(params.progressbarOppositeClass);
       }
       if (params.clickable) {
-        $el.on("click", classesToSelector(params.bulletClass), function onClick2(e) {
-          e.preventDefault();
-          let index2 = dom_default(this).index() * swiper2.params.slidesPerGroup;
-          if (swiper2.params.loop)
-            index2 += swiper2.loopedSlides;
-          swiper2.slideTo(index2);
-        });
+        $el.on(
+          "click",
+          classesToSelector(params.bulletClass),
+          function onClick2(e) {
+            e.preventDefault();
+            let index2 =
+              dom_default(this).index() * swiper2.params.slidesPerGroup;
+            if (swiper2.params.loop) index2 += swiper2.loopedSlides;
+            swiper2.slideTo(index2);
+          }
+        );
       }
       Object.assign(swiper2.pagination, {
         $el,
-        el: $el[0]
+        el: $el[0],
       });
       if (!swiper2.enabled) {
         $el.addClass(params.lockClass);
@@ -7523,12 +8355,13 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     }
     function destroy() {
       const params = swiper2.params.pagination;
-      if (isPaginationDisabled())
-        return;
+      if (isPaginationDisabled()) return;
       const $el = swiper2.pagination.$el;
       $el.removeClass(params.hiddenClass);
       $el.removeClass(params.modifierClass + params.type);
-      $el.removeClass(swiper2.isHorizontal() ? params.horizontalClass : params.verticalClass);
+      $el.removeClass(
+        swiper2.isHorizontal() ? params.horizontalClass : params.verticalClass
+      );
       if (swiper2.pagination.bullets && swiper2.pagination.bullets.removeClass)
         swiper2.pagination.bullets.removeClass(params.bulletActiveClass);
       if (params.clickable) {
@@ -7572,11 +8405,11 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       destroy();
     });
     on3("enable disable", () => {
-      const {
-        $el
-      } = swiper2.pagination;
+      const { $el } = swiper2.pagination;
       if ($el) {
-        $el[swiper2.enabled ? "removeClass" : "addClass"](swiper2.params.pagination.lockClass);
+        $el[swiper2.enabled ? "removeClass" : "addClass"](
+          swiper2.params.pagination.lockClass
+        );
       }
     });
     on3("lock unlock", () => {
@@ -7584,11 +8417,21 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     });
     on3("click", (_s, e) => {
       const targetEl = e.target;
-      const {
-        $el
-      } = swiper2.pagination;
-      if (swiper2.params.pagination.el && swiper2.params.pagination.hideOnClick && $el && $el.length > 0 && !dom_default(targetEl).hasClass(swiper2.params.pagination.bulletClass)) {
-        if (swiper2.navigation && (swiper2.navigation.nextEl && targetEl === swiper2.navigation.nextEl || swiper2.navigation.prevEl && targetEl === swiper2.navigation.prevEl))
+      const { $el } = swiper2.pagination;
+      if (
+        swiper2.params.pagination.el &&
+        swiper2.params.pagination.hideOnClick &&
+        $el &&
+        $el.length > 0 &&
+        !dom_default(targetEl).hasClass(swiper2.params.pagination.bulletClass)
+      ) {
+        if (
+          swiper2.navigation &&
+          ((swiper2.navigation.nextEl &&
+            targetEl === swiper2.navigation.nextEl) ||
+            (swiper2.navigation.prevEl &&
+              targetEl === swiper2.navigation.prevEl))
+        )
           return;
         const isHidden = $el.hasClass(swiper2.params.pagination.hiddenClass);
         if (isHidden === true) {
@@ -7600,9 +8443,13 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       }
     });
     const enable = () => {
-      swiper2.$el.removeClass(swiper2.params.pagination.paginationDisabledClass);
+      swiper2.$el.removeClass(
+        swiper2.params.pagination.paginationDisabledClass
+      );
       if (swiper2.pagination.$el) {
-        swiper2.pagination.$el.removeClass(swiper2.params.pagination.paginationDisabledClass);
+        swiper2.pagination.$el.removeClass(
+          swiper2.params.pagination.paginationDisabledClass
+        );
       }
       init();
       render();
@@ -7611,7 +8458,9 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     const disable = () => {
       swiper2.$el.addClass(swiper2.params.pagination.paginationDisabledClass);
       if (swiper2.pagination.$el) {
-        swiper2.pagination.$el.addClass(swiper2.params.pagination.paginationDisabledClass);
+        swiper2.pagination.$el.addClass(
+          swiper2.params.pagination.paginationDisabledClass
+        );
       }
       destroy();
     };
@@ -7621,22 +8470,17 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       render,
       update,
       init,
-      destroy
+      destroy,
     });
   }
 
   // node_modules/swiper/modules/autoplay/autoplay.js
   function Autoplay(_ref) {
-    let {
-      swiper: swiper2,
-      extendParams,
-      on: on3,
-      emit
-    } = _ref;
+    let { swiper: swiper2, extendParams, on: on3, emit } = _ref;
     let timeout;
     swiper2.autoplay = {
       running: false,
-      paused: false
+      paused: false,
     };
     extendParams({
       autoplay: {
@@ -7646,14 +8490,16 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         disableOnInteraction: true,
         stopOnLastSlide: false,
         reverseDirection: false,
-        pauseOnMouseEnter: false
-      }
+        pauseOnMouseEnter: false,
+      },
     });
     function run() {
       const $activeSlideEl = swiper2.slides.eq(swiper2.activeIndex);
       let delay = swiper2.params.autoplay.delay;
       if ($activeSlideEl.attr("data-swiper-autoplay")) {
-        delay = $activeSlideEl.attr("data-swiper-autoplay") || swiper2.params.autoplay.delay;
+        delay =
+          $activeSlideEl.attr("data-swiper-autoplay") ||
+          swiper2.params.autoplay.delay;
       }
       clearTimeout(timeout);
       timeout = nextTick2(() => {
@@ -7661,13 +8507,26 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         if (swiper2.params.autoplay.reverseDirection) {
           if (swiper2.params.loop) {
             swiper2.loopFix();
-            autoplayResult = swiper2.slidePrev(swiper2.params.speed, true, true);
+            autoplayResult = swiper2.slidePrev(
+              swiper2.params.speed,
+              true,
+              true
+            );
             emit("autoplay");
           } else if (!swiper2.isBeginning) {
-            autoplayResult = swiper2.slidePrev(swiper2.params.speed, true, true);
+            autoplayResult = swiper2.slidePrev(
+              swiper2.params.speed,
+              true,
+              true
+            );
             emit("autoplay");
           } else if (!swiper2.params.autoplay.stopOnLastSlide) {
-            autoplayResult = swiper2.slideTo(swiper2.slides.length - 1, swiper2.params.speed, true, true);
+            autoplayResult = swiper2.slideTo(
+              swiper2.slides.length - 1,
+              swiper2.params.speed,
+              true,
+              true
+            );
             emit("autoplay");
           } else {
             stop2();
@@ -7685,28 +8544,23 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         } else {
           stop2();
         }
-        if (swiper2.params.cssMode && swiper2.autoplay.running)
-          run();
+        if (swiper2.params.cssMode && swiper2.autoplay.running) run();
         else if (autoplayResult === false) {
           run();
         }
       }, delay);
     }
     function start2() {
-      if (typeof timeout !== "undefined")
-        return false;
-      if (swiper2.autoplay.running)
-        return false;
+      if (typeof timeout !== "undefined") return false;
+      if (swiper2.autoplay.running) return false;
       swiper2.autoplay.running = true;
       emit("autoplayStart");
       run();
       return true;
     }
     function stop2() {
-      if (!swiper2.autoplay.running)
-        return false;
-      if (typeof timeout === "undefined")
-        return false;
+      if (!swiper2.autoplay.running) return false;
+      if (typeof timeout === "undefined") return false;
       if (timeout) {
         clearTimeout(timeout);
         timeout = void 0;
@@ -7716,12 +8570,9 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       return true;
     }
     function pause(speed) {
-      if (!swiper2.autoplay.running)
-        return;
-      if (swiper2.autoplay.paused)
-        return;
-      if (timeout)
-        clearTimeout(timeout);
+      if (!swiper2.autoplay.running) return;
+      if (swiper2.autoplay.paused) return;
+      if (timeout) clearTimeout(timeout);
       swiper2.autoplay.paused = true;
       if (speed === 0 || !swiper2.params.autoplay.waitForTransition) {
         swiper2.autoplay.paused = false;
@@ -7743,10 +8594,8 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       }
     }
     function onTransitionEnd(e) {
-      if (!swiper2 || swiper2.destroyed || !swiper2.$wrapperEl)
-        return;
-      if (e.target !== swiper2.$wrapperEl[0])
-        return;
+      if (!swiper2 || swiper2.destroyed || !swiper2.$wrapperEl) return;
+      if (e.target !== swiper2.$wrapperEl[0]) return;
       ["transitionend", "webkitTransitionEnd"].forEach((event2) => {
         swiper2.$wrapperEl[0].removeEventListener(event2, onTransitionEnd);
       });
@@ -7813,7 +8662,11 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       }
     });
     on3("touchEnd", () => {
-      if (swiper2.params.cssMode && swiper2.autoplay.paused && !swiper2.params.autoplay.disableOnInteraction) {
+      if (
+        swiper2.params.cssMode &&
+        swiper2.autoplay.paused &&
+        !swiper2.params.autoplay.disableOnInteraction
+      ) {
         run();
       }
     });
@@ -7829,7 +8682,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       pause,
       run,
       start: start2,
-      stop: stop2
+      stop: stop2,
     });
   }
 
@@ -7844,12 +8697,13 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       overwriteParams,
       perspective,
       recreateShadows,
-      getEffectParams
+      getEffectParams,
     } = params;
     on3("beforeInit", () => {
-      if (swiper2.params.effect !== effect3)
-        return;
-      swiper2.classNames.push(`${swiper2.params.containerModifierClass}${effect3}`);
+      if (swiper2.params.effect !== effect3) return;
+      swiper2.classNames.push(
+        `${swiper2.params.containerModifierClass}${effect3}`
+      );
       if (perspective && perspective()) {
         swiper2.classNames.push(`${swiper2.params.containerModifierClass}3d`);
       }
@@ -7858,32 +8712,31 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       Object.assign(swiper2.originalParams, overwriteParamsResult);
     });
     on3("setTranslate", () => {
-      if (swiper2.params.effect !== effect3)
-        return;
+      if (swiper2.params.effect !== effect3) return;
       setTranslate2();
     });
     on3("setTransition", (_s, duration) => {
-      if (swiper2.params.effect !== effect3)
-        return;
+      if (swiper2.params.effect !== effect3) return;
       setTransition2(duration);
     });
     on3("transitionEnd", () => {
-      if (swiper2.params.effect !== effect3)
-        return;
+      if (swiper2.params.effect !== effect3) return;
       if (recreateShadows) {
-        if (!getEffectParams || !getEffectParams().slideShadows)
-          return;
+        if (!getEffectParams || !getEffectParams().slideShadows) return;
         swiper2.slides.each((slideEl) => {
           const $slideEl = swiper2.$(slideEl);
-          $slideEl.find(".swiper-slide-shadow-top, .swiper-slide-shadow-right, .swiper-slide-shadow-bottom, .swiper-slide-shadow-left").remove();
+          $slideEl
+            .find(
+              ".swiper-slide-shadow-top, .swiper-slide-shadow-right, .swiper-slide-shadow-bottom, .swiper-slide-shadow-left"
+            )
+            .remove();
         });
         recreateShadows();
       }
     });
     let requireUpdateOnVirtual;
     on3("virtualUpdate", () => {
-      if (swiper2.params.effect !== effect3)
-        return;
+      if (swiper2.params.effect !== effect3) return;
       if (!swiper2.slides.length) {
         requireUpdateOnVirtual = true;
       }
@@ -7901,7 +8754,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     if (effectParams.transformEl) {
       return $slideEl.find(effectParams.transformEl).css({
         "backface-visibility": "hidden",
-        "-webkit-backface-visibility": "hidden"
+        "-webkit-backface-visibility": "hidden",
       });
     }
     return $slideEl;
@@ -7909,30 +8762,21 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
 
   // node_modules/swiper/shared/effect-virtual-transition-end.js
   function effectVirtualTransitionEnd(_ref) {
-    let {
-      swiper: swiper2,
-      duration,
-      transformEl,
-      allSlides
-    } = _ref;
-    const {
-      slides,
-      activeIndex,
-      $wrapperEl
-    } = swiper2;
+    let { swiper: swiper2, duration, transformEl, allSlides } = _ref;
+    const { slides, activeIndex, $wrapperEl } = swiper2;
     if (swiper2.params.virtualTranslate && duration !== 0) {
       let eventTriggered = false;
       let $transitionEndTarget;
       if (allSlides) {
         $transitionEndTarget = transformEl ? slides.find(transformEl) : slides;
       } else {
-        $transitionEndTarget = transformEl ? slides.eq(activeIndex).find(transformEl) : slides.eq(activeIndex);
+        $transitionEndTarget = transformEl
+          ? slides.eq(activeIndex).find(transformEl)
+          : slides.eq(activeIndex);
       }
       $transitionEndTarget.transitionEnd(() => {
-        if (eventTriggered)
-          return;
-        if (!swiper2 || swiper2.destroyed)
-          return;
+        if (eventTriggered) return;
+        if (!swiper2 || swiper2.destroyed) return;
         eventTriggered = true;
         swiper2.animating = false;
         const triggerEvents = ["webkitTransitionEnd", "transitionend"];
@@ -7945,51 +8789,48 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
 
   // node_modules/swiper/modules/effect-fade/effect-fade.js
   function EffectFade(_ref) {
-    let {
-      swiper: swiper2,
-      extendParams,
-      on: on3
-    } = _ref;
+    let { swiper: swiper2, extendParams, on: on3 } = _ref;
     extendParams({
       fadeEffect: {
         crossFade: false,
-        transformEl: null
-      }
+        transformEl: null,
+      },
     });
     const setTranslate2 = () => {
-      const {
-        slides
-      } = swiper2;
+      const { slides } = swiper2;
       const params = swiper2.params.fadeEffect;
       for (let i = 0; i < slides.length; i += 1) {
         const $slideEl = swiper2.slides.eq(i);
         const offset2 = $slideEl[0].swiperSlideOffset;
         let tx = -offset2;
-        if (!swiper2.params.virtualTranslate)
-          tx -= swiper2.translate;
+        if (!swiper2.params.virtualTranslate) tx -= swiper2.translate;
         let ty = 0;
         if (!swiper2.isHorizontal()) {
           ty = tx;
           tx = 0;
         }
-        const slideOpacity = swiper2.params.fadeEffect.crossFade ? Math.max(1 - Math.abs($slideEl[0].progress), 0) : 1 + Math.min(Math.max($slideEl[0].progress, -1), 0);
+        const slideOpacity = swiper2.params.fadeEffect.crossFade
+          ? Math.max(1 - Math.abs($slideEl[0].progress), 0)
+          : 1 + Math.min(Math.max($slideEl[0].progress, -1), 0);
         const $targetEl = effectTarget(params, $slideEl);
-        $targetEl.css({
-          opacity: slideOpacity
-        }).transform(`translate3d(${tx}px, ${ty}px, 0px)`);
+        $targetEl
+          .css({
+            opacity: slideOpacity,
+          })
+          .transform(`translate3d(${tx}px, ${ty}px, 0px)`);
       }
     };
     const setTransition2 = (duration) => {
-      const {
-        transformEl
-      } = swiper2.params.fadeEffect;
-      const $transitionElements = transformEl ? swiper2.slides.find(transformEl) : swiper2.slides;
+      const { transformEl } = swiper2.params.fadeEffect;
+      const $transitionElements = transformEl
+        ? swiper2.slides.find(transformEl)
+        : swiper2.slides;
       $transitionElements.transition(duration);
       effectVirtualTransitionEnd({
         swiper: swiper2,
         duration,
         transformEl,
-        allSlides: true
+        allSlides: true,
       });
     };
     effectInit({
@@ -8003,38 +8844,30 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         slidesPerGroup: 1,
         watchSlidesProgress: true,
         spaceBetween: 0,
-        virtualTranslate: !swiper2.params.cssMode
-      })
+        virtualTranslate: !swiper2.params.cssMode,
+      }),
     });
   }
 
   // resources/js/app.js
-  module_default.plugin(module_default2);
+  window.Alpine = module_default;
   var swiper = new core_default(".swiper", {
     modules: [Autoplay, Pagination, EffectFade],
-    direction: "vertical",
+    direction: "horizontal",
     loop: true,
-    speed: 2e3,
+    effect: "fade",
     autoplay: {
-      delay: 5e3
+      delay: 3e3,
     },
     allowTouchMove: false,
     pagination: {
-      el: ".swiper-pagination"
-    }
+      el: ".swiper-pagination",
+    },
   });
-  var swiperSingleProduct = new core_default(".swiper-single-product", {
-    modules: [Pagination],
-    direction: "horizontal",
-    loop: false,
-    pagination: {
-      el: ".swiper-pagination"
-    }
-  });
+  module_default.start();
   if (document.querySelector(".page-template-page-coming-soon")) {
     document.addEventListener("DOMContentLoaded", () => {
       document.querySelector(".wpcf7-email").focus();
     });
   }
-  module_default.start();
 })();

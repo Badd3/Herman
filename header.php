@@ -14,7 +14,7 @@
 
 	<?php do_action('tailpress_site_before'); ?>
 
-	<div x-data="{ navOpen: false }" id="page" class="min-h-screen flex flex-col">
+	<div x-data="{ navOpen: false, bagOpen: false }" id="page" class="min-h-screen flex flex-col">
 
 		<?php do_action('tailpress_header'); ?>
 
@@ -26,6 +26,9 @@
 
 		<!-- Desktop header -->
 		<?php get_template_part('partials/desktop/header'); ?>
+
+		<!-- Core -->
+		<?php get_template_part('partials/core/off-canvas-bag'); ?>
 
 		<div id="content" class="site-content flex-grow w-full lg:ml-auto lg:w-5/6">
 

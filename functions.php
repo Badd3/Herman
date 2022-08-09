@@ -179,3 +179,5 @@ add_filter('wpcf7_autop_or_not', '__return_false');
 // 	}
 // }
 // add_action('template_redirect', 'coming_soon_redirect');
+
+remove_action( 'woocommerce_widget_shopping_cart_buttons', 'woocommerce_widget_shopping_cart_button_view_cart', 10 );
