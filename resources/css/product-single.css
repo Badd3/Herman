@@ -1,0 +1,11 @@
+.related.products {
+  @apply mt-[60px];
+}
+
+.related.products > h2 {
+  @apply uppercase mb-5 font-bold;
+}
+
+.woocommerce-loop-product__title {
+  @apply text-base;
+}

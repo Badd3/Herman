@@ -128,6 +128,27 @@ function single_product_description()
             <?php
             } ?>
         </section>
-<?php
+
+    <?php
+        // woocommerce_output_related_products();
     }
 }
+
+
+add_action('woocommerce_after_single_product_summary', 'custom_related_products', 20);
+
+function custom_related_products()
+{
+    ?>
+    <section class="py-12">
+        <?php
+        woocommerce_output_related_products();
+        ?>
+    </section>
+<?php
+}
+
+
+add_filter('woocommerce_product_related_products_heading', function () {
+    return 'More to love';
+});
