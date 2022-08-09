@@ -1,6 +1,6 @@
 import Alpine from "alpinejs";
 import collapse from "@alpinejs/collapse";
-import Swiper, { Autoplay, Pagination, Mousewheel } from "swiper";
+import Swiper, { Pagination, Mousewheel } from "swiper";
 Alpine.plugin(collapse);
 
 //SWIPER HOME
