@@ -11,11 +11,11 @@
 }
 
 .wpcf7-text {
-  @apply text-base outline-0 border-b w-full border-grey py-3 bg-white-bg;
+  @apply text-base outline-0 border-b w-full border-grey py-3;
 }
 
 .wpcf7-textarea {
-  @apply text-base w-9/12 py-3 outline-0 focus-visible:outline-0 resize-none bg-white-bg;
+  @apply text-base w-9/12 py-3 outline-0 focus-visible:outline-0 resize-none;
 }
 
 .wpcf7-submit {
@@ -36,40 +36,21 @@
   outline: unset;
 }
 
-.coming-soon .wpcf7-not-valid-tip {
-  @apply absolute mt-[-3.5rem] text-xs;
-}
-
-.coming-soon .wpcf7 form.invalid .wpcf7-response-output, .wpcf7 form.unaccepted .wpcf7-response-output, .wpcf7 form.payment-required .wpcf7-response-output .coming-soon {
-  @apply absolute mt-[4rem] text-xs ml-0 text-black;
-}
-
-.coming-soon .wpcf7-response-output {
-  @apply absolute text-black text-xs;
-  margin-top: 4rem !important;
-  margin-left: 0 !important;
-}
-
-.wpcf7-not-valid-tip, 
-.wpcf7-response-output {
-  @apply text-xs;
-}
-
-.wpcf7-response-output {
-  @apply text-black;
-}
-
 form.invalid .wpcf7-response-output,
 .wpcf7 form.sent .wpcf7-response-output {
   border: none;
-  font-family: 'Gotham', 'sans-serif';
+  font-family: "Gotham", "sans-serif";
   text-transform: uppercase;
   padding: unset;
 }
 
 .wpcf7-not-valid-tip {
-  font-family: 'Gotham', 'sans-serif';
+  font-family: "Gotham", "sans-serif";
   text-transform: uppercase;
+}
+
+.coming-soon .wpcf7-form.init {
+  display: flex;
 }
 
 .coming-soon .wpcf7-text {
@@ -78,17 +59,4 @@ form.invalid .wpcf7-response-output,
 
 .coming-soon .wpcf7 {
   padding-bottom: unset;
-}
-
-.coming-soon .wpcf7-form.init,
-.coming-soon .wpcf7-form.sent,
-.coming-soon .wpcf7-form.sent,
-.coming-soon .wpcf7-form.active,
-.coming-soon .wpcf7-form
-{
-  @apply flex;
-}
-
-.coming-soon .wpcf7-form-control.wpcf7-text.wpcf7-email.wpcf7-validates-as-required.wpcf7-validates-as-email {
-  @apply text-md;
 }

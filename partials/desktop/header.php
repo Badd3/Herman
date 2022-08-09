@@ -9,7 +9,6 @@ if (get_field('header_kleur') == 'light') {
 };
 
 ?>
-
 <section class="fixed top-0 w-full z-10 w-[calc(100vw-16.67vw)] ml-auto right-0 hidden lg:block">
     <div class="flex justify-center">
         <div class="w-40 absolute left-1/2 -translate-x-1/2 top-5">
