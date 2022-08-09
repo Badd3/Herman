@@ -17,8 +17,8 @@ if (get_field('header_kleur') == 'light') {
                 <img src="<?php echo esc_url(get_template_directory_uri() . $logo_url); ?>" alt="logo-white">
             </a>
         </div>
-        <div class="absolute right-8 top-5 text-white">
-            <button @click="bagOpen = !bagOpen" class="uppercase">bag (<?php echo WC()->cart->get_cart_contents_count() ?>)</button>
+        <div class="absolute right-8 top-5 <?php echo $text_color; ?>">
+            <button @click="bagOpen = !bagOpen" class="uppercase">bag [<?php echo WC()->cart->get_cart_contents_count() ?>]</button>
         </div>
     </div>
 </section>
