@@ -1,25 +1,24 @@
 import Alpine from "alpinejs";
 import collapse from "@alpinejs/collapse";
-import Swiper, { Autoplay, Pagination, EffectFade } from "swiper";
+import Swiper, { Pagination, Mousewheel } from "swiper";
 Alpine.plugin(collapse);
 
+//SWIPER HOME
 const swiper = new Swiper(".swiper", {
-  modules: [Autoplay, Pagination, EffectFade],
+  modules: [Pagination, Mousewheel],
   direction: "vertical",
   loop: true,
   speed: 2000,
-  // effect: "fade",
-  autoplay: {
-    delay: 5000,
+  mousewheel: {
+    invert: false,
   },
-
-  allowTouchMove: false,
   // If we need pagination
   pagination: {
     el: ".swiper-pagination",
   },
 });
 
+//SWIPER SINGLE PRODUCT PAGE
 const swiperSingleProduct = new Swiper(".swiper-single-product", {
   modules: [Pagination],
   direction: "horizontal",
