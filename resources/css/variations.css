@@ -36,9 +36,29 @@
 }
 
 .variable-item.button-variable-item.selected {
-  @apply !shadow-none !font-bold;
+  @apply !shadow-none;
 }
 
 .woocommerce-variation-add-to-cart {
   @apply flex justify-end;
+}
+
+.variable-item-contents {
+  @apply !flex !flex-row !items-center;
+}
+
+.variable-item-contents > span {
+  @apply !mr-[3px];
+}
+.variable-item-contents:after {
+  content: "";
+  display: block;
+  width: 10px;
+  height: 10px;
+  border: 1px solid #000;
+  background-color: white;
+}
+
+.variable-item.button-variable-item.selected .variable-item-contents:after {
+  background-color: black;
 }
