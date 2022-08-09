@@ -675,8 +675,8 @@ video {
   left: 1.25rem;
 }
 
-.top-4 {
-  top: 1rem;
+.right-5 {
+  right: 1.25rem;
 }
 
 .left-0 {
@@ -798,8 +798,8 @@ video {
   margin-top: -0px;
 }
 
-.mt-5 {
-  margin-top: 1.25rem;
+.mt-32 {
+  margin-top: 8rem;
 }
 
 .mb-3 {
@@ -828,6 +828,10 @@ video {
 
 .block {
   display: block;
+}
+
+.inline {
+  display: inline;
 }
 
 .flex {
@@ -902,6 +906,10 @@ video {
   width: 10rem;
 }
 
+.w-6 {
+  width: 1.5rem;
+}
+
 .w-2\/3 {
   width: 66.666667%;
 }
@@ -950,8 +958,30 @@ video {
   flex-basis: 100%;
 }
 
+.basis-3\/6 {
+  flex-basis: 50%;
+}
+
+.basis-2\/5 {
+  flex-basis: 40%;
+}
+
 .-translate-x-1\/2 {
   --tw-translate-x: -50%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y))
+    rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
+    scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.rotate-90 {
+  --tw-rotate: 90deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y))
+    rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
+    scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.rotate-45 {
+  --tw-rotate: 45deg;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y))
     rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
     scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -1073,8 +1103,8 @@ video {
   border-bottom-width: 1px;
 }
 
-.border-t {
-  border-top-width: 1px;
+.border-l {
+  border-left-width: 1px;
 }
 
 .border-black {
@@ -1240,12 +1270,12 @@ video {
   padding-bottom: 4rem;
 }
 
-.pt-6 {
-  padding-top: 1.5rem;
+.pt-14 {
+  padding-top: 3.5rem;
 }
 
-.pb-4 {
-  padding-bottom: 1rem;
+.pt-20 {
+  padding-top: 5rem;
 }
 
 .text-center {
@@ -1376,6 +1406,20 @@ video {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast)
     var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate)
     var(--tw-sepia) var(--tw-drop-shadow);
+}
+
+.transition {
+  transition-property: color, background-color, border-color, fill, stroke,
+    opacity, box-shadow, transform, filter, -webkit-text-decoration-color,
+    -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color,
+    text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
+    backdrop-filter;
+  transition-property: color, background-color, border-color,
+    text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
+    backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
 }
 
 .duration-700 {
@@ -2013,6 +2057,7 @@ article > *:not(.entry-content),
   padding-bottom: 0.75rem;
   font-size: 14px;
   line-height: 22px;
+  line-height: 1rem;
   outline-width: 0px;
 }
 
@@ -2116,6 +2161,20 @@ form.invalid .wpcf7-response-output,
   padding-bottom: unset;
 }
 
+.coming-soon .wpcf7-form.init,
+.coming-soon .wpcf7-form.sent,
+.coming-soon .wpcf7-form.sent,
+.coming-soon .wpcf7-form.active,
+.coming-soon .wpcf7-form {
+  display: flex;
+}
+
+.coming-soon
+  .wpcf7-form-control.wpcf7-text.wpcf7-email.wpcf7-validates-as-required.wpcf7-validates-as-email {
+  font-size: 16px;
+  line-height: 22px;
+}
+
 @font-face {
   font-family: "gotham";
 
@@ -2146,6 +2205,10 @@ form.invalid .wpcf7-response-output,
 }
 
 @media (min-width: 600px) {
+  .sm\:invisible {
+    visibility: hidden;
+  }
+
   .sm\:sticky {
     position: -webkit-sticky;
     position: sticky;
@@ -2179,6 +2242,10 @@ form.invalid .wpcf7-response-output,
     flex-basis: 60%;
   }
 
+  .sm\:basis-2\/5 {
+    flex-basis: 40%;
+  }
+
   .sm\:flex-row {
     flex-direction: row;
   }
@@ -2188,12 +2255,20 @@ form.invalid .wpcf7-response-output,
     padding-right: 1.5rem;
   }
 
-  .sm\:pt-28 {
-    padding-top: 7rem;
+  .sm\:pt-40 {
+    padding-top: 10rem;
   }
 
   .sm\:pt-16 {
     padding-top: 4rem;
+  }
+
+  .sm\:pt-28 {
+    padding-top: 7rem;
+  }
+
+  .sm\:pt-24 {
+    padding-top: 6rem;
   }
 }
 
@@ -2305,4 +2380,9 @@ form.invalid .wpcf7-response-output,
 
 .\[\&\>a\:hover\]\:duration-300 > a:hover {
   transition-duration: 300ms;
+}
+
+.\[\&\>\*\]\:object-cover > * {
+  -o-object-fit: cover;
+  object-fit: cover;
 }
