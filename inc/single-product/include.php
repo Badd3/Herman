@@ -26,7 +26,7 @@ function single_product_images()
 {
     global $product;
     $attachment_ids = $product->get_gallery_attachment_ids();
-    echo '<div class="product-images  flex-col gap-y-5 hidden lg:flex">';
+    echo '<div class="product-images  flex-col gap-y-5 hidden md:flex">';
     echo '<div class="aspect-w-[54] aspect-h-[73] [&>*]:object-cover">';
     the_post_thumbnail();
     echo '</div>';
@@ -39,7 +39,7 @@ function single_product_images()
     }
     echo '</div>';
 
-    echo '<div class="swiper-single-product overflow-hidden relative lg:hidden">';
+    echo '<div class="swiper-single-product overflow-hidden relative md:hidden">';
     echo '<div class="swiper-wrapper">';
     echo '<div class="aspect-w-[54] aspect-h-[73] [&>*]:object-cover swiper-slide">';
     the_post_thumbnail();
