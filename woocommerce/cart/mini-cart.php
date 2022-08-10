@@ -162,7 +162,7 @@ do_action('woocommerce_before_mini_cart'); ?>
 
 
               <div class="mt-6">
-                <a href="#" class="flex items-center justify-center border border-black  px-6 py-3 text-base font-base text-black shadow-sm  ">CHECKOUT</a>
+                <a href="<?php echo wc_get_checkout_url() ?>" class="flex items-center justify-center border border-black  px-6 py-3 text-base font-base text-black shadow-sm  ">CHECKOUT</a>
               </div>
             </div>
 

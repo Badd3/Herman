@@ -1,0 +1,29 @@
+#billing_first_name,
+#billing_last_name,
+#billing_address_1,
+#billing_postcode,
+#billing_city,
+#billing_email {
+  @apply text-base outline-0 focus-visible:outline-0 border-b w-full border-grey py-3 bg-white-bg;
+}
+
+#billing_first_name:focus-visible,
+#billing_last_name:focus-visible,
+#billing_address_1:focus-visible,
+#billing_postcode:focus-visible,
+#billing_city:focus-visible,
+#billing_email:focus-visible {
+  outline: unset;
+}
+
+.select2-container--default .select2-selection--single  {
+  @apply text-base rounded-none uppercase my-4 h-8 border-0 border-b border-grey bg-white-bg;
+}
+
+.select2-container .select2-selection--single .select2-selection__rendered {
+  @apply text-base pl-0;
+}
+
+.select2-selection__arrow {
+  @apply mt-4;
+}

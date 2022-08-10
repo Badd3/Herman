@@ -213,3 +213,78 @@ remove_action( 'woocommerce_widget_shopping_cart_buttons', 'woocommerce_widget_s
     elseif (isset($_GET['paged']) && !empty($_GET['paged'])) {echo "Blog Archives";}
     elseif (is_search()) {echo"Search Results";}
 }
+
+// WooCommerce Checkout Fields Hook
+add_filter('woocommerce_checkout_fields','custom_wc_checkout_fields_no_label');
+
+// Our hooked in function - $fields is passed via the filter!
+// Action: remove label from $fields
+function custom_wc_checkout_fields_no_label($fields) {
+    // loop by category
+    foreach ($fields as $category => $value) {
+        // loop by fields
+        foreach ($value as $field => $property) {
+            // remove label property
+            unset($fields[$category][$field]['label']);
+        }
+    }
+     return $fields;
+}
+
+
+/**
+ Remove all possible fields
+ **/
+function wc_remove_checkout_fields( $fields ) {
+
+    // Billing fields
+    unset( $fields['billing']['billing_company'] );
+    // unset( $fields['billing']['billing_email'] );
+    unset( $fields['billing']['billing_phone'] );
+    unset( $fields['billing']['billing_state'] );
+    // unset( $fields['billing']['billing_first_name'] );
+    // unset( $fields['billing']['billing_last_name'] );
+    // unset( $fields['billing']['billing_address_1'] );
+    unset( $fields['billing']['billing_address_2'] );
+    // unset( $fields['billing']['billing_city'] );
+    // unset( $fields['billing']['billing_postcode'] );
+
+    // Shipping fields
+    unset( $fields['shipping']['shipping_company'] );
+    unset( $fields['shipping']['shipping_phone'] );
+    unset( $fields['shipping']['shipping_state'] );
+    // unset( $fields['shipping']['shipping_first_name'] );
+    // unset( $fields['shipping']['shipping_last_name'] );
+    // unset( $fields['shipping']['shipping_address_1'] );
+    unset( $fields['shipping']['shipping_address_2'] );
+    // unset( $fields['shipping']['shipping_city'] );
+    // unset( $fields['shipping']['shipping_postcode'] );
+
+    // Order fields
+    unset( $fields['order']['order_comments'] );
+
+    return $fields;
+}
+add_filter( 'woocommerce_checkout_fields', 'wc_remove_checkout_fields' );
+
+add_filter('woocommerce_checkout_fields', 'custom_override_checkout_fields');
+function custom_override_checkout_fields($fields)
+ {
+ $fields['billing']['billing_first_name']['placeholder'] = 'NAME';
+ $fields['billing']['billing_last_name']['placeholder'] = 'SURNAME';
+ $fields['billing']['billing_email']['placeholder'] = 'EMAIL'; 
+ $fields['billing']['billing_address_1']['placeholder'] = 'ADDRESS';
+ $fields['billing']['billing_address_1_field']['placeholder'] = 'ADDRESS';
+ $fields['billing']['billing_postcode']['placeholder'] = 'POSTCODE';
+ $fields['billing']['billing_city']['placeholder'] = 'CITY';    
+
+ $fields['shipping']['shipping_first_name']['placeholder'] = 'NAME';
+ $fields['shipping']['shipping_last_name']['placeholder'] = 'SURNAME';
+ $fields['shipping']['shipping_email']['placeholder'] = 'EMAIL'; 
+ $fields['shipping']['shipping_address_1']['placeholder'] = 'ADDRESS';
+ $fields['shipping']['shipping_postcode']['placeholder'] = 'POSTCODE';
+ $fields['shipping']['shipping_city']['placeholder'] = 'CITY';
+
+
+ return $fields;
+ }
