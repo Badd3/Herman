@@ -25,7 +25,7 @@ defined( 'ABSPATH' ) || exit;
 
 	<?php else : ?>
 
-		<h3><?php esc_html_e( 'Billing details', 'woocommerce' ); ?></h3>
+		<h3><?php esc_html_e( 'DELIVERY DETAILS', 'woocommerce' ); ?></h3>
 
 	<?php endif; ?>
 
@@ -41,7 +41,7 @@ defined( 'ABSPATH' ) || exit;
 		?>
 	</div>
 
-	<?php do_action( 'woocommerce_after_checkout_billing_form', $checkout ); ?>
+	
 </div>
 
 <?php if ( ! is_user_logged_in() && $checkout->is_registration_enabled() ) : ?>

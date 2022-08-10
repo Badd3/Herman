@@ -9,10 +9,10 @@
 
 #billing_first_name:focus-visible,
 #billing_last_name:focus-visible,
-#billing_address_1:focus-visible,
 #billing_postcode:focus-visible,
 #billing_city:focus-visible,
-#billing_email:focus-visible {
+#billing_email:focus-visible,
+#billing_address_1:focus-visible {
   outline: unset;
 }
 
