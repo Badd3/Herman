@@ -213,4 +213,3 @@ remove_action( 'woocommerce_widget_shopping_cart_buttons', 'woocommerce_widget_s
     elseif (isset($_GET['paged']) && !empty($_GET['paged'])) {echo "Blog Archives";}
     elseif (is_search()) {echo"Search Results";}
 }
-
