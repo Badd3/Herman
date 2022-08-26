@@ -5,7 +5,9 @@
 #billing_city,
 #billing_email,
 #username,
-#password {
+#password,
+#email,
+#user_login {
   @apply text-base outline-0 focus-visible:outline-0 border-b w-full border-grey py-3 bg-white-bg;
 }
 
@@ -16,13 +18,16 @@
 #billing_email:focus-visible,
 #billing_address_1:focus-visible,
 #username:focus-visible,
-#password:focus-visible {
+#password:focus-visible,
+#email:focus-visible,
+#user_login:focus-visible {
   outline: unset;
 }
 
 #username,
-#password {
-  @apply w-1/2;
+#password,
+#email {
+  @apply w-full;
 }
 
 .woocommerce-form.woocommerce-form-login.login {
