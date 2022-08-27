@@ -213,3 +213,15 @@ remove_action( 'woocommerce_widget_shopping_cart_buttons', 'woocommerce_widget_s
     elseif (isset($_GET['paged']) && !empty($_GET['paged'])) {echo "Blog Archives";}
     elseif (is_search()) {echo"Search Results";}
 }
+
+add_filter( 'woocommerce_form_field', 'herman_checkout_fields_in_label_error', 10, 4 );
+ 
+function herman_checkout_fields_in_label_error( $field, $key, $args, $value ) {
+   if ( strpos( $field, '</label>' ) !== false && $args['required'] ) {
+      $error = '<span class="error" style="display:none">';
+      $error .= sprintf( __( '%S IS A REQUIRED FIELD.', 'woocommerce' ), $args['label'] );
+      $error .= '</span>';
+      $field = substr_replace( $field, $error, strpos( $field, '</label>' ), 0);
+   }
+   return $field;
+}

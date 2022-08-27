@@ -2,10 +2,14 @@
   
  }
 
- .woocommerce-lost-password .woocommerce-notices-wrapper {
-  @apply flex absolute flex-col items-center justify-center px-6 py-16 lg:py-28 mx-auto;
+ .woocommerce-form-login__submit {
+    @apply w-full;
  }
 
- .woocommerce-lost-password .woocommerce-error {
-  @apply flex mt-56 text-xs w-full  md:mt-0 sm:max-w-md xl:p-0 p-6 space-y-4 md:space-y-6 sm:p-8;
+ .lost_password, .woocommerce-form-login__rememberme {
+  @apply mt-0;
+ }
+
+ .woocommerce-account .woocommerce-error {
+  @apply flex flex-col items-center justify-center mt-[5rem] mb-[-8rem] ml-[-13rem] text-xs;
  }
