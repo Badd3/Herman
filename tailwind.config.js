@@ -35,9 +35,10 @@ module.exports = {
       "3xl": ["38px", "32px"],
     },
     extend: {
-      // colors: tailpress.colorMapper(
-      //   tailpress.theme("settings.color.palette", theme)
-      // ),
+      gridTemplateRows: {
+        // Simple 12 row grid
+        12: "repeat(12, minmax(0, 1fr))",
+      },
 
       colors: {
         white: {

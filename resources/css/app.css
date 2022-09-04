@@ -14,6 +14,8 @@
 @import "variations.css";
 @import "product-single.css";
 
+@import "post-single.css";
+
 @font-face {
   font-family: "gotham";
   src: url("/wp-content/themes/Herman/fonts/Gotham.woff2") format("woff2"),
