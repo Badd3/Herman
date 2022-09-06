@@ -75,3 +75,22 @@
 .woocommerce-error {
   @apply text-base uppercase;
 }
+
+#thank-you {
+  @apply mt-12 sm:mt-28 text-base;
+}
+
+#thank-you .woocommerce-notice.woocommerce-notice--success.woocommerce-thankyou-order-received {
+ @apply mb-4;
+}
+
+#thank-you .woocommerce-order-details__title {
+  @apply my-4 
+}
+#thank-you .woocommerce-table.woocommerce-table--order-details.shop_table.order_details {
+  @apply text-left;
+}
+#thank-you .woocommerce-column.woocommerce-column--1.woocommerce-column--billing-address.col-1,
+#thank-you .woocommerce-column.woocommerce-column--2.woocommerce-column--shipping-address.col-2 {
+  @apply mt-4;
+}

@@ -27,8 +27,8 @@ $allowed_html = array(
 	),
 );
 ?>
-
-<p>
+<section id="welkom" class="pt-28">
+<p class="mb-12">
 	<?php
 	printf(
 		/* translators: 1: user display name 2: logout url */
@@ -39,7 +39,7 @@ $allowed_html = array(
 	?>
 </p>
 
-<p>
+<p class="w-2/3">
 	<?php
 	/* translators: 1: Orders URL 2: Address URL 3: Account URL. */
 	$dashboard_desc = __( 'FROM YOUR ACCOUNT DASHBOARD YOU CAN VIEW YOUR <A HREF="%1$S">RECENT ORDERS</A>, MANAGE YOUR <A HREF="%2$S">BILLING ADDRESS</a>, AND <A HREF="%3$S">EDIT YOUR PASSWORD AND ACCOUNT DETAILS</A>.', 'woocommerce' );
@@ -55,7 +55,7 @@ $allowed_html = array(
 	);
 	?>
 </p>
-
+</section>
 <?php
 	/**
 	 * My Account dashboard.
