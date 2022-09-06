@@ -360,6 +360,33 @@
                     ],
                     "min": "",
                     "max": ""
+                },
+                "layout_6314b013c2489": {
+                    "key": "layout_6314b013c2489",
+                    "name": "post_overview",
+                    "label": "Post Overzicht",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_6314b07bc248a",
+                            "label": "Post Overzicht",
+                            "name": "",
+                            "type": "message",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "message": "Posts die toegevoegd worden zullen hier getoond worden. Zorg dat de post een Titel en Uitgelichte afbeelding hebben",
+                            "new_lines": "wpautop",
+                            "esc_html": 0
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
                 }
             },
             "button_label": "Add Row",
@@ -385,5 +412,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1658085652
+    "modified": 1662300602
 }
