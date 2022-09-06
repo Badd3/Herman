@@ -225,3 +225,26 @@ function herman_checkout_fields_in_label_error( $field, $key, $args, $value ) {
    }
    return $field;
 }
+
+add_filter( 'woocommerce_account_menu_items', 'herman_rename_address_my_account', 9999 );
+ 
+function herman_rename_address_my_account( $items ) {
+ 
+   $items['edit-account'] = 'ACCOUNT DETAILS';
+   $items['orders'] = 'ORDERS';
+   $items['edit-address'] = 'DELIVERY ADDRESS';
+   $items['customer-logout'] = 'LOGOUT';
+
+   unset( $items['dashboard'] );
+   unset( $items['edit-address'] );
+   unset( $items['subscriptions'] );
+   unset( $items['downloads'] );
+ 
+     return $items;
+ 
+}
+// Insert the content of the Addresses tab into an existing tab (edit-account in this case)
+ 
+add_action( 'woocommerce_account_edit-account_endpoint', 'woocommerce_account_edit_address' );
+
+

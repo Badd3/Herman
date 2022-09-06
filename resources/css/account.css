@@ -13,3 +13,48 @@
  .woocommerce-account .woocommerce-error {
   @apply flex flex-col items-center justify-center mt-[5rem] mb-[-8rem] ml-[-13rem] text-xs;
  }
+
+ .woocommerce-privacy-policy-text {
+  @apply text-xs font-light text-gray-500;
+ }
+
+
+ .woocommerce-MyAccount-navigation {
+ @apply text-base mt-20 outline-0 focus-visible:outline-0 border-r w-60 border-grey py-3 bg-white-bg;
+ }
+
+ .woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--subscriptions {
+    @apply text-base outline-0 focus-visible:outline-0 border-b w-full border-grey py-3 bg-white-bg;
+ }
+
+ .woocommerce-EditAccountForm edit-account #account_first_name {
+    @apply text-base mt-28 outline-0 focus-visible:outline-0 border-b w-full border-grey py-3 bg-white-bg;
+ }
+
+ .woocommerce-MyAccount-navigation-link.woocommerce-MyAccount-navigation-link--orders,
+ .woocommerce-MyAccount-navigation-link.woocommerce-MyAccount-navigation-link--edit-account,
+ .woocommerce-MyAccount-navigation-link.woocommerce-MyAccount-navigation-link--customer-logout {
+  @apply w-44 text-center mt-4 border;
+}
+
+.woocommerce-MyAccount-navigation-link.woocommerce-MyAccount-navigation-link--orders a,
+ .woocommerce-MyAccount-navigation-link.woocommerce-MyAccount-navigation-link--edit-account a,
+ .woocommerce-MyAccount-navigation-link.woocommerce-MyAccount-navigation-link--customer-logout a{
+  @apply block  p-2;
+}
+
+.woocommerce-MyAccount-navigation-link.woocommerce-MyAccount-navigation-link--orders.is-active,
+ .woocommerce-MyAccount-navigation-link.woocommerce-MyAccount-navigation-link--edit-account.is-active,
+ .woocommerce-MyAccount-navigation-link.woocommerce-MyAccount-navigation-link--customer-logout.is-active {
+  @apply border-black;
+}
+
+#dashboard {
+    @apply flex;
+}
+
+#dashboard .woocommerce-message.woocommerce-message--info.woocommerce-Message.woocommerce-Message--info.woocommerce-info,
+#dashboard .woocommerce-EditAccountForm.edit-account,
+#dashboard .woocommerce-notices-wrapper {
+    @apply mt-28 ml-8;
+}

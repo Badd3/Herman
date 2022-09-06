@@ -25,7 +25,7 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
   <div class="flex flex-col items-center justify-center px-6 pt-16 lg:pt-28 mx-auto" id="customer_login">
       <div class="w-full  md:mt-0 sm:max-w-md xl:p-0 ">
           <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-              <h1 class="text-md font-base ">
+              <h1 class="text-base">
 			  <?php esc_html_e( 'SIGN IN TO YOUR ACCOUNT', 'woocommerce' ); ?>
               </h1>
 
@@ -52,10 +52,9 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
 								<input class="woocommerce-form__input woocommerce-form__input-checkbox" name="rememberme" type="checkbox" id="rememberme" value="forever" />
 						</label>
 						 
-						  <!-- <input name="rememberme" type="checkbox" id="rememberme" value="forever" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300" required=""> -->
-                          </div>
-                          <div class="ml-3 text-sm">
-                            <label for="woocommerce-form__label woocommerce-form__label-for-checkbox woocommerce-form-login__rememberme" class="woocommerce-form__input woocommerce-form__input-checkbox text-gray-500 text-xs dark:text-gray-300">REMEMBER ME </label>
+						 </div>
+                          <div class="ml-3">
+                            <label for="woocommerce-form__label woocommerce-form__label-for-checkbox woocommerce-form-login__rememberme" class="woocommerce-form__input woocommerce-form__input-checkbox  text-base">REMEMBER ME </label>
                           </div>
                       </div>
                       <a href="<?php echo esc_url( wp_lostpassword_url() ); ?>" class="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">FORGOT PASSWORD?</a>
@@ -67,7 +66,7 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
 			
                   <!-- <button type="submit" class="flex items-center justify-center border border-black  px-6 py-3 text-base font-base text-black shadow-sm  w-full">SIGN IN</button> -->
                   <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-                      DON'T HAVE AN ACCOUNT YET? <a href="#" class="font-medium text-primary-600 hover:underline dark:text-primary-500">SIGN UP</a>
+                      DON'T HAVE AN ACCOUNT YET? <a href="#registration" class="font-base hover:underline text-black">SIGN UP</a>
                   </p>
 
 				  <?php do_action( 'woocommerce_login_form_end' ); ?>
@@ -82,12 +81,11 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
 
 <?php if ( 'yes' === get_option( 'woocommerce_enable_myaccount_registration' ) ) : ?>
 
-<section class="registration">
+<section id="registration">
 	<div class="flex flex-col items-center justify-center px-6 mx-auto" id="customer_login">
       <div class="w-full  md:mt-0 sm:max-w-md xl:p-0 ">
           <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-			<div class=""><h2 class="text-md">OR</h2></div>
-              <h1 class="text-md font-base ">
+              <h1 class="font-base ">
 			  <?php esc_html_e( 'REGISTER NEW ACCOUNT', 'woocommerce' ); ?>
               </h1>
 

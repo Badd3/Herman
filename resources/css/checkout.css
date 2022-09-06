@@ -7,7 +7,10 @@
 #username,
 #password,
 #email,
-#user_login {
+#user_login,
+#reg_email,
+#account_first_name,
+#account_last_name {
   @apply text-base outline-0 focus-visible:outline-0 border-b w-full border-grey py-3 bg-white-bg;
 }
 
@@ -20,7 +23,10 @@
 #username:focus-visible,
 #password:focus-visible,
 #email:focus-visible,
-#user_login:focus-visible {
+#user_login:focus-visible,
+#reg_email:focus-visible,
+#account_first_name:focus-visible,
+#account_last_name:focus-visible {
   outline: unset;
 }
 
