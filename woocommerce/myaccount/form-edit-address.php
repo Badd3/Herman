@@ -26,7 +26,7 @@ do_action( 'woocommerce_before_edit_account_address_form' ); ?>
 <?php else : ?>
 <section id="dashboard-billing-address">
 	<div class="flex justify-center">
-      <div class="basis-full sm:basis-3/5 text-base pb-16 px-4 sm:px-6 lg:px-16 lg:max-w-5xl">
+      <div class="basis-full sm:basis-3/5 text-base pb-16 px-4 sm:px-6 lg:max-w-5xl">
 		<form method="post">
 
 			<h3 class="uppercase mb-4"><?php echo apply_filters( 'woocommerce_my_account_edit_address_title', $page_title, $load_address ); ?></h3><?php // @codingStandardsIgnoreLine ?>

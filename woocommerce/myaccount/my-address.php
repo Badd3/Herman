@@ -43,7 +43,7 @@ $col    = 1;
 ?>
 <section id="dashboard-my-address">
 	<div class="flex justify-center">
-      <div class="basis-full sm:basis-3/5 text-base pb-16 px-4 sm:px-6 lg:px-16 lg:max-w-5xl">
+      <div class="basis-full sm:basis-3/5 text-base pb-16 px-4 sm:px-6 lg:max-w-5xl">
 		<p class="uppercase">
 			<?php echo apply_filters( 'woocommerce_my_account_my_address_description', esc_html__( 'The following addresses will be used on the checkout page by default.', 'woocommerce' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 		</p>
