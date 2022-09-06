@@ -1,0 +1,141 @@
+#billing_first_name,
+#billing_last_name,
+#billing_address_1,
+#billing_postcode,
+#billing_city,
+#billing_email,
+#username,
+#password,
+#email,
+#user_login,
+#reg_email,
+#account_first_name,
+#account_last_name,
+#account_display_name,
+#account_email,
+#password_current,
+#password_1,
+#password_2,
+#billing_company,
+#billing_address_2,
+#billing_phone {
+  @apply text-base outline-0 focus-visible:outline-0 border-b w-full border-grey py-3 bg-white-bg;
+}
+
+#billing_first_name:focus-visible,
+#billing_last_name:focus-visible,
+#billing_postcode:focus-visible,
+#billing_city:focus-visible,
+#billing_email:focus-visible,
+#billing_address_1:focus-visible,
+#username:focus-visible,
+#password:focus-visible,
+#email:focus-visible,
+#user_login:focus-visible,
+#reg_email:focus-visible,
+#account_first_name:focus-visible,
+#account_last_name:focus-visible,
+#account_display_name:focus-visible,
+#account_email:focus-visible,
+#password_current:focus-visible,
+#password_1:focus-visible,
+#password_2:focus-visible,
+#billing_company:focus-visible,
+#billing_address_2:focus-visible,
+#billing_phone:focus-visible  {
+  outline: unset;
+}
+
+#username,
+#password,
+#email {
+  @apply w-full;
+}
+
+.woocommerce-form.woocommerce-form-login.login {
+  @apply text-base px-8;
+}
+
+.woocommerce-form-login__submit {
+  @apply text-base uppercase flex items-center justify-center border border-black px-6 py-3 w-40 mt-4 text-black shadow-sm;
+}
+
+.dashboardBtn {
+  @apply text-base uppercase flex items-center justify-center border border-black px-6 py-3 w-60 mt-4 text-black shadow-sm;
+}
+
+.dashboardOrderBtn {
+  @apply text-base uppercase flex items-center justify-center border border-black px-6 w-20 text-black shadow-sm;
+}
+
+#dashboard-edit-account .woocommerce-message {
+ @apply absolute;
+}
+
+.lost_password,
+.woocommerce-form-login__rememberme {
+  @apply text-base uppercase mt-4;
+}
+
+.select2-container--default .select2-selection--single  {
+  @apply text-base rounded-none uppercase my-4 h-8 border-0 border-b border-grey bg-white-bg;
+}
+
+.select2-container .select2-selection--single .select2-selection__rendered {
+  @apply text-base pl-0;
+}
+
+.select2-selection__arrow {
+  @apply mt-4;
+}
+
+#customer_details#billing_address_1_field{
+  display: none;
+}
+
+.cart-empty.woocommerce-info {
+  @apply justify-center flex text-center uppercase mt-4;
+}
+
+.woocommerce-error {
+  @apply text-base uppercase;
+}
+
+#thank-you {
+  @apply mt-12 sm:mt-28 text-base;
+}
+
+#thank-you .woocommerce-notice.woocommerce-notice--success.woocommerce-thankyou-order-received {
+ @apply mb-4;
+}
+
+#thank-you .woocommerce-order-details__title {
+  @apply my-4 
+}
+#thank-you .woocommerce-table.woocommerce-table--order-details.shop_table.order_details {
+  @apply text-left;
+}
+#thank-you .woocommerce-column.woocommerce-column--1.woocommerce-column--billing-address.col-1,
+#thank-you .woocommerce-column.woocommerce-column--2.woocommerce-column--shipping-address.col-2 {
+  @apply mt-4;
+}
+
+.hermanBtn {
+  @apply text-base uppercase flex items-center justify-center border border-black px-6 py-3 w-60 mt-4 text-black shadow-sm;
+}
+
+.wc_payment_methods.payment_methods.methods {
+  @apply mt-8;
+}
+
+.mollie-gateway-icon {
+  @apply h-12 !important;
+}
+
+.payment_box.payment_method_mollie_wc_gateway_ideal > p:nth-child(1) {
+  @apply hidden;
+}
+
+.payment_method_mollie_wc_gateway_ideal select {
+  @apply text-base rounded-none uppercase my-4 h-8 border-0 border-b w-full border-grey bg-white-bg;
+}

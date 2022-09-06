@@ -1,0 +1,82 @@
+.woocommerce-form-login {
+  
+ }
+
+ .woocommerce-form-login__submit {
+    @apply w-full;
+ }
+
+ .lost_password, .woocommerce-form-login__rememberme {
+  @apply mt-0;
+ }
+
+ .woocommerce-account .woocommerce-error {
+  @apply flex flex-col items-center justify-center mt-[5rem] mb-[-8rem] ml-[-13rem] text-xs;
+ }
+
+ .woocommerce-privacy-policy-text {
+  @apply text-xs font-light text-gray-500;
+ }
+
+ .woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--subscriptions {
+    @apply text-base outline-0 focus-visible:outline-0 border-b w-full border-grey py-3 bg-white-bg;
+ }
+
+ .woocommerce-EditAccountForm edit-account #account_first_name {
+    @apply text-base mt-28 outline-0 focus-visible:outline-0 border-b w-full border-grey py-3 bg-white-bg;
+ }
+
+ .woocommerce-MyAccount-navigation-link.woocommerce-MyAccount-navigation-link--orders,
+ .woocommerce-MyAccount-navigation-link.woocommerce-MyAccount-navigation-link--edit-account,
+ .woocommerce-MyAccount-navigation-link.woocommerce-MyAccount-navigation-link--customer-logout {
+  @apply w-44 text-center mt-4 border;
+}
+
+.woocommerce-MyAccount-navigation-link.woocommerce-MyAccount-navigation-link--orders a,
+ .woocommerce-MyAccount-navigation-link.woocommerce-MyAccount-navigation-link--edit-account a,
+ .woocommerce-MyAccount-navigation-link.woocommerce-MyAccount-navigation-link--customer-logout a{
+  @apply block  p-2;
+}
+
+.woocommerce-MyAccount-navigation-link.woocommerce-MyAccount-navigation-link--orders.is-active,
+ .woocommerce-MyAccount-navigation-link.woocommerce-MyAccount-navigation-link--edit-account.is-active,
+ .woocommerce-MyAccount-navigation-link.woocommerce-MyAccount-navigation-link--customer-logout.is-active {
+  @apply border-black;
+}
+
+#dashboard .woocommerce-MyAccount-navigation {
+ @apply flex mt-24;
+}
+
+#dashboard ul {
+ @apply flex flex-wrap justify-center items-center w-full;
+}
+
+#dashboard .woocommerce-MyAccount-navigation-link.woocommerce-MyAccount-navigation-link--orders,
+#dashboard .woocommerce-MyAccount-navigation-link.woocommerce-MyAccount-navigation-link--edit-account {
+ @apply mr-8;
+}
+
+#dashboard .woocommerce-message.woocommerce-message--info.woocommerce-Message.woocommerce-Message--info.woocommerce-info,
+#dashboard .woocommerce-EditAccountForm.edit-account {
+    @apply mt-28 ml-8;
+}
+
+#dashboard .woocommerce-Address-title.title {
+    @apply mt-4;
+}
+
+#dashboard-billing-address,
+#dashboard-orders,
+#dashboard-view-order {
+    @apply mt-28;
+}
+
+#dashboard-order-details .woocommerce-table.woocommerce-table--order-details.shop_table.order_details {
+    @apply text-left;
+}
+
+#dashboard-order-details .wc-item-meta {
+    justify-items: start !important;
+    display: inline;
+}

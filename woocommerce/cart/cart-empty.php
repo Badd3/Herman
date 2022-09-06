@@ -16,15 +16,16 @@
  */
 
 defined( 'ABSPATH' ) || exit;
-
 /*
  * @hooked wc_empty_cart_message - 10
  */
 do_action( 'woocommerce_cart_is_empty' );
 
 if ( wc_get_page_id( 'shop' ) > 0 ) : ?>
+
+<section class="bg-white-bg justify-center flex text-center mt-4">
 	<p class="return-to-shop">
-		<a class="button wc-backward" href="<?php echo esc_url( apply_filters( 'woocommerce_return_to_shop_redirect', wc_get_page_permalink( 'shop' ) ) ); ?>">
+		<a class="button wc-backward w-60 mt-5 flex items-center justify-center border border-black  px-6 py-3 text-base font-base text-black shadow-sm" href="<?php echo esc_url( apply_filters( 'woocommerce_return_to_shop_redirect', wc_get_page_permalink( 'shop' ) ) ); ?>">
 			<?php
 				/**
 				 * Filter "Return To Shop" text.
@@ -32,8 +33,9 @@ if ( wc_get_page_id( 'shop' ) > 0 ) : ?>
 				 * @since 4.6.0
 				 * @param string $default_text Default text.
 				 */
-				echo esc_html( apply_filters( 'woocommerce_return_to_shop_text', __( 'Return to shop', 'woocommerce' ) ) );
+				echo esc_html( apply_filters( 'woocommerce_return_to_shop_text', __( 'RETURN TO SHOP', 'woocommerce' ) ) );
 			?>
 		</a>
 	</p>
+</section>
 <?php endif; ?>
