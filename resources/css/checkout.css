@@ -93,9 +93,6 @@
   display: none;
 }
 
-#post-23 .woocommerce-info{
-  @apply justify-center flex text-center uppercase mt-28;
-}
 .cart-empty.woocommerce-info {
   @apply justify-center flex text-center uppercase mt-4;
 }
