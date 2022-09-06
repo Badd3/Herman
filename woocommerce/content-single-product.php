@@ -33,7 +33,7 @@ if (post_password_required()) {
 }
 ?>
 <div id="product-<?php the_ID(); ?>" <?php wc_product_class('', $product); ?>>
-	<div class="grid grid-cols-1 md:grid-cols-2">
+	<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
 		<?php
 		/**
 		 * Hook: woocommerce_before_single_product_summary.
@@ -63,18 +63,18 @@ if (post_password_required()) {
 				?>
 			</div>
 		</div>
-
-		<?php
-		/**
-		 * Hook: woocommerce_after_single_product_summary.
-		 *
-		 * @hooked woocommerce_output_product_data_tabs - 10
-		 * @hooked woocommerce_upsell_display - 15
-		 * @hooked woocommerce_output_related_products - 20
-		 */
-		do_action('woocommerce_after_single_product_summary');
-		?>
 	</div>
+	<?php
+	/**
+	 * Hook: woocommerce_after_single_product_summary.
+	 *
+	 * @hooked woocommerce_output_product_data_tabs - 10
+	 * @hooked woocommerce_upsell_display - 15
+	 * @hooked woocommerce_output_related_products - 20
+	 */
+	do_action('woocommerce_after_single_product_summary');
+	?>
+
 </div>
 
 <?php do_action('woocommerce_after_single_product'); ?>

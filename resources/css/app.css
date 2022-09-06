@@ -12,7 +12,11 @@
 
 @import "contact-form.css";
 @import "variations.css";
+
 @import "checkout.css";
+
+@import "product-single.css";
+
 
 @font-face {
   font-family: "gotham";

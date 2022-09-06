@@ -7,9 +7,9 @@ if (have_rows('slider_afbeeldingen')) :
     <section class="h-screen grid z-[0] grid-cols-3 grid-rows-3 relative">
         <?php
 
-        if ($overlay) { ?>
-            <div class="absolute w-full h-full bg-black/[0.4] z-[2]"></div>
-        <?php }; ?>
+        if ($overlay) {
+            $overlay_classes = "after:absolute after:w-full after:h-full after:bg-black/[0.4] after:z-[2]";
+        }; ?>
 
         <!-- Slider main container -->
         <div class="swiper w-screen lg:w-[calc(100vw-16.67vw)] row-span-full row-col-full">
@@ -25,7 +25,7 @@ if (have_rows('slider_afbeeldingen')) :
 
                     // Do something...
                 ?>
-                    <div class="swiper-slide flex"><img class="object-center object-cover w-full" src="<?php echo $image_url; ?>" alt="<?php echo $image_alt; ?>" srcset=""></div>
+                    <div class="swiper-slide flex <?php echo $overlay_classes; ?>"><img class="object-center object-cover w-full" src="<?php echo $image_url; ?>" alt="<?php echo $image_alt; ?>" srcset=""></div>
                 <?php
                 // End loop.
                 endwhile;
