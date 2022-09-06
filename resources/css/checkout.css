@@ -64,6 +64,10 @@
   @apply text-base uppercase flex items-center justify-center border border-black px-6 py-3 w-60 mt-4 text-black shadow-sm;
 }
 
+.dashboardOrderBtn {
+  @apply text-base uppercase flex items-center justify-center border border-black px-6 w-20 text-black shadow-sm;
+}
+
 #dashboard-edit-account .woocommerce-message {
  @apply absolute;
 }
@@ -117,4 +121,24 @@
 #thank-you .woocommerce-column.woocommerce-column--1.woocommerce-column--billing-address.col-1,
 #thank-you .woocommerce-column.woocommerce-column--2.woocommerce-column--shipping-address.col-2 {
   @apply mt-4;
+}
+
+.hermanBtn {
+  @apply text-base uppercase flex items-center justify-center border border-black px-6 py-3 w-60 mt-4 text-black shadow-sm;
+}
+
+.wc_payment_methods.payment_methods.methods {
+  @apply mt-8;
+}
+
+.mollie-gateway-icon {
+  @apply h-12 !important;
+}
+
+.payment_box.payment_method_mollie_wc_gateway_ideal > p:nth-child(1) {
+  @apply hidden;
+}
+
+.payment_method_mollie_wc_gateway_ideal select {
+  @apply text-base rounded-none uppercase my-4 h-8 border-0 border-b w-full border-grey bg-white-bg;
 }

@@ -20,6 +20,8 @@ defined( 'ABSPATH' ) || exit;
 $show_shipping = ! wc_ship_to_billing_address_only() && $order->needs_shipping_address();
 ?>
 <section class="woocommerce-customer-details">
+<div class="flex justify-center">
+      <div class="basis-full sm:basis-3/5 text-base pb-16 px-4 sm:px-6 lg:px-8 lg:max-w-5xl">
 
 	<?php if ( $show_shipping ) : ?>
 
@@ -28,7 +30,7 @@ $show_shipping = ! wc_ship_to_billing_address_only() && $order->needs_shipping_a
 
 	<?php endif; ?>
 
-	<h2 class="woocommerce-column__title"><?php esc_html_e( 'Billing address', 'woocommerce' ); ?></h2>
+	<h2 class="woocommerce-column__title uppercase mb-4"><?php esc_html_e( 'Billing address', 'woocommerce' ); ?></h2>
 
 	<address>
 		<?php echo wp_kses_post( $order->get_formatted_billing_address( esc_html__( 'N/A', 'woocommerce' ) ) ); ?>
@@ -47,7 +49,7 @@ $show_shipping = ! wc_ship_to_billing_address_only() && $order->needs_shipping_a
 		</div><!-- /.col-1 -->
 
 		<div class="woocommerce-column woocommerce-column--2 woocommerce-column--shipping-address col-2">
-			<h2 class="woocommerce-column__title"><?php esc_html_e( 'Shipping address', 'woocommerce' ); ?></h2>
+			<h2 class="woocommerce-column__title uppercase my-4"><?php esc_html_e( 'Shipping address', 'woocommerce' ); ?></h2>
 			<address>
 				<?php echo wp_kses_post( $order->get_formatted_shipping_address( esc_html__( 'N/A', 'woocommerce' ) ) ); ?>
 
@@ -62,5 +64,6 @@ $show_shipping = ! wc_ship_to_billing_address_only() && $order->needs_shipping_a
 	<?php endif; ?>
 
 	<?php do_action( 'woocommerce_order_details_after_customer_details', $order ); ?>
-
+				</div>
+				</div>
 </section>

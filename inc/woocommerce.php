@@ -322,7 +322,6 @@ function custom_override_checkout_fields($fields)
  $fields['billing']['billing_first_name']['placeholder'] = 'NAME';
  $fields['billing']['billing_last_name']['placeholder'] = 'SURNAME';
  $fields['billing']['billing_email']['placeholder'] = 'EMAIL'; 
- $fields['billing']['billing_address_1_field']['placeholder'] = 'ADDRESS';
  $fields['billing']['billing_postcode']['placeholder'] = 'POSTCODE';
  $fields['billing']['billing_city']['placeholder'] = 'CITY';    
 
