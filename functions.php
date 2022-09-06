@@ -213,3 +213,38 @@ remove_action( 'woocommerce_widget_shopping_cart_buttons', 'woocommerce_widget_s
     elseif (isset($_GET['paged']) && !empty($_GET['paged'])) {echo "Blog Archives";}
     elseif (is_search()) {echo"Search Results";}
 }
+
+add_filter( 'woocommerce_form_field', 'herman_checkout_fields_in_label_error', 10, 4 );
+ 
+function herman_checkout_fields_in_label_error( $field, $key, $args, $value ) {
+   if ( strpos( $field, '</label>' ) !== false && $args['required'] ) {
+      $error = '<span class="error" style="display:none">';
+      $error .= sprintf( __( '%S IS A REQUIRED FIELD.', 'woocommerce' ), $args['label'] );
+      $error .= '</span>';
+      $field = substr_replace( $field, $error, strpos( $field, '</label>' ), 0);
+   }
+   return $field;
+}
+
+add_filter( 'woocommerce_account_menu_items', 'herman_rename_address_my_account', 9999 );
+ 
+function herman_rename_address_my_account( $items ) {
+ 
+   $items['edit-account'] = 'ACCOUNT DETAILS';
+   $items['orders'] = 'ORDERS';
+   $items['edit-address'] = 'DELIVERY ADDRESS';
+   $items['customer-logout'] = 'LOGOUT';
+
+   unset( $items['dashboard'] );
+   unset( $items['edit-address'] );
+   unset( $items['subscriptions'] );
+   unset( $items['downloads'] );
+ 
+     return $items;
+ 
+}
+// Insert the content of the Addresses tab into an existing tab (edit-account in this case)
+ 
+add_action( 'woocommerce_account_edit-account_endpoint', 'woocommerce_account_edit_address' );
+
+

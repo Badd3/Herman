@@ -27,25 +27,25 @@ $allowed_html = array(
 	),
 );
 ?>
-
-<p>
+<section id="welkom" class="pt-28">
+<p class="mb-12">
 	<?php
 	printf(
 		/* translators: 1: user display name 2: logout url */
-		wp_kses( __( 'Hello %1$s (not %1$s? <a href="%2$s">Log out</a>)', 'woocommerce' ), $allowed_html ),
-		'<strong>' . esc_html( $current_user->display_name ) . '</strong>',
+		wp_kses( __( 'HELLO %1$S (NOT %1$s? <a href="%2$S">LOG OUT</a>)', 'woocommerce' ), $allowed_html ),
+		'<strong class="uppercase">' . esc_html( $current_user->display_name ) . '</strong>',
 		esc_url( wc_logout_url() )
 	);
 	?>
 </p>
 
-<p>
+<p class="w-2/3">
 	<?php
 	/* translators: 1: Orders URL 2: Address URL 3: Account URL. */
-	$dashboard_desc = __( 'From your account dashboard you can view your <a href="%1$s">recent orders</a>, manage your <a href="%2$s">billing address</a>, and <a href="%3$s">edit your password and account details</a>.', 'woocommerce' );
+	$dashboard_desc = __( 'FROM YOUR ACCOUNT DASHBOARD YOU CAN VIEW YOUR <A HREF="%1$S">RECENT ORDERS</A>, MANAGE YOUR <A HREF="%2$S">BILLING ADDRESS</a>, AND <A HREF="%3$S">EDIT YOUR PASSWORD AND ACCOUNT DETAILS</A>.', 'woocommerce' );
 	if ( wc_shipping_enabled() ) {
 		/* translators: 1: Orders URL 2: Addresses URL 3: Account URL. */
-		$dashboard_desc = __( 'From your account dashboard you can view your <a href="%1$s">recent orders</a>, manage your <a href="%2$s">shipping and billing addresses</a>, and <a href="%3$s">edit your password and account details</a>.', 'woocommerce' );
+		$dashboard_desc = __( 'FROM YOUR ACCOUNT DASHBOARD YOU CAN VIEW YOUR <A HREF="%1$S">RECENT ORDERS</A>, MANAGE YOUR <A HREF="%2$S">BILLING ADDRESS</a>, AND <A HREF="%3$S">EDIT YOUR PASSWORD AND ACCOUNT DETAILS</A>.', 'woocommerce' );
 	}
 	printf(
 		wp_kses( $dashboard_desc, $allowed_html ),
@@ -55,7 +55,7 @@ $allowed_html = array(
 	);
 	?>
 </p>
-
+</section>
 <?php
 	/**
 	 * My Account dashboard.

@@ -200,11 +200,6 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
 	</div>
 		  
 	<?php do_action('woocommerce_widget_shopping_cart_before_buttons'); ?>
-
-
-		  <div class="mt-6">
-			<a href="<?php echo wc_get_checkout_url() ?>" class="flex items-center justify-center border border-black  px-6 py-3 text-base font-base text-black shadow-sm  ">PAY WITH IDEAL</a>
-		  </div>
 		</div>
 
 <?php do_action('woocommerce_widget_shopping_cart_after_buttons'); ?>
