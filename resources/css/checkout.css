@@ -10,7 +10,15 @@
 #user_login,
 #reg_email,
 #account_first_name,
-#account_last_name {
+#account_last_name,
+#account_display_name,
+#account_email,
+#password_current,
+#password_1,
+#password_2,
+#billing_company,
+#billing_address_2,
+#billing_phone {
   @apply text-base outline-0 focus-visible:outline-0 border-b w-full border-grey py-3 bg-white-bg;
 }
 
@@ -26,7 +34,15 @@
 #user_login:focus-visible,
 #reg_email:focus-visible,
 #account_first_name:focus-visible,
-#account_last_name:focus-visible {
+#account_last_name:focus-visible,
+#account_display_name:focus-visible,
+#account_email:focus-visible,
+#password_current:focus-visible,
+#password_1:focus-visible,
+#password_2:focus-visible,
+#billing_company:focus-visible,
+#billing_address_2:focus-visible,
+#billing_phone:focus-visible  {
   outline: unset;
 }
 
@@ -42,6 +58,14 @@
 
 .woocommerce-form-login__submit {
   @apply text-base uppercase flex items-center justify-center border border-black px-6 py-3 w-40 mt-4 text-black shadow-sm;
+}
+
+.dashboardBtn {
+  @apply text-base uppercase flex items-center justify-center border border-black px-6 py-3 w-60 mt-4 text-black shadow-sm;
+}
+
+#dashboard-edit-account .woocommerce-message {
+ @apply absolute;
 }
 
 .lost_password,

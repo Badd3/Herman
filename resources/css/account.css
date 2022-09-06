@@ -18,11 +18,6 @@
   @apply text-xs font-light text-gray-500;
  }
 
-
- .woocommerce-MyAccount-navigation {
- @apply text-base mt-20 outline-0 focus-visible:outline-0 border-r w-60 border-grey py-3 bg-white-bg;
- }
-
  .woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--subscriptions {
     @apply text-base outline-0 focus-visible:outline-0 border-b w-full border-grey py-3 bg-white-bg;
  }
@@ -49,12 +44,34 @@
   @apply border-black;
 }
 
-#dashboard {
-    @apply flex;
+#dashboard .woocommerce-MyAccount-navigation {
+ @apply flex mt-24;
+}
+
+#dashboard ul {
+ @apply flex flex-wrap justify-center items-center w-full;
+}
+
+#dashboard .woocommerce-MyAccount-navigation-link.woocommerce-MyAccount-navigation-link--orders,
+#dashboard .woocommerce-MyAccount-navigation-link.woocommerce-MyAccount-navigation-link--edit-account {
+ @apply mr-8;
 }
 
 #dashboard .woocommerce-message.woocommerce-message--info.woocommerce-Message.woocommerce-Message--info.woocommerce-info,
-#dashboard .woocommerce-EditAccountForm.edit-account,
-#dashboard .woocommerce-notices-wrapper {
+#dashboard .woocommerce-EditAccountForm.edit-account {
     @apply mt-28 ml-8;
+}
+
+#dashboard .woocommerce-Address-title.title {
+    @apply mt-4;
+}
+
+#dashboard-billing-address,
+#dashboard-orders,
+#dashboard-view-order {
+    @apply mt-28;
+}
+
+#dashboard-orders .woocommerce-orders-table.woocommerce-MyAccount-orders.shop_table.shop_table_responsive.my_account_orders.account-orders-table {
+    @apply table-auto;
 }
