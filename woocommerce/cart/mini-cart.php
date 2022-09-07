@@ -51,7 +51,7 @@ do_action('woocommerce_before_mini_cart'); ?>
 						 <?php echo $thumbnail . wp_kses_post($product_name); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
 						?>
 					<?php else : ?>
-						<div class="mt-8">
+						<div class="mt-8 w-100">
 							<div class="flow-root">
 								<ul role="list" class="-mt-6 mb-2 divide-y divide-gray-200 border-t border-gray-200">
 									<li class="flex pt-6 pb-4">
