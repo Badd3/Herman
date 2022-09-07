@@ -12,7 +12,7 @@ if (have_rows('buttons')) : ?>
             // echo $button_style;
 
             if ($button_style == 'outlined') { ?>
-                <a class="block flex items-center bg-white font-bold text-blue border-2 border-blue rounded-xl py-3.5 px-6" href="<?php echo $button['url']; ?>"> <?php echo $button['title']; ?></a>
+                <a class="block flex items-center bg-white-bg font-bold text-blue border-2 border-blue rounded-xl py-3.5 px-6" href="<?php echo $button['url']; ?>"> <?php echo $button['title']; ?></a>
             <?php
             } elseif ($button_style == 'filled') { ?>
 
