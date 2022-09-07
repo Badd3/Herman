@@ -130,7 +130,7 @@
 }
 
 .cart-empty.woocommerce-info {
-  @apply justify-center flex text-center uppercase mt-4;
+  @apply justify-center flex text-center uppercase mt-8 md:mt-28;
 }
 
 .woocommerce-error {
