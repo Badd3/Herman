@@ -66,6 +66,24 @@
   @apply w-full;
 }
 
+#billing_first_name_field,
+#billing_last_name_field,
+#billing_postcode_field,
+#billing_city_field,
+#billing_email_field,
+#billing_company_field,
+#billing_country_field,
+#billing_phone_field,
+#shipping_last_name_field,
+#shipping_company_field,
+#shipping_country_field,
+#shipping_postcode_field,
+#shipping_address_2,
+#shipping_postcode_field,
+#shipping_city_field {
+  @apply pt-2;
+}
+
 .woocommerce-form.woocommerce-form-login.login {
   @apply text-base px-8;
 }
@@ -76,6 +94,10 @@
 
 .dashboardBtn {
   @apply text-base uppercase flex items-center justify-center border border-black px-6 py-3 w-60 mt-4 text-black shadow-sm;
+}
+
+.dashboardBtnBig {
+  @apply text-base uppercase flex items-center justify-center border border-black px-6 py-3 w-80 mt-4 text-black shadow-sm;
 }
 
 .dashboardOrderBtn {

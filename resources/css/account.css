@@ -45,7 +45,7 @@
 }
 
 #dashboard .woocommerce-MyAccount-navigation {
- @apply flex mt-4 md:mt-24;
+ @apply flex mt-16 md:mt-24;
 }
 
 #dashboard ul {

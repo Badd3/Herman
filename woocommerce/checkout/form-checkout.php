@@ -28,8 +28,8 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
 }
 
 ?>
-<section class="bg-white-bg flex">
-<div class="basis-full sm:basis-2/4 text-base pt-20 pb-16 px-4 sm:pt-24 sm:px-6 lg:px-8">
+<section class="bg-white-bg flex flex-col md:flex-row">
+<div class="basis-full sm:basis-2/4 text-base pb-4 px-4 sm:pt-28 sm:px-6 lg:px-8 order-last md:order-first">
 <form name="checkout" method="post" class="checkout woocommerce-checkout" action="<?php echo esc_url( wc_get_checkout_url() ); ?>" enctype="multipart/form-data">
 
 	<?php if ( $checkout->get_checkout_fields() ) : ?>
@@ -50,7 +50,7 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
 	
 	<?php do_action( 'woocommerce_checkout_before_order_review_heading' ); ?>
 	</div>
-	<div class="basis-full sm:basis-2/4 text-base pt-20 pb-16 px-4 sm:pt-24 sm:px-6 lg:px-8">
+	<div class="basis-full sm:basis-2/4 text-base pt-8 pb-4 sm:pt-28 sm:px-6 lg:px-8">
 	<h3 id="order_review_heading" class="px-6"><?php esc_html_e( 'YOUR ORDER', 'woocommerce' ); ?></h3>
 
 	<?php if (!WC()->cart->is_empty()) : ?>

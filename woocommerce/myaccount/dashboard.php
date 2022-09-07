@@ -27,7 +27,7 @@ $allowed_html = array(
 	),
 );
 ?>
-<section id="welkom" class="pt-28">
+<section id="welkom" class="pt-12">
 	<div class="flex justify-center">
       <div class="basis-full sm:basis-3/5 text-base pb-16 px-4 sm:px-6 lg:px-8 lg:max-w-5xl">
 		<p class="mb-12">
