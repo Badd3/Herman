@@ -18,7 +18,14 @@
 #password_2,
 #billing_company,
 #billing_address_2,
-#billing_phone {
+#billing_phone,
+#shipping_first_name,
+#shipping_last_name,
+#shipping_company,
+#shipping_address_1,
+#shipping_address_2,
+#shipping_postcode,
+#shipping_city {
   @apply text-base outline-0 focus-visible:outline-0 border-b w-full border-grey py-3 bg-white-bg;
 }
 
@@ -42,7 +49,14 @@
 #password_2:focus-visible,
 #billing_company:focus-visible,
 #billing_address_2:focus-visible,
-#billing_phone:focus-visible  {
+#billing_phone:focus-visible,
+#shipping_first_name:focus-visible,
+#shipping_last_name:focus-visible,
+#shipping_company:focus-visible,
+#shipping_address_1:focus-visible,
+#shipping_address_2:focus-visible,
+#shipping_postcode:focus-visible,
+#shipping_city:focus-visible  {
   outline: unset;
 }
 

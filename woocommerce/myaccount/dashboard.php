@@ -28,54 +28,58 @@ $allowed_html = array(
 );
 ?>
 <section id="welkom" class="pt-28">
-<p class="mb-12">
-	<?php
-	printf(
-		/* translators: 1: user display name 2: logout url */
-		wp_kses( __( 'HELLO %1$S (NOT %1$s? <a href="%2$S">LOG OUT</a>)', 'woocommerce' ), $allowed_html ),
-		'<strong class="uppercase">' . esc_html( $current_user->display_name ) . '</strong>',
-		esc_url( wc_logout_url() )
-	);
-	?>
-</p>
+	<div class="flex justify-center">
+      <div class="basis-full sm:basis-3/5 text-base pb-16 px-4 sm:px-6 lg:px-8 lg:max-w-5xl">
+		<p class="mb-12">
+			<?php
+			printf(
+				/* translators: 1: user display name 2: logout url */
+				wp_kses( __( 'HELLO %1$S (NOT %1$s? <a href="%2$S">LOG OUT</a>)', 'woocommerce' ), $allowed_html ),
+				'<strong class="uppercase">' . esc_html( $current_user->display_name ) . '</strong>',
+				esc_url( wc_logout_url() )
+			);
+			?>
+		</p>
 
-<p class="w-2/3">
-	<?php
-	/* translators: 1: Orders URL 2: Address URL 3: Account URL. */
-	$dashboard_desc = __( 'FROM YOUR ACCOUNT DASHBOARD YOU CAN VIEW YOUR <A HREF="%1$S">RECENT ORDERS</A>, MANAGE YOUR <A HREF="%2$S">BILLING ADDRESS</a>, AND <A HREF="%3$S">EDIT YOUR PASSWORD AND ACCOUNT DETAILS</A>.', 'woocommerce' );
-	if ( wc_shipping_enabled() ) {
-		/* translators: 1: Orders URL 2: Addresses URL 3: Account URL. */
-		$dashboard_desc = __( 'FROM YOUR ACCOUNT DASHBOARD YOU CAN VIEW YOUR <A HREF="%1$S">RECENT ORDERS</A>, MANAGE YOUR <A HREF="%2$S">BILLING ADDRESS</a>, AND <A HREF="%3$S">EDIT YOUR PASSWORD AND ACCOUNT DETAILS</A>.', 'woocommerce' );
-	}
-	printf(
-		wp_kses( $dashboard_desc, $allowed_html ),
-		esc_url( wc_get_endpoint_url( 'orders' ) ),
-		esc_url( wc_get_endpoint_url( 'edit-address' ) ),
-		esc_url( wc_get_endpoint_url( 'edit-account' ) )
-	);
-	?>
-</p>
+		<p>
+			<?php
+			/* translators: 1: Orders URL 2: Address URL 3: Account URL. */
+			$dashboard_desc = __( 'FROM YOUR ACCOUNT DASHBOARD YOU CAN VIEW YOUR <A HREF="%1$S">RECENT ORDERS</A>, MANAGE YOUR <A HREF="%2$S">BILLING ADDRESS</a>, AND <A HREF="%3$S">EDIT YOUR PASSWORD AND ACCOUNT DETAILS</A>.', 'woocommerce' );
+			if ( wc_shipping_enabled() ) {
+				/* translators: 1: Orders URL 2: Addresses URL 3: Account URL. */
+				$dashboard_desc = __( 'FROM YOUR ACCOUNT DASHBOARD YOU CAN VIEW YOUR <A HREF="%1$S">RECENT ORDERS</A>, MANAGE YOUR <A HREF="%2$S">BILLING ADDRESS</a>, AND <A HREF="%3$S">EDIT YOUR PASSWORD AND ACCOUNT DETAILS</A>.', 'woocommerce' );
+			}
+			printf(
+				wp_kses( $dashboard_desc, $allowed_html ),
+				esc_url( wc_get_endpoint_url( 'orders' ) ),
+				esc_url( wc_get_endpoint_url( 'edit-address' ) ),
+				esc_url( wc_get_endpoint_url( 'edit-account' ) )
+			);
+			?>
+		</p>
+		</div>
+	</div>
 </section>
-<?php
-	/**
-	 * My Account dashboard.
-	 *
-	 * @since 2.6.0
-	 */
-	do_action( 'woocommerce_account_dashboard' );
+		<?php
+			/**
+			 * My Account dashboard.
+			 *
+			 * @since 2.6.0
+			 */
+			do_action( 'woocommerce_account_dashboard' );
 
-	/**
-	 * Deprecated woocommerce_before_my_account action.
-	 *
-	 * @deprecated 2.6.0
-	 */
-	do_action( 'woocommerce_before_my_account' );
+			/**
+			 * Deprecated woocommerce_before_my_account action.
+			 *
+			 * @deprecated 2.6.0
+			 */
+			do_action( 'woocommerce_before_my_account' );
 
-	/**
-	 * Deprecated woocommerce_after_my_account action.
-	 *
-	 * @deprecated 2.6.0
-	 */
-	do_action( 'woocommerce_after_my_account' );
+			/**
+			 * Deprecated woocommerce_after_my_account action.
+			 *
+			 * @deprecated 2.6.0
+			 */
+			do_action( 'woocommerce_after_my_account' );
 
 /* Omit closing PHP tag at the end of PHP files to avoid "headers already sent" issues. */
