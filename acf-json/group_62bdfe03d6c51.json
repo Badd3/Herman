@@ -237,6 +237,25 @@
                     "display": "block",
                     "sub_fields": [
                         {
+                            "key": "field_631890f2058b5",
+                            "label": "Contact Title Top",
+                            "name": "contact_title_top",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "CONTACT US",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
                             "key": "field_62d2cd497e7cf",
                             "label": "Image Left",
                             "name": "image_left",
@@ -412,5 +431,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1662300602
+    "modified": 1662554385
 }

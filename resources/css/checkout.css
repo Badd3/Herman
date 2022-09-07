@@ -175,3 +175,7 @@
 .payment_method_mollie_wc_gateway_ideal select {
   @apply text-base rounded-none uppercase my-4 h-8 border-0 border-b w-full border-grey bg-white-bg;
 }
+
+.woocommerce-form.woocommerce-form-login.login {
+  @apply w-1/2 mt-4;
+}
