@@ -249,3 +249,4 @@ add_action( 'woocommerce_account_edit-account_endpoint', 'woocommerce_account_ed
 
 // Add to cart message disabled
 add_filter( 'wc_add_to_cart_message_html', '__return_false' );
+

@@ -79,8 +79,7 @@ if ( $show_downloads ) {
 					do_action( 'woocommerce_order_details_after_order_table_items', $order );
 					?>
 				</tbody>
-
-				<tfoot>
+				<tfoot class="order-footer">
 					<?php
 					foreach ( $order->get_order_item_totals() as $key => $total ) {
 						?>

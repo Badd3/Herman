@@ -92,7 +92,7 @@
 #dashboard-order-review .product-total,
 #dashboard-order-details .product-total,
 .shop_table > tfoot {
-    @apply uppercase;
+    @apply uppercase w-1/5;
 }
 
 .shop_table > tfoot {
@@ -115,4 +115,8 @@
 
 #dashboard-order-review {
     @apply md:mt-28;
+}
+
+#dashboard-view-order .woocommerce-table__product-name.product-name {
+    @apply flex;
 }
