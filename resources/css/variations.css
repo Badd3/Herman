@@ -5,6 +5,11 @@
 .variations {
   @apply !w-full !text-base;
 }
+
+.variations tbody {
+  border-right: 1px solid black;
+  border-left: 1px solid black;
+}
 .variations tbody tr {
   @apply flex flex-row items-center border-b border-black divide-x-[1px] divide-black;
 }
@@ -61,4 +66,8 @@
 
 .variable-item.button-variable-item.selected .variable-item-contents:after {
   background-color: black;
+}
+
+.variations .label {
+  font-weight: 400;
 }
