@@ -28,9 +28,9 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
 	<div class="flex flex-col sm:flex-row">
 		<div class="basis-full sm:basis-1/3 md:basis-2/6">
 			<div class="mt-16 mb-4 text-grey sm:mt-0 pl-5 text-xs sm:invisible"><p>ACCOUNT</p></div>
-			<img class="sm:h-screen w-full object-cover grayscale sm:sticky sm:top-0 sm:mt-[-2rem]" src="<?php echo $image_url; ?>" alt="<?php echo $image_alt; ?>">
+			<img class="accountImage sm:h-screen w-full object-cover grayscale sm:sticky sm:top-0 sm:mt-[-2rem]" src="<?php echo $image_url; ?>" alt="<?php echo $image_alt; ?>">
 		</div>
-		<div class="sm:px-7 pb-8 pt-8 sm:pt-28 sm:basis-2/3 md:basis-2/6 text-gray-900 grid content-center bg-white-bg coming-soon items-center min-h-full justify-center">
+		<div class="sm:px-7 pb-8 pt-8 sm:pt-28 sm:basis-2/3 md:basis-2/6 text-gray-900 grid content-center bg-white-bg coming-soon items-center justify-center">
 			<div class="flex items-center justify-between mb-8">
 				<div class="flex items-start">
 					<div class="flex items-center h-5">

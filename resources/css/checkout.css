@@ -51,7 +51,7 @@ select#billing_country {
 }
 
 .woocommerce-account-fields {
-  @apply pt-4 text-base uppercase;
+  @apply pt-4 text-md uppercase;
 }
 
 #billing_first_name:focus-visible,
