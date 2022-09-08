@@ -250,3 +250,46 @@ add_action( 'woocommerce_account_edit-account_endpoint', 'woocommerce_account_ed
 // Add to cart message disabled
 add_filter( 'wc_add_to_cart_message_html', '__return_false' );
 
+function herman_extra_register_fields() {?>
+	<p class="form-row form-row-first">
+	<label for="reg_billing_first_name"><span class="required"></span></label>
+	<input type="text" class="input-text" placeholder="NAME" name="billing_first_name" id="reg_billing_first_name" value="<?php if ( ! empty( $_POST['billing_first_name'] ) ) esc_attr_e( $_POST['billing_first_name'] ); ?>" />
+	</p>
+	<p class="form-row form-row-last">
+	<label for="reg_billing_last_name"><span class="required"></span></label>
+	<input type="text" class="input-text" placeholder="SURNAME" name="billing_last_name" id="reg_billing_last_name" value="<?php if ( ! empty( $_POST['billing_last_name'] ) ) esc_attr_e( $_POST['billing_last_name'] ); ?>" />
+	</p>
+	<p class="form-row form-row-first">
+	<label for="reg_billing_email"><span class="required"></span></label>
+	<input type="text" class="input-text" placeholder="EMAIL" name="billing_email" id="reg_billing_email" value="<?php if ( ! empty( $_POST['billing_email'] ) ) esc_attr_e( $_POST['billing_email'] ); ?>" />
+	</p>
+	<p class="form-row form-row-last">
+	<label for="reg_account_password"><span class="required"></span></label>
+	<input type="password" class="input-text" placeholder="PASSWORD" name="account_password" id="reg_account_password" value="<?php if ( ! empty( $_POST['account_password'] ) ) esc_attr_e( $_POST['account_password'] ); ?>" />
+	</p>
+	<p class="form-row form-row-first">
+	<label for="reg_account_password-2"><span class="required"></span></label>
+	<input type="password" class="input-text" placeholder="PASSWORD CONFIRMATION" name="account_password-2" id="reg_account_password-2" value="<?php if ( ! empty( $_POST['account_password-2'] ) ) esc_attr_e( $_POST['account_password-2'] ); ?>" />
+	</p>
+	<p class="form-row form-row-last">
+	<label for="reg_billing_country"><span class="required"></span></label>
+	<input type="select" class="input-text" placeholder="COUNTRY" name="billing_country" id="reg_billing_country" value="<?php if ( ! empty( $_POST['billing_country'] ) ) esc_attr_e( $_POST['billing_country'] ); ?>" />
+	</p>
+	<div class="clear"></div>
+	<?php
+}
+add_action( 'woocommerce_register_form_start', 'herman_extra_register_fields' );
+
+/**
+ * Change the default country on the checkout for non-existing users only
+ */
+add_filter( 'default_checkout_billing_country', 'change_default_checkout_country', 10, 1 );
+
+function change_default_checkout_country( $country ) {
+    // If the user already exists, don't override country
+    if ( WC()->customer->get_is_paying_customer() ) {
+        return $country;
+    }
+
+    return 'NL'; // Override default to Netherlands
+}

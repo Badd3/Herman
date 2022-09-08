@@ -25,8 +25,24 @@
 #shipping_address_1,
 #shipping_address_2,
 #shipping_postcode,
-#shipping_city {
+#shipping_city,
+#reg_billing_first_name,
+#reg_billing_last_name,
+#reg_billing_email,
+#reg_account_password,
+#reg_account_password-2,
+#reg_billing_country,
+#account_username,
+#account_password_field {
   @apply text-base outline-0 focus-visible:outline-0 border-b w-full border-grey py-3 bg-white-bg;
+}
+
+#account_password {
+  @apply text-base outline-0 focus-visible:outline-0 w-full bg-white-bg;
+}
+
+.woocommerce-account-fields {
+  @apply pt-4 text-base uppercase;
 }
 
 #billing_first_name:focus-visible,
@@ -56,7 +72,16 @@
 #shipping_address_1:focus-visible,
 #shipping_address_2:focus-visible,
 #shipping_postcode:focus-visible,
-#shipping_city:focus-visible  {
+#shipping_city:focus-visible,
+#reg_billing_first_name:focus-visible,
+#reg_billing_last_name:focus-visible,
+#reg_billing_email:focus-visible,
+#reg_account_password:focus-visible,
+#reg_account_password-2:focus-visible,
+#reg_billing_country:focus-visible,
+#account_username:focus-visible,
+#account_password_field:focus-visible,
+#account_password:focus-visible  {
   outline: unset;
 }
 

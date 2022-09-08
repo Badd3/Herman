@@ -2,8 +2,9 @@
   
  }
 
- .woocommerce-form-login__submit {
-    @apply w-full;
+ .woocommerce-form-login__submit,
+ .woocommerce-form-register__submit {
+    @apply w-2/5 float-right;
  }
 
  .lost_password, .woocommerce-form-login__rememberme {
