@@ -1,5 +1,5 @@
 .accountImage {
-    @apply h-80 w-full sm:h-full;
+    @apply h-72 w-full sm:h-full;
 }
 
  .woocommerce-form-login__submit {
