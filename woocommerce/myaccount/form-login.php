@@ -15,6 +15,10 @@
  * @version 4.1.0
  */
 
+$image = get_sub_field('image_left_login');
+$image_url = get_sub_field('image_left_login')['url'];
+$image_alt = get_sub_field('image_left_login')['alt'];
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
@@ -23,10 +27,10 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
 <section id="login" class="bg-white-bg mb-[-3rem]">
 	<div class="flex flex-col sm:flex-row">
 		<div class="basis-full sm:basis-1/3 md:basis-2/6">
-			<div class="mt-16 mb-4 text-grey sm:mt-0 pl-5 text-xs sm:invisible"><p>ACCOUNT REGISTRATION</p></div>
-			<img class="sm:h-screen w-full object-cover grayscale sm:sticky sm:top-0 sm:mt-[-2rem]" src="https://herman.designdew.nl/wp-content/uploads/2022/07/d2ad68a9e60be2b5e8a8333b4f5dd12f-1.jpeg">
+			<div class="mt-16 mb-4 text-grey sm:mt-0 pl-5 text-xs sm:invisible"><p>ACCOUNT</p></div>
+			<img class="sm:h-screen w-full object-cover grayscale sm:sticky sm:top-0 sm:mt-[-2rem]" src="<?php echo $image_url; ?>" alt="<?php echo $image_alt; ?>">
 		</div>
-		<div class="px-7 pb-8 pt-8 sm:pt-28 sm:basis-2/3 md:basis-2/6 text-gray-900 grid content-center bg-white-bg coming-soon items-center min-h-full justify-center">
+		<div class="sm:px-7 pb-8 pt-8 sm:pt-28 sm:basis-2/3 md:basis-2/6 text-gray-900 grid content-center bg-white-bg coming-soon items-center min-h-full justify-center">
 			<div class="flex items-center justify-between mb-8">
 				<div class="flex items-start">
 					<div class="flex items-center h-5">

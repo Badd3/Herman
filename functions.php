@@ -250,36 +250,6 @@ add_action( 'woocommerce_account_edit-account_endpoint', 'woocommerce_account_ed
 // Add to cart message disabled
 add_filter( 'wc_add_to_cart_message_html', '__return_false' );
 
-function herman_extra_register_fields() {?>
-	<p class="form-row form-row-first">
-	<label for="reg_billing_first_name"><span class="required"></span></label>
-	<input type="text" class="input-text" placeholder="NAME" name="billing_first_name" id="reg_billing_first_name" value="<?php if ( ! empty( $_POST['billing_first_name'] ) ) esc_attr_e( $_POST['billing_first_name'] ); ?>" />
-	</p>
-	<p class="form-row form-row-last">
-	<label for="reg_billing_last_name"><span class="required"></span></label>
-	<input type="text" class="input-text" placeholder="SURNAME" name="billing_last_name" id="reg_billing_last_name" value="<?php if ( ! empty( $_POST['billing_last_name'] ) ) esc_attr_e( $_POST['billing_last_name'] ); ?>" />
-	</p>
-	<p class="form-row form-row-first">
-	<label for="reg_billing_email"><span class="required"></span></label>
-	<input type="text" class="input-text" placeholder="EMAIL" name="billing_email" id="reg_billing_email" value="<?php if ( ! empty( $_POST['billing_email'] ) ) esc_attr_e( $_POST['billing_email'] ); ?>" />
-	</p>
-	<p class="form-row form-row-last">
-	<label for="reg_account_password"><span class="required"></span></label>
-	<input type="password" class="input-text" placeholder="PASSWORD" name="account_password" id="reg_account_password" value="<?php if ( ! empty( $_POST['account_password'] ) ) esc_attr_e( $_POST['account_password'] ); ?>" />
-	</p>
-	<p class="form-row form-row-first">
-	<label for="reg_account_password-2"><span class="required"></span></label>
-	<input type="password" class="input-text" placeholder="PASSWORD CONFIRMATION" name="account_password-2" id="reg_account_password-2" value="<?php if ( ! empty( $_POST['account_password-2'] ) ) esc_attr_e( $_POST['account_password-2'] ); ?>" />
-	</p>
-	<p class="form-row form-row-last">
-	<label for="reg_billing_country"><span class="required"></span></label>
-	<input type="select" class="input-text" placeholder="COUNTRY" name="billing_country" id="reg_billing_country" value="<?php if ( ! empty( $_POST['billing_country'] ) ) esc_attr_e( $_POST['billing_country'] ); ?>" />
-	</p>
-	<div class="clear"></div>
-	<?php
-}
-add_action( 'woocommerce_register_form_start', 'herman_extra_register_fields' );
-
 /**
  * Change the default country on the checkout for non-existing users only
  */
@@ -292,4 +262,89 @@ function change_default_checkout_country( $country ) {
     }
 
     return 'NL'; // Override default to Netherlands
+}
+
+add_action( 'woocommerce_register_form_start', 'herman_add_name_woo_account_registration' );
+  
+function herman_add_name_woo_account_registration() {
+    ?>
+  
+    <p class="form-row form-row-first">
+    <input type="text" class="input-text" name="billing_first_name" id="reg_billing_first_name" placeholder="NAME" value="<?php if ( ! empty( $_POST['billing_first_name'] ) ) esc_attr_e( $_POST['billing_first_name'] ); ?>" />
+    </p>
+  
+    <p class="form-row form-row-last">
+    <input type="text" class="input-text" name="billing_last_name" id="reg_billing_last_name" placeholder="SURNAME" value="<?php if ( ! empty( $_POST['billing_last_name'] ) ) esc_attr_e( $_POST['billing_last_name'] ); ?>" />
+    </p>
+  
+    <div class="clear"></div>
+  
+    <?php
+}
+  
+///////////////////////////////
+// 2. VALIDATE FIELDS
+  
+add_filter( 'woocommerce_registration_errors', 'herman_validate_name_fields', 10, 3 );
+  
+function herman_validate_name_fields( $errors, $username, $email ) {
+    if ( isset( $_POST['billing_first_name'] ) && empty( $_POST['billing_first_name'] ) ) {
+        $errors->add( 'billing_first_name_error', __( '<strong>Error</strong>: First name is required!', 'woocommerce' ) );
+    }
+    if ( isset( $_POST['billing_last_name'] ) && empty( $_POST['billing_last_name'] ) ) {
+        $errors->add( 'billing_last_name_error', __( '<strong>Error</strong>: Last name is required!.', 'woocommerce' ) );
+    }
+	if(isset($_POST['billing_country']) && empty($_POST['billing_country'])){
+		$errors->add( 'billing_country_error', __( '<strong>Error</strong>: Country is required!.', 'woocommerce' ) );
+	}
+    return $errors;
+}
+  
+///////////////////////////////
+// 3. SAVE FIELDS
+  
+add_action( 'woocommerce_created_customer', 'herman_save_name_fields' );
+  
+function herman_save_name_fields( $customer_id ) {
+    if ( isset( $_POST['billing_first_name'] ) ) {
+        update_user_meta( $customer_id, 'billing_first_name', sanitize_text_field( $_POST['billing_first_name'] ) );
+        update_user_meta( $customer_id, 'first_name', sanitize_text_field($_POST['billing_first_name']) );
+    }
+    if ( isset( $_POST['billing_last_name'] ) ) {
+        update_user_meta( $customer_id, 'billing_last_name', sanitize_text_field( $_POST['billing_last_name'] ) );
+        update_user_meta( $customer_id, 'last_name', sanitize_text_field($_POST['billing_last_name']) );
+    }
+	if(isset($_POST['billing_country'])){
+        update_user_meta( $customer_id, 'billing_country', sanitize_text_field($_POST['billing_country']));
+		update_user_meta( $customer_id, 'shipping_country', sanitize_text_field($_POST['shipping_country']));
+    }
+   
+  
+}
+
+/**
+ * Add new register fields for WooCommerce registration.
+ */
+function wooc_extra_register_fields() {
+
+    wp_enqueue_script( 'wc-country-select' );
+
+    woocommerce_form_field( 'billing_country', array(
+        'type'      => 'country',
+        'class'     => array('chzn-drop'),
+        'placeholder' => __('CHOOSE YOUR COUNTRY'),
+        'required'  => true,
+        'clear'     => true,
+		'default' 	=> 'NL'
+    ));
+
+}
+add_action( 'woocommerce_register_form_start', 'wooc_extra_register_fields' );
+
+add_filter( 'woocommerce_registration_redirect', 'custom_redirection_after_registration', 10, 1 );
+function custom_redirection_after_registration( $redirection_url ){
+    // Change the redirection Url
+    $redirection_url = get_permalink( get_option('woocommerce_myaccount_page_id'));
+
+    return $redirection_url; // Always return something
 }

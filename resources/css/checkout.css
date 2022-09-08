@@ -33,12 +33,21 @@
 #reg_account_password-2,
 #reg_billing_country,
 #account_username,
-#account_password_field {
+#account_password_field,
+#reg_password,
+#reg_password-2,
+#reg_country,
+#billing_country_field {
   @apply text-base outline-0 focus-visible:outline-0 border-b w-full border-grey py-3 bg-white-bg;
 }
 
-#account_password {
+#account_password,
+#billing_country {
   @apply text-base outline-0 focus-visible:outline-0 w-full bg-white-bg;
+}
+
+select#billing_country {
+  @apply ml-[-5px] uppercase;
 }
 
 .woocommerce-account-fields {
@@ -81,7 +90,11 @@
 #reg_billing_country:focus-visible,
 #account_username:focus-visible,
 #account_password_field:focus-visible,
-#account_password:focus-visible  {
+#account_password:focus-visible,
+#reg_password:focus-visible,
+#reg_password-2:focus-visible,
+#reg_country:focus-visible,
+#billing_country_field:focus-visible  {
   outline: unset;
 }
 

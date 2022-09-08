@@ -184,6 +184,25 @@
                     "display": "block",
                     "sub_fields": [
                         {
+                            "key": "field_6319c2f4eb4d5",
+                            "label": "Account Shortcode",
+                            "name": "account_shortcode",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "[wc_reg_form_herman]",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
                             "key": "field_6318936b305df",
                             "label": "Image Left Login",
                             "name": "image_left_login",
@@ -465,5 +484,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1662555034
+    "modified": 1662634160
 }
