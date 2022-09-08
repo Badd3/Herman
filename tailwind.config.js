@@ -29,14 +29,13 @@ module.exports = {
       sm: ["12px", "18px"],
       base: ["14px", "22px"],
       md: ["16px", "22px"],
-      lg: ["20px", "28px"],
+      lg: ["18px", "28px"],
       xl: ["24px", "32px"],
       "2xl": ["30px", "32px"],
       "3xl": ["38px", "32px"],
     },
     extend: {
       gridTemplateRows: {
-        // Simple 12 row grid
         12: "repeat(12, minmax(0, 1fr))",
       },
 
@@ -56,7 +55,8 @@ module.exports = {
       // ),
     },
     fontFamily: {
-      sans: ["Gotham", "sans-serif"],
+      book: ["Gotham-Book", "sans-serif"],
+      light: ["Gotham", "sans-serif"],
     },
     screens: {
       xx: "375px",

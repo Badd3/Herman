@@ -4,7 +4,7 @@ $overlay = get_sub_field('overlay');
 // Check rows exists.
 if (have_rows('slider_afbeeldingen')) :
 ?>
-    <section class="h-screen grid z-[0] grid-cols-3 grid-rows-3 relative">
+    <section class="h-screen grid z-[0] grid-cols-12 lg:grid-cols-3 grid-rows-3 relative">
         <?php
 
         if ($overlay) {
@@ -12,7 +12,7 @@ if (have_rows('slider_afbeeldingen')) :
         }; ?>
 
         <!-- Slider main container -->
-        <div class="swiper w-screen lg:w-[calc(100vw-16.67vw)] row-span-full row-col-full">
+        <div class="swiper w-screen lg:w-[calc(100vw-208px)] row-span-full col-span-full">
             <!-- Additional required wrapper -->
             <div class="swiper-wrapper">
                 <?php
@@ -42,9 +42,9 @@ if (have_rows('slider_afbeeldingen')) :
         $slider_button_label = get_sub_field('slider_button')['title'];
 
         ?>
-        <div class="z-10 text-center row-span-full col-start-2 col-end-3 row-start-2 row-end-3 flex justify-center items-center flex-col">
-            <h1 class="text-white uppercase text-lg	mb-3"><?php the_sub_field('slider_tekst'); ?></h1>
-            <a class="text-white uppercase text-lg" href="<?php echo $slider_button_url; ?>"><?php echo $slider_button_label; ?></a>
+        <div class="z-10 text-center row-span-full col-start-3 col-end-11 lg:col-start-2 lg:col-end-3 row-start-2 row-end-3 flex justify-center items-center flex-col">
+            <h1 class="text-white uppercase lg:text-lg mb-3 text-[14px]"><?php the_sub_field('slider_tekst'); ?></h1>
+            <a class="text-white uppercase text-[14px] lg:text-lg" href="<?php echo $slider_button_url; ?>"><?php echo $slider_button_label; ?></a>
         </div>
     </section>
 
