@@ -79,17 +79,19 @@ function single_product_description()
     <section class="mb-5">
         <div class="flex flex-col border-b border-black pb-3">
             <div class="w-full flex flex-row justify-between">
-                <div><?php the_title(); ?></div>
+                <div>
+                    <h1 class="text-base"><?php the_title(); ?></h1>
+                </div>
                 <div><?php woocommerce_template_single_price(); ?></div>
             </div>
         </div>
         <?php woocommerce_template_single_add_to_cart(); ?>
     </section>
     <?php if ($description_content || $care_guide_content || $size_guide_content || $history_content) { ?>
-        <section class="space-y-5">
+        <section class="space-y-5 text-base">
             <?php if (get_the_content()) { ?>
                 <div x-data="{ expanded: false }">
-                    <button @click="expanded = ! expanded"><span :class="expanded ? 'rotate-45' : ''" class="mr-3 duration-300 inline-block">+</span>DESCRIPTION</button>
+                    <button @click="expanded = ! expanded" class="duration-300" :class="expanded ? 'mb-[10px]' : ''"><span :class="expanded ? 'rotate-45' : ''" class="mr-3 duration-300 inline-block">+</span>DESCRIPTION</button>
 
                     <div x-show="expanded" x-collapse>
                         <?php the_content(); ?>
@@ -99,7 +101,7 @@ function single_product_description()
             }
             if ($care_guide_content) { ?>
                 <div x-data="{ expanded: false }">
-                    <button @click="expanded = ! expanded"><span :class="expanded ? 'rotate-45' : ''" class="mr-3 duration-300 inline-block">+</span>CARE GUIDE</button>
+                    <button @click="expanded = ! expanded" class="duration-300" :class="expanded ? 'mb-[10px]' : ''"><span :class="expanded ? 'rotate-45' : ''" class="mr-3 duration-300 inline-block">+</span>CARE GUIDE</button>
 
                     <div x-show="expanded" x-collapse>
                         <?php echo $care_guide_content ?>
@@ -109,7 +111,7 @@ function single_product_description()
             }
             if ($size_guide_content) { ?>
                 <div x-data="{ expanded: false }">
-                    <button @click="expanded = ! expanded"><span :class="expanded ? 'rotate-45' : ''" class="mr-3 duration-300 inline-block">+</span>SIZE GUIDE</button>
+                    <button @click="expanded = ! expanded" class="duration-300" :class="expanded ? 'mb-[10px]' : ''"><span :class="expanded ? 'rotate-45' : ''" class="mr-3 duration-300 inline-block">+</span>SIZE GUIDE</button>
 
                     <div x-show="expanded" x-collapse>
                         <?php echo $size_guide_content ?>
@@ -119,7 +121,7 @@ function single_product_description()
             }
             if ($history_content) { ?>
                 <div x-data="{ expanded: false }">
-                    <button @click="expanded = ! expanded"><span :class="expanded ? 'rotate-45' : ''" class="mr-3 duration-300 inline-block">+</span>HISTORY CONTENT</button>
+                    <button @click="expanded = ! expanded" class="duration-300" :class="expanded ? 'mb-[10px]' : ''"><span :class="expanded ? 'rotate-45' : ''" class="mr-3 duration-300 inline-block">+</span>HISTORY CONTENT</button>
 
                     <div x-show="expanded" x-collapse>
                         <?php echo $history_content ?>
