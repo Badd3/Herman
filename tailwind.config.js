@@ -35,6 +35,10 @@ module.exports = {
       "3xl": ["38px", "32px"],
     },
     extend: {
+      spacing: {
+        2.5: "0.625rem",
+        7.5: "1.875rem",
+      },
       gridTemplateRows: {
         12: "repeat(12, minmax(0, 1fr))",
       },

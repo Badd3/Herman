@@ -3,7 +3,7 @@
 }
 
 .related.products > h2 {
-  @apply uppercase mb-5 font-bold;
+  @apply uppercase mb-5;
 }
 
 .woocommerce-loop-product__title {

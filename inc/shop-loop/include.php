@@ -17,7 +17,7 @@ if (is_shop() || is_product_category() || is_product()) {
 
     function herman_template_loop_product_link_open()
     {
-        echo '<a class="aspect-w-[54] aspect-h-[73] block" href="' . get_the_permalink() . '">';
+        echo '<a class="aspect-w-[54] aspect-h-[73] block group" href="' . get_the_permalink() . '">';
     }
 
     add_action('woocommerce_shop_loop_item_title', 'herman_template_loop_product_link_close', 5);
@@ -44,6 +44,26 @@ if (is_shop() || is_product_category() || is_product()) {
 
     function loop_product_custom_thumbnail()
     {
-        echo the_post_thumbnail('thumbnail', array('class' => 'object-cover'));
+
+        global $product;
+        $attachment_ids = $product->get_gallery_image_ids();
+        $thumbnail_url = wp_get_attachment_image_src($attachment_ids[0], 'full');
+
+        //als er geen image in gallery is dan word de hover image niet getoond
+        if ($thumbnail_url) {
+            $hover_classes = "object-cover group-hover:hidden";
+        } else {
+            $hover_classes = "object-cover";
+        }
+        echo the_post_thumbnail('thumbnail', array('class' => $hover_classes));
+?>
+        <img class="hidden group-hover:block object-cover" src="<?php echo $thumbnail_url[0]; ?>">
+<?php
+
+
+        // if ($attachment_ids = $product->get_gallery_image_ids()) {
+        //     echo wc_get_gallery_image_html($attachment_ids[0], array('class' => 'object-cover'));
+        // }
+        // echo $img;
     }
 }

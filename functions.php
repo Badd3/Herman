@@ -75,6 +75,22 @@ function tailpress_asset($path)
 }
 
 /**
+ * Add page and post slugs to body class
+ */
+
+function add_slug_body_class($classes)
+{
+    global $post;
+    if (isset($post)) {
+        $classes[] = $post->post_type . '-' . $post->post_name;
+    }
+    return $classes;
+}
+add_filter('body_class', 'add_slug_body_class');
+
+
+
+/**
  * Adds option 'li_class' to 'wp_nav_menu'.
  *
  * @param string  $classes String of classes.
