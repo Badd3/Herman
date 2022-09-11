@@ -13,5 +13,4 @@ $info_text = get_sub_field('info_text');
       <p><?php echo $info_text; ?></p>
     </div>
   </div>
-  </div>
 </section>
