@@ -30,7 +30,7 @@
 		<!-- Core -->
 		<?php get_template_part('partials/core/off-canvas-bag'); ?>
 
-		<div id="content" class="site-content bg-white-bg flex-grow w-full lg:ml-auto lg:w-5/6">
+		<div id="content" class="site-content bg-white-bg flex-grow w-full lg:ml-auto lg:w-[calc(100vw-208px)]">
 
 			<?php do_action('tailpress_content_start'); ?>
 

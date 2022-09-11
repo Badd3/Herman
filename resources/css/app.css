@@ -25,3 +25,10 @@
     url("/wp-content/themes/Herman/fonts/Gotham.woff") format("woff");
   font-display: auto;
 }
+
+@font-face {
+  font-family: "Gotham-Book";
+  src: url("/wp-content/themes/Herman/fonts/Gotham-Book.woff2") format("woff2"),
+    url("/wp-content/themes/Herman/fonts/Gotham-Book.woff") format("woff");
+  font-display: auto;
+}

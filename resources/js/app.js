@@ -8,7 +8,7 @@ const swiper = new Swiper(".swiper", {
   modules: [Pagination, Mousewheel],
   direction: "vertical",
   loop: true,
-  speed: 2000,
+  speed: 500,
   mousewheel: {
     invert: false,
   },

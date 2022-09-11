@@ -145,7 +145,7 @@ if (!function_exists('herman_woocommerce_flex_wrapper_before')) {
 ?>
 
 			<section class="py-16 lg:py-28">
-				<div class="px-2.5 lg:px-8">
+				<div class="px-2.5 lg:px-7.5">
 
 				<?php
 			}
@@ -176,8 +176,8 @@ if (!function_exists('herman_woocommerce_flex_wrapper_before')) {
 	add_action('woocommerce_sidebar', 'herman_woocommerce_flex_wrapper_after', 11);
 
 
-	
-	if ( function_exists( 'herman_woocommerce_header_cart' ) ) {
+
+	if (function_exists('herman_woocommerce_header_cart')) {
 		herman_woocommerce_header_cart();
 	}
 
@@ -273,73 +273,75 @@ if (!function_exists('herman_woocommerce_flex_wrapper_before')) {
 	add_action('wp', 'custom_includes');
 
 
-// WooCommerce Checkout Fields Hook
-add_filter('woocommerce_checkout_fields','custom_wc_checkout_fields_no_label');
+	// WooCommerce Checkout Fields Hook
+	add_filter('woocommerce_checkout_fields', 'custom_wc_checkout_fields_no_label');
 
-// Our hooked in function - $fields is passed via the filter!
-// Action: remove label from $fields
-function custom_wc_checkout_fields_no_label($fields) {
-    // loop by category
-    foreach ($fields as $category => $value) {
-        // loop by fields
-        foreach ($value as $field => $property) {
-            // remove label property
-            unset($fields[$category][$field]['label']);
-        }
-    }
-     return $fields;
-}
+	// Our hooked in function - $fields is passed via the filter!
+	// Action: remove label from $fields
+	function custom_wc_checkout_fields_no_label($fields)
+	{
+		// loop by category
+		foreach ($fields as $category => $value) {
+			// loop by fields
+			foreach ($value as $field => $property) {
+				// remove label property
+				unset($fields[$category][$field]['label']);
+			}
+		}
+		return $fields;
+	}
 
 
-/**
+	/**
  Remove all possible fields
- **/
-function wc_remove_checkout_fields( $fields ) {
+	 **/
+	function wc_remove_checkout_fields($fields)
+	{
 
-    // Billing fields
-    unset( $fields['billing']['billing_company'] );
-    unset( $fields['billing']['billing_phone'] );
-    unset( $fields['billing']['billing_state'] );
-    unset( $fields['billing']['billing_address_1_field'] );
-	unset( $fields['billing']['billing_address_2'] );
+		// Billing fields
+		unset($fields['billing']['billing_company']);
+		unset($fields['billing']['billing_phone']);
+		unset($fields['billing']['billing_state']);
+		unset($fields['billing']['billing_address_1_field']);
+		unset($fields['billing']['billing_address_2']);
 
-    // Shipping fields
-    unset( $fields['shipping']['shipping_company'] );
-    unset( $fields['shipping']['shipping_phone'] );
-    unset( $fields['shipping']['shipping_state'] );
-    unset( $fields['shipping']['shipping_address_2'] );
+		// Shipping fields
+		unset($fields['shipping']['shipping_company']);
+		unset($fields['shipping']['shipping_phone']);
+		unset($fields['shipping']['shipping_state']);
+		unset($fields['shipping']['shipping_address_2']);
 
-    // Order fields
-    unset( $fields['order']['order_comments'] );
+		// Order fields
+		unset($fields['order']['order_comments']);
 
-    return $fields;
-}
-add_filter( 'woocommerce_checkout_fields', 'wc_remove_checkout_fields' );
+		return $fields;
+	}
+	add_filter('woocommerce_checkout_fields', 'wc_remove_checkout_fields');
 
-add_filter('woocommerce_checkout_fields', 'custom_override_checkout_fields');
-function custom_override_checkout_fields($fields)
- {
- $fields['billing']['billing_first_name']['placeholder'] = 'NAME';
- $fields['billing']['billing_last_name']['placeholder'] = 'SURNAME';
- $fields['billing']['billing_email']['placeholder'] = 'EMAIL'; 
- $fields['billing']['billing_postcode']['placeholder'] = 'POSTCODE';
- $fields['billing']['billing_city']['placeholder'] = 'CITY';    
+	add_filter('woocommerce_checkout_fields', 'custom_override_checkout_fields');
+	function custom_override_checkout_fields($fields)
+	{
+		$fields['billing']['billing_first_name']['placeholder'] = 'NAME';
+		$fields['billing']['billing_last_name']['placeholder'] = 'SURNAME';
+		$fields['billing']['billing_email']['placeholder'] = 'EMAIL';
+		$fields['billing']['billing_postcode']['placeholder'] = 'POSTCODE';
+		$fields['billing']['billing_city']['placeholder'] = 'CITY';
 
- $fields['shipping']['shipping_first_name']['placeholder'] = 'NAME';
- $fields['shipping']['shipping_last_name']['placeholder'] = 'SURNAME';
- $fields['shipping']['shipping_email']['placeholder'] = 'EMAIL'; 
- $fields['shipping']['shipping_address_1']['placeholder'] = 'ADDRESS';
- $fields['shipping']['shipping_postcode']['placeholder'] = 'POSTCODE';
- $fields['shipping']['shipping_city']['placeholder'] = 'CITY';
+		$fields['shipping']['shipping_first_name']['placeholder'] = 'NAME';
+		$fields['shipping']['shipping_last_name']['placeholder'] = 'SURNAME';
+		$fields['shipping']['shipping_email']['placeholder'] = 'EMAIL';
+		$fields['shipping']['shipping_address_1']['placeholder'] = 'ADDRESS';
+		$fields['shipping']['shipping_postcode']['placeholder'] = 'POSTCODE';
+		$fields['shipping']['shipping_city']['placeholder'] = 'CITY';
 
- return $fields;
- }
+		return $fields;
+	}
 
- add_filter('woocommerce_default_address_fields', 'wc_override_address_fields');
-function wc_override_address_fields( $fields ) {
-$fields['address_1']['placeholder'] = 'ADDRESS AND HOUSENUMBER';
-return $fields;
-}
+	add_filter('woocommerce_default_address_fields', 'wc_override_address_fields');
+	function wc_override_address_fields($fields)
+	{
+		$fields['address_1']['placeholder'] = 'ADDRESS AND HOUSENUMBER';
+		return $fields;
+	}
 
-remove_action( 'woocommerce_checkout_order_review', 'woocommerce_order_review', 10 );
-
+	remove_action('woocommerce_checkout_order_review', 'woocommerce_order_review', 10);

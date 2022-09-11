@@ -38,7 +38,7 @@
 #reg_password-2,
 #reg_country,
 #billing_country_field {
-  @apply text-base outline-0 focus-visible:outline-0 border-b w-full border-grey py-3 bg-white-bg;
+  @apply text-base outline-0 focus-visible:outline-0 border-b w-full border-black py-3 bg-white-bg;
 }
 
 #account_password,
@@ -94,7 +94,7 @@ select#billing_country {
 #reg_password:focus-visible,
 #reg_password-2:focus-visible,
 #reg_country:focus-visible,
-#billing_country_field:focus-visible  {
+#billing_country_field:focus-visible {
   outline: unset;
 }
 
@@ -143,7 +143,7 @@ select#billing_country {
 }
 
 #dashboard-edit-account .woocommerce-message {
- @apply absolute;
+  @apply absolute;
 }
 
 .lost_password,
@@ -151,7 +151,7 @@ select#billing_country {
   @apply text-base uppercase mt-4;
 }
 
-.select2-container--default .select2-selection--single  {
+.select2-container--default .select2-selection--single {
   @apply text-base rounded-none uppercase my-4 h-8 border-0 border-b border-grey bg-white-bg;
 }
 
@@ -163,7 +163,7 @@ select#billing_country {
   @apply mt-4;
 }
 
-#customer_details#billing_address_1_field{
+#customer_details#billing_address_1_field {
   display: none;
 }
 
@@ -179,18 +179,22 @@ select#billing_country {
   @apply mt-12 sm:mt-28 text-base;
 }
 
-#thank-you .woocommerce-notice.woocommerce-notice--success.woocommerce-thankyou-order-received {
- @apply mb-4;
+#thank-you
+  .woocommerce-notice.woocommerce-notice--success.woocommerce-thankyou-order-received {
+  @apply mb-4;
 }
 
 #thank-you .woocommerce-order-details__title {
-  @apply my-4 
+  @apply my-4;
 }
-#thank-you .woocommerce-table.woocommerce-table--order-details.shop_table.order_details {
+#thank-you
+  .woocommerce-table.woocommerce-table--order-details.shop_table.order_details {
   @apply text-left;
 }
-#thank-you .woocommerce-column.woocommerce-column--1.woocommerce-column--billing-address.col-1,
-#thank-you .woocommerce-column.woocommerce-column--2.woocommerce-column--shipping-address.col-2 {
+#thank-you
+  .woocommerce-column.woocommerce-column--1.woocommerce-column--billing-address.col-1,
+#thank-you
+  .woocommerce-column.woocommerce-column--2.woocommerce-column--shipping-address.col-2 {
   @apply mt-4;
 }
 

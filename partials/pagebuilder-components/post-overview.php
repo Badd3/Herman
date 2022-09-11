@@ -9,7 +9,7 @@ $args = array(
 $the_query = new WP_Query($args);
 
 ?>
-<section class="py-16 lg:py-28 px-2.5 lg:px-8">
+<section class="py-16 lg:py-28 px-2.5 lg:px-7.5">
 
   <?php
 
@@ -35,7 +35,7 @@ $the_query = new WP_Query($args);
         <div class="flex mb-2.5 overflow-hidden h-full">
           <img class="object-cover w-full" src="<?php the_post_thumbnail_url(); ?>">
         </div>
-        <span class="uppercase font-bold"><?php the_title(); ?></span>
+        <span class="uppercase "><?php the_title(); ?></span>
       </a>
 
     <?php
@@ -48,7 +48,7 @@ $the_query = new WP_Query($args);
     ?>
 
 
-    <div class="flex justify-center [&_button]:uppercase [&_button]:font-bold [&_button]:mt-10">
+    <div class="flex justify-center [&_button]:uppercase  [&_button]:mt-10">
       <?php echo do_shortcode('[facetwp facet="load_more"]'); ?>
     </div>
   <?php
