@@ -7,10 +7,11 @@ $selected_navigation = $args['selected_nav'];
 // Check rows exists.
 if (have_rows('navigation_items', $selected_navigation)) :
 ?>
-    <ul x-data="{ selected: null }" class="flex flex-col gap-3">
+    <ul class="flex flex-col gap-3">
         <?php
         // Loop through rows.
         $i = 0;
+
         while (have_rows('navigation_items', $selected_navigation)) : the_row();
 
             // Load sub field value.
@@ -20,7 +21,9 @@ if (have_rows('navigation_items', $selected_navigation)) :
 
         ?>
             <?php if ($submenu) { ?>
+
                 <li>
+                    <?php $i = rand(10000, 99999); ?>
                     <a @click.prevent.stop="selected !== <?php echo $i; ?> ? selected = <?php echo $i; ?> : selected = null;" class="hover:text-black duration-300 text-base" href="<?php echo $nav_item_link; ?>"><?php echo $nav_item_label; ?></a>
                     <?php
                     if ($submenu) {
@@ -36,7 +39,7 @@ if (have_rows('navigation_items', $selected_navigation)) :
         <?php
             }
 
-            $i++;
+        // $i++;
         endwhile;
         ?>
     </ul>
