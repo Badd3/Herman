@@ -1,6 +1,8 @@
 import Alpine from "alpinejs";
 import collapse from "@alpinejs/collapse";
 import Swiper, { Pagination, Mousewheel } from "swiper";
+import "./lightbox.js";
+
 Alpine.plugin(collapse);
 
 //SWIPER HOME
