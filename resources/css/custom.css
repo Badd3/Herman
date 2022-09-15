@@ -5,3 +5,7 @@ body {
 button {
   @apply text-base;
 }
+
+.zoom-cursor {
+  cursor: url("/wp-content/themes/Herman/zoom.png"), pointer;
+}

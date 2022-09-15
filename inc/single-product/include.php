@@ -26,16 +26,18 @@ function single_product_images()
 {
     global $product;
     $attachment_ids = $product->get_gallery_attachment_ids();
-    echo '<div class="product-images  flex-col gap-y-5 hidden md:flex">';
-    echo '<div class="aspect-w-[54] aspect-h-[73] [&>*]:object-cover">';
+    $thumbnail_url = get_the_post_thumbnail_url(get_the_id(), 'full');
+    echo '<div class="product-images flex-col gap-y-5 hidden md:flex">';
+    echo '<a class="chocolat-image zoom-cursor" href="' . $thumbnail_url . '" class="aspect-w-[54] aspect-h-[73] [&>*]:object-cover">';
     the_post_thumbnail();
-    echo '</div>';
+    echo '</a>';
 
 
     foreach ($attachment_ids as $attachment_id) {
-        echo '<div class="aspect-w-[54] aspect-h-[73] [&>*]:object-cover">';
+        $attachment_url = wp_get_attachment_url($attachment_id, 'full');
+        echo '<a class="chocolat-image zoom-cursor" href="' . $attachment_url . '" class="aspect-w-[54] aspect-h-[73] [&>*]:object-cover">';
         echo wp_get_attachment_image($attachment_id, 'full');
-        echo '</div>';
+        echo '</a>';
     }
     echo '</div>';
 

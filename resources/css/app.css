@@ -6,6 +6,7 @@
 @import "swiper/modules/effect-fade/effect-fade.min.css";
 @import "swiper/modules/pagination/pagination.min.css";
 @import "swiper/modules/autoplay/autoplay.min.css";
+@import "chocolat/dist/css/chocolat.css";
 
 @import "custom.css";
 @import "home-slider.css";
