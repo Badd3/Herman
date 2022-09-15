@@ -2,7 +2,7 @@
     <?php
     $i = $args['count'];
     ?>
-    <section x-data="{open : false}" :open="selected == <? echo $i; ?> ? open = true : open = false" @click.outside="open ? selected = null : '' " class="duration-300 absolute h-full left-0 top-0 w-[208px] bg-white-bg z-[1] hidden lg:block" :class="selected == <? echo $i; ?> ? 'left-[208px]' : ''">
+    <section x-data="{open : false}" :open="selected == <? echo $i; ?> ? open = true : open = false" @click.outside="open ? selected = null : '' " class="duration-300 fixed h-full left-0 top-0 w-[208px] bg-white-bg z-[1] hidden lg:block " :class="selected == <? echo $i; ?> ? 'left-[208px]' : ''">
 
 
         <?php
