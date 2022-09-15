@@ -9,12 +9,13 @@
 
 
                 <?php
-
-                get_template_part('partials/sidebar/components/main');
+                $main_navigation = get_field('main_nav', 'option');
+                get_template_part('partials/sidebar/components/sidebar-nav', null, array('selected_nav' => $main_navigation));
                 ?>
             </div>
             <?php
-            get_template_part('partials/sidebar/components/secondary');
+            $secondary_navigation = get_field('secondary_nav', 'option');
+            get_template_part('partials/sidebar/components/sidebar-nav', null, array('selected_nav' => $secondary_navigation));
 
 
             ?>

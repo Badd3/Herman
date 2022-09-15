@@ -1,18 +1,17 @@
 <?php
-$main_navigation = get_field('main_nav', 'option');
-
+$selected_navigation = $args['selected_nav'];
 
 ?>
 <?php
 
 // Check rows exists.
-if (have_rows('navigation_items', $main_navigation)) :
+if (have_rows('navigation_items', $selected_navigation)) :
 ?>
     <ul x-data="{ selected: null }" class="flex flex-col gap-3">
         <?php
         // Loop through rows.
         $i = 0;
-        while (have_rows('navigation_items', $main_navigation)) : the_row();
+        while (have_rows('navigation_items', $selected_navigation)) : the_row();
 
             // Load sub field value.
             $nav_item_label = get_sub_field('item_label');
