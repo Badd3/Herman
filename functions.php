@@ -213,8 +213,8 @@ function get_breadcrumb()
             $anc = get_post_ancestors($post->ID);
             $title = get_the_title();
             foreach ($anc as $ancestor) {
-                // $output = '<a class="uppercase text-xs inline" href="'.get_permalink($ancestor).'" title="'.get_the_title($ancestor).'">'.get_the_title($ancestor).'</a> <p class="text-xs inline">></p>';
-                $output = '<p class="uppercase text-xs inline" title="' . get_the_title($ancestor) . '">' . get_the_title($ancestor) . '</p> <p class="text-xs inline">></p>';
+                $output = '<a class="uppercase text-xs inline" href="'.get_permalink($ancestor).'" title="'.get_the_title($ancestor).'">'.get_the_title($ancestor).'</a> <p class="text-xs inline">></p>';
+                // $output = '<p class="uppercase text-xs inline" title="' . get_the_title($ancestor) . '">' . get_the_title($ancestor) . '</p> <p class="text-xs inline">></p>';
             }
             echo $output;
             echo '<p class="uppercase text-xs inline" title="' . $title . '"> ' . $title . '</p>';
