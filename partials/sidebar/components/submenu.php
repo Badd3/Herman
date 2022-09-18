@@ -17,7 +17,7 @@
     <section x-data="{open : false}" :open="selected == <? echo $i; ?> ? open = true : open = false" @click.outside="open ? selected = null : '' " class="duration-300 fixed h-full top-0 bg-white-bg <?php echo $section_classes; ?>" :class="selected == <? echo $i; ?> ? '<?php echo $motion_classes; ?>' : ''">
 
         <?php if ($mobile) { ?>
-            <button @click="navOpen = !navOpen" class="absolute right-5 top-5 text-black z-[22]">X</button>
+            <button @click="navOpen = !navOpen, selected = null" class="absolute right-5 top-5 text-black z-[22] xxx">X</button>
         <?php }; ?>
 
         <?php

@@ -1,4 +1,4 @@
-<section x-data="{ selected: null }" class="fixed h-full w-full md:w-1/3 bg-white-bg z-20 duration-700 ease-in-out lg:hidden text-base offcanvas" :class="navOpen ? 'left-0' : '-left-full'">
+<section x-data="{ selected: null }" class="fixed h-full w-full bg-white-bg z-20 duration-700 ease-in-out lg:hidden text-base offcanvas" :class="navOpen ? 'left-0' : '-left-full'">
     <div class="relative h-full w-full ">
         <button @click="navOpen = !navOpen" class="absolute right-5 top-5 text-black z-[22]">X</button>
 
