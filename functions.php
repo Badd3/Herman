@@ -379,3 +379,29 @@ function custom_redirection_after_registration($redirection_url)
 
     return $redirection_url; // Always return something
 }
+
+function filter_woocommerce_add_notice ( $message ) {
+    // Equal to (Must be exactly the same).
+    // If the message is displayed in another language, adjust where necessary!
+    if ( $message == 'Checkout is not available whilst your cart is empty.' ) {
+        return false;
+    }   
+    
+    return $message;
+}
+add_filter( 'woocommerce_add_notice', 'filter_woocommerce_add_notice', 10, 1 );
+
+// ===========================================================================
+//  Redirect Empty Checkout to Shop 
+// ===========================================================================
+
+add_action('template_redirect', 'redirection_function');
+
+function redirection_function(){
+    global $woocommerce;
+
+    if( is_checkout() && 0 == sprintf(_n('%d', '%d', $woocommerce->cart->cart_contents_count, 'herman'), $woocommerce->cart->cart_contents_count) && !isset($_GET['key']) ) {
+        wp_safe_redirect( get_permalink( woocommerce_get_page_id( 'shop' ) ) );
+        exit;
+    }
+}
