@@ -125,7 +125,7 @@ select#billing_country {
 }
 
 .woocommerce-form.woocommerce-form-login.login {
-  @apply text-base px-8;
+  @apply text-base px-3 md:px-8;
 }
 
 .woocommerce-form-login__submit {
@@ -154,15 +154,11 @@ select#billing_country {
 }
 
 .select2-container--default .select2-selection--single {
-  @apply text-base rounded-none uppercase my-4 h-8 border-0 border-b border-grey bg-white-bg;
+  @apply text-base rounded-none uppercase mt-1 border-0 border-grey bg-white-bg;
 }
 
 .select2-container .select2-selection--single .select2-selection__rendered {
   @apply text-base pl-0;
-}
-
-.select2-selection__arrow {
-  @apply mt-4;
 }
 
 #customer_details#billing_address_1_field {
@@ -221,5 +217,5 @@ select#billing_country {
 }
 
 .woocommerce-form.woocommerce-form-login.login {
-  @apply w-1/2 mt-4;
+  @apply w-full md:w-1/2 mt-4;
 }
