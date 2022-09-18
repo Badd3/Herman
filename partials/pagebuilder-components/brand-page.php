@@ -13,7 +13,7 @@ $herman_sound_file = get_sub_field('sound_file');
 
 <section>
   <div class="flex flex-col-reverse md:flex-row gap-10">
-    <div class="px-3 pb-8 md:pt-28 sm:basis-2/3 md:basis-2/5 text-gray-900 text-base">
+    <div class="px-3 md:px-4 pb-8 md:pt-28 sm:basis-2/3 md:basis-2/5 text-gray-900 text-base">
     <?php
       if ($herman_sound_text || $herman_sound_image || $herman_sound_file ) {
         ?>
