@@ -13,26 +13,22 @@ $herman_sound_file = get_sub_field('sound_file');
 
 <section>
   <div class="flex flex-col-reverse md:flex-row gap-10">
-    <div class="px-3 md:px-4 pb-8 md:pt-28 sm:basis-2/3 md:basis-2/5 text-gray-900 text-base">
-      <script>
-        function play(){
-            var audio = document.getElementById("audio");
-            audio.play();
-                      }
-      </script>
-<?php
-if ($herman_sound_text || $herman_sound_image || $herman_sound_file ) {
-  ?>
-
-<div class="flex">
+    <div class="px-3 pb-8 md:pt-28 sm:basis-2/3 md:basis-2/5 text-gray-900 text-base">
+    <?php
+      if ($herman_sound_text || $herman_sound_image || $herman_sound_file ) {
+        ?>
+        <div class="flex">
           <p><?php echo $herman_sound_text; ?></p>
-          <img class="h-[20px] mt-6 pl-2 cursor-pointer" src="<?php echo $herman_sound_image; ?>" value="PLAY"  onclick="play()">
-         <audio id="audio" src="<?php echo $herman_sound_file; ?>" ></audio>
+          <img class="h-[20px] mt-6 pl-2 cursor-pointer" src="<?php echo $herman_sound_image; ?>" value="PLAY" @click="$refs.audio.play()">
+          <audio x-ref="audio" src="<?php echo $herman_sound_file; ?>"></audio>
       </div>
-  <?php
-}
-?>
-      <p class="mt-4"><?php echo $brand_text; ?></p>  
+
+        <?php
+      }
+    ?>
+
+      <p class="mt-4"><?php echo $brand_text; ?></p>
+
     </div>
     <div class="basis-full sm:basis-1/3 md:basis-3/5">
       <img class="md:h-screen w-full object-cover grayscale sm:sticky sm:top-0" src="<?php echo $image_url; ?>" alt="<?php echo $image_alt; ?>">
