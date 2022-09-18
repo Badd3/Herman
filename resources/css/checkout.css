@@ -125,7 +125,7 @@ select#billing_country {
 }
 
 .woocommerce-form.woocommerce-form-login.login {
-  @apply text-base px-3 md:px-8;
+  @apply text-base px-2.5 lg:px-7.5;
 }
 
 .woocommerce-form-login__submit {
@@ -194,6 +194,10 @@ select#billing_country {
 #thank-you
   .woocommerce-column.woocommerce-column--2.woocommerce-column--shipping-address.col-2 {
   @apply mt-4;
+}
+
+.woocommerce-message {
+  @apply hidden;
 }
 
 .hermanBtn {
