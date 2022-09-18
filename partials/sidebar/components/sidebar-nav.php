@@ -1,5 +1,6 @@
 <?php
 $selected_navigation = $args['selected_nav'];
+$mobile = $args['mobile'];
 
 ?>
 <?php
@@ -27,7 +28,8 @@ if (have_rows('navigation_items', $selected_navigation)) :
                     <a @click.prevent.stop="selected !== <?php echo $i; ?> ? selected = <?php echo $i; ?> : selected = null;" class="hover:text-black duration-300 text-base" href="<?php echo $nav_item_link; ?>"><?php echo $nav_item_label; ?></a>
                     <?php
                     if ($submenu) {
-                        get_template_part('partials/sidebar/components/submenu', null, array('count' => $i));
+
+                        get_template_part('partials/sidebar/components/submenu', null, array('count' => $i, 'mobile' => $mobile));
                     }
                     ?>
                 </li>
