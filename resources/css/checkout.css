@@ -197,7 +197,7 @@ select#billing_country {
 }
 
 .hermanBtn {
-  @apply text-base uppercase flex items-center justify-center border border-black px-6 py-3 w-60 mt-4 text-black shadow-sm;
+  @apply text-base uppercase flex items-center justify-center border border-black px-4 py-1 w-fit mt-4 text-black shadow-sm;
 }
 
 .wc_payment_methods.payment_methods.methods {

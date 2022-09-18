@@ -146,7 +146,22 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
 													<p class="text-xs py-1"><?php echo $cart_item['quantity'] ?></p>
 												</div>
 												<div class="flex flex-row-reverse mt-2">
-
+												<?php
+											echo apply_filters( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+												'woocommerce_cart_item_remove_link',
+												sprintf(
+													'<div class="flex">
+								<button type="button" class="text-xs text-grey items-center justify-center border border-grey hover:border-black hover:text-black  px-4 py-1 "><a href="%s" class="remove remove_from_cart_button" aria-label="%s" data-product_id="%s" data-cart_item_key="%s" data-product_sku="%s">REMOVE</a></button>
+							  	</div>',
+													esc_url(wc_get_cart_remove_url($cart_item_key)),
+													esc_attr__('Remove this item', 'woocommerce'),
+													esc_attr($product_id),
+													esc_attr($cart_item_key),
+													esc_attr($_product->get_sku())
+												),
+												$cart_item_key
+											);
+											?>
 
 												</div>
 											</div>
