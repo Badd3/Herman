@@ -7,5 +7,5 @@ button {
 }
 
 .zoom-cursor {
-  cursor: url("/wp-content/themes/Herman/zoom.png"), pointer;
+  cursor: url("/wp-content/themes/Herman/images/zoom-black.png"), pointer;
 }
