@@ -29,6 +29,8 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
 }
 
 ?>
+
+
 <section class="bg-white-bg flex flex-col md:flex-row mt-10 lg:mt-0">
 	<div class="basis-full sm:basis-2/4 text-base pb-4 px-2.5 sm:pt-28 lg:px-7.5 order-last md:order-first">
 		<form name="checkout" method="post" class="checkout woocommerce-checkout" action="<?php echo esc_url(wc_get_checkout_url()); ?>" enctype="multipart/form-data">
@@ -51,6 +53,7 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
 
 			<?php do_action('woocommerce_checkout_before_order_review_heading'); ?>
 	</div>
+
 	<div class="basis-full sm:basis-2/4 text-base pt-8 pb-4 sm:pt-28 lg:px-8">
 		<h3 id="order_review_heading" class="px-2.5"><?php esc_html_e('YOUR ORDER', 'woocommerce'); ?></h3>
 
@@ -146,23 +149,24 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
 													<p class="text-xs py-1"><?php echo $cart_item['quantity'] ?></p>
 												</div>
 												<div class="flex flex-row-reverse mt-2">
-												<?php
-											echo apply_filters( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-												'woocommerce_cart_item_remove_link',
-												sprintf(
-													'<div class="flex">
-								<button type="button" class="text-xs text-grey items-center justify-center border border-grey hover:border-black hover:text-black  px-4 py-1 "><a href="%s" class="remove remove_from_cart_button" aria-label="%s" data-product_id="%s" data-cart_item_key="%s" data-product_sku="%s">REMOVE</a></button>
-							  	</div>',
-													esc_url(wc_get_cart_remove_url($cart_item_key)),
-													esc_attr__('Remove this item', 'woocommerce'),
-													esc_attr($product_id),
-													esc_attr($cart_item_key),
-													esc_attr($_product->get_sku())
-												),
-												$cart_item_key
-											);
-											?>
-
+												<td class="product-remove">
+													<?php
+														echo apply_filters(
+															'woocommerce_cart_item_remove_link',
+															sprintf(
+																'<div class="flex">
+																<button type="button" class="text-xs text-grey items-center justify-center border border-grey hover:border-black hover:text-black  px-4 py-1 ">
+																<a href="%s" class="remove" aria-label="%s" data-product_id="%s" data-product_sku="%s">REMOVE</a></button></div>',
+																
+																esc_url( wc_get_cart_remove_url( $cart_item_key ) ),
+																esc_html__( 'Remove this item', 'woocommerce' ),
+																esc_attr( $_product->get_id() ),
+																esc_attr( $_product->get_sku() )
+															),
+															$cart_item_key
+														);
+													?>
+												</td>
 												</div>
 											</div>
 											</li>
