@@ -5,6 +5,11 @@ import "./lightbox.js";
 
 Alpine.plugin(collapse);
 
+// function play() {
+//   var audio = document.getElementById("audio");
+//   audio.play();
+// }
+
 //SWIPER HOME
 const swiper = new Swiper(".swiper", {
   modules: [Pagination, Mousewheel],
@@ -38,8 +43,3 @@ if (document.querySelector(".page-template-page-coming-soon")) {
 }
 
 Alpine.start();
-
-
-function playSound(herman) {
-  document.getElementById(herman).play();
-};
