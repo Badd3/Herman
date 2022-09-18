@@ -6,7 +6,9 @@
 
 <?php do_action('tailpress_content_after'); ?>
 
-<?php get_template_part('partials/mobile/footer'); ?>
+<?php if (!is_front_page()) {
+    get_template_part('partials/mobile/footer');
+}; ?>
 <?php get_template_part('partials/desktop/footer'); ?>
 </div> <!-- CLOSE #ID PAGE -->
 
