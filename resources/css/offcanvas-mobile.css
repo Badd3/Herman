@@ -1,0 +1,7 @@
+.offcanvas .search-form {
+  @apply w-1/2;
+}
+
+.offcanvas .search-form input {
+  @apply w-[80%];
+}

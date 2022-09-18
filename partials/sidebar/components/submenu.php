@@ -1,17 +1,30 @@
 <template x-teleport="body">
     <?php
     $i = $args['count'];
+    $mobile = $args['mobile'];
+
+    if ($mobile) {
+        $section_classes = 'hidden w-1/2 !right-0 !z-[21]';
+        $motion_classes = '!block';
+        $wrapper_classes = 'pt-[134px]';
+    } else {
+        $section_classes = 'hidden lg:block w-[208px] left-0 z-[1]';
+        $motion_classes = 'left-[208px]';
+        $wrapper_classes = 'pt-28';
+    }
 
     ?>
-    <section x-data="{open : false}" :open="selected == <? echo $i; ?> ? open = true : open = false" @click.outside="open ? selected = null : '' " class="duration-300 fixed h-full left-0 top-0 w-[208px] bg-white-bg z-[1] hidden lg:block " :class="selected == <? echo $i; ?> ? 'left-[208px]' : ''">
+    <section x-data="{open : false}" :open="selected == <? echo $i; ?> ? open = true : open = false" @click.outside="open ? selected = null : '' " class="duration-300 fixed h-full top-0 bg-white-bg <?php echo $section_classes; ?>" :class="selected == <? echo $i; ?> ? '<?php echo $motion_classes; ?>' : ''">
 
-
+        <?php if ($mobile) { ?>
+            <button @click="navOpen = !navOpen, selected = null" class="absolute right-5 top-5 text-black z-[22] xxx">X</button>
+        <?php }; ?>
 
         <?php
 
 
         if (have_rows('submenu_items')) : ?>
-            <div class="px-7 pb-8 pt-28 h-full">
+            <div class="px-7 pb-8 pt- h-full <?php echo $wrapper_classes; ?>">
                 <ul class="flex flex-col gap-3 mb-2 text-grey justify-between uppercase">
                     <?php
 

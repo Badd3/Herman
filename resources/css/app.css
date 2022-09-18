@@ -20,6 +20,8 @@
 @import "checkout.css";
 @import "account.css";
 
+@import "offcanvas-mobile.css";
+
 @font-face {
   font-family: "gotham";
   src: url("/wp-content/themes/Herman/fonts/Gotham.woff2") format("woff2"),

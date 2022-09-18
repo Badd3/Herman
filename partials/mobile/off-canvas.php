@@ -1,59 +1,18 @@
-<section class="fixed h-full w-2/3 md:w-1/3 bg-white-bg z-20 duration-700 ease-in-out lg:hidden text-base" :class="navOpen ? 'left-0' : '-left-full'">
+<section x-data="{ selected: null }" class="fixed h-full w-full bg-white-bg z-20 duration-700 ease-in-out lg:hidden text-base offcanvas" :class="navOpen ? 'left-0' : '-left-full'">
     <div class="relative h-full w-full ">
-        <button @click="navOpen = !navOpen" class="absolute right-5 top-5 text-black">X</button>
+        <button @click="navOpen = !navOpen" class="absolute right-5 top-5 text-black z-[22]">X</button>
 
-        <div class="text-grey flex flex-col justify-center pl-5 uppercase gap-12 pt-24">
+        <div class="text-grey flex flex-col justify-center px-2.5 uppercase gap-12 pt-16">
+            <?php get_search_form(); ?>
             <?php
-
             $main_navigation = get_field('main_nav', 'option');
 
-            // Check rows exists.
-            if (have_rows('navigation_items', $main_navigation)) :
-            ?>
-                <ul class="flex flex-col gap-3">
-                    <?php
-                    // Loop through rows.
-                    while (have_rows('navigation_items', $main_navigation)) : the_row();
-
-                        // Load sub field value.
-                        $nav_item_label = get_sub_field('item_label');
-                        $nav_item_link = get_sub_field('item_link');
-                    ?>
-                        <a class="hover:text-black" href="<?php echo $nav_item_link; ?>"><?php echo $nav_item_label; ?></a>
-                    <?php
-
-                    endwhile;
-                    ?>
-                </ul>
-            <?php
-
-            endif;
+            get_template_part('partials/sidebar/components/sidebar-nav', null, array('selected_nav' => $main_navigation, 'mobile' => true));
 
 
             $secondary_navigation = get_field('secondary_nav', 'option');
 
-            // Check rows exists.
-            if (have_rows('navigation_items', $secondary_navigation)) :
-            ?>
-                <ul class="flex flex-col gap-3">
-                    <?php
-                    // Loop through rows.
-                    while (have_rows('navigation_items', $secondary_navigation)) : the_row();
-
-                        // Load sub field value.
-                        $nav_item_label = get_sub_field('item_label');
-                        $nav_item_link = get_sub_field('item_link');
-                    ?>
-                        <a class="hover:text-black" href="<?php echo $nav_item_link; ?>"><?php echo $nav_item_label; ?></a>
-                    <?php
-
-                    endwhile;
-                    ?>
-                </ul>
-            <?php
-
-            endif;
-
+            get_template_part('partials/sidebar/components/sidebar-nav', null, array('selected_nav' => $secondary_navigation, 'mobile' => true));
             ?>
         </div>
     </div>
