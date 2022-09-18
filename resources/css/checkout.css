@@ -42,7 +42,8 @@
 }
 
 #account_password,
-#billing_country {
+#billing_country,
+#search-field {
   @apply text-base outline-0 focus-visible:outline-0 w-full bg-white-bg;
 }
 
@@ -94,7 +95,8 @@ select#billing_country {
 #reg_password:focus-visible,
 #reg_password-2:focus-visible,
 #reg_country:focus-visible,
-#billing_country_field:focus-visible {
+#billing_country_field:focus-visible,
+#search-field {
   outline: unset;
 }
 
