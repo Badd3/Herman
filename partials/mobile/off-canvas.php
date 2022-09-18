@@ -2,7 +2,7 @@
     <div class="relative h-full w-full ">
         <button @click="navOpen = !navOpen" class="absolute right-5 top-5 text-black z-[22]">X</button>
 
-        <div class="text-grey flex flex-col justify-center px-5 uppercase gap-12 pt-16">
+        <div class="text-grey flex flex-col justify-center px-2.5 uppercase gap-12 pt-16">
             <?php get_search_form(); ?>
             <?php
             $main_navigation = get_field('main_nav', 'option');
