@@ -38,3 +38,8 @@ if (document.querySelector(".page-template-page-coming-soon")) {
 }
 
 Alpine.start();
+
+
+function playSound(herman) {
+  document.getElementById(herman).play();
+};

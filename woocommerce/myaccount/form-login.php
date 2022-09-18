@@ -59,7 +59,7 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
 						
 						<?php wp_nonce_field( 'woocommerce-login', 'woocommerce-login-nonce' ); ?>
 						
-						<button type="submit" class="woocommerce-button button woocommerce-form-login__submit flex items-center justify-center border border-black  px-6 py-3 text-base font-base text-black shadow-sm  w-20" name="login" value="<?php esc_attr_e( 'Log in', 'woocommerce' ); ?>"><?php esc_html_e( 'LOGIN', 'woocommerce' ); ?></button>
+						<button type="submit" class="woocommerce-button button woocommerce-form-login__submit flex items-center justify-center border border-black  px-4 py-1 text-base font-base text-black shadow-sm" name="login" value="<?php esc_attr_e( 'Log in', 'woocommerce' ); ?>"><?php esc_html_e( 'LOGIN', 'woocommerce' ); ?></button>
 						<?php do_action( 'woocommerce_login_form_end' ); ?>
 					</form>
 				</div>

@@ -127,19 +127,19 @@ select#billing_country {
 }
 
 .woocommerce-form-login__submit {
-  @apply text-base uppercase flex items-center justify-center border border-black px-6 py-3 w-40 mt-4 text-black shadow-sm;
+  @apply text-base uppercase flex items-center justify-center border border-black px-4 py-1 w-fit mt-4 text-black shadow-sm;
 }
 
 .dashboardBtn {
-  @apply text-base uppercase flex items-center justify-center border border-black px-6 py-3 w-60 mt-4 text-black shadow-sm;
+  @apply text-base uppercase flex items-center justify-center border border-black px-4 py-1 w-fit mt-4 text-black shadow-sm;
 }
 
 .dashboardBtnBig {
-  @apply text-base uppercase flex items-center justify-center border border-black px-6 py-3 w-80 mt-4 text-black shadow-sm;
+  @apply text-base uppercase flex items-center justify-center border border-black px-4 py-1 w-fit mt-4 text-black shadow-sm;
 }
 
 .dashboardOrderBtn {
-  @apply text-base uppercase flex items-center justify-center border border-black px-6 w-20 text-black shadow-sm;
+  @apply text-base uppercase flex items-center justify-center border border-black px-4 py-1 w-20 text-black shadow-sm;
 }
 
 #dashboard-edit-account .woocommerce-message {
