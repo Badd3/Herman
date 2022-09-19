@@ -1,0 +1,44 @@
+{
+    "key": "group_63272ce191ac9",
+    "title": "Thema Opties",
+    "fields": [
+        {
+            "key": "field_63272ced1f72e",
+            "label": "Footer Shortcode",
+            "name": "footer_shortcode",
+            "type": "text",
+            "instructions": "Plaats hier de shortcode voor het formulier (deze kan je aanmaken bij Contact)",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "theme-general-settings"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1663511962
+}

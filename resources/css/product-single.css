@@ -7,5 +7,5 @@
 }
 
 .woocommerce-loop-product__title {
-  @apply text-base;
+  @apply text-xs lg:text-base;
 }

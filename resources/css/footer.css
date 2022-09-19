@@ -1,0 +1,11 @@
+.footer form {
+  @apply flex flex-row flex-wrap border-b border-black justify-between;
+}
+
+.footer .wpcf7-text {
+  @apply border-0 uppercase;
+}
+
+.footer .wpcf7-response-output {
+  @apply !py-2 !m-0;
+}
