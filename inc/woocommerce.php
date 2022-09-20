@@ -69,8 +69,8 @@ add_filter('woocommerce_breadcrumb_defaults', 'jk_woocommerce_breadcrumbs');
 function jk_woocommerce_breadcrumbs()
 {
 	return array(
-		'delimiter'   => ' &#43; ',
-		'wrap_before' => '<nav class="woocommerce-breadcrumb uppercase mb-5 text-grey [&>a:hover]:text-black [&>a:hover]:duration-300" itemprop="breadcrumb">',
+		'delimiter'   => ' > ',
+		'wrap_before' => '<nav class="woocommerce-breadcrumb text-[11px] uppercase mb-5 text-grey [&>a:hover]:text-black [&>a:hover]:duration-300" itemprop="breadcrumb">',
 		'wrap_after'  => '</nav>',
 		'before'      => '',
 		'after'       => '',

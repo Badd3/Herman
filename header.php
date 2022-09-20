@@ -33,5 +33,13 @@
 		<div id="content" class="site-content bg-white-bg flex-grow w-full lg:ml-auto lg:w-[calc(100vw-208px)]">
 
 			<?php do_action('tailpress_content_start'); ?>
+			<?php if (!is_front_page() && !is_page(77) && !is_woocommerce() && !is_cart() && !is_checkout()) {
+			?>
+				<div class="px-2.5 text-grey lg:hidden mt-14 mb-5">
+					<?php get_breadcrumb(); ?>
+				</div>
+			<?php
+			}; ?>
+
 
 			<main>

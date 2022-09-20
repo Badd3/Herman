@@ -9,7 +9,7 @@ $args = array(
 $the_query = new WP_Query($args);
 
 ?>
-<section class="py-16 lg:py-28 px-2.5 lg:px-7.5">
+<section class="pb-16 lg:py-28 px-2.5 lg:px-7.5">
 
   <?php
 
