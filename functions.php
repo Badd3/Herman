@@ -219,7 +219,7 @@ function get_breadcrumb()
             echo $output;
             echo '<p class="uppercase text-xs inline" title="' . $title . '"> ' . $title . '</p>';
         } else {
-            echo '<span class="text-[11px]"> ' . get_the_title() . '</span>';
+            echo '<span class="text-[11px] uppercase"> ' . get_the_title() . '</span>';
         }
     } elseif (is_tag()) {
         single_tag_title();
