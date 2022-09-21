@@ -44,7 +44,7 @@
 #account_password,
 #billing_country,
 #search-field {
-  @apply text-base outline-0 focus-visible:outline-0 w-full bg-white-bg;
+  @apply text-base outline-0 focus-visible:outline-0 w-full bg-white-bg uppercase;
 }
 
 select#billing_country {

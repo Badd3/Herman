@@ -300,6 +300,7 @@ function herman_add_name_woo_account_registration()
 ?>
 
     <p class="form-row form-row-first">
+
         <input type="text" class="input-text" name="billing_first_name" id="reg_billing_first_name" placeholder="NAME" value="<?php if (!empty($_POST['billing_first_name'])) esc_attr_e($_POST['billing_first_name']); ?>" />
     </p>
 
