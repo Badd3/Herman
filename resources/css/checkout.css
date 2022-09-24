@@ -42,8 +42,9 @@
 }
 
 #account_password,
-#billing_country {
-  @apply text-base outline-0 focus-visible:outline-0 w-full bg-white-bg;
+#billing_country,
+#search-field {
+  @apply text-base outline-0 focus-visible:outline-0 w-full bg-white-bg uppercase;
 }
 
 select#billing_country {
@@ -94,7 +95,8 @@ select#billing_country {
 #reg_password:focus-visible,
 #reg_password-2:focus-visible,
 #reg_country:focus-visible,
-#billing_country_field:focus-visible {
+#billing_country_field:focus-visible,
+#search-field {
   outline: unset;
 }
 
@@ -123,23 +125,23 @@ select#billing_country {
 }
 
 .woocommerce-form.woocommerce-form-login.login {
-  @apply text-base px-8;
+  @apply text-base px-2.5 lg:px-7.5;
 }
 
 .woocommerce-form-login__submit {
-  @apply text-base uppercase flex items-center justify-center border border-black px-6 py-3 w-40 mt-4 text-black shadow-sm;
+  @apply text-base uppercase flex items-center justify-center border border-black px-4 py-1 w-fit mt-4 text-black shadow-sm;
 }
 
 .dashboardBtn {
-  @apply text-base uppercase flex items-center justify-center border border-black px-6 py-3 w-60 mt-4 text-black shadow-sm;
+  @apply text-base uppercase flex items-center justify-center border border-black px-4 py-1 w-fit mt-4 text-black shadow-sm;
 }
 
 .dashboardBtnBig {
-  @apply text-base uppercase flex items-center justify-center border border-black px-6 py-3 w-80 mt-4 text-black shadow-sm;
+  @apply text-base uppercase flex items-center justify-center border border-black px-4 py-1 w-fit mt-4 text-black shadow-sm;
 }
 
 .dashboardOrderBtn {
-  @apply text-base uppercase flex items-center justify-center border border-black px-6 w-20 text-black shadow-sm;
+  @apply text-base uppercase flex items-center justify-center border border-black px-4 py-1 w-20 text-black shadow-sm;
 }
 
 #dashboard-edit-account .woocommerce-message {
@@ -152,15 +154,11 @@ select#billing_country {
 }
 
 .select2-container--default .select2-selection--single {
-  @apply text-base rounded-none uppercase my-4 h-8 border-0 border-b border-grey bg-white-bg;
+  @apply text-base rounded-none uppercase mt-1 border-0 border-grey bg-white-bg;
 }
 
 .select2-container .select2-selection--single .select2-selection__rendered {
   @apply text-base pl-0;
-}
-
-.select2-selection__arrow {
-  @apply mt-4;
 }
 
 #customer_details#billing_address_1_field {
@@ -198,8 +196,12 @@ select#billing_country {
   @apply mt-4;
 }
 
+.woocommerce-message {
+  @apply hidden;
+}
+
 .hermanBtn {
-  @apply text-base uppercase flex items-center justify-center border border-black px-6 py-3 w-60 mt-4 text-black shadow-sm;
+  @apply text-base uppercase flex items-center justify-center border border-black px-4 py-1 w-fit mt-4 text-black shadow-sm;
 }
 
 .wc_payment_methods.payment_methods.methods {
@@ -219,5 +221,5 @@ select#billing_country {
 }
 
 .woocommerce-form.woocommerce-form-login.login {
-  @apply w-1/2 mt-4;
+  @apply w-full md:w-1/2 mt-4;
 }

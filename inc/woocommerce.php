@@ -223,6 +223,7 @@ if (!function_exists('herman_woocommerce_flex_wrapper_before')) {
 			);
 			?>
 			<span class="flex text-base ml-6 mt-6 h-8">SHOPPINGBAG</span>
+			
 		</a>
 	<?php
 		}

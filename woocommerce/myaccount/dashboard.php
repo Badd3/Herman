@@ -34,8 +34,8 @@ $allowed_html = array(
 			<?php
 			printf(
 				/* translators: 1: user display name 2: logout url */
-				wp_kses( __( 'HELLO %1$S (NOT %1$s? <a href="%2$S">LOG OUT</a>)', 'woocommerce' ), $allowed_html ),
-				'<strong class="uppercase">' . esc_html( $current_user->display_name ) . '</strong>',
+				wp_kses( __( 'HELLO %1$s', 'woocommerce' ), $allowed_html ),
+				'<strong class="uppercase">' . esc_html( $current_user->first_name ) . '</strong>',
 				esc_url( wc_logout_url() )
 			);
 			?>

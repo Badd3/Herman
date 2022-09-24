@@ -5,6 +5,11 @@ import "./lightbox.js";
 
 Alpine.plugin(collapse);
 
+// function play() {
+//   var audio = document.getElementById("audio");
+//   audio.play();
+// }
+
 //SWIPER HOME
 const swiper = new Swiper(".swiper", {
   modules: [Pagination, Mousewheel],

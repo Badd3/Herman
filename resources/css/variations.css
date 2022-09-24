@@ -1,5 +1,5 @@
 .single_add_to_cart_button {
-  @apply uppercase border border-black py-2 px-4;
+  @apply uppercase border border-black py-1 px-4;
 }
 
 .variations {

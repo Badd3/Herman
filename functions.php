@@ -213,8 +213,8 @@ function get_breadcrumb()
             $anc = get_post_ancestors($post->ID);
             $title = get_the_title();
             foreach ($anc as $ancestor) {
-                // $output = '<a class="uppercase text-xs inline" href="'.get_permalink($ancestor).'" title="'.get_the_title($ancestor).'">'.get_the_title($ancestor).'</a> <p class="text-xs inline">></p>';
-                $output = '<p class="uppercase text-xs inline" title="' . get_the_title($ancestor) . '">' . get_the_title($ancestor) . '</p> <p class="text-xs inline">></p>';
+                $output = '<a class="uppercase text-xs inline" href="'.get_permalink($ancestor).'" title="'.get_the_title($ancestor).'">'.get_the_title($ancestor).'</a> <p class="text-xs inline">></p>';
+                // $output = '<p class="uppercase text-xs inline" title="' . get_the_title($ancestor) . '">' . get_the_title($ancestor) . '</p> <p class="text-xs inline">></p>';
             }
             echo $output;
             echo '<p class="uppercase text-xs inline" title="' . $title . '"> ' . $title . '</p>';
@@ -300,6 +300,7 @@ function herman_add_name_woo_account_registration()
 ?>
 
     <p class="form-row form-row-first">
+
         <input type="text" class="input-text" name="billing_first_name" id="reg_billing_first_name" placeholder="NAME" value="<?php if (!empty($_POST['billing_first_name'])) esc_attr_e($_POST['billing_first_name']); ?>" />
     </p>
 
@@ -378,4 +379,30 @@ function custom_redirection_after_registration($redirection_url)
     $redirection_url = get_permalink(get_option('woocommerce_myaccount_page_id'));
 
     return $redirection_url; // Always return something
+}
+
+function filter_woocommerce_add_notice ( $message ) {
+    // Equal to (Must be exactly the same).
+    // If the message is displayed in another language, adjust where necessary!
+    if ( $message == 'Checkout is not available whilst your cart is empty.' ) {
+        return false;
+    }   
+    
+    return $message;
+}
+add_filter( 'woocommerce_add_notice', 'filter_woocommerce_add_notice', 10, 1 );
+
+// ===========================================================================
+//  Redirect Empty Checkout to Shop 
+// ===========================================================================
+
+add_action('template_redirect', 'redirection_function');
+
+function redirection_function(){
+    global $woocommerce;
+
+    if( is_checkout() && 0 == sprintf(_n('%d', '%d', $woocommerce->cart->cart_contents_count, 'herman'), $woocommerce->cart->cart_contents_count) && !isset($_GET['key']) ) {
+        wp_safe_redirect( get_permalink( woocommerce_get_page_id( 'shop' ) ) );
+        exit;
+    }
 }
