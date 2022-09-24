@@ -153,6 +153,59 @@
                     "min": "",
                     "max": ""
                 },
+                "layout_6318936b305dd": {
+                    "key": "layout_6318936b305dd",
+                    "name": "account_page",
+                    "label": "Account page",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_6319c2f4eb4d5",
+                            "label": "Account Shortcode",
+                            "name": "account_shortcode",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "[wc_reg_form_herman]",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
+                            "key": "field_6318936b305df",
+                            "label": "Image Left Login",
+                            "name": "image_left_login",
+                            "type": "image",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "return_format": "array",
+                            "preview_size": "medium",
+                            "library": "all",
+                            "min_width": "",
+                            "min_height": "",
+                            "min_size": "",
+                            "max_width": "",
+                            "max_height": "",
+                            "max_size": "",
+                            "mime_types": ""
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
                 "layout_62c1ecf7f2c49": {
                     "key": "layout_62c1ecf7f2c49",
                     "name": "brand_page",
