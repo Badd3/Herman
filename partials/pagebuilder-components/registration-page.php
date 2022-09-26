@@ -4,8 +4,8 @@ add_shortcode('wc_reg_form_herman', 'herman_separate_registration_form');
 
 function herman_separate_registration_form()
 {
-  if (is_admin()) return;
-  if (is_user_logged_in()) return;
+  // if (is_admin()) return;
+  // if (is_user_logged_in()) return;
   ob_start();
 
   $image = get_sub_field('image_left_login');
@@ -19,7 +19,6 @@ function herman_separate_registration_form()
   <section id="registration" class="bg-white-bg mb-[-3rem]">
 	<div class="flex flex-col sm:flex-row">
 		<div class="basis-full sm:basis-1/3 md:basis-2/6">
-			<div class="mt-16 mb-4 text-grey sm:mt-0 pl-3 text-xs sm:invisible"><p>ACCOUNT REGISTRATION</p></div>
 			<img class="accountImage sm:h-screen w-full object-cover grayscale sm:sticky sm:top-0 sm:mt-[-2rem]" src="<?php echo $image_url; ?>" alt="<?php echo $image_alt; ?>">
 		</div>
 		<div class="sm:px-7 pb-8 pt-8 sm:pt-28 sm:basis-2/3 md:basis-2/6 text-gray-900 grid content-center bg-white-bg coming-soon items-center justify-center">
