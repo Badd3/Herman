@@ -301,11 +301,17 @@ function herman_add_name_woo_account_registration()
 
     <p class="form-row form-row-first">
 
-        <input type="text" class="input-text" name="billing_first_name" id="reg_billing_first_name" placeholder="NAME" value="<?php if (!empty($_POST['billing_first_name'])) esc_attr_e($_POST['billing_first_name']); ?>" />
+        <input type="text" class="input-text woocommerce-invalid-required-field" name="billing_first_name" id="reg_billing_first_name" placeholder="NAME" required class="peer border border-slate-400" value="<?php if (!empty($_POST['billing_first_name'])) esc_attr_e($_POST['billing_first_name']); ?>" />
+        <p class="invisible peer-invalid:visible text-red-700 font-light">
+                Please enter your name
+            </p>
     </p>
 
     <p class="form-row form-row-last">
-        <input type="text" class="input-text" name="billing_last_name" id="reg_billing_last_name" placeholder="SURNAME" value="<?php if (!empty($_POST['billing_last_name'])) esc_attr_e($_POST['billing_last_name']); ?>" />
+        <input type="text" class="input-text woocommerce-invalid-required-field" name="billing_last_name" id="reg_billing_last_name" required class="peer border border-slate-400" placeholder="SURNAME" value="<?php if (!empty($_POST['billing_last_name'])) esc_attr_e($_POST['billing_last_name']); ?>" />
+        <p class="invisible peer-invalid:visible text-red-700 font-light">
+                Please enter your surname
+            </p>
     </p>
 
     <div class="clear"></div>
@@ -405,4 +411,16 @@ function redirection_function(){
         wp_safe_redirect( get_permalink( woocommerce_get_page_id( 'shop' ) ) );
         exit;
     }
+}
+
+add_filter( 'woocommerce_form_field', 'bbloomer_checkout_fields_in_label_error', 10, 4 );
+ 
+function bbloomer_checkout_fields_in_label_error( $field, $key, $args, $value ) {
+   if ( strpos( $field, '</label>' ) !== false && $args['required'] ) {
+      $error = '<span class="error" style="display:none">';
+      $error .= sprintf( __( '%s is a required field.', 'woocommerce' ), $args['label'] );
+      $error .= '</span>';
+      $field = substr_replace( $field, $error, strpos( $field, '</label>' ), 0);
+   }
+   return $field;
 }

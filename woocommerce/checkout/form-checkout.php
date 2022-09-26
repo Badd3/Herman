@@ -33,8 +33,9 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
 
 <section class="bg-white-bg flex flex-col md:flex-row mt-10 lg:mt-0">
 	<div class="basis-full sm:basis-2/4 text-base pb-4 px-2.5 sm:pt-28 lg:px-7.5 order-last md:order-first">
-		<form name="checkout" method="post" class="checkout woocommerce-checkout" action="<?php echo esc_url(wc_get_checkout_url()); ?>" enctype="multipart/form-data">
+		<form id="order_review" name="checkout" method="post" class="checkout woocommerce-checkout" action="<?php echo esc_url(wc_get_checkout_url()); ?>" enctype="multipart/form-data">
 
+		
 			<?php if ($checkout->get_checkout_fields()) : ?>
 
 				<?php do_action('woocommerce_checkout_before_customer_details'); ?>
@@ -47,9 +48,11 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
 
 				<?php do_action('woocommerce_checkout_order_review'); ?>
 
-
+				
+				
 
 			<?php endif; ?>
+			
 
 			<?php do_action('woocommerce_checkout_before_order_review_heading'); ?>
 	</div>
@@ -179,28 +182,46 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
 
 					do_action('woocommerce_mini_cart_contents');
 							?>
+									<?php if ( WC()->cart->needs_shipping() && WC()->cart->show_shipping() ) : ?>
+
 							<div class="border-t border-gray-200 py-6">
 								<div class="flex flex-row-reverse justify-between md:flex-row text-base text-black">
-									<p class="hidden md:block">SUBTOTAL</p>
+									<p class="hidden md:block">PRODUCTS</p>
 									<p class="woocommerce-mini-cart__total total">
-										<?php
-										/**
-										 * Hook: woocommerce_widget_shopping_cart_total.
-										 *
-										 * @hooked woocommerce_widget_shopping_cart_subtotal - 10
-										 */
-										do_action('woocommerce_widget_shopping_cart_total');
-										?>
+									<td class="product-total">
+										<?php echo apply_filters( 'woocommerce_cart_item_subtotal', WC()->cart->get_product_subtotal( $_product, $cart_item['quantity'] ), $cart_item, $cart_item_key ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+									</td>
 									</p>
 								</div>
 
-								<div class="flex flex-row-reverse justify-between md:flex-row text-base text-black">
-									<p class="hidden md:block">SHIPPING COST</p>
+
+								<?php do_action( 'woocommerce_review_order_before_shipping' ); ?>
+
+								<div class="flex flex-row-reverse justify-between md:flex-row text-base text-black divide-gray-200 border-b border-gray-200">
+									<p class="hidden md:block mb-2">SHIPPING COST</p>
 									<p class="woocommerce_package_rates total">
 										<?php
 										$current_shipping_cost = WC()->cart->get_cart_shipping_total();
 										echo $current_shipping_cost;
 										?>
+									</p>
+								</div>
+
+								<?php do_action( 'woocommerce_review_order_after_shipping' ); ?>
+
+								<?php endif; ?>
+
+								<div class="flex flex-row-reverse justify-between md:flex-row text-base text-black mt-2">
+									<p class="hidden md:block">TOTAL COST</p>
+									<p class="woocommerce_package_rates total">
+
+									<?php do_action( 'woocommerce_review_order_before_order_total' ); ?>
+
+									<tr class="order-total">
+										<td><?php wc_cart_totals_order_total_html(); ?></td>
+									</tr>
+
+									<?php do_action( 'woocommerce_review_order_after_order_total' ); ?>
 									</p>
 								</div>
 
@@ -219,8 +240,7 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
 
 <?php endif; ?>
 
-
-
 </form>
 </div>
 </section>
+

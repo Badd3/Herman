@@ -223,3 +223,17 @@ select#billing_country {
 .woocommerce-form.woocommerce-form-login.login {
   @apply w-full md:w-1/2 mt-4;
 }
+
+.page-checkout .woocommerce-error {
+  @apply text-xs font-normal;
+}
+
+.page-checkout strong {
+  @apply font-normal;
+}
+
+p.woocommerce-invalid-required-field span.error {
+  color: #e2401c;
+  display: block !important;
+  font-weight: bold;
+}
