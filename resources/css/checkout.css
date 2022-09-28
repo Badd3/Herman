@@ -237,3 +237,7 @@ select#billing_country {
   transform: scale(0.85);
   transform-origin: top left;
 }
+
+.closeMenu {
+  @apply text-lg;
+}

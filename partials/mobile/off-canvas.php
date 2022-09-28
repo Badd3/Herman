@@ -1,6 +1,6 @@
 <section x-data="{ selected: null }" class="fixed h-full w-full bg-white-bg z-20 duration-700 ease-in-out lg:hidden text-base offcanvas" :class="navOpen ? 'left-0' : '-left-full'">
     <div class="relative h-full w-full ">
-        <button @click="navOpen = !navOpen" class="absolute right-5 top-5 text-black z-[22]">X</button>
+        <button @click="navOpen = !navOpen" class="absolute right-5 top-5 text-black z-[22] closeMenu">X</button>
 
         <div class="text-grey flex flex-col justify-center px-2.5 uppercase gap-12 pt-16">
             <?php get_search_form(); ?>
