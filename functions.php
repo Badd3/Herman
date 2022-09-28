@@ -302,16 +302,16 @@ function herman_add_name_woo_account_registration()
     <p class="form-row form-row-first">
 
         <input type="text" class="input-text woocommerce-invalid-required-field" name="billing_first_name" id="reg_billing_first_name" placeholder="NAME" required class="peer border border-slate-400" value="<?php if (!empty($_POST['billing_first_name'])) esc_attr_e($_POST['billing_first_name']); ?>" />
-        <p class="invisible peer-invalid:visible text-red-700 font-light">
+        <!-- <p class="invisible peer-invalid:visible text-red-700 font-light">
                 Please enter your name
-            </p>
+            </p> -->
     </p>
 
     <p class="form-row form-row-last">
         <input type="text" class="input-text woocommerce-invalid-required-field" name="billing_last_name" id="reg_billing_last_name" required class="peer border border-slate-400" placeholder="SURNAME" value="<?php if (!empty($_POST['billing_last_name'])) esc_attr_e($_POST['billing_last_name']); ?>" />
-        <p class="invisible peer-invalid:visible text-red-700 font-light">
+        <!-- <p class="invisible peer-invalid:visible text-red-700 font-light">
                 Please enter your surname
-            </p>
+            </p> -->
     </p>
 
     <div class="clear"></div>
@@ -423,4 +423,32 @@ function bbloomer_checkout_fields_in_label_error( $field, $key, $args, $value ) 
       $field = substr_replace( $field, $error, strpos( $field, '</label>' ), 0);
    }
    return $field;
+}
+
+add_action( 'woocommerce_register_form', 'herman_add_registration_privacy_policy', 11 );
+   
+function herman_add_registration_privacy_policy() {
+ 
+woocommerce_form_field( 'privacy_policy_reg', array(
+   'type'          => 'checkbox',
+   'class'         => array('form-row privacy'),
+   'label_class'   => array('woocommerce-form__label woocommerce-form__label-for-checkbox checkbox'),
+   'input_class'   => array('woocommerce-form__input woocommerce-form__input-checkbox input-checkbox'),
+   'required'      => true,
+   'label'         => 'I AGREE TO RECEIVE NEWS, STYLE TIPS AND MARKETING INFORMATION',
+));
+  
+}
+  
+// Show error if user does not tick
+   
+add_filter( 'woocommerce_registration_errors', 'herman_validate_privacy_registration', 10, 3 );
+  
+function herman_validate_privacy_registration( $errors, $username, $email ) {
+if ( ! is_checkout() ) {
+    if ( ! (int) isset( $_POST['privacy_policy_reg'] ) ) {
+        $errors->add( 'privacy_policy_reg_error', __( 'POLICY CONSENT IS REQUIRED', 'woocommerce' ) );
+    }
+}
+return $errors;
 }

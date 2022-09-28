@@ -28,9 +28,9 @@ do_action('woocommerce_before_customer_login_form'); ?>
 <section id="login" class="bg-white-bg mb-[-3rem]">
 	<div class="flex flex-col sm:flex-row">
 		<div class="basis-full sm:basis-1/3 md:basis-2/6">
-			<img class="accountImage sm:h-screen w-full object-cover grayscale sm:sticky sm:top-0 sm:mt-[-2rem]" src="<?php echo $image_url; ?>" alt="<?php echo $image_alt; ?>">
+			<img class="accountImage sm:h-screen w-full object-cover grayscale sm:sticky sm:top-0" src="<?php echo $image_url; ?>" alt="<?php echo $image_alt; ?>">
 		</div>
-		<div class="sm:px-7 pb-8 pt-8 sm:pt-28 sm:basis-2/3 md:basis-2/6 text-gray-900 grid content-center bg-white-bg coming-soon items-center justify-center">
+		<div class="sm:px-7 sm:pt-28 sm:basis-2/3 md:basis-2/6 text-gray-900 grid content-center bg-white-bg coming-soon items-center justify-center">
 			<div class="flex items-center justify-between mb-8">
 				<div class="flex items-start">
 					<div class="flex items-center h-5">
@@ -43,20 +43,20 @@ do_action('woocommerce_before_customer_login_form'); ?>
 				</p>
 			</div>
 
-			<form class=" woocommerce_form_field login w-80" method="post">
+			<form class=" woocommerce_form_field login w-[24vw]" method="post">
 				<?php do_action('woocommerce_login_form_start'); ?>
 				<div>
 					<input type="text" class="text-base w-full py-1 border-b woocommerce-Input woocommerce-Input--text input-text woocommerce-invalid-required-field" placeholder="EMAIL" name="username" id="username" autocomplete="username" required class="peer" value="<?php echo (!empty($_POST['username'])) ? esc_attr(wp_unslash($_POST['username'])) : ''; ?>" /><?php // @codingStandardsIgnoreLine?> 
-					<p class="invisible peer-invalid:visible text-red-700 font-light">
+					<!-- <p class="invisible peer-invalid:visible text-red-700 font-light">
 						EMAIL IS REQUIRED
-					</p>																																																																														
+					</p>																																																																														 -->
 				</div>
 				<div>
 					<input class="text-base w-full py-1" type="password" placeholder="PASSWORD" name="password" id="password" required class="peer" autocomplete="current-password" />
 					<!-- <input type="password" name="password" id="password" placeholder="PASSWORD" class="text-base w-full py-1 woocommerce-Input woocommerce-Input--text input-text" required="" autocomplete="current-password" /> -->
-					<p class="invisible peer-invalid:visible text-red-700 font-light">
+					<!-- <p class="invisible peer-invalid:visible text-red-700 font-light">
 						PASSWORD IS REQUIRED
-					</p>
+					</p> -->
 				</div>
 				<?php do_action('woocommerce_login_form'); ?>
 				<div class="flex">
