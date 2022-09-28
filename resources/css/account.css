@@ -3,11 +3,11 @@
 }
 
  .woocommerce-form-login__submit {
-    @apply w-2/6 float-right;
+    @apply w-fit float-right;
  }
 
  .woocommerce-form-register__submit {
-    @apply w-7/12 float-right;
+    @apply w-fit float-right;
  }
 
  .lost_password, .woocommerce-form-login__rememberme {
@@ -18,7 +18,8 @@
   @apply flex flex-col items-center justify-center mt-[5rem] mb-[-8rem] ml-[-13rem] text-xs;
  }
 
- .woocommerce-privacy-policy-text {
+ .woocommerce-privacy-policy-text,
+ .checkbox.woocommerce-form__label.woocommerce-form__label-for-checkbox {
   @apply text-xs font-light text-gray-500;
  }
 

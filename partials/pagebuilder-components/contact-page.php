@@ -13,8 +13,8 @@ $phone_display = get_sub_field('phone_display');
 ?>
 
 <section>
-  <div class="flex flex-col sm:flex-row">
-    <div class="px-2.5 px- md:px-10 pb-8 sm:pt-28 sm:basis-2/3 md:basis-2/5 text-gray-900">
+  <div class="flex flex-col sm:flex-row content-center items-center justify-center">
+    <div class="px-2.5 px- md:px-10 sm:basis-2/3 md:basis-2/5 text-gray-900 ">
       <h1 class="mb-8"><?php echo $contact_title_top; ?></h1>
       <?php
 
