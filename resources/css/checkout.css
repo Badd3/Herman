@@ -232,8 +232,8 @@ select#billing_country {
   @apply font-normal;
 }
 
-p.woocommerce-invalid-required-field span.error {
-  color: #e2401c;
-  display: block !important;
-  font-weight: bold;
+.no-zoom {
+  font-size: 16px !important;
+  transform: scale(0.85);
+  transform-origin: top left;
 }
