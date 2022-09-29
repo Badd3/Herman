@@ -24,12 +24,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 do_action( 'woocommerce_before_customer_login_form' ); ?>
-<section id="login" class="bg-white-bg mb-[-3rem]">
-	<div class="flex flex-col sm:flex-row">
+<section id="login" class="bg-white-bg">
+	<div class="flex flex-col sm:flex-row lg:h-screen">
 		<div class="basis-full sm:basis-1/3 md:basis-2/6">
 			<img class="accountImage sm:h-screen w-full object-cover grayscale sm:sticky sm:top-0 sm:mt-[-2rem]" src="<?php echo $image_url; ?>" alt="<?php echo $image_alt; ?>">
 		</div>
-		<div class="px-2.5 mt-4 md:mt-0 sm:px-7 sm:pt-28 sm:basis-2/3 md:basis-2/6 text-gray-900 grid content-center bg-white-bg coming-soon items-center justify-center">
+		<div class="px-2.5 mt-4 md:mt-0 sm:px-7 sm:pt-28 sm:basis-2/3 md:basis-2/6 text-gray-900 lg:grid content-center bg-white-bg coming-soon items-center justify-center">
 			<div class="flex items-center justify-between mb-8">
 				<div class="flex items-start">
 					<div class="flex items-center h-5">
@@ -45,10 +45,10 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
 					<form class=" woocommerce_form_field login w-full md:w-[24vw]" method="post">
 						<?php do_action( 'woocommerce_login_form_start' ); ?>
 						<div>
-							<input type="text" class="text-base w-full py-1 border-b woocommerce-Input woocommerce-Input--text input-text woocommerce-invalid-required-field" placeholder="EMAIL" name="username" id="username" autocomplete="username" value="<?php echo ( ! empty( $_POST['username'] ) ) ? esc_attr( wp_unslash( $_POST['username'] ) ) : ''; ?>" /><?php // @codingStandardsIgnoreLine ?>
+							<input type="text" class="text-base w-full py-1 border-b woocommerce-Input woocommerce-Input--text input-text woocommerce-invalid-required-field" required placeholder="EMAIL" name="username" id="username" autocomplete="username" value="<?php echo ( ! empty( $_POST['username'] ) ) ? esc_attr( wp_unslash( $_POST['username'] ) ) : ''; ?>" /><?php // @codingStandardsIgnoreLine ?>
 						</div>
 						<div>
-							<input class="text-base w-full py-1" type="password" placeholder="PASSWORD" name="password" id="password" autocomplete="current-password" />
+							<input class="text-base w-full py-1" type="password" placeholder="PASSWORD" name="password" id="password" required autocomplete="current-password" />
 							<!-- <input type="password" name="password" id="password" placeholder="PASSWORD" class="text-base w-full py-1 woocommerce-Input woocommerce-Input--text input-text" required="" autocomplete="current-password" /> -->
 						</div>		
 						<?php do_action( 'woocommerce_login_form' ); ?>
