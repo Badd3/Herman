@@ -156,3 +156,16 @@ function custom_related_products()
 add_filter('woocommerce_product_related_products_heading', function () {
     return 'More to love';
 });
+
+/**
+ * Change number of related products output
+ */
+function woo_related_products_limit()
+{
+    global $product;
+
+    $args['posts_per_page'] = 4;
+
+    return $args;
+}
+add_filter('woocommerce_output_related_products_args', 'woo_related_products_limit', 20);

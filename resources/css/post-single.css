@@ -5,3 +5,9 @@
     @apply border border-black px-4 py-1.5;
   }
 }
+
+.related.products {
+  .products > li {
+    @apply lg:last:hidden;
+  }
+}

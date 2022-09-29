@@ -9,3 +9,7 @@
 .woocommerce-loop-product__title {
   @apply text-xs lg:text-base;
 }
+
+.archive .woocommerce-loop-product__title {
+  @apply truncate;
+}
