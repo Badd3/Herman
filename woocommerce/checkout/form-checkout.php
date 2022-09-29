@@ -189,7 +189,7 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
 									<p class="hidden md:block">PRODUCTS</p>
 									<p class="woocommerce-mini-cart__total total">
 									<td class="product-total">
-										<?php echo apply_filters( 'woocommerce_cart_item_subtotal', WC()->cart->total); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+									<?php do_action('woocommerce_widget_shopping_cart_total'); ?>
 									</td>
 									</p>
 								</div>
