@@ -19,7 +19,7 @@ defined( 'ABSPATH' ) || exit;
 ?>
 <section id="thank-you">
 	<div class="flex justify-center">
-      <div class="basis-full sm:basis-2/5 text-base pb-16 px-42 sm:px-6 lg:px-8 lg:max-w-5xl">
+      <div class="px-2.5 basis-full sm:basis-2/5 text-base pb-16 px-42 sm:px-6 lg:px-8 lg:max-w-5xl">
 		<div class="woocommerce-order">
 
 			<?php
