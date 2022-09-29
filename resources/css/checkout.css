@@ -232,6 +232,15 @@ select#billing_country {
   @apply font-normal;
 }
 
+input {
+  border-radius: 0;
+}
+
+input[type="search"] {
+  -webkit-appearance: none;
+}
+
+
 .closeMenu {
   @apply text-lg;
 }
