@@ -66,7 +66,7 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
 </section>
 
 <section id="herman_login" class="py-16 lg:py-28 bg-white-bg">
-<div class= bg-white-bg flex-grow w-full lg:ml-auto lg:w-1/2" id="customer_login">
+<div class="bg-white-bg flex-grow w-full lg:ml-auto lg:w-1/2" id="customer_login">
 
 <div>
 
