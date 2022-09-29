@@ -3,6 +3,55 @@
     "title": "Single Product",
     "fields": [
         {
+            "key": "field_6335ee1fc320d",
+            "label": "Color",
+            "name": "color",
+            "type": "checkbox",
+            "instructions": "Bepaal hier de kleur van het product",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "red": "Red",
+                "black": "Black"
+            },
+            "allow_custom": 1,
+            "save_custom": 1,
+            "default_value": [],
+            "layout": "vertical",
+            "toggle": 0,
+            "return_format": "value"
+        },
+        {
+            "key": "field_6335ef87b3dcb",
+            "label": "Related Products",
+            "name": "related_products",
+            "type": "relationship",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "product"
+            ],
+            "taxonomy": "",
+            "filters": "",
+            "elements": [
+                "featured_image"
+            ],
+            "min": "",
+            "max": "",
+            "return_format": "id"
+        },
+        {
             "key": "field_62e82abf4d07c",
             "label": "Care Guide",
             "name": "",
@@ -129,5 +178,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1659382580
+    "modified": 1664481314
 }

@@ -13,8 +13,12 @@
 .variations tbody tr {
   @apply flex flex-row items-center border-b border-black divide-x-[1px] divide-black;
 }
+
+html .woo-variation-swatches.wvs-show-label .variations th {
+  @apply !min-w-[94px] !shrink-0 !px-3;
+}
 .variations > tbody > tr > th {
-  @apply !basis-[20%] text-left border-r;
+  @apply lg:!basis-1/5 text-left;
 }
 .variations .reset_variations {
   @apply !hidden;
@@ -69,5 +73,5 @@
 }
 
 .variations .label {
-  font-weight: 400;
+  @apply pl-3 font-normal;
 }
