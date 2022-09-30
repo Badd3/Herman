@@ -12,7 +12,7 @@ if (get_field('header_kleur') == 'light') {
 
 ?>
 
-
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <section class="fixed z-10 top-5 w-full lg:hidden h-5">
     <div class="relative ">
