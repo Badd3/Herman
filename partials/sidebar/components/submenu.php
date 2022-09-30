@@ -2,10 +2,19 @@
     <?php
     $i = $args['count'];
     $mobile = $args['mobile'];
+    $expanded_menu = $args['expanded'];
+
+
+    // if ($expanded_menu) {
+    //     $expanded = 'true';
+    // } else {
+    //     $expanded = 'false';
+    // }
+    // echo $expanded;
 
     if ($mobile) {
         $section_classes = 'hidden w-1/2 !right-0 !z-[21]';
-        $motion_classes = '!block';
+        $motion_classes = '!block lg:!hidden';
         $wrapper_classes = 'pt-[134px]';
     } else {
         $section_classes = 'hidden lg:block w-[208px] left-0 z-[1]';
@@ -15,9 +24,8 @@
 
     ?>
     <section x-data="{open : false}" :open="selected == <? echo $i; ?> ? open = true : open = false" @click.outside="open ? selected = null : '' " class="duration-300 fixed h-full top-0 bg-white-bg <?php echo $section_classes; ?>" :class="selected == <? echo $i; ?> ? '<?php echo $motion_classes; ?>' : ''">
-
         <?php if ($mobile) { ?>
-            <button @click="navOpen = !navOpen, selected = null" class="absolute right-5 top-5 text-black z-[22] xxx">X</button>
+            <button @click="navOpen = !navOpen, selected = null" class="absolute right-5 top-5 text-black z-[22] text-lg">X</button>
         <?php }; ?>
 
         <?php
@@ -41,9 +49,6 @@
 
 
                         $sub_nav_item_label = get_sub_field('submenu_label');
-
-
-
                     ?>
                         <li>
                             <a class="hover:text-black duration-300 text-base" href="<?php echo $sub_nav_item_link; ?>"><?php echo $sub_nav_item_label; ?></a>

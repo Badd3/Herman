@@ -99,6 +99,33 @@
                     "ui_off_text": ""
                 },
                 {
+                    "key": "field_6335df7b20f1f",
+                    "label": "Uitgeklapt laten?",
+                    "name": "expanded",
+                    "type": "true_false",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_62d3e9540e147",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "default_value": 0,
+                    "ui": 1,
+                    "ui_on_text": "",
+                    "ui_off_text": ""
+                },
+                {
                     "key": "field_62d428077f098",
                     "label": "Sub Menu",
                     "name": "submenu_items",
@@ -248,5 +275,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1658072862
+    "modified": 1664475081
 }

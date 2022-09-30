@@ -12,7 +12,7 @@
 
 <body <?php body_class('bg-white-bg text-gray-900 antialiased'); ?>>
 
-	<section class="flex justify-center mt-10 fixed w-full">
-		<img class="w-44" src="<?php echo esc_url(get_template_directory_uri() . '/images/herman-logo-black.svg'); ?>" alt="logo-black">
+	<section class="flex justify-center mt-10 fixed w-full z-[10]">
+		<img class="h-[20px]" src="<?php echo esc_url(get_template_directory_uri() . '/images/HERMAN-logo-white.svg'); ?>" alt="logo-black">
 	</section>
 	<main class="h-screen">

@@ -54,7 +54,7 @@ function single_product_images()
         echo '</div>';
     }
     echo '</div>';
-    echo '<div class="swiper-pagination !left-[5px] !w-[50px]"></div>';
+    echo '<div class="swiper-pagination left-[5px] !w-[300px] flex"></div>';
     echo '</div>';
 
 ?>
@@ -76,8 +76,14 @@ function single_product_description()
     $care_guide_content = get_field('care_guide_content');
     $size_guide_content = get_field('size_guide_content');
     $history_content = get_field('history_content');
+    $color = get_field('color');
+    $related_colors = get_field('related_products');
+
+    // echo $related_colors[0];
+    // var_dump(get_field('color', $related_colors[0]));
 
 ?>
+
     <section class="mb-5">
         <div class="flex flex-col border-b border-black pb-3">
             <div class="w-full flex flex-row justify-between">
@@ -85,6 +91,30 @@ function single_product_description()
                     <h1 class="text-base"><?php the_title(); ?></h1>
                 </div>
                 <div><?php woocommerce_template_single_price(); ?></div>
+            </div>
+        </div>
+        <div class="flex flex-row border-x border-black border-b border-b-black">
+            <div class="border-r-black border-r w-[95px] shrink-0 lg:basis-[95px] py-1.5 px-3 flex flex-col justify-center">
+                <span class="uppercase">Color</span>
+            </div>
+            <div class=" py-1 flex flex-row flex-wrap gap-x-4 px-3">
+                <div class="flex flex-row gap-2 items-center">
+                    <span class="uppercase"> <?php echo $color[0]; ?></span>
+                    <div class="block w-[10px] h-[10px] bg-black border-black border"></div>
+                </div>
+
+                <?php
+                foreach ($related_colors as $color) {
+                    $product_color = get_field('color', $color);
+                ?>
+                    <a class="flex flex-row flex-nowrap items-center gap-2" href="<?php the_permalink($color); ?>">
+                        <span class="uppercase"><?php echo $product_color[0]; ?></span>
+                        <div class="block w-[10px] h-[10px] bg-white border-black border"></div>
+                    </a>
+                <?php
+                }
+                ?>
+
             </div>
         </div>
         <?php woocommerce_template_single_add_to_cart(); ?>
@@ -156,3 +186,16 @@ function custom_related_products()
 add_filter('woocommerce_product_related_products_heading', function () {
     return 'More to love';
 });
+
+/**
+ * Change number of related products output
+ */
+function woo_related_products_limit()
+{
+    global $product;
+
+    $args['posts_per_page'] = 4;
+
+    return $args;
+}
+add_filter('woocommerce_output_related_products_args', 'woo_related_products_limit', 20);
