@@ -93,30 +93,34 @@ function single_product_description()
                 <div><?php woocommerce_template_single_price(); ?></div>
             </div>
         </div>
-        <div class="flex flex-row border-x border-black border-b border-b-black">
-            <div class="border-r-black border-r w-[95px] shrink-0 lg:basis-[95px] py-1.5 px-3 flex flex-col justify-center">
-                <span class="uppercase">Color</span>
-            </div>
-            <div class=" py-1 flex flex-row flex-wrap gap-x-4 px-3">
-                <div class="flex flex-row gap-2 items-center">
-                    <span class="uppercase"> <?php echo $color[0]; ?></span>
-                    <div class="block w-[10px] h-[10px] bg-black border-black border"></div>
+        <?php if ($color || $related_colors) { ?>
+            <div class="flex flex-row border-x border-black border-b border-b-black">
+                <div class="border-r-black border-r w-[95px] shrink-0 lg:basis-[95px] py-1.5 px-3 flex flex-col justify-center">
+                    <span class="uppercase">Color</span>
                 </div>
 
-                <?php
-                foreach ($related_colors as $color) {
-                    $product_color = get_field('color', $color);
-                ?>
-                    <a class="flex flex-row flex-nowrap items-center gap-2" href="<?php the_permalink($color); ?>">
-                        <span class="uppercase"><?php echo $product_color[0]; ?></span>
-                        <div class="block w-[10px] h-[10px] bg-white border-black border"></div>
-                    </a>
-                <?php
-                }
-                ?>
+                <div class=" py-1 flex flex-row flex-wrap gap-x-4 px-3">
+                    <div class="flex flex-row gap-2 items-center">
+                        <span class="uppercase"> <?php echo $color[0]; ?></span>
+                        <div class="block w-[10px] h-[10px] bg-black border-black border"></div>
+                    </div>
+
+                    <?php
+                    foreach ($related_colors as $item_color) {
+                        $product_color = get_field('color', $item_color);
+                    ?>
+                        <a class="flex flex-row flex-nowrap items-center gap-2" href="<?php the_permalink($item_color); ?>">
+                            <span class="uppercase"><?php echo $product_color[0]; ?></span>
+                            <div class="block w-[10px] h-[10px] bg-white border-black border"></div>
+                        </a>
+                    <?php
+                    }
+                    ?>
+
+                </div>
 
             </div>
-        </div>
+        <?php }; ?>
         <?php woocommerce_template_single_add_to_cart(); ?>
     </section>
     <?php if ($description_content || $care_guide_content || $size_guide_content || $history_content) { ?>
