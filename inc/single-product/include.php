@@ -100,20 +100,24 @@ function single_product_description()
                 </div>
 
                 <div class=" py-1 flex flex-row flex-wrap gap-x-4 px-3">
-                    <div class="flex flex-row gap-2 items-center">
-                        <span class="uppercase"> <?php echo $color[0]; ?></span>
-                        <div class="block w-[10px] h-[10px] bg-black border-black border"></div>
-                    </div>
+                    <?php if ($color) { ?>
+                        <div class="flex flex-row gap-2 items-center">
+                            <span class="uppercase"> <?php echo $color[0]; ?></span>
+                            <div class="block w-[10px] h-[10px] bg-black border-black border"></div>
+                        </div>
+                    <?php }; ?>
 
                     <?php
-                    foreach ($related_colors as $item_color) {
-                        $product_color = get_field('color', $item_color);
+                    if ($related_colors) {
+                        foreach ($related_colors as $item_color) {
+                            $product_color = get_field('color', $item_color);
                     ?>
-                        <a class="flex flex-row flex-nowrap items-center gap-2" href="<?php the_permalink($item_color); ?>">
-                            <span class="uppercase"><?php echo $product_color[0]; ?></span>
-                            <div class="block w-[10px] h-[10px] bg-white border-black border"></div>
-                        </a>
+                            <a class="flex flex-row flex-nowrap items-center gap-2" href="<?php the_permalink($item_color); ?>">
+                                <span class="uppercase"><?php echo $product_color[0]; ?></span>
+                                <div class="block w-[10px] h-[10px] bg-white border-black border"></div>
+                            </a>
                     <?php
+                        }
                     }
                     ?>
 
