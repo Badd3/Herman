@@ -6,6 +6,10 @@
   @apply text-base outline-0;
 }
 
+#email-545 {
+  @apply border-b w-11/12;
+}
+
 /* .wpcf7 {
   @apply border-b border-black pb-3;
 } */

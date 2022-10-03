@@ -9,3 +9,13 @@ button {
 .zoom-cursor {
   cursor: url("/wp-content/themes/Herman/images/zoom-black.png"), pointer;
 }
+
+/* Landscape */
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 812px) 
+{ 
+  .coming-soon-mobile {
+    background-position: 50% 75% !important;
+  }
+}
