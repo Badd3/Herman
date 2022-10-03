@@ -12,7 +12,7 @@
 		</div>
 	</div>
 	<div class="bg-white border border-black left-1/2 translate-x-[-50%] bottom-[10px] w-[90%] absolute lg:translate-x-0 lg:left-auto lg:right-[76px] lg:bottom-[45px] max-w-[343px] p-10 pop-up">
-		<p class="mb-4">HERMAN will be launched soon, sign up to the newsletter and be the first to know</p>
+		<p class="mb-4">HERMAN will launch soon. Subscribe to the newsletter and be the first to know.</p>
 		<?php
 		if (get_field('shortcode')) {
 			echo do_shortcode(get_field('shortcode'));
