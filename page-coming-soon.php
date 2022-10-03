@@ -11,7 +11,7 @@
 			<p class="text-base"><?php the_field('subtitel'); ?></p>
 		</div>
 	</div>
-	<div class="text-base bg-white border border-black left-1/2 translate-x-[-50%] bottom-16 w-[90%] absolute lg:translate-x-0 lg:left-auto lg:right-[76px] lg:bottom-[45px] max-w-[343px] p-10 pop-up">
+	<div class="text-base bg-white-bg border border-black left-1/2 translate-x-[-50%] bottom-16 w-[90%] absolute lg:translate-x-0 lg:left-auto lg:right-[76px] lg:bottom-[45px] max-w-[343px] p-10 pop-up">
 		<p class="mb-4">HERMAN will launch soon. Subscribe to the newsletter and be the first to know.</p>
 		<?php
 		if (get_field('shortcode')) {
