@@ -110,3 +110,7 @@ form.invalid .wpcf7-response-output,
   .wpcf7-form-control.wpcf7-text.wpcf7-email.wpcf7-validates-as-required.wpcf7-validates-as-email {
   @apply border-black text-base outline-0 border-b w-11/12 py-3 bg-white-bg;
 }
+
+#test {
+  @apply border-black text-base outline-0 border-b w-11/12 py-3 bg-white-bg;
+}
