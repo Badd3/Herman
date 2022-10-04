@@ -1,9 +1,8 @@
 <?php
 /* Template Name: Coming Soon Page */
 ?>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <?php get_header('minimal'); ?>
-
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <section style="background-image: url(<?php the_field('bg_image'); ?>" class="bg-no-repeat bg-cover grid content-center bg-white-bg coming-soon items-center min-h-full justify-center relative coming-soon-mobile">
 	<div class="container">
 		<div class="text-white text-center">

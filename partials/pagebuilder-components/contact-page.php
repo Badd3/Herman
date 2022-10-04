@@ -14,7 +14,7 @@ $phone_display = get_sub_field('phone_display');
 
 <section>
   <div class="flex flex-col sm:flex-row content-center items-center justify-center">
-    <div class="px-2.5 px- md:px-10 sm:basis-2/3 md:basis-2/5 text-gray-900 ">
+    <div class="px-2.5 w-full md:px-10 sm:basis-2/3 md:basis-2/5 text-gray-900 ">
       <h1 class="mb-8"><?php echo $contact_title_top; ?></h1>
       <?php
 
@@ -57,7 +57,7 @@ $phone_display = get_sub_field('phone_display');
       };
       ?>
     </div>
-    <div class="sm:order-first basis-full sm:basis-3/5">
+    <div class="sm:order-first basis-full sm:basis-3/5 mt-4 md:mt-0">
       <img class="sm:h-screen sm:w-full object-cover grayscale sm:sticky sm:top-0" src="<?php echo $image_url; ?>" alt="<?php echo $image_alt; ?>">
     </div>
   </div>
