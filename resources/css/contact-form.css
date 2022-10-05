@@ -23,7 +23,7 @@
 }
 
 .pop-up .wpcf7-submit {
-  @apply border border-black px-3 py-2 float-right mt-4;
+  @apply border border-black px-3 py-0;
 }
 
 .wpcf7-form-control-wrap {
@@ -64,7 +64,7 @@
 
 .coming-soon .wpcf7-response-output {
   @apply absolute text-black text-xs;
-  margin-top: 1rem !important;
+  margin-top: 4rem !important;
   margin-left: 0 !important;
 }
 
@@ -103,13 +103,12 @@ form.invalid .wpcf7-response-output,
 .coming-soon .wpcf7-form.sent,
 .coming-soon .wpcf7-form.active,
 .coming-soon .wpcf7-form {
-  /* @apply flex; */
+  @apply flex;
 }
 
 .coming-soon .wpcf7-form-control.wpcf7-text.wpcf7-email.wpcf7-validates-as-required.wpcf7-validates-as-email {
-  @apply border-black text-base outline-0 border-b py-3 bg-white-bg;
+  @apply border-black text-base outline-0 border-b w-11/12 py-3 bg-white-bg;
 }
-
-input.wpcf7-form-control:nth-child(1) {
+.coming-soon input.wpcf7-form-control:nth-child(1) {
   border-bottom: 1px solid;
 }
