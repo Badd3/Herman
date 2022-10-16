@@ -1,44 +1,29 @@
 import Alpine from "alpinejs";
 import collapse from "@alpinejs/collapse";
-import Swiper, { Pagination, Mousewheel } from "swiper";
+import "./swiper.js";
 import "./lightbox.js";
 
 Alpine.plugin(collapse);
-
-// function play() {
-//   var audio = document.getElementById("audio");
-//   audio.play();
-// }
-
-//SWIPER HOME
-const swiper = new Swiper(".swiper", {
-  modules: [Pagination, Mousewheel],
-  direction: "vertical",
-  loop: true,
-  speed: 500,
-  mousewheel: {
-    invert: false,
-  },
-  // If we need pagination
-  pagination: {
-    el: ".swiper-pagination",
-  },
-});
-
-//SWIPER SINGLE PRODUCT PAGE
-const swiperSingleProduct = new Swiper(".swiper-single-product", {
-  modules: [Pagination],
-  direction: "horizontal",
-  loop: false,
-  pagination: {
-    el: ".swiper-pagination",
-  },
-});
 
 //Alleen op coming soon template runnen
 if (document.querySelector(".page-template-page-coming-soon")) {
   document.addEventListener("DOMContentLoaded", () => {
     document.querySelector(".wpcf7-email").focus();
+  });
+}
+
+//bagOpen is false zodat deze niet getoond wordt.
+Alpine.store("bagOpen", false);
+
+//In success.php is een empty div met #trigger-side. Als deze in de DOM aanwezig (wanneer een product dus succesvol is toegevoegd) zetten we de state van bagOpen op true.
+if (document.querySelector("#trigger-side")) {
+  document.addEventListener("alpine:init", () => {
+    //Plaats de $store wijziging in functie
+    function openBag() {
+      Alpine.store("bagOpen", true);
+    }
+    //Mbv timeOut kan de animatie afspelen
+    setTimeout(openBag, 100);
   });
 }
 
