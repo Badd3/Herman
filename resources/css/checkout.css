@@ -197,7 +197,7 @@ select#billing_country {
 }
 
 .woocommerce-message {
-  @apply hidden;
+  @apply invisible;
 }
 
 .hermanBtn {
@@ -236,13 +236,10 @@ input {
   border-radius: 0;
 }
 
-
 input[type="search"] {
   -webkit-appearance: none;
 }
 
-
 .closeMenu {
   @apply text-lg;
 }
-

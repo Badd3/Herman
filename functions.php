@@ -213,7 +213,7 @@ function get_breadcrumb()
             $anc = get_post_ancestors($post->ID);
             $title = get_the_title();
             foreach ($anc as $ancestor) {
-                $output = '<a class="uppercase text-xs inline" href="'.get_permalink($ancestor).'" title="'.get_the_title($ancestor).'">'.get_the_title($ancestor).'</a> <p class="text-xs inline">></p>';
+                $output = '<a class="uppercase text-xs inline" href="' . get_permalink($ancestor) . '" title="' . get_the_title($ancestor) . '">' . get_the_title($ancestor) . '</a> <p class="text-xs inline">></p>';
                 // $output = '<p class="uppercase text-xs inline" title="' . get_the_title($ancestor) . '">' . get_the_title($ancestor) . '</p> <p class="text-xs inline">></p>';
             }
             echo $output;
@@ -276,7 +276,7 @@ function herman_rename_address_my_account($items)
 add_action('woocommerce_account_edit-account_endpoint', 'woocommerce_account_edit_address');
 
 // Add to cart message disabled
-add_filter('wc_add_to_cart_message_html', '__return_false');
+// add_filter('wc_add_to_cart_message_html', '__return_false');
 
 /**
  * Change the default country on the checkout for non-existing users only
@@ -316,7 +316,7 @@ function herman_add_name_woo_account_registration()
 
     <div class="clear"></div>
 
-<?php
+    <?php
 }
 
 ///////////////////////////////
@@ -387,16 +387,17 @@ function custom_redirection_after_registration($redirection_url)
     return $redirection_url; // Always return something
 }
 
-function filter_woocommerce_add_notice ( $message ) {
+function filter_woocommerce_add_notice($message)
+{
     // Equal to (Must be exactly the same).
     // If the message is displayed in another language, adjust where necessary!
-    if ( $message == 'Checkout is not available whilst your cart is empty.' ) {
+    if ($message == 'Checkout is not available whilst your cart is empty.') {
         return false;
-    }   
-    
+    }
+
     return $message;
 }
-add_filter( 'woocommerce_add_notice', 'filter_woocommerce_add_notice', 10, 1 );
+add_filter('woocommerce_add_notice', 'filter_woocommerce_add_notice', 10, 1);
 
 // ===========================================================================
 //  Redirect Empty Checkout to Shop 
@@ -404,56 +405,73 @@ add_filter( 'woocommerce_add_notice', 'filter_woocommerce_add_notice', 10, 1 );
 
 add_action('template_redirect', 'redirection_function');
 
-function redirection_function(){
+function redirection_function()
+{
     global $woocommerce;
 
-    if( is_checkout() && 0 == sprintf(_n('%d', '%d', $woocommerce->cart->cart_contents_count, 'herman'), $woocommerce->cart->cart_contents_count) && !isset($_GET['key']) ) {
-        wp_safe_redirect( get_permalink( woocommerce_get_page_id( 'shop' ) ) );
+    if (is_checkout() && 0 == sprintf(_n('%d', '%d', $woocommerce->cart->cart_contents_count, 'herman'), $woocommerce->cart->cart_contents_count) && !isset($_GET['key'])) {
+        wp_safe_redirect(get_permalink(woocommerce_get_page_id('shop')));
         exit;
     }
 }
 
-add_filter( 'woocommerce_form_field', 'bbloomer_checkout_fields_in_label_error', 10, 4 );
- 
-function bbloomer_checkout_fields_in_label_error( $field, $key, $args, $value ) {
-   if ( strpos( $field, '</label>' ) !== false && $args['required'] ) {
-      $error = '<span class="error" style="display:none">';
-      $error .= sprintf( __( '%s is a required field.', 'woocommerce' ), $args['label'] );
-      $error .= '</span>';
-      $field = substr_replace( $field, $error, strpos( $field, '</label>' ), 0);
-   }
-   return $field;
-}
+add_filter('woocommerce_form_field', 'bbloomer_checkout_fields_in_label_error', 10, 4);
 
-add_action( 'woocommerce_register_form', 'herman_add_registration_privacy_policy', 11 );
-   
-function herman_add_registration_privacy_policy() {
- 
-woocommerce_form_field( 'privacy_policy_reg', array(
-   'type'          => 'checkbox',
-   'class'         => array('form-row privacy'),
-   'label_class'   => array('woocommerce-form__label woocommerce-form__label-for-checkbox checkbox'),
-   'input_class'   => array('woocommerce-form__input woocommerce-form__input-checkbox input-checkbox'),
-   'required'      => true,
-   'label'         => 'I AGREE TO RECEIVE NEWS, STYLE TIPS AND MARKETING INFORMATION',
-));
-  
-}
-  
-// Show error if user does not tick
-   
-add_filter( 'woocommerce_registration_errors', 'herman_validate_privacy_registration', 10, 3 );
-  
-function herman_validate_privacy_registration( $errors, $username, $email ) {
-if ( ! is_checkout() ) {
-    if ( ! (int) isset( $_POST['privacy_policy_reg'] ) ) {
-        $errors->add( 'privacy_policy_reg_error', __( 'POLICY CONSENT IS REQUIRED', 'woocommerce' ) );
+function bbloomer_checkout_fields_in_label_error($field, $key, $args, $value)
+{
+    if (strpos($field, '</label>') !== false && $args['required']) {
+        $error = '<span class="error" style="display:none">';
+        $error .= sprintf(__('%s is a required field.', 'woocommerce'), $args['label']);
+        $error .= '</span>';
+        $field = substr_replace($field, $error, strpos($field, '</label>'), 0);
     }
+    return $field;
 }
-return $errors;
+add_action('woocommerce_register_form', 'herman_add_registration_privacy_policy', 11);
+
+function herman_add_registration_privacy_policy()
+{
+
+    woocommerce_form_field('privacy_policy_reg', array(
+        'type'          => 'checkbox',
+        'class'         => array('form-row privacy'),
+        'label_class'   => array('woocommerce-form__label woocommerce-form__label-for-checkbox checkbox'),
+        'input_class'   => array('woocommerce-form__input woocommerce-form__input-checkbox input-checkbox'),
+        'required'      => true,
+        'label'         => 'I AGREE TO RECEIVE NEWS, STYLE TIPS AND MARKETING INFORMATION',
+    ));
 }
 
+// Show error if user does not tick
 
+add_filter('woocommerce_registration_errors', 'herman_validate_privacy_registration', 10, 3);
+
+function herman_validate_privacy_registration($errors, $username, $email)
+{
+    if (!is_checkout()) {
+        if (!(int) isset($_POST['privacy_policy_reg'])) {
+            $errors->add('privacy_policy_reg_error', __('POLICY CONSENT IS REQUIRED', 'woocommerce'));
+        }
+    }
+    return $errors;
+}
+
+add_action( 'get_header', 'redirect_to_holding');
+
+add_action('wp_footer', 'teleport_container', 999);
+function teleport_container()
+{
+    if (is_product()) : // Only for archives pages
+
+
+    ?>
+
+        <div id="teleport-container"></div>
+<?php
+    endif;
+}
+
+ 
 function redirect_to_holding(){
     $holding_page = get_page_by_path('coming-soon'); 
     if (($holding_page != NULL) && ($holding_page->post_status == 'publish')) 
