@@ -453,6 +453,7 @@ if ( ! is_checkout() ) {
 return $errors;
 }
 
+
 function redirect_to_holding(){
     $holding_page = get_page_by_path('coming-soon'); 
     if (($holding_page != NULL) && ($holding_page->post_status == 'publish')) 
