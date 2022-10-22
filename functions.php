@@ -456,8 +456,6 @@ function herman_validate_privacy_registration($errors, $username, $email)
     return $errors;
 }
 
-add_action( 'get_header', 'redirect_to_holding');
-
 add_action('wp_footer', 'teleport_container', 999);
 function teleport_container()
 {

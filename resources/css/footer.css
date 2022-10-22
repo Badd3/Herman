@@ -1,5 +1,5 @@
 .footer form {
-  @apply flex flex-row flex-wrap border-b border-black justify-between;
+  @apply flex flex-row flex-wrap border-b border-black justify-between pb-7;
 }
 
 .footer .wpcf7-text {
@@ -8,4 +8,11 @@
 
 .footer .wpcf7-response-output {
   @apply !py-2 !m-0;
+}
+#wpcf7-f301-o2 > form > span.wpcf7-form-control-wrap > input {
+  width: 70%;
+}
+
+#wpcf7-f301-o2 > form > input {
+  margin-top: -2.5rem;
 }
