@@ -236,7 +236,7 @@ input {
   border-radius: 0;
 }
 textarea {
-  border-radius: 0;
+  border-radius: 0 !important;
 }
 
 input[type="search"] {
