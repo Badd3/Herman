@@ -7,9 +7,20 @@
 }
 
 .woocommerce-loop-product__title {
-  @apply text-xs lg:text-base;
+  @apply text-sm lg:text-base;
 }
 
 .archive .woocommerce-loop-product__title {
   @apply truncate;
+}
+
+.size-guide table, 
+.size-guide th, 
+.size-guide td {
+  @apply border-r-black border;
+}
+
+.size-guide th,
+.size-guide td {
+  @apply px-3 py-1;
 }
