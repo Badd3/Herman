@@ -235,6 +235,9 @@ select#billing_country {
 input {
   border-radius: 0;
 }
+textarea {
+  border-radius: 0;
+}
 
 input[type="search"] {
   -webkit-appearance: none;

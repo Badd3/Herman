@@ -1,5 +1,5 @@
 .footer form {
-  @apply flex flex-row flex-wrap border-b border-black justify-between pb-7;
+  @apply flex flex-row flex-wrap border-b border-black justify-between pb-3;
 }
 
 .footer .wpcf7-text {
