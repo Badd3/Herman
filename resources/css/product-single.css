@@ -17,10 +17,30 @@
 .size-guide table, 
 .size-guide th, 
 .size-guide td {
-  @apply border-r-black border;
+  @apply border border-black;
 }
 
 .size-guide th,
 .size-guide td {
   @apply px-3 py-1;
+}
+
+.plus {
+  @apply text-left pl-4;
+}
+
+.plus:before{
+  content:"+";
+  position:absolute;
+  left: 83%;
+  opacity: 0;
+}
+
+.plus:hover:before{
+  left:92%;
+  opacity:1;
+}
+
+.plus:hover {
+  @apply w-36;
 }
