@@ -37,3 +37,9 @@ button {
 .page-shipping ul {
   @apply ml-4 list-disc;
 }
+
+#page ul,
+#page ol,
+.doubleMenu {
+  list-style: none;
+}
