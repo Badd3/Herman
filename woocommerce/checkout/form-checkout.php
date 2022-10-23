@@ -93,7 +93,7 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
 									<div class="flow-root">
 										<ul role="list" class="-mt-6 mb-2 divide-y divide-gray-200 border-t border-gray-200">
 											<li class="flex pt-6 pb-4">
-												<div class="h-24 w-24 flex-shrink-0 overflow-hidden">
+												<div class="h-20 w-32 flex-shrink-0 overflow-hidden">
 													<a href="<?php echo esc_url($product_permalink); ?>">
 														<?php echo $thumbnail; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
 														?>
