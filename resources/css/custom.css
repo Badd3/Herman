@@ -19,3 +19,10 @@ button {
     background-position: 50% 75% !important;
   }
 }
+
+#content ol {
+  @apply ml-4 list-decimal;
+}
+#content ul {
+  @apply ml-4 list-disc;
+}
