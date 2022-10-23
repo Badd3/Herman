@@ -20,9 +20,20 @@ button {
   }
 }
 
-#content ol {
+.page-sizing ol,
+.page-privacy ol,
+.page-terms-conditions ol,
+.page-sustainability ol,
+.page-returns ol,
+.page-shipping ol
+{
   @apply ml-4 list-decimal;
 }
-#content ul {
+.page-sizing ul,
+.page-privacy ul,
+.page-terms-conditions ul,
+.page-sustainability ul,
+.page-returns ul,
+.page-shipping ul {
   @apply ml-4 list-disc;
 }
