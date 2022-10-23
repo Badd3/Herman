@@ -42,4 +42,5 @@ button {
 #page ol,
 .doubleMenu {
   list-style: none;
+  margin-left: unset;
 }
