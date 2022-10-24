@@ -20,27 +20,27 @@ button {
   }
 }
 
-.page-sizing ol,
-.page-privacy ol,
-.page-terms-conditions ol,
-.page-sustainability ol,
-.page-returns ol,
-.page-shipping ol
+.page-sizing ol li,
+.page-privacy ol li,
+.page-terms-conditions ol li,
+.page-sustainability ol li,
+.page-returns ol li,
+.page-shipping ol li
 {
-  @apply ml-4 list-decimal;
+  @apply ml-4 auto;
 }
-.page-sizing ul,
-.page-privacy ul,
-.page-terms-conditions ul,
-.page-sustainability ul,
-.page-returns ul,
-.page-shipping ul {
-  @apply ml-4 list-disc;
+.page-sizing ul li,
+.page-privacy ul li,
+.page-terms-conditions ul li,
+.page-sustainability ul li,
+.page-returns ul li,
+.page-shipping ul li{
+  @apply ml-4 auto;
 }
 
 #page ul,
 #page ol,
 .doubleMenu {
-  list-style: none;
+  list-style: none !important;
   margin-left: unset !important;
 }

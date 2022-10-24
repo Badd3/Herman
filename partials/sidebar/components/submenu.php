@@ -33,7 +33,7 @@
 
         if (have_rows('submenu_items')) : ?>
             <div class="px-7 pb-8 pt- h-full <?php echo $wrapper_classes; ?>">
-                <ul class="flex flex-col gap-3 mb-2 text-grey justify-between uppercase">
+                <ul class="flex flex-col gap-3 mb-2 text-grey justify-between uppercase doubleMenu">
                     <?php
 
                     // loop through rows (sub repeater)
