@@ -20,27 +20,11 @@ button {
   }
 }
 
-.page-sizing ol li,
-.page-privacy ol li,
-.page-terms-conditions ol li,
-.page-sustainability ol li,
-.page-returns ol li,
-.page-shipping ol li
+.infoList ol li
 {
-  @apply ml-4 auto;
+  @apply ml-4 list-decimal;
 }
-.page-sizing ul li,
-.page-privacy ul li,
-.page-terms-conditions ul li,
-.page-sustainability ul li,
-.page-returns ul li,
-.page-shipping ul li{
-  @apply ml-4 auto;
-}
-
-#page ul,
-#page ol,
-.doubleMenu {
-  list-style: none !important;
-  margin-left: unset !important;
+.infoList ul li
+{
+  @apply ml-4 list-disc;
 }
