@@ -316,7 +316,7 @@ function herman_add_name_woo_account_registration()
 
     <div class="clear"></div>
 
-    <?php
+<?php
 }
 
 ///////////////////////////////
@@ -456,37 +456,24 @@ function herman_validate_privacy_registration($errors, $username, $email)
     return $errors;
 }
 
-add_action('wp_footer', 'teleport_container', 999);
-function teleport_container()
-{
-    if (is_product()) : // Only for archives pages
-
-
-    ?>
-
-        <div id="teleport-container"></div>
-<?php
-    endif;
-}
-
  
-function redirect_to_holding(){
-    $holding_page = get_page_by_path('coming-soon'); 
-    if (($holding_page != NULL) && ($holding_page->post_status == 'publish')) 
-    {
-        /* We have a holding page */
-        $current_page = get_post();
+// function redirect_to_holding(){
+//     $holding_page = get_page_by_path('coming-soon'); 
+//     if (($holding_page != NULL) && ($holding_page->post_status == 'publish')) 
+//     {
+//         /* We have a holding page */
+//         $current_page = get_post();
     
-        if ($holding_page != $current_page) 
-        {    
-            /* not trying to display the holding page so ok to redirect to holding page */
-            if (current_user_can('delete_users') == false) 
-            {
-                /* we are not logged on to an admin account */
-                wp_redirect(get_permalink($holding_page));
-                exit;               
-            }
-        }
-    }
-}
-add_action( 'get_header', 'redirect_to_holding');
+//         if ($holding_page != $current_page) 
+//         {    
+//             /* not trying to display the holding page so ok to redirect to holding page */
+//             if (current_user_can('delete_users') == false) 
+//             {
+//                 /* we are not logged on to an admin account */
+//                 wp_redirect(get_permalink($holding_page));
+//                 exit;               
+//             }
+//         }
+//     }
+// }
+// add_action( 'get_header', 'redirect_to_holding');
