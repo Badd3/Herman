@@ -17,7 +17,8 @@
             },
             "choices": {
                 "red": "Red",
-                "black": "Black"
+                "blue": "Blue",
+                "green": "Green"
             },
             "allow_custom": 1,
             "save_custom": 1,
@@ -25,31 +26,6 @@
             "layout": "vertical",
             "toggle": 0,
             "return_format": "value"
-        },
-        {
-            "key": "field_6335ef87b3dcb",
-            "label": "Related Products",
-            "name": "related_products",
-            "type": "relationship",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "post_type": [
-                "product"
-            ],
-            "taxonomy": "",
-            "filters": "",
-            "elements": [
-                "featured_image"
-            ],
-            "min": "",
-            "max": "",
-            "return_format": "id"
         },
         {
             "key": "field_62e82abf4d07c",
@@ -178,5 +154,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1664481314
+    "modified": 1666726978
 }
