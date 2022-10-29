@@ -223,7 +223,7 @@ if (!function_exists('herman_woocommerce_flex_wrapper_before')) {
 			);
 			?>
 			<span class="flex text-base ml-6 mt-6 h-8">SHOPPINGBAG</span>
-			
+
 		</a>
 	<?php
 		}
@@ -293,8 +293,7 @@ if (!function_exists('herman_woocommerce_flex_wrapper_before')) {
 	}
 
 
-	/**
- Remove all possible fields
+	/** Remove all possible fields
 	 **/
 	function wc_remove_checkout_fields($fields)
 	{
@@ -346,3 +345,47 @@ if (!function_exists('herman_woocommerce_flex_wrapper_before')) {
 	}
 
 	remove_action('woocommerce_checkout_order_review', 'woocommerce_order_review', 10);
+
+
+
+
+	//hook into the init action and call create_topics_nonhierarchical_taxonomy when it fires
+
+	add_action('init', 'create_taxonomy', 10);
+
+	function create_taxonomy()
+	{
+
+		// Labels part for the GUI
+
+		$labels = array(
+			'name' => _x('Product group', 'taxonomy general name'),
+			'singular_name' => _x('Product group', 'taxonomy singular name'),
+			'search_items' =>  __('Search Product group'),
+			'popular_items' => __('Popular Product group'),
+			'all_items' => __('All Product groups'),
+			'parent_item' => null,
+			'parent_item_colon' => null,
+			'edit_item' => __('Edit Product group'),
+			'update_item' => __('Update Product group'),
+			'add_new_item' => __('Add New Product group'),
+			'new_item_name' => __('New Product group Name'),
+			'separate_items_with_commas' => __('Separate Product group with commas'),
+			'add_or_remove_items' => __('Add or remove Product groups'),
+			'choose_from_most_used' => __('Choose from the most used Product groups'),
+			'menu_name' => __('Product groups'),
+		);
+
+		// Now register the non-hierarchical taxonomy like tag
+
+		register_taxonomy('product_group', 'product', array(
+			'hierarchical' => true,
+			'labels' => $labels,
+			'show_ui' => true,
+			'show_in_rest' => true,
+			'show_admin_column' => true,
+			'update_count_callback' => '_update_post_term_count',
+			'query_var' => true,
+			'rewrite' => array('slug' => 'product_group'),
+		));
+	}

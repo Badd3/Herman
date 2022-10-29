@@ -22,6 +22,8 @@ remove_action('woocommerce_after_single_product_summary', 'woocommerce_output_pr
 
 add_action('woocommerce_before_single_product_summary', 'single_product_images', 20);
 
+
+
 function single_product_images()
 {
     global $product;
@@ -77,12 +79,12 @@ function single_product_description()
     $size_guide_content = get_field('size_guide_content');
     $history_content = get_field('history_content');
     $color = get_field('color');
-    $related_colors = get_field('related_products');
-
-    // echo $related_colors[0];
-    // var_dump(get_field('color', $related_colors[0]));
-
+    $current_page_id = get_the_ID();
+    $term_obj_list = get_the_terms($post->ID, 'product_group');
 ?>
+
+
+
 
     <section class="mb-5">
         <div class="flex flex-col border-b border-black pb-3">
@@ -93,38 +95,63 @@ function single_product_description()
                 <div><?php woocommerce_template_single_price(); ?></div>
             </div>
         </div>
-        <?php if ($color || $related_colors) { ?>
+        <?php if ($color) { ?>
             <div class="flex flex-row border-x border-black border-b border-b-black">
                 <div class="border-r-black border-r w-[95px] shrink-0 lg:basis-[95px] py-1.5 px-3 flex flex-col justify-center">
                     <span class="uppercase">Color</span>
                 </div>
+                <?php
+
+                $args = array(
+                    'posts_per_page' => -1,
+                    'tax_query' => array(
+                        array(
+                            'taxonomy' => 'product_group',
+                            'field' => 'slug',
+                            'terms' => $term_obj_list[0]->slug
+                        )
+                    ),
+                    'post_type' => 'product',
+                    'orderby' => 'title',
+                );
+                $query = new WP_Query($args);
+
+                ?>
+
 
                 <div class=" py-1 flex flex-row flex-wrap gap-x-4 px-3">
-                    <?php if ($color) { ?>
-                        <div class="flex flex-row gap-2 items-center">
-                            <span class="uppercase"> <?php echo $color[0]; ?></span>
-                            <div class="block w-[10px] h-[10px] bg-black border-black border"></div>
-                        </div>
-                    <?php }; ?>
 
                     <?php
-                    if ($related_colors) {
-                        foreach ($related_colors as $item_color) {
-                            $product_color = get_field('color', $item_color);
+
+                    if ($query->have_posts()) : while ($query->have_posts()) : $query->the_post();
+                            $loop_id = get_the_id();
+                            $product_color = get_field('color');
+
+                            if ($loop_id === $current_page_id) {
+                                $fill_box_classes = 'bg-black';
+                            } else {
+                                $fill_box_classes = 'bg-white';
+                            }
                     ?>
-                            <a class="flex flex-row flex-nowrap items-center gap-2" href="<?php the_permalink($item_color); ?>">
+
+
+                            <a class="flex flex-row flex-nowrap items-center gap-2" href="<?php the_permalink(); ?>">
                                 <span class="uppercase"><?php echo $product_color[0]; ?></span>
-                                <div class="block w-[10px] h-[10px] bg-white border-black border"></div>
+                                <div class="block w-[10px] h-[10px] border-black border <?php echo $fill_box_classes; ?>"></div>
                             </a>
                     <?php
-                        }
-                    }
+
+
+                        endwhile;
+                    endif;
+                    wp_reset_query();
                     ?>
 
                 </div>
 
             </div>
         <?php }; ?>
+
         <?php woocommerce_template_single_add_to_cart(); ?>
     </section>
     <?php if ($description_content || $care_guide_content || $size_guide_content || $history_content) { ?>
