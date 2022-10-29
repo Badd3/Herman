@@ -209,7 +209,7 @@ select#billing_country {
 }
 
 .mollie-gateway-icon {
-  @apply h-12 !important;
+  @apply h-8 !important;
 }
 
 .payment_box.payment_method_mollie_wc_gateway_ideal > p:nth-child(1) {
@@ -245,4 +245,13 @@ input[type="search"] {
 
 .closeMenu {
   @apply text-lg;
+}
+
+.payment_box.payment_method_mollie_wc_gateway_creditcard,
+li.wc_payment_method.payment_method_mollie_wc_gateway_creditcard {
+  @apply pt-4;
+}
+
+p.mollie-components-description {
+  @apply pb-4;
 }
