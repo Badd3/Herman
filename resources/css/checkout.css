@@ -248,10 +248,20 @@ input[type="search"] {
 }
 
 .payment_box.payment_method_mollie_wc_gateway_creditcard,
-li.wc_payment_method.payment_method_mollie_wc_gateway_creditcard {
+li.wc_payment_method.payment_method_mollie_wc_gateway_creditcard,
+li.wc_payment_method.payment_method_mollie_wc_gateway_applepay {
   @apply pt-4;
 }
 
-p.mollie-components-description {
+p.mollie-components-description,
+li.wc_payment_method.payment_method_mollie_wc_gateway_applepay {
   @apply pb-4;
+}
+
+li.wc_payment_method.payment_method_mollie_wc_gateway_creditcard {
+  @apply pb-8;
+}
+
+.payment_box.payment_method_mollie_wc_gateway_ideal {
+  margin-bottom: -0.5rem;
 }
