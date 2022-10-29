@@ -17,8 +17,10 @@ if (get_field('header_kleur') == 'light') {
                 <img class="h-5" src="<?php echo esc_url(get_template_directory_uri() . $logo_url); ?>" alt="logo-white">
             </a>
         </div>
+        <?php if( ! is_page( 'checkout' ) ) { ?>
         <div class="absolute right-8 gotham-book <?php echo $text_color; ?>">
             <button @click="$store.bagOpen = !$store.bagOpen" class="uppercase text-base">bag [<?php echo WC()->cart->get_cart_contents_count() ?>]</button>
         </div>
+        <?php } ?>
     </div>
 </section>

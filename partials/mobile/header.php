@@ -27,8 +27,10 @@ if (get_field('header_kleur') == 'light') {
             </a>
         </div>
 
+        <?php if( ! is_page( 'checkout' ) ) { ?>
         <div class="absolute right-[10px] top-[-6px] <?php echo   $text_color; ?>">
             <button @click="$store.bagOpen = !$store.bagOpen" class="uppercase closeMenu">[<?php echo WC()->cart->get_cart_contents_count() ?>]</button>
         </div>
+        <?php } ?>
     </div>
 </section>
