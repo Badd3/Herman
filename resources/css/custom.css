@@ -28,3 +28,7 @@ button {
 {
   @apply ml-4 list-disc;
 }
+
+.tableView {
+  max-width: -webkit-fill-available;
+}
