@@ -30,8 +30,6 @@ do_action('woocommerce_before_mini_cart'); ?>
 
 		foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) {
 			if ($cart_item['variation_id'] != 0) {
-				var_dump($cart_item);
-				// exit();
 				// Getting attribute size selected value
 				$attribute_color = $cart_item['variation']['attribute_color'];
 				$attribute_size = $cart_item['variation']['attribute_size'];
