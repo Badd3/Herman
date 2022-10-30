@@ -485,4 +485,18 @@ function redirect_to_holding()
         }
     }
 }
-// add_action( 'get_header', 'redirect_to_holding');
+// add_action( 'get_header', 'redirect_to_holding')
+
+
+add_action('woocommerce_after_order_itemmeta', 'add_item_color', 10, 3);
+add_action('woocommerce_order_item_meta_end', 'add_item_color', 10, 3);
+
+function add_item_color($item_id, $item, $product)
+{
+    $item_color = get_field('color', $item['product_id'])[0];
+
+
+    if ($item['product_id'] && $item_color) {
+        echo '<span style="color:#888;font-weight:bold;font-size:12px;">COLOR: </span><span style="color:#888;font-size:12px;">' . $item_color . '</span>';
+    }
+}
