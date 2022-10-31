@@ -485,7 +485,7 @@ function redirect_to_holding()
         }
     }
 }
-// add_action( 'get_header', 'redirect_to_holding')
+add_action( 'get_header', 'redirect_to_holding')
 
 
 add_action('woocommerce_after_order_itemmeta', 'add_item_color', 10, 3);
