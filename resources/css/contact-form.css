@@ -34,7 +34,7 @@
   cursor: pointer;
 }
 
-.page-contact .wpcf7-form {
+.footerSubscribe .wpcf7-form {
   @apply flex flex-col;
 
   .wpcf7-submit {
@@ -111,4 +111,8 @@ form.invalid .wpcf7-response-output,
 }
 .coming-soon input.wpcf7-form-control:nth-child(1) {
   border-bottom: 1px solid;
+}
+
+#wpcf7-f301-o2 > form > span.wpcf7-form-control-wrap > input {
+  border-bottom: unset;
 }
