@@ -35,7 +35,7 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
 	<div class="basis-full sm:basis-2/4 text-base pb-4 px-2.5 sm:pt-28 lg:px-7.5 order-last md:order-first">
 		<form id="order_review" name="checkout" method="post" class="checkout woocommerce-checkout" action="<?php echo esc_url(wc_get_checkout_url()); ?>" enctype="multipart/form-data">
 
-		
+
 			<?php if ($checkout->get_checkout_fields()) : ?>
 
 				<?php do_action('woocommerce_checkout_before_customer_details'); ?>
@@ -48,11 +48,11 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
 
 				<?php do_action('woocommerce_checkout_order_review'); ?>
 
-				
-				
+
+
 
 			<?php endif; ?>
-			
+
 
 			<?php do_action('woocommerce_checkout_before_order_review_heading'); ?>
 	</div>
@@ -82,6 +82,9 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
 						$product_price     = apply_filters('woocommerce_cart_item_price', WC()->cart->get_product_price($_product), $cart_item, $cart_item_key);
 						$product_permalink = apply_filters('woocommerce_cart_item_permalink', $_product->is_visible() ? $_product->get_permalink($cart_item) : '', $cart_item, $cart_item_key);
 
+						if (get_field('color', $cart_item['product_id'])) {
+							$item_color = get_field('color', $cart_item['product_id']);
+						};
 				?>
 						<li class="flex flex-col md:flex-row woocommerce-mini-cart-item <?php echo esc_attr(apply_filters('woocommerce_mini_cart_item_class', 'mini_cart_item', $cart_item, $cart_item_key)); ?>">
 
@@ -125,7 +128,13 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
 														</div>
 													<?php
 													};
-													?>
+													if ($item_color) { ?>
+														<div class="flex justify-between py-1 border-b border-black text-black">
+															<p class="text-xs py-1">COLOR: </p>
+															<p class="text-xs py-1 uppercase"><?php echo $item_color[0]; ?></p>
+														</div>
+													<?php }; ?>
+
 													<?php
 													if ($attribute_size != "" && $attribute_size != NULL) {
 													?>
@@ -152,24 +161,24 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
 													<p class="text-xs py-1"><?php echo $cart_item['quantity'] ?></p>
 												</div>
 												<div class="flex flex-row-reverse mt-2">
-												<td class="product-remove">
-													<?php
+													<td class="product-remove">
+														<?php
 														echo apply_filters(
 															'woocommerce_cart_item_remove_link',
 															sprintf(
 																'<div class="flex">
 																<button type="button" class="text-xs text-grey items-center justify-center border border-grey hover:border-black hover:text-black  px-4 py-1 ">
 																<a href="%s" class="remove" aria-label="%s" data-product_id="%s" data-product_sku="%s">REMOVE</a></button></div>',
-																
-																esc_url( wc_get_cart_remove_url( $cart_item_key ) ),
-																esc_html__( 'Remove this item', 'woocommerce' ),
-																esc_attr( $_product->get_id() ),
-																esc_attr( $_product->get_sku() )
+
+																esc_url(wc_get_cart_remove_url($cart_item_key)),
+																esc_html__('Remove this item', 'woocommerce'),
+																esc_attr($_product->get_id()),
+																esc_attr($_product->get_sku())
 															),
 															$cart_item_key
 														);
-													?>
-												</td>
+														?>
+													</td>
 												</div>
 											</div>
 											</li>
@@ -182,32 +191,32 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
 
 					do_action('woocommerce_mini_cart_contents');
 							?>
-									<?php if ( WC()->cart->needs_shipping() && WC()->cart->show_shipping() ) : ?>
+							<?php if (WC()->cart->needs_shipping() && WC()->cart->show_shipping()) : ?>
 
-							<div class="border-t border-gray-200 py-6">
-								<div class="flex flex-row-reverse justify-between md:flex-row text-base text-black">
-									<p class="hidden md:block">PRODUCTS</p>
-									<p class="woocommerce-mini-cart__total total">
-									<td class="product-total">
-									<?php do_action('woocommerce_widget_shopping_cart_total'); ?>
-									</td>
-									</p>
-								</div>
+								<div class="border-t border-gray-200 py-6">
+									<div class="flex flex-row-reverse justify-between md:flex-row text-base text-black">
+										<p class="hidden md:block">PRODUCTS</p>
+										<p class="woocommerce-mini-cart__total total">
+											<td class="product-total">
+												<?php do_action('woocommerce_widget_shopping_cart_total'); ?>
+											</td>
+										</p>
+									</div>
 
 
-								<?php do_action( 'woocommerce_review_order_before_shipping' ); ?>
+									<?php do_action('woocommerce_review_order_before_shipping'); ?>
 
-								<div class="flex flex-row-reverse justify-between md:flex-row text-base text-black divide-gray-200 border-b border-gray-200">
-									<p class="hidden md:block mb-2">SHIPPING COST</p>
-									<p class="woocommerce_package_rates total">
-										<?php
-										$current_shipping_cost = WC()->cart->get_cart_shipping_total();
-										echo $current_shipping_cost;
-										?>
-									</p>
-								</div>
+									<div class="flex flex-row-reverse justify-between md:flex-row text-base text-black divide-gray-200 border-b border-gray-200">
+										<p class="hidden md:block mb-2">SHIPPING COST</p>
+										<p class="woocommerce_package_rates total">
+											<?php
+											$current_shipping_cost = WC()->cart->get_cart_shipping_total();
+											echo $current_shipping_cost;
+											?>
+										</p>
+									</div>
 
-								<?php do_action( 'woocommerce_review_order_after_shipping' ); ?>
+									<?php do_action('woocommerce_review_order_after_shipping'); ?>
 
 								<?php endif; ?>
 
@@ -215,20 +224,20 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
 									<p class="hidden md:block">TOTAL COST</p>
 									<p class="woocommerce_package_rates total">
 
-									<?php do_action( 'woocommerce_review_order_before_order_total' ); ?>
+										<?php do_action('woocommerce_review_order_before_order_total'); ?>
 
-									<tr class="order-total">
-										<td><?php wc_cart_totals_order_total_html(); ?></td>
-									</tr>
+										<tr class="order-total">
+											<td><?php wc_cart_totals_order_total_html(); ?></td>
+										</tr>
 
-									<?php do_action( 'woocommerce_review_order_after_order_total' ); ?>
+										<?php do_action('woocommerce_review_order_after_order_total'); ?>
 									</p>
 								</div>
 
 								<?php do_action('woocommerce_widget_shopping_cart_before_buttons'); ?>
-							</div>
+								</div>
 
-							<?php do_action('woocommerce_widget_shopping_cart_after_buttons'); ?>
+								<?php do_action('woocommerce_widget_shopping_cart_after_buttons'); ?>
 								</div>
 	</div>
 	</ul>
@@ -243,4 +252,3 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
 </form>
 </div>
 </section>
-

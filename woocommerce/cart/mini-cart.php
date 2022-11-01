@@ -44,6 +44,10 @@ do_action('woocommerce_before_mini_cart'); ?>
 				$product_price     = apply_filters('woocommerce_cart_item_price', WC()->cart->get_product_price($_product), $cart_item, $cart_item_key);
 				$product_permalink = apply_filters('woocommerce_cart_item_permalink', $_product->is_visible() ? $_product->get_permalink($cart_item) : '', $cart_item, $cart_item_key);
 
+
+				if (get_field('color', $cart_item['product_id'])) {
+					$item_color = get_field('color', $cart_item['product_id']);
+				};
 		?>
 				<li class="flex flex-col md:flex-row woocommerce-mini-cart-item <?php echo esc_attr(apply_filters('woocommerce_mini_cart_item_class', 'mini_cart_item', $cart_item, $cart_item_key)); ?>">
 
@@ -109,6 +113,12 @@ do_action('woocommerce_before_mini_cart'); ?>
 											};
 											?>
 										</div>
+										<?php if ($item_color) { ?>
+											<div class="flex justify-between py-1 border-b border-black text-black">
+												<p class="text-xs py-1">COLOR: </p>
+												<p class="text-xs py-1 uppercase"><?php echo $item_color[0]; ?></p>
+											</div>
+										<?php }; ?>
 										<div class="flex justify-between py-1 border-b border-black text-black">
 											<p class="text-xs py-1">QUANTITY: </p>
 											<p class="text-xs py-1"><?php echo $cart_item['quantity'] ?></p>

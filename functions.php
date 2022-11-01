@@ -460,8 +460,6 @@ add_action('wp_footer', 'teleport_container', 999);
 function teleport_container()
 {
     if (is_product()) : // Only for archives pages
-
-
     ?>
 
         <div id="teleport-container"></div>
@@ -469,24 +467,36 @@ function teleport_container()
     endif;
 }
 
- 
-function redirect_to_holding(){
-    $holding_page = get_page_by_path('coming-soon'); 
-    if (($holding_page != NULL) && ($holding_page->post_status == 'publish')) 
-    {
+
+function redirect_to_holding()
+{
+    $holding_page = get_page_by_path('coming-soon');
+    if (($holding_page != NULL) && ($holding_page->post_status == 'publish')) {
         /* We have a holding page */
         $current_page = get_post();
-    
-        if ($holding_page != $current_page) 
-        {    
+
+        if ($holding_page != $current_page) {
             /* not trying to display the holding page so ok to redirect to holding page */
-            if (current_user_can('delete_users') == false) 
-            {
+            if (current_user_can('delete_users') == false) {
                 /* we are not logged on to an admin account */
                 wp_redirect(get_permalink($holding_page));
-                exit;               
+                exit;
             }
         }
     }
 }
-add_action( 'get_header', 'redirect_to_holding');
+add_action('get_header', 'redirect_to_holding');
+
+
+add_action('woocommerce_after_order_itemmeta', 'add_item_color', 10, 3);
+add_action('woocommerce_order_item_meta_end', 'add_item_color', 10, 3);
+
+function add_item_color($item_id, $item, $product)
+{
+    $item_color = get_field('color', $item['product_id'])[0];
+
+
+    if ($item['product_id'] && $item_color) {
+        echo '<span style="color:#888;font-weight:bold;font-size:12px;">COLOR: </span><span style="color:#888;font-size:12px;">' . $item_color . '</span>';
+    }
+}
