@@ -4,7 +4,7 @@ $logo_url = '/images/herman_sign.svg';
 
 <section class="lg:hidden footer py-5">
     <div class="px-2.5">
-        <div class="flex flex-col">
+        <div class="flex flex-col footerSubscribe">
             <?php echo do_shortcode(get_field('footer_shortcode', 'options')); ?>
         </div>
 
