@@ -2,5 +2,4 @@
     <label>
         <input id="search-field" type="search" class="search-field focus-visible:outline-none text-md no-zoom" placeholder="<?php echo esc_attr_x('SEARCH', 'placeholder') ?>" value="<?php echo get_search_query() ?>" name="search" />
     </label>
-    <!-- <input type="submit" class="search-submit" value="<?php echo esc_attr_x('Search', 'submit button') ?>" /> -->
 </form>
