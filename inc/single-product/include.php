@@ -219,7 +219,7 @@ function custom_related_products()
 
 
 add_filter('woocommerce_product_related_products_heading', function () {
-    return 'More to love';
+    return 'More from Herman';
 });
 
 /**
