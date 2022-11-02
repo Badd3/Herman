@@ -27,6 +27,7 @@ get_header();
                 </header><!-- .page-header -->
                 <ul class="products grid grid-cols-2 gap-2.5 lg:grid-cols-3 lg:gap-5">
                     <?php
+                    $i = 0;
                     /* Start the Loop */
                     while (have_posts()) :
                         the_post();
@@ -36,8 +37,8 @@ get_header();
                          * If you want to overload this in a child theme then include a file
                          * called content-search.php and that will be used instead.
                          */
-
                         get_template_part('template-parts/content', 'search');
+
 
                     endwhile;
 

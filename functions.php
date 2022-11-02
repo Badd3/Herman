@@ -500,3 +500,13 @@ function add_item_color($item_id, $item, $product)
         echo '<span style="color:#888;font-weight:bold;font-size:12px;">COLOR: </span><span style="color:#888;font-size:12px;">' . $item_color . '</span>';
     }
 }
+
+//Allow only to search for product post type (works only when not logged in to prevent dashboard errors)
+add_action('pre_get_posts', 'search_products_only');
+
+function search_products_only($query)
+{
+    if (!is_admin() && is_search() && $query->is_main_query()) {
+        $query->set('post_type', 'product');
+    }
+}
