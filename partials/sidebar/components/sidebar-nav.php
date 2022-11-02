@@ -17,8 +17,9 @@ if (have_rows('navigation_items', $selected_navigation)) :
         while (have_rows('navigation_items', $selected_navigation)) : the_row();
 
             // Load sub field value.
-            $nav_item_label = get_sub_field('item_label');
             $nav_item_link = get_sub_field('item_link');
+            $nav_item_label = $nav_item_link['title'];
+            $link_target = $nav_item_link['target'] ? $nav_item_link['target'] : '_self';
             $submenu = get_sub_field('submenu');
             $basename_url = basename($nav_item_link);
             $expanded = get_sub_field('expanded');
@@ -36,7 +37,7 @@ if (have_rows('navigation_items', $selected_navigation)) :
 
                 <li>
                     <?php $i = rand(10000, 99999); ?>
-                    <a @click.prevent.stop="selected !== <?php echo $i; ?> ? selected = <?php echo $i; ?> : selected = null;" class="hover:text-black duration-300 text-base <?php echo $navigation_item_active; ?>" href="<?php echo $nav_item_link; ?>"><?php echo $nav_item_label; ?></a>
+                    <a @click.prevent.stop="selected !== <?php echo $i; ?> ? selected = <?php echo $i; ?> : selected = null;" class="hover:text-black duration-300 text-base <?php echo $navigation_item_active; ?>" href="<?php echo $nav_item_link['url']; ?>" target="<?php echo esc_attr($link_target); ?>"><?php echo $nav_item_label; ?></a>
                     <?php
                     if ($submenu) {
 
@@ -48,7 +49,7 @@ if (have_rows('navigation_items', $selected_navigation)) :
             <?php } else { ?>
                 <li>
 
-                    <a class="hover:text-black duration-300 text-base <?php echo $navigation_item_active; ?>" href="<?php echo $nav_item_link; ?>"><?php echo $nav_item_label; ?></a>
+                    <a class="hover:text-black duration-300 text-base <?php echo $navigation_item_active; ?>" href="<?php echo $nav_item_link['url']; ?>" target="<?php echo esc_attr($link_target); ?>"><?php echo $nav_item_label; ?></a>
                 </li>
         <?php
             }
