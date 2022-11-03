@@ -41,12 +41,14 @@
 
                         if (get_sub_field('link_type') == 'page_link') {
 
-                            $sub_nav_item_link = get_sub_field('submenu_link_default');
-                            $link_target = $sub_nav_item_link['target'] ? $sub_nav_item_link['target'] : '_self';
-                            $sub_nav_item_label = $sub_nav_item_link['title'];
+                            $sub_nav_item = get_sub_field('submenu_link_default');
+                            $sub_nav_item_link = get_sub_field('submenu_link_default')['url'];
+                            // var_dump($sub_nav_item_link);
+                            $link_target = $sub_nav_item['target'] ? $sub_nav_item['target'] : '_self';
+                            $sub_nav_item_label = $sub_nav_item['title'];
                         } elseif (get_sub_field('link_type') == 'product_category') {
 
-                            $sub_nav_item_link = get_term_link(get_sub_field('submenu_link_product'), 'product_cat');
+                            $sub_nav_item_link = get_term_link((int)get_sub_field('submenu_link_product'), 'product_cat');
                             $sub_nav_item_label = get_sub_field('submenu_label');
                         }
 
@@ -54,7 +56,7 @@
 
                     ?>
                         <li>
-                            <a class="hover:text-black duration-300 text-base" href="<?php echo $sub_nav_item_link['url']; ?>" target="<?php echo esc_attr($link_target); ?>"><?php echo $sub_nav_item_label; ?></a>
+                            <a class="hover:text-black duration-300 text-base" href="<?php echo $sub_nav_item_link; ?>" target="<?php echo esc_attr($link_target); ?>"><?php echo $sub_nav_item_label; ?></a>
                         </li>
                     <?php endwhile; ?>
                 </ul>
