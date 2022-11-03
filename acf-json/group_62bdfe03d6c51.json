@@ -148,83 +148,6 @@
                             "toolbar": "full",
                             "media_upload": 1,
                             "delay": 0
-                        },
-                        {
-                            "key": "field_62cef10e092b0",
-                            "label": "Image Right",
-                            "name": "image_right",
-                            "type": "image",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "return_format": "array",
-                            "preview_size": "medium",
-                            "library": "all",
-                            "min_width": "",
-                            "min_height": "",
-                            "min_size": "",
-                            "max_width": "",
-                            "max_height": "",
-                            "max_size": "",
-                            "mime_types": ""
-                        }
-                    ],
-                    "min": "",
-                    "max": ""
-                },
-                "layout_6318936b305dd": {
-                    "key": "layout_6318936b305dd",
-                    "name": "account_page",
-                    "label": "Account page",
-                    "display": "block",
-                    "sub_fields": [
-                        {
-                            "key": "field_6319c2f4eb4d5",
-                            "label": "Account Shortcode",
-                            "name": "account_shortcode",
-                            "type": "text",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "default_value": "[wc_reg_form_herman]",
-                            "placeholder": "",
-                            "prepend": "",
-                            "append": "",
-                            "maxlength": ""
-                        },
-                        {
-                            "key": "field_6318936b305df",
-                            "label": "Image Left Login",
-                            "name": "image_left_login",
-                            "type": "image",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "return_format": "array",
-                            "preview_size": "medium",
-                            "library": "all",
-                            "min_width": "",
-                            "min_height": "",
-                            "min_size": "",
-                            "max_width": "",
-                            "max_height": "",
-                            "max_size": "",
-                            "mime_types": ""
                         }
                     ],
                     "min": "",
@@ -236,68 +159,6 @@
                     "label": "Brand Page",
                     "display": "block",
                     "sub_fields": [
-                        {
-                            "key": "field_6325ffdcf67cc",
-                            "label": "Sound Text",
-                            "name": "sound_text",
-                            "type": "wysiwyg",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "default_value": "",
-                            "tabs": "all",
-                            "toolbar": "full",
-                            "media_upload": 1,
-                            "delay": 0
-                        },
-                        {
-                            "key": "field_632603c3a302a",
-                            "label": "Sound Image",
-                            "name": "sound_image",
-                            "type": "image",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "return_format": "url",
-                            "preview_size": "medium",
-                            "library": "all",
-                            "min_width": "",
-                            "min_height": "",
-                            "min_size": "",
-                            "max_width": "",
-                            "max_height": "",
-                            "max_size": "",
-                            "mime_types": ""
-                        },
-                        {
-                            "key": "field_6325ffecf67cd",
-                            "label": "Sound File",
-                            "name": "sound_file",
-                            "type": "file",
-                            "instructions": "Plaats hier je geluid .ogg of .mp3",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "return_format": "url",
-                            "library": "all",
-                            "min_size": "",
-                            "max_size": "",
-                            "mime_types": ".ogg, .mp3"
-                        },
                         {
                             "key": "field_62cef059ce95d",
                             "label": "Brand Text",
@@ -351,25 +212,6 @@
                     "label": "Contact Page",
                     "display": "block",
                     "sub_fields": [
-                        {
-                            "key": "field_631890f2058b5",
-                            "label": "Contact Title Top",
-                            "name": "contact_title_top",
-                            "type": "text",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "default_value": "CONTACT US",
-                            "placeholder": "",
-                            "prepend": "",
-                            "append": "",
-                            "maxlength": ""
-                        },
                         {
                             "key": "field_62d2cd497e7cf",
                             "label": "Image Left",
@@ -521,6 +363,33 @@
                     ],
                     "min": "",
                     "max": ""
+                },
+                "layout_636426bc13a2e": {
+                    "key": "layout_636426bc13a2e",
+                    "name": "post_overview_v2",
+                    "label": "Post Overzicht v2",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_636426bc13a2f",
+                            "label": "Post Overzicht",
+                            "name": "",
+                            "type": "message",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "message": "Posts die toegevoegd worden zullen hier getoond worden. Zorg dat de post een Titel en Uitgelichte afbeelding hebben",
+                            "new_lines": "wpautop",
+                            "esc_html": 0
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
                 }
             },
             "button_label": "Add Row",
@@ -546,5 +415,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1664477854
+    "modified": 1667507938
 }

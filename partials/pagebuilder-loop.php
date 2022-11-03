@@ -29,6 +29,10 @@ if (have_rows('herman_builder')) :
 
             get_template_part('partials/pagebuilder-components/registration-page');
 
+        elseif (get_row_layout() == 'post_overview_v2') :
+
+            get_template_part('partials/pagebuilder-components/post-overview-v2');
+
         endif;
 
     // End loop.
