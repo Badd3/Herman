@@ -12,10 +12,31 @@
 		<div class="max-w-[544px] mx-auto py-10 px-2.5">
 			<?php the_content(); ?>
 
-			<?php the_post_navigation(array(
-				'prev_text'  => __('PREVIOUS'),
-				'next_text'  => __('NEXT'),
-			));
+			<?php
+			echo '<div class="nav-links">';
+			/* Infinite next and previous post looping */
+			if (get_adjacent_post(false, '', true)) {
+				echo '<div class="nav-next">';
+				previous_post_link('%link', 'PREVIOUS');
+				echo '</div>';
+			} else {
+				$first = new WP_Query('posts_per_page=1&order=DESC');
+				$first->the_post();
+				echo '<div class="nav-previous" <a class="nav-previous" href="' . get_permalink() . '">PREVIOUS</a></div>';
+				wp_reset_query();
+			};
+
+			if (get_adjacent_post(false, '', false)) {
+				echo '<div class="nav-next">';
+				next_post_link('%link', 'NEXT');
+				echo '</div>';
+			} else {
+				$last = new WP_Query('posts_per_page=1&order=ASC');
+				$last->the_post();
+				echo '<div class="nav-previous"><a href="' . get_permalink() . '">PREVIOUS</a></div>';
+				wp_reset_query();
+			};
+			echo '</div>';
 			?>
 		</div>
 	</section>
