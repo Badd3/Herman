@@ -1,7 +1,7 @@
 <?php
 $selected_navigation = $args['selected_nav'];
 $mobile = $args['mobile'];
-$current_url = $args['current_url'];
+$current_url = strtolower($args['current_url']);
 
 ?>
 <?php
@@ -21,13 +21,13 @@ if (have_rows('navigation_items', $selected_navigation)) :
             $nav_item_label = $nav_item_link['title'];
             $link_target = $nav_item_link['target'] ? $nav_item_link['target'] : '_self';
             $submenu = get_sub_field('submenu');
-            $basename_url = basename($nav_item_link);
+            $basename_url = strtolower(basename($nav_item_label));
+            $nav_post_id = url_to_postid($nav_item_link['url']);
+            $current_page_id = get_the_id();
             $expanded = get_sub_field('expanded');
 
-            // var_dump($expanded);
-
-
-            if ($basename_url === $current_url || (is_shop() || is_product_category()) && $nav_item_label === 'Shop') {
+            //Vraag me niet de logica hierachter. Het werkt iig.
+            if ($nav_post_id ===  $current_page_id || ((is_shop() || is_product_category() || is_product()) && $nav_item_label === 'Shop') || (str_contains(strtolower($nav_item_label), strtolower('Library')) && get_post_type() === 'post')) {
                 $navigation_item_active = 'text-black';
             } else {
                 $navigation_item_active = '';
@@ -40,7 +40,6 @@ if (have_rows('navigation_items', $selected_navigation)) :
                     <a @click.prevent.stop="selected !== <?php echo $i; ?> ? selected = <?php echo $i; ?> : selected = null;" class="hover:text-black duration-300 text-base <?php echo $navigation_item_active; ?>" href="<?php echo $nav_item_link['url']; ?>" target="<?php echo esc_attr($link_target); ?>"><?php echo $nav_item_label; ?></a>
                     <?php
                     if ($submenu) {
-
                         get_template_part('partials/sidebar/components/submenu', null, array('count' => $i, 'mobile' => $mobile, 'expanded' => $expanded));
                     }
                     ?>
@@ -48,7 +47,6 @@ if (have_rows('navigation_items', $selected_navigation)) :
 
             <?php } else { ?>
                 <li>
-
                     <a class="hover:text-black duration-300 text-base <?php echo $navigation_item_active; ?>" href="<?php echo $nav_item_link['url']; ?>" target="<?php echo esc_attr($link_target); ?>"><?php echo $nav_item_label; ?></a>
                 </li>
         <?php
