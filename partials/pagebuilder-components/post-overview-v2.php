@@ -31,7 +31,7 @@ $the_query = new WP_Query($args);
       }
   ?>
 
-      <a class="<?php echo $classes; ?> flex flex-col duration-300 hover:-translate-y-1" href="<?php the_permalink(); ?> ">
+      <a class="<?php echo $classes; ?> flex flex-col duration-300 hover:-translate-y-1 h-max" href="<?php the_permalink(); ?> ">
         <div class="block mb-2.5">
           <div class="itw">
             <div class="overflow-hidden">
