@@ -137,7 +137,7 @@ function single_product_description()
 
                             <a class="flex flex-row flex-nowrap items-center gap-2" href="<?php the_permalink(); ?>">
                                 <span class="uppercase"><?php echo $product_color[0]; ?></span>
-                                <div class="block w-[10px] h-[10px] border-black border <?php echo $fill_box_classes; ?>"></div>
+                                <div class="block w-[10px] h-[10px] border-black border <?php echo $fill_box_classes; ?> hover:bg-black"></div>
                             </a>
                     <?php
 
