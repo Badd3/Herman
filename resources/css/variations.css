@@ -64,11 +64,12 @@ html .woo-variation-swatches.wvs-show-label .variations th {
   display: block;
   width: 10px;
   height: 10px;
-  border: 1px solid #000;
+  border: 0.1px solid #000;
   background-color: white;
 }
 
-.variable-item.button-variable-item.selected .variable-item-contents:after {
+.variable-item.button-variable-item.selected .variable-item-contents:after,
+.variable-item.button-variable-item .variable-item-contents:hover::after {
   background-color: black;
 }
 
