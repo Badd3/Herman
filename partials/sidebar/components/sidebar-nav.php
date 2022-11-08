@@ -10,6 +10,7 @@ $current_url = strtolower($args['current_url']);
 if (have_rows('navigation_items', $selected_navigation)) :
 ?>
     <ul class="flex flex-col gap-3">
+        <span x-html="selected">ss</span>
         <?php
         // Loop through rows.
         $i = 0;
@@ -25,6 +26,8 @@ if (have_rows('navigation_items', $selected_navigation)) :
             $nav_post_id = url_to_postid($nav_item_link['url']);
             $current_page_id = get_the_id();
             $expanded = get_sub_field('expanded');
+            $nav_item_id = get_page_by_title($nav_item_link['title'])->ID;
+
 
             //Vraag me niet de logica hierachter. Het werkt iig.
             if ($nav_post_id ===  $current_page_id || ((is_shop() || is_product_category() || is_product()) && $nav_item_label === 'Shop') || (str_contains(strtolower($nav_item_label), strtolower('Library')) && get_post_type() === 'post')) {
@@ -37,16 +40,18 @@ if (have_rows('navigation_items', $selected_navigation)) :
 
                 <li>
                     <?php $i = rand(10000, 99999); ?>
+                    <?php echo $nav_item_id; ?>
                     <a @click.prevent.stop="selected !== <?php echo $i; ?> ? selected = <?php echo $i; ?> : selected = null;" class="hover:text-black duration-300 text-base <?php echo $navigation_item_active; ?>" href="<?php echo $nav_item_link['url']; ?>" target="<?php echo esc_attr($link_target); ?>"><?php echo $nav_item_label; ?></a>
                     <?php
                     if ($submenu) {
-                        get_template_part('partials/sidebar/components/submenu', null, array('count' => $i, 'mobile' => $mobile, 'expanded' => $expanded));
+                        get_template_part('partials/sidebar/components/submenu', null, array('count' => $i, 'mobile' => $mobile, 'expanded' => $expanded, 'parent_id' => $nav_item_id));
                     }
                     ?>
                 </li>
 
             <?php } else { ?>
                 <li>
+
                     <a class="hover:text-black duration-300 text-base <?php echo $navigation_item_active; ?>" href="<?php echo $nav_item_link['url']; ?>" target="<?php echo esc_attr($link_target); ?>"><?php echo $nav_item_label; ?></a>
                 </li>
         <?php
