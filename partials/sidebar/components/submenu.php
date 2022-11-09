@@ -22,7 +22,7 @@
         $section_classes = 'hidden lg:block w-[208px] left-0 z-[1] xx';
         $motion_classes = 'left-[208px]';
         $wrapper_classes = 'pt-28';
-        $keep_menu_open = 'left-[208px]';
+        $keep_menu_open = 'left-[209px]';
     }
 
     ?>
