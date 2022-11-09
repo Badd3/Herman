@@ -10,7 +10,7 @@ $current_url = strtolower($args['current_url']);
 if (have_rows('navigation_items', $selected_navigation)) :
 ?>
     <ul class="flex flex-col gap-3">
-        <span x-html="selected">ss</span>
+
         <?php
         // Loop through rows.
         $i = 0;
@@ -40,7 +40,6 @@ if (have_rows('navigation_items', $selected_navigation)) :
 
                 <li>
                     <?php $i = rand(10000, 99999); ?>
-                    <?php echo $nav_item_id; ?>
                     <a @click.prevent.stop="selected !== <?php echo $i; ?> ? selected = <?php echo $i; ?> : selected = null;" class="hover:text-black duration-300 text-base <?php echo $navigation_item_active; ?>" href="<?php echo $nav_item_link['url']; ?>" target="<?php echo esc_attr($link_target); ?>"><?php echo $nav_item_label; ?></a>
                     <?php
                     if ($submenu) {
@@ -51,7 +50,6 @@ if (have_rows('navigation_items', $selected_navigation)) :
 
             <?php } else { ?>
                 <li>
-
                     <a class="hover:text-black duration-300 text-base <?php echo $navigation_item_active; ?>" href="<?php echo $nav_item_link['url']; ?>" target="<?php echo esc_attr($link_target); ?>"><?php echo $nav_item_label; ?></a>
                 </li>
         <?php
