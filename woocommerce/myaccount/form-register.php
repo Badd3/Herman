@@ -55,7 +55,7 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
 				  
 				  <?php wp_nonce_field( 'woocommerce-login', 'woocommerce-login-nonce' ); ?>
 
-                  <button type="submit" class="flex items-center justify-center border border-black  px-6 py-3 text-base font-base text-black shadow-sm  w-full">SIGN IN</button>
+                  <button type="submit" class="hover:bg-black hover:text-white flex items-center justify-center border border-black  px-6 py-3 text-base font-base text-black shadow-sm w-full">SIGN IN</button>
                   <p class="text-sm font-light text-gray-500 dark:text-gray-400">
                       DON'T HAVE AN ACCOUNT YET? <a href="#" class="font-medium text-primary-600 hover:underline dark:text-primary-500">SIGN UP</a>
                   </p>
@@ -147,7 +147,7 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
 
 			<p class="woocommerce-form-row form-row">
 				<?php wp_nonce_field( 'woocommerce-register', 'woocommerce-register-nonce' ); ?>
-				<button type="submit" class="woocommerce-Button woocommerce-button button woocommerce-form-register__submit" name="register" value="<?php esc_attr_e( 'Register', 'woocommerce' ); ?>"><?php esc_html_e( 'Register', 'woocommerce' ); ?></button>
+				<button type="submit" class="hover:bg-black hover:text-white woocommerce-Button woocommerce-button button woocommerce-form-register__submit" name="register" value="<?php esc_attr_e( 'Register', 'woocommerce' ); ?>"><?php esc_html_e( 'Register', 'woocommerce' ); ?></button>
 			</p>
 
 			<?php do_action( 'woocommerce_register_form_end' ); ?>

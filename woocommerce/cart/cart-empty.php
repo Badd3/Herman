@@ -25,7 +25,7 @@ if ( wc_get_page_id( 'shop' ) > 0 ) : ?>
 
 <section class="bg-white-bg justify-center flex text-center mt-4">
 	<p class="return-to-shop">
-		<a class="button wc-backward w-60 mt-5 flex items-center justify-center border border-black  px-6 py-3 text-base font-base text-black shadow-sm" href="<?php echo esc_url( apply_filters( 'woocommerce_return_to_shop_redirect', wc_get_page_permalink( 'shop' ) ) ); ?>">
+		<a class="hover:bg-black hover:text-white button wc-backward w-60 mt-5 flex items-center justify-center border border-black  px-6 py-3 text-base font-base text-black shadow-sm" href="<?php echo esc_url( apply_filters( 'woocommerce_return_to_shop_redirect', wc_get_page_permalink( 'shop' ) ) ); ?>">
 			<?php
 				/**
 				 * Filter "Return To Shop" text.

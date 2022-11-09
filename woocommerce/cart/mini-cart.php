@@ -129,7 +129,7 @@ do_action('woocommerce_before_mini_cart'); ?>
 												'woocommerce_cart_item_remove_link',
 												sprintf(
 													'<div class="flex">
-								<button type="button" class="text-xs text-grey items-center justify-center border border-grey hover:border-black hover:text-black  px-4 py-1 "><a href="%s" class="remove remove_from_cart_button" aria-label="%s" data-product_id="%s" data-cart_item_key="%s" data-product_sku="%s">REMOVE</a></button>
+								<button type="button" class="text-xs text-grey items-center justify-center border border-grey hover:border-black px-4 py-1 hover:bg-black hover:text-white"><a href="%s" class="remove remove_from_cart_button" aria-label="%s" data-product_id="%s" data-cart_item_key="%s" data-product_sku="%s">REMOVE</a></button>
 							  	</div>',
 													esc_url(wc_get_cart_remove_url($cart_item_key)),
 													esc_attr__('Remove this item', 'woocommerce'),
