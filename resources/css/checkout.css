@@ -125,23 +125,23 @@ select#billing_country {
 }
 
 .woocommerce-form.woocommerce-form-login.login {
-  @apply text-base px-2.5 lg:px-7.5;
+  @apply text-base px-2.5 lg:px-7.5 hover:bg-black hover:text-white;
 }
 
 .woocommerce-form-login__submit {
-  @apply text-base uppercase flex items-center justify-center border border-black px-4 py-1 w-fit mt-4 text-black shadow-sm;
+  @apply text-base uppercase flex items-center justify-center border border-black px-4 py-1 w-fit mt-4 text-black shadow-sm hover:bg-black hover:text-white;
 }
 
 .dashboardBtn {
-  @apply text-base uppercase flex items-center justify-center border border-black px-4 py-1 w-fit mt-4 text-black shadow-sm;
+  @apply text-base uppercase flex items-center justify-center border border-black px-4 py-1 w-fit mt-4 text-black shadow-sm hover:bg-black hover:text-white;
 }
 
 .dashboardBtnBig {
-  @apply text-base uppercase flex items-center justify-center border border-black px-4 py-1 w-fit mt-4 text-black shadow-sm;
+  @apply text-base uppercase flex items-center justify-center border border-black px-4 py-1 w-fit mt-4 text-black shadow-sm hover:bg-black hover:text-white;
 }
 
 .dashboardOrderBtn {
-  @apply text-base uppercase flex items-center justify-center border border-black px-4 py-1 w-20 text-black shadow-sm;
+  @apply text-base uppercase flex items-center justify-center border border-black px-4 py-1 w-20 text-black shadow-sm hover:bg-black hover:text-white;
 }
 
 #dashboard-edit-account .woocommerce-message {

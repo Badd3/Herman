@@ -41,3 +41,33 @@ input[type="search"]::-webkit-search-cancel-button {
 .hoverBlack:hover {
   @apply bg-black;
 }
+
+.xdebug-error {
+  display: none;
+}
+
+.woocommerce-table__product-name.product-name span {
+  color: black !important;
+  font-weight: 400 !important;
+  font-size: 14px !important;
+}
+
+#dashboard-order-details .product-name {
+  width: 50% !important;
+}
+
+ul.wc-item-meta p {
+  /* float: left !important; */
+  margin: 0 !important;
+  padding: 0 !important;
+    list-style: none !important;
+}
+
+ul.wc-item-meta .wc-item-meta-label {
+  float: left !important;
+  margin-right: 5px !important;
+}
+
+.onsale {
+  display: none;
+}

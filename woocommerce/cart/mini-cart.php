@@ -172,7 +172,7 @@ do_action('woocommerce_before_mini_cart'); ?>
 
 
 						<div class="mt-6">
-							<a href="<?php echo wc_get_checkout_url() ?>" class="flex items-center justify-center border border-black  px-6 py-3 text-base font-base text-black shadow-sm  ">CHECKOUT</a>
+							<a href="<?php echo wc_get_checkout_url() ?>" class="hover:bg-black hover:text-white flex items-center justify-center border border-black  px-6 py-3 text-base font-base text-black shadow-sm  ">CHECKOUT</a>
 						</div>
 					</div>
 
@@ -186,7 +186,7 @@ do_action('woocommerce_before_mini_cart'); ?>
 <?php else : ?>
 	<p class="woocommerce-mini-cart__empty-message ml-6"><?php esc_html_e('NO PRODUCTS IN THE CART.', 'woocommerce'); ?></p>
 	<div class="px-6 mt-6">
-		<a href="/shop" class="flex items-center justify-center border border-black  px-6 py-3 text-base font-base text-black shadow-sm  ">CHECK PRODUCTS</a>
+		<a href="/shop" class="hover:bg-black hover:text-white flex items-center justify-center border border-black  px-6 py-3 text-base font-base text-black shadow-sm">CHECK PRODUCTS</a>
 	</div>
 
 <?php endif; ?>
