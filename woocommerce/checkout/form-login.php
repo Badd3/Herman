@@ -23,7 +23,7 @@ if ( is_user_logged_in() || 'no' === get_option( 'woocommerce_enable_checkout_lo
 
 ?>
 <div class="woocommerce-form-login-toggle bg-white-bg text-base pt-20 px-3 sm:pt-28 sm:px-6 lg:px-8">
-	<?php wc_print_notice( apply_filters( 'woocommerce_checkout_login_message', esc_html__( 'RETURNING CUSTOMER?', 'woocommerce' ) ) . ' <br><a href="#" class="showlogin w-40 mt-5 flex items-center justify-center border border-black  px-6 py-3 text-base font-base text-black shadow-sm  ">' . esc_html__( 'GO TO LOGIN', 'woocommerce' ) . '</a>', 'notice' ); ?>
+	<?php wc_print_notice( apply_filters( 'woocommerce_checkout_login_message', esc_html__( 'RETURNING CUSTOMER?', 'woocommerce' ) ) . ' <br><a href="#" class="showlogin w-40 mt-5 flex items-center justify-center border border-black  px-6 py-3 text-base font-base text-black shadow-sm hover:bg-black hover:text-white">' . esc_html__( 'GO TO LOGIN', 'woocommerce' ) . '</a>', 'notice' ); ?>
 </div>
 <?php
 woocommerce_login_form(

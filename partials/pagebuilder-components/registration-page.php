@@ -75,7 +75,7 @@ function herman_separate_registration_form() {
 
           <p class="woocommerce-FormRow form-row">
               <?php wp_nonce_field( 'woocommerce-register', 'woocommerce-register-nonce' ); ?>
-              <button type="submit" class="mt-4 woocommerce-Button woocommerce-button button woocommerce-form-register__submit flex items-center justify-center border border-black  px-4 py-1 text-base font-base text-black shadow-sm " name="register" value="<?php esc_attr_e( 'Register', 'woocommerce' ); ?>"><?php esc_html_e( 'CREATE ACCOUNT', 'woocommerce' ); ?></button>
+              <button type="submit" class="mt-4 woocommerce-Button woocommerce-button button woocommerce-form-register__submit flex items-center justify-center border border-black  px-4 py-1 text-base font-base text-black shadow-sm hover:bg-black hover:text-white" name="register" value="<?php esc_attr_e( 'Register', 'woocommerce' ); ?>"><?php esc_html_e( 'CREATE ACCOUNT', 'woocommerce' ); ?></button>
           </p>
 
           <?php do_action( 'woocommerce_register_form_end' ); ?>
