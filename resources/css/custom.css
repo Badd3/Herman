@@ -71,3 +71,26 @@ ul.wc-item-meta .wc-item-meta-label {
 .onsale {
   display: none;
 }
+
+.cky-consent-container .cky-consent-bar,
+.cky-modal {
+  border-radius: 0 !important;
+  border: 1px solid black !important;
+}
+
+.cky-btn:hover {
+  background-color: black !important;
+  color: white !important;
+  opacity: 1 !important;
+}
+
+.cky-btn-accept,
+.cky-btn-reject,
+.cky-btn-customize,
+.cky-btn-preferences {
+  border: 1px solid black !important;
+}
+
+.cky-btn-revisit-wrapper.cky-revisit-bottom-left {
+  display: none;
+}
