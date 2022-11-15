@@ -29,7 +29,7 @@ function single_product_images()
     global $product;
     $attachment_ids = $product->get_gallery_attachment_ids();
     $thumbnail_url = get_the_post_thumbnail_url(get_the_id(), 'full');
-    echo '<div class="product-images flex-col gap-y-5 hidden md:flex">';
+    echo '<div class="product-images flex-col gap-y-5 hidden md:flex border border-black h-fit">';
     echo '<a class="chocolat-image zoom-cursor" href="' . $thumbnail_url . '" class="aspect-w-[54] aspect-h-[73] [&>*]:object-cover">';
     the_post_thumbnail();
     echo '</a>';
@@ -75,6 +75,7 @@ add_action('woocommerce_single_product_summary', 'single_product_description', 2
 function single_product_description()
 {
     $description_content = get_the_content();
+    $badges = get_field('badges');
     $care_guide_content = get_field('care_guide_content');
     $size_guide_content = get_field('size_guide_content');
     $history_content = get_field('history_content');
@@ -87,6 +88,16 @@ function single_product_description()
 
 
     <section class="mb-5">
+        <?php 
+            if ($badges) {
+                echo '<div class="w-full flex flex-row-reverse mb-2">
+
+                        
+                        <span class="bg-white-bg h-fit w-fit px-1 border border-black text-base pointer-events-none">'. $badges; echo'
+                        </span></div>';
+            }
+            ;?>
+
         <div class="flex flex-col border-b border-black pb-3">
             <div class="w-full flex flex-row justify-between">
                 <div>
