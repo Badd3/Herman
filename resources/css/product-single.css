@@ -10,7 +10,8 @@
   @apply text-sm lg:text-base;
 }
 
-.archive .woocommerce-loop-product__title {
+.archive .woocommerce-loop-product__title,
+.related .woocommerce-loop-product__title {
   @apply truncate;
 }
 
@@ -24,7 +25,6 @@
 .size-guide td {
   @apply px-3 py-1;
 }
-
 
 .chocolat-overlay {
   @apply !bg-white-bg !opacity-100;
