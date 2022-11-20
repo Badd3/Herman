@@ -29,15 +29,15 @@ function single_product_images()
     global $product;
     $attachment_ids = $product->get_gallery_attachment_ids();
     $thumbnail_url = get_the_post_thumbnail_url(get_the_id(), 'full');
-    echo '<div class="product-images flex-col gap-y-5 hidden md:flex border border-black h-fit">';
-    echo '<a class="chocolat-image zoom-cursor" href="' . $thumbnail_url . '" class="aspect-w-[54] aspect-h-[73] [&>*]:object-cover">';
+    echo '<div class="product-images flex-col gap-y-5 hidden md:flex  h-fit">';
+    echo '<a class="chocolat-image zoom-cursor border border-black" href="' . $thumbnail_url . '" class="aspect-w-[54] aspect-h-[73] [&>*]:object-cover">';
     the_post_thumbnail();
     echo '</a>';
 
 
     foreach ($attachment_ids as $attachment_id) {
         $attachment_url = wp_get_attachment_url($attachment_id, 'full');
-        echo '<a class="chocolat-image zoom-cursor" href="' . $attachment_url . '" class="aspect-w-[54] aspect-h-[73] [&>*]:object-cover">';
+        echo '<a class="chocolat-image zoom-cursor border border-black" href="' . $attachment_url . '" class="aspect-w-[54] aspect-h-[73] [&>*]:object-cover">';
         echo wp_get_attachment_image($attachment_id, 'full');
         echo '</a>';
     }
@@ -88,15 +88,15 @@ function single_product_description()
 
 
     <section class="mb-5">
-        <?php 
-            if ($badges) {
-                echo '<div class="w-full flex flex-row-reverse mb-2">
+        <?php
+        if ($badges) {
+            echo '<div class="w-full flex flex-row-reverse mb-2">
 
                         
-                        <span class="bg-white-bg h-fit w-fit px-1 border border-black text-base pointer-events-none">'. $badges; echo'
+                        <span class="bg-white-bg h-fit w-fit px-1 border border-black text-base pointer-events-none">' . $badges;
+            echo '
                         </span></div>';
-            }
-            ;?>
+        }; ?>
 
         <div class="flex flex-col border-b border-black pb-3">
             <div class="w-full flex flex-row justify-between">
