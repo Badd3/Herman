@@ -170,7 +170,7 @@ function single_product_description()
 
             <?php if (get_the_content()) { ?>
                 <div x-data="{ expanded: false }">
-                    <button @click="selected = 0" class="duration-300" :class="selected === 0 ? 'mb-[10px]' : ''"><span :class="selected === 0 ? 'rotate-45' : ''" class="mr-3 duration-300 inline-block">+</span>DESCRIPTION</button>
+                    <button @click="selected !== 0 ? selected = 0 : selected = null" class="duration-300" :class="selected === 0 ? 'mb-[10px]' : ''"><span :class="selected === 0 ? 'rotate-45' : ''" class="mr-3 duration-300 inline-block">+</span>DESCRIPTION</button>
 
                     <div x-show="selected === 0" x-collapse>
                         <?php the_content(); ?>
@@ -180,7 +180,7 @@ function single_product_description()
             }
             if ($care_guide_content) { ?>
                 <div x-data="{ expanded: false }">
-                    <button @click="selected = 1" class="duration-300" :class="selected === 1 ? 'mb-[10px]' : ''"><span :class="selected === 1 ? 'rotate-45' : ''" class="mr-3 duration-300 inline-block">+</span>CARE GUIDE</button>
+                    <button @click="selected !== 1 ? selected = 1 : selected = null" class="duration-300" :class="selected === 1 ? 'mb-[10px]' : ''"><span :class="selected === 1 ? 'rotate-45' : ''" class="mr-3 duration-300 inline-block">+</span>CARE GUIDE</button>
 
                     <div x-show=" selected === 1" x-collapse>
                         <?php echo $care_guide_content ?>
@@ -190,7 +190,7 @@ function single_product_description()
             }
             if ($size_guide_content) { ?>
                 <div x-data="{ expanded: false }">
-                    <button @click="selected = 2" class="duration-300" :class="selected === 2 ? 'mb-[10px]' : ''"><span :class="selected === 2 ? 'rotate-45' : ''" class="mr-3 duration-300 inline-block">+</span>SIZE GUIDE</button>
+                    <button @click="selected !== 2 ? selected = 2 : selected = null" class="duration-300" :class="selected === 2 ? 'mb-[10px]' : ''"><span :class="selected === 2 ? 'rotate-45' : ''" class="mr-3 duration-300 inline-block">+</span>SIZE GUIDE</button>
 
                     <div x-show=" selected === 2" x-collapse>
                         <?php echo $size_guide_content ?>
@@ -200,7 +200,7 @@ function single_product_description()
             }
             if ($history_content) { ?>
                 <div x-data="{ expanded: false }">
-                    <button @click="selected = 3" class="duration-300" :class="selected === 3 ? 'mb-[10px]' : ''"><span :class="selected === 3 ? 'rotate-45' : ''" class="mr-3 duration-300 inline-block">+</span>HISTORY CONTENT</button>
+                    <button @click="selected !== 3 ? selected = 3 : selected = null" class="duration-300" :class="selected === 3 ? 'mb-[10px]' : ''"><span :class="selected === 3 ? 'rotate-45' : ''" class="mr-3 duration-300 inline-block">+</span>HISTORY CONTENT</button>
 
                     <div x-show="selected === 3" x-collapse>
                         <?php echo $history_content ?>
