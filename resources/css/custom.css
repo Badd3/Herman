@@ -94,3 +94,7 @@ ul.wc-item-meta .wc-item-meta-label {
 .cky-btn-revisit-wrapper.cky-revisit-bottom-left {
   display: none;
 }
+
+.post-categories {
+  display: none !important;
+}
