@@ -73,4 +73,9 @@ module.exports = {
     },
   },
   plugins: [require("@tailwindcss/aspect-ratio"), tailpress.tailwind],
+  variants: {
+    extend: {
+        display: ["group-hover"],
+    },
+},
 };

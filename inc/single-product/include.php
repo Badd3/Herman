@@ -29,15 +29,15 @@ function single_product_images()
     global $product;
     $attachment_ids = $product->get_gallery_attachment_ids();
     $thumbnail_url = get_the_post_thumbnail_url(get_the_id(), 'full');
-    echo '<div class="product-images flex-col gap-y-5 hidden md:flex">';
-    echo '<a class="chocolat-image zoom-cursor" href="' . $thumbnail_url . '" class="aspect-w-[54] aspect-h-[73] [&>*]:object-cover">';
+    echo '<div class="product-images flex-col gap-y-5 hidden md:flex  h-fit">';
+    echo '<a class="chocolat-image zoom-cursor border border-black" href="' . $thumbnail_url . '" class="aspect-w-[54] aspect-h-[73] [&>*]:object-cover">';
     the_post_thumbnail();
     echo '</a>';
 
 
     foreach ($attachment_ids as $attachment_id) {
         $attachment_url = wp_get_attachment_url($attachment_id, 'full');
-        echo '<a class="chocolat-image zoom-cursor" href="' . $attachment_url . '" class="aspect-w-[54] aspect-h-[73] [&>*]:object-cover">';
+        echo '<a class="chocolat-image zoom-cursor border border-black" href="' . $attachment_url . '" class="aspect-w-[54] aspect-h-[73] [&>*]:object-cover">';
         echo wp_get_attachment_image($attachment_id, 'full');
         echo '</a>';
     }
@@ -75,6 +75,7 @@ add_action('woocommerce_single_product_summary', 'single_product_description', 2
 function single_product_description()
 {
     $description_content = get_the_content();
+    $badges = get_field('badges');
     $care_guide_content = get_field('care_guide_content');
     $size_guide_content = get_field('size_guide_content');
     $history_content = get_field('history_content');
@@ -87,6 +88,16 @@ function single_product_description()
 
 
     <section class="mb-5">
+        <?php
+        if ($badges) {
+            echo '<div class="w-full flex flex-row-reverse mb-2">
+
+                        
+                        <span class="bg-white-bg h-fit w-fit px-1 border border-black text-base pointer-events-none">' . $badges;
+            echo '
+                        </span></div>';
+        }; ?>
+
         <div class="flex flex-col border-b border-black pb-3">
             <div class="w-full flex flex-row justify-between">
                 <div>
@@ -159,7 +170,7 @@ function single_product_description()
 
             <?php if (get_the_content()) { ?>
                 <div x-data="{ expanded: false }">
-                    <button @click="selected = 0" class="duration-300" :class="selected === 0 ? 'mb-[10px]' : ''"><span :class="selected === 0 ? 'rotate-45' : ''" class="mr-3 duration-300 inline-block">+</span>DESCRIPTION</button>
+                    <button @click="selected !== 0 ? selected = 0 : selected = null" class="duration-300" :class="selected === 0 ? 'mb-[10px]' : ''"><span :class="selected === 0 ? 'rotate-45' : ''" class="mr-3 duration-300 inline-block">+</span>DESCRIPTION</button>
 
                     <div x-show="selected === 0" x-collapse>
                         <?php the_content(); ?>
@@ -169,7 +180,7 @@ function single_product_description()
             }
             if ($care_guide_content) { ?>
                 <div x-data="{ expanded: false }">
-                    <button @click="selected = 1" class="duration-300" :class="selected === 1 ? 'mb-[10px]' : ''"><span :class="selected === 1 ? 'rotate-45' : ''" class="mr-3 duration-300 inline-block">+</span>CARE GUIDE</button>
+                    <button @click="selected !== 1 ? selected = 1 : selected = null" class="duration-300" :class="selected === 1 ? 'mb-[10px]' : ''"><span :class="selected === 1 ? 'rotate-45' : ''" class="mr-3 duration-300 inline-block">+</span>GARMENT CARE</button>
 
                     <div x-show=" selected === 1" x-collapse>
                         <?php echo $care_guide_content ?>
@@ -179,7 +190,7 @@ function single_product_description()
             }
             if ($size_guide_content) { ?>
                 <div x-data="{ expanded: false }">
-                    <button @click="selected = 2" class="duration-300" :class="selected === 2 ? 'mb-[10px]' : ''"><span :class="selected === 2 ? 'rotate-45' : ''" class="mr-3 duration-300 inline-block">+</span>SIZE GUIDE</button>
+                    <button @click="selected !== 2 ? selected = 2 : selected = null" class="duration-300" :class="selected === 2 ? 'mb-[10px]' : ''"><span :class="selected === 2 ? 'rotate-45' : ''" class="mr-3 duration-300 inline-block">+</span>SIZE ASSISTANCE</button>
 
                     <div x-show=" selected === 2" x-collapse>
                         <?php echo $size_guide_content ?>
@@ -189,7 +200,7 @@ function single_product_description()
             }
             if ($history_content) { ?>
                 <div x-data="{ expanded: false }">
-                    <button @click="selected = 3" class="duration-300" :class="selected === 3 ? 'mb-[10px]' : ''"><span :class="selected === 3 ? 'rotate-45' : ''" class="mr-3 duration-300 inline-block">+</span>HISTORY CONTENT</button>
+                    <button @click="selected !== 3 ? selected = 3 : selected = null" class="duration-300" :class="selected === 3 ? 'mb-[10px]' : ''"><span :class="selected === 3 ? 'rotate-45' : ''" class="mr-3 duration-300 inline-block">+</span>DELIVERY</button>
 
                     <div x-show="selected === 3" x-collapse>
                         <?php echo $history_content ?>

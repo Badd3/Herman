@@ -129,7 +129,7 @@ do_action('woocommerce_before_mini_cart'); ?>
 												'woocommerce_cart_item_remove_link',
 												sprintf(
 													'<div class="flex">
-								<button type="button" class="text-xs text-grey items-center justify-center border border-grey hover:border-black hover:text-black  px-4 py-1 "><a href="%s" class="remove remove_from_cart_button" aria-label="%s" data-product_id="%s" data-cart_item_key="%s" data-product_sku="%s">REMOVE</a></button>
+								<button type="button" class="text-xs text-grey items-center justify-center border border-grey hover:border-black  px-4 py-1 hover:bg-black hover:text-white"><a href="%s" class="remove remove_from_cart_button" aria-label="%s" data-product_id="%s" data-cart_item_key="%s" data-product_sku="%s">REMOVE</a></button>
 							  	</div>',
 													esc_url(wc_get_cart_remove_url($cart_item_key)),
 													esc_attr__('Remove this item', 'woocommerce'),
@@ -172,7 +172,7 @@ do_action('woocommerce_before_mini_cart'); ?>
 
 
 						<div class="mt-6">
-							<a href="<?php echo wc_get_checkout_url() ?>" class="flex items-center justify-center border border-black  px-6 py-3 text-base font-base text-black shadow-sm  ">CHECKOUT</a>
+							<a href="<?php echo wc_get_checkout_url() ?>" class="hover:bg-black hover:text-white flex items-center justify-center border border-black  px-6 py-3 text-base font-base text-black shadow-sm  ">CHECKOUT</a>
 						</div>
 					</div>
 
@@ -186,7 +186,7 @@ do_action('woocommerce_before_mini_cart'); ?>
 <?php else : ?>
 	<p class="woocommerce-mini-cart__empty-message ml-6"><?php esc_html_e('NO PRODUCTS IN THE CART.', 'woocommerce'); ?></p>
 	<div class="px-6 mt-6">
-		<a href="/shop" class="flex items-center justify-center border border-black  px-6 py-3 text-base font-base text-black shadow-sm  ">CHECK PRODUCTS</a>
+		<a href="/shop" class="hover:bg-black hover:text-white flex items-center justify-center border border-black  px-6 py-3 text-base font-base text-black shadow-sm">CHECK PRODUCTS</a>
 	</div>
 
 <?php endif; ?>

@@ -10,7 +10,8 @@
   @apply text-sm lg:text-base;
 }
 
-.archive .woocommerce-loop-product__title {
+.archive .woocommerce-loop-product__title,
+.related .woocommerce-loop-product__title {
   @apply truncate;
 }
 
@@ -25,29 +26,10 @@
   @apply px-3 py-1;
 }
 
-.plus {
-  @apply text-left pl-4;
-}
-
 .chocolat-overlay {
   @apply !bg-white-bg !opacity-100;
 }
 
-.plus:before {
-  content: "+";
-  position: absolute;
-  left: 83%;
-  opacity: 0;
-}
-
-.plus:hover:before {
-  left: 92%;
-  opacity: 1;
-}
-
-.plus:hover {
-  @apply w-36;
-}
 .chocolat-wrapper .chocolat-right {
   background: url("/wp-content/themes/Herman/images/arrow-right.svg") 50% 50% /
     2rem auto no-repeat !important;

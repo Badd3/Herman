@@ -203,10 +203,11 @@ function get_breadcrumb()
 {
     global $post;
     if (is_category() || is_single()) {
-        the_category(' / ');
+        the_category('');
+        $title = get_the_title();
         if (is_single()) {
-            echo ' / ';
-            the_title();
+            echo '<a class="uppercase text-xs inline" href="/library" title="LIBRARY">LIBRARY</a> <p class="text-xs inline"> > </p>';
+            echo '<p class="uppercase text-xs inline" title="' . $title . '"> ' . $title . '</p>';
         }
     } elseif (is_page()) {
         if ($post->post_parent) {

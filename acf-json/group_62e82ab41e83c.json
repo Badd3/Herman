@@ -28,8 +28,27 @@
             "return_format": "value"
         },
         {
+            "key": "field_63720b6383661",
+            "label": "Badges",
+            "name": "badges",
+            "type": "text",
+            "instructions": "Badge bij product bijv. coming-soon, -10% of -40%",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
             "key": "field_62e82abf4d07c",
-            "label": "Care Guide",
+            "label": "Garment Care",
             "name": "",
             "type": "accordion",
             "instructions": "",
@@ -46,7 +65,7 @@
         },
         {
             "key": "field_62e82ad04d07d",
-            "label": "Care Guide Content",
+            "label": "Garment Care Content",
             "name": "care_guide_content",
             "type": "wysiwyg",
             "instructions": "",
@@ -65,7 +84,7 @@
         },
         {
             "key": "field_62e82aea4d07e",
-            "label": "Size Guide",
+            "label": "Size Assistance",
             "name": "",
             "type": "accordion",
             "instructions": "",
@@ -82,7 +101,7 @@
         },
         {
             "key": "field_62e82af14d07f",
-            "label": "Size Guide Content",
+            "label": "Size Assistance Content",
             "name": "size_guide_content",
             "type": "wysiwyg",
             "instructions": "",
@@ -101,7 +120,7 @@
         },
         {
             "key": "field_62e82b0a4d080",
-            "label": "History",
+            "label": "Delivery",
             "name": "",
             "type": "accordion",
             "instructions": "",
@@ -118,7 +137,7 @@
         },
         {
             "key": "field_62e82b134d081",
-            "label": "History Content",
+            "label": "Delivery Content",
             "name": "history_content",
             "type": "wysiwyg",
             "instructions": "",
@@ -154,5 +173,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1666726978
+    "modified": 1668970600
 }

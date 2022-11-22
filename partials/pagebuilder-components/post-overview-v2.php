@@ -35,7 +35,7 @@ $the_query = new WP_Query($args);
         <div class="block mb-2.5">
           <div class="itw">
             <div class="overflow-hidden">
-              <img class="h-auto hover:scale-[1.02] duration-300" src="<?php the_post_thumbnail_url(); ?>">
+              <img class="h-auto duration-300" src="<?php the_post_thumbnail_url(); ?>">
             </div>
             <span class="uppercase "><?php the_title(); ?></span>
           </div>

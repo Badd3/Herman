@@ -11,17 +11,38 @@ if (is_shop() || is_product_category() || is_product()) {
 
 
 
+    add_action('woocommerce_before_shop_loop_item', 'herman_template_loop_product_badges_open', 7);
+
+    function herman_template_loop_product_badges_open()
+    {
+        $badges = get_field('badges');
+        if ($badges) {
+            echo '<div class="block"><span class="bg-white-bg h-fit w-fit px-1 border border-black text-base mt-2 mr-2 float-right relative pointer-events-none z-[1]">'. $badges;
+        }
+    }
+
+    add_action('woocommerce_before_shop_loop_item', 'herman_template_loop_product_badges_close', 8);
+
+    function herman_template_loop_product_badges_close()
+    {
+        $badges = get_field('badges');
+        if ($badges) {
+            echo '</span></div>';
+        }
+    }
 
 
-    add_action('woocommerce_before_shop_loop_item', 'herman_template_loop_product_link_open', 10);
+
+    add_action('woocommerce_before_shop_loop_item', 'herman_template_loop_product_link_open', 9);
 
     function herman_template_loop_product_link_open()
     {
         echo '<a class="aspect-w-[54] aspect-h-[73] block group" href="' . get_the_permalink() . '">';
     }
 
-    add_action('woocommerce_shop_loop_item_title', 'herman_template_loop_product_link_close', 5);
 
+
+    add_action('woocommerce_shop_loop_item_title', 'herman_template_loop_product_link_close', 5);
 
     function herman_template_loop_product_link_close()
     {
@@ -46,6 +67,7 @@ if (is_shop() || is_product_category() || is_product()) {
     {
 
         global $product;
+        $badges = get_field('badges');
         $attachment_ids = $product->get_gallery_image_ids();
         $thumbnail_url = wp_get_attachment_image_src($attachment_ids[0], 'full');
 

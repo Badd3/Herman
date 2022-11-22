@@ -46,7 +46,7 @@
 .woocommerce-MyAccount-navigation-link.woocommerce-MyAccount-navigation-link--orders.is-active,
  .woocommerce-MyAccount-navigation-link.woocommerce-MyAccount-navigation-link--edit-account.is-active,
  .woocommerce-MyAccount-navigation-link.woocommerce-MyAccount-navigation-link--customer-logout.is-active {
-  @apply border-black;
+  @apply bg-black text-white
 }
 
 #dashboard .woocommerce-MyAccount-navigation {

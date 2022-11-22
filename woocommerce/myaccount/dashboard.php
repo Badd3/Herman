@@ -34,8 +34,8 @@ $allowed_html = array(
 			<?php
 			printf(
 				/* translators: 1: user display name 2: logout url */
-				wp_kses( __( 'HELLO %1$s', 'woocommerce' ), $allowed_html ),
-				'<strong class="uppercase">' . esc_html( $current_user->first_name ) . '</strong>',
+				wp_kses( __( 'Hello %1$s', 'woocommerce' ), $allowed_html ),
+				'<strong>' . esc_html( $current_user->first_name ) . '</strong>',
 				esc_url( wc_logout_url() )
 			);
 			?>
@@ -44,10 +44,10 @@ $allowed_html = array(
 		<p>
 			<?php
 			/* translators: 1: Orders URL 2: Address URL 3: Account URL. */
-			$dashboard_desc = __( 'FROM YOUR ACCOUNT DASHBOARD YOU CAN VIEW YOUR <A HREF="%1$S">RECENT ORDERS</A>, MANAGE YOUR <A HREF="%2$S">BILLING ADDRESS</a>, AND <A HREF="%3$S">EDIT YOUR PASSWORD AND ACCOUNT DETAILS</A>.', 'woocommerce' );
+			$dashboard_desc = __( 'From your account dashboard you can view your <A HREF="%1$S">recent orders</A>, manage your <A HREF="%2$S">billing address</a>, and <A HREF="%3$S">edit your password and account details</A>.', 'woocommerce' );
 			if ( wc_shipping_enabled() ) {
 				/* translators: 1: Orders URL 2: Addresses URL 3: Account URL. */
-				$dashboard_desc = __( 'FROM YOUR ACCOUNT DASHBOARD YOU CAN VIEW YOUR <A HREF="%1$S">RECENT ORDERS</A>, MANAGE YOUR <A HREF="%2$S">BILLING ADDRESS</a>, AND <A HREF="%3$S">EDIT YOUR PASSWORD AND ACCOUNT DETAILS</A>.', 'woocommerce' );
+				$dashboard_desc = __( 'From your account dashboard you can view your <A HREF="%1$S">recent orders</A>, manage your <A HREF="%2$S">billing address</a>, and <A HREF="%3$S">edit your password and account details</A>.', 'woocommerce' );
 			}
 			printf(
 				wp_kses( $dashboard_desc, $allowed_html ),
