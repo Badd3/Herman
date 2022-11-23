@@ -98,3 +98,11 @@ ul.wc-item-meta .wc-item-meta-label {
 .post-categories {
   display: none !important;
 }
+
+.disabled .variable-item-contents::after {
+  @apply border-gray-600;
+}
+
+.disabled .variable-item-span {
+  @apply line-through;
+}
