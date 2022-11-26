@@ -3,6 +3,8 @@ $selected_navigation = $args['selected_nav'];
 $mobile = $args['mobile'];
 $current_url = strtolower($args['current_url']);
 
+// error_log(print_r($current_url, true));
+
 ?>
 <?php
 
