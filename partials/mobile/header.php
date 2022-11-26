@@ -23,12 +23,12 @@ if (get_field('header_kleur') == 'light') {
 
         <div class="absolute left-1/2 -translate-x-1/2 top-0">
             <a href="<?php echo home_url(); ?>">
-                <img class="h-5" src="<?php echo esc_url(get_template_directory_uri() . $logo_url); ?>" alt="logo-white">
+                <img class="h-5 mt-[3px]" src="<?php echo esc_url(get_template_directory_uri() . $logo_url); ?>" alt="logo-white">
             </a>
         </div>
 
         <?php if( ! is_page( 'checkout' ) ) { ?>
-        <div class="absolute right-[10px] top-[-6px] <?php echo   $text_color; ?>">
+        <div class="absolute right-[10px] top-[-3px] <?php echo   $text_color; ?>">
             <button @click="$store.bagOpen = !$store.bagOpen" class="uppercase closeMenu">[<?php echo WC()->cart->get_cart_contents_count() ?>]</button>
         </div>
         <?php } ?>

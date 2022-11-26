@@ -167,7 +167,7 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
 															'woocommerce_cart_item_remove_link',
 															sprintf(
 																'<div class="flex">
-																<button type="button" class="text-xs text-grey items-center justify-center border border-grey hover:bg-black hover:text-white hover:border-black  px-4 py-1 ">
+																<button type="button" class="text-xs text-black items-center justify-center border border-black hover:bg-black hover:text-white hover:border-black  px-4 py-1 ">
 																<a href="%s" class="remove" aria-label="%s" data-product_id="%s" data-product_sku="%s">REMOVE</a></button></div>',
 
 																esc_url(wc_get_cart_remove_url($cart_item_key)),

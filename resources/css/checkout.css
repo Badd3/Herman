@@ -48,7 +48,7 @@
 }
 
 select#billing_country {
-  @apply uppercase;
+  @apply ml-[-4px] md:ml-0 uppercase;
 }
 
 .woocommerce-account-fields {

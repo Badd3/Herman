@@ -34,7 +34,7 @@
  .woocommerce-MyAccount-navigation-link.woocommerce-MyAccount-navigation-link--orders,
  .woocommerce-MyAccount-navigation-link.woocommerce-MyAccount-navigation-link--edit-account,
  .woocommerce-MyAccount-navigation-link.woocommerce-MyAccount-navigation-link--customer-logout {
-  @apply md:w-44 text-center mt-4 border;
+  @apply md:w-44 text-center mt-4 border border-black;
 }
 
 .woocommerce-MyAccount-navigation-link.woocommerce-MyAccount-navigation-link--orders a,
@@ -50,7 +50,7 @@
 }
 
 #dashboard .woocommerce-MyAccount-navigation {
- @apply flex mt-16 md:mt-24;
+ @apply flex mt-0 md:mt-24;
 }
 
 #dashboard ul {
@@ -97,7 +97,7 @@
 #dashboard-order-review .product-total,
 #dashboard-order-details .product-total,
 .shop_table > tfoot {
-    @apply uppercase w-1/5;
+    @apply uppercase;
 }
 
 .shop_table > tfoot {
@@ -123,5 +123,9 @@
 }
 
 #dashboard-view-order .woocommerce-table__product-name.product-name {
-    @apply flex;
+    @apply flex flex-col;
+}
+
+#dashboard-order-details .product-quantity::before {
+    content: "quantity ";
 }
