@@ -40,10 +40,8 @@
                     while (have_rows('submenu_items')) : the_row();
 
                         if (get_sub_field('link_type') == 'page_link') {
-
                             $sub_nav_item = get_sub_field('submenu_link_default');
-                            $sub_nav_item_link = get_sub_field('submenu_link_default')['url'];
-                            // var_dump($sub_nav_item_link);
+                            $sub_nav_item_link = $sub_nav_item['url'];
                             $link_target = $sub_nav_item['target'] ? $sub_nav_item['target'] : '_self';
                             $sub_nav_item_label = $sub_nav_item['title'];
                         } elseif (get_sub_field('link_type') == 'product_category') {

@@ -19,14 +19,12 @@ $current_url = basename(get_permalink());
 
                 <?php
                 $main_navigation = get_field('main_nav', 'option');
-                get_template_part('partials/sidebar/components/sidebar-nav', null, array('selected_nav' => $main_navigation, 'current_url' => $current_url));
+                get_template_part('partials/sidebar/components/sidebar-nav', null, array('selected_nav' => $main_navigation, 'current_url' => $current_url, 'mobile' => false));
                 ?>
             </div>
             <?php
             $secondary_navigation = get_field('secondary_nav', 'option');
-            get_template_part('partials/sidebar/components/sidebar-nav', null, array('selected_nav' => $secondary_navigation, 'current_url' => $current_url));
-
-
+            get_template_part('partials/sidebar/components/sidebar-nav', null, array('selected_nav' => $secondary_navigation, 'current_url' => $current_url, 'mobile' => false));
             ?>
 
         </div>

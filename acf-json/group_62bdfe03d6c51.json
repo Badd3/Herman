@@ -42,13 +42,45 @@
                             "button_label": "",
                             "sub_fields": [
                                 {
+                                    "key": "field_63821efaeed5d",
+                                    "label": "Media Type",
+                                    "name": "media_type",
+                                    "type": "radio",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "choices": {
+                                        "image": "Afbeelding",
+                                        "video": "Video"
+                                    },
+                                    "allow_null": 0,
+                                    "other_choice": 0,
+                                    "default_value": "image",
+                                    "layout": "horizontal",
+                                    "return_format": "value",
+                                    "save_other_choice": 0
+                                },
+                                {
                                     "key": "field_62bdfe4459788",
                                     "label": "Afbeelding",
                                     "name": "afbeelding",
                                     "type": "image",
                                     "instructions": "",
                                     "required": 0,
-                                    "conditional_logic": 0,
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_63821efaeed5d",
+                                                "operator": "==",
+                                                "value": "image"
+                                            }
+                                        ]
+                                    ],
                                     "wrapper": {
                                         "width": "",
                                         "class": "",
@@ -64,6 +96,33 @@
                                     "max_height": "",
                                     "max_size": "",
                                     "mime_types": ""
+                                },
+                                {
+                                    "key": "field_63821f44eed5e",
+                                    "label": "Video",
+                                    "name": "video",
+                                    "type": "file",
+                                    "instructions": "Voeg hier een mp4 bestand toe.",
+                                    "required": 0,
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_63821efaeed5d",
+                                                "operator": "==",
+                                                "value": "video"
+                                            }
+                                        ]
+                                    ],
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "return_format": "url",
+                                    "library": "all",
+                                    "min_size": "",
+                                    "max_size": "",
+                                    "mime_types": "mp4"
                                 }
                             ]
                         },
@@ -546,5 +605,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1668025130
+    "modified": 1669472214
 }
