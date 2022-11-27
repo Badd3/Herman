@@ -31,11 +31,11 @@ $the_query = new WP_Query($args);
       }
   ?>
 
-      <a class="<?php echo $classes; ?> flex flex-col duration-300 hover:-translate-y-1 h-max !grow-0" href="<?php the_permalink(); ?> ">
+      <a class="<?php echo $classes; ?> flex flex-col h-max !grow-0" href="<?php the_permalink(); ?> ">
         <div class="block mb-2.5">
           <div class="itw">
             <div class="overflow-hidden">
-              <img class="h-auto duration-300" src="<?php the_post_thumbnail_url(); ?>">
+              <img class="h-auto" src="<?php the_post_thumbnail_url(); ?>">
             </div>
             <span class="uppercase "><?php the_title(); ?></span>
           </div>
