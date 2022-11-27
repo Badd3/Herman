@@ -1,13 +1,9 @@
 <?php
-if (get_field('header_kleur') == 'light') {
-    $logo_url = '/images/herman-logo-white-1.svg';
-    $text_color = 'text-white border-white';
-    $bg_color = 'bg-white';
-} else {
-    $logo_url = '/images/herman-logo-black.svg';
-    $text_color = 'text-black border-black';
-    $bg_color = 'bg-black';
-};
+// Voor nu op mobiel altijd zwarte header
+
+$logo_url = '/images/herman-logo-black.svg';
+$text_color = 'text-black border-black';
+$bg_color = 'bg-black';
 
 
 ?>
@@ -27,10 +23,10 @@ if (get_field('header_kleur') == 'light') {
             </a>
         </div>
 
-        <?php if( ! is_page( 'checkout' ) ) { ?>
-        <div class="absolute right-[10px] top-[-3px] <?php echo   $text_color; ?>">
-            <button @click="$store.bagOpen = !$store.bagOpen" class="uppercase closeMenu">[<?php echo WC()->cart->get_cart_contents_count() ?>]</button>
-        </div>
+        <?php if (!is_page('checkout')) { ?>
+            <div class="absolute right-[10px] top-[-3px] <?php echo   $text_color; ?>">
+                <button @click="$store.bagOpen = !$store.bagOpen" class="uppercase closeMenu">[<?php echo WC()->cart->get_cart_contents_count() ?>]</button>
+            </div>
         <?php } ?>
     </div>
 </section>
