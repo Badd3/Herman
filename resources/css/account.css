@@ -2,10 +2,6 @@
   @apply h-72 w-full sm:h-full;
 }
 
-.woocommerce-order-details {
-  @apply px-4;
-}
-
 .woocommerce-form-login__submit {
   @apply w-fit float-right;
 }
