@@ -23,10 +23,13 @@ if (have_rows('slider_afbeeldingen')) :
                     // Load sub field value.
                     if ($media_type === 'video') {
                         $video_url = get_sub_field('video');
-                        error_log(print_r($video_url, true));
+                        if (get_sub_field('video_poster')) {
+                            $video_poster = get_sub_field('video_poster');
+                            $video_poster_html = 'poster=' . $video_poster;
+                        }
                 ?>
                         <div class="swiper-slide flex <?php echo $overlay_classes; ?>">
-                            <video autoplay muted loop class="object-center object-cover w-full">
+                            <video autoplay muted loop class="object-center object-cover w-full" <?php echo $video_poster_html; ?>>
                                 <source src="<?php echo $video_url; ?>" type="video/mp4">
                             </video>
                         </div>

@@ -38,7 +38,7 @@
                             "collapsed": "",
                             "min": 0,
                             "max": 0,
-                            "layout": "table",
+                            "layout": "block",
                             "button_label": "",
                             "sub_fields": [
                                 {
@@ -114,7 +114,7 @@
                                         ]
                                     ],
                                     "wrapper": {
-                                        "width": "",
+                                        "width": "50",
                                         "class": "",
                                         "id": ""
                                     },
@@ -123,6 +123,38 @@
                                     "min_size": "",
                                     "max_size": "",
                                     "mime_types": "mp4"
+                                },
+                                {
+                                    "key": "field_63835788a8d5f",
+                                    "label": "Video Poster",
+                                    "name": "video_poster",
+                                    "type": "image",
+                                    "instructions": "Plaats hier een afbeelding die getoond word op het moment dat de video niet afspeelt.",
+                                    "required": 0,
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_63821efaeed5d",
+                                                "operator": "==",
+                                                "value": "video"
+                                            }
+                                        ]
+                                    ],
+                                    "wrapper": {
+                                        "width": "50",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "return_format": "url",
+                                    "preview_size": "full",
+                                    "library": "all",
+                                    "min_width": "",
+                                    "min_height": "",
+                                    "min_size": "",
+                                    "max_width": "",
+                                    "max_height": "",
+                                    "max_size": "",
+                                    "mime_types": ""
                                 }
                             ]
                         },
@@ -605,5 +637,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1669472214
+    "modified": 1669552107
 }
