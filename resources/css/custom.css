@@ -73,7 +73,7 @@ input[type="search"]::-webkit-search-cancel-button {
 
 .woocommerce-table__product-name.product-name img {
   border: 1px solid black;
-  width: 70%;
+  width: 35%;
 }
 
 ul.wc-item-meta p {
