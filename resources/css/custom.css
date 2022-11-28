@@ -126,3 +126,55 @@ ul.wc-item-meta .wc-item-meta-label {
 .disabled .variable-item-span {
   @apply line-through;
 }
+
+input#coupon_code {
+  width: 100%;
+  border-bottom: 1px solid black;
+  padding: 10px 0 10px 0;
+}
+
+#order_review .button {
+  margin-top: 1rem;
+    display: flex;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    align-items: center;
+    justify-content: center;
+    border-width: 1px;
+    --tw-border-opacity: 1;
+    border-color: rgb(0 0 0 / var(--tw-border-opacity));
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    font-size: 14px;
+    line-height: 22px;
+    text-transform: uppercase;
+    --tw-text-opacity: 1;
+    color: rgb(0 0 0 / var(--tw-text-opacity));
+    --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+#order_review .button:hover {
+  background-color: black;
+  color: white;
+}
+
+input#coupon_code:focus-visible {
+  outline: unset;
+}
+
+#payment .woocommerce-info {
+  padding-top: 1.5rem;
+}
+
+#payment hr {
+  display: none;
+}
+
+.woocommerce-error #order_review {
+  display: none;
+}

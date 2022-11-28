@@ -203,6 +203,20 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
 										</p>
 									</div>
 
+									<?php
+									$discount_excl_tax_total = WC()->cart->get_cart_discount_total();
+									$discount_tax_total = WC()->cart->get_cart_discount_tax_total();
+									$discount_total = $discount_excl_tax_total + $discount_tax_total;
+									if( ! empty($discount_total) ): ?>
+						
+									<div class="flex flex-row-reverse justify-between md:flex-row text-base text-black art-discount coupon-<?php echo esc_attr( sanitize_title( $code ) ); ?>">
+										<p class="hidden md:block"><?php _e('COUPON','woocommerce'); ?></p>
+										<p class="woocommerce_package_rates total">
+										<?php echo wc_price(-$discount_total) ?>
+										</p>
+									</div>
+									<?php endif; ?>
+
 
 									<?php do_action('woocommerce_review_order_before_shipping'); ?>
 
@@ -233,6 +247,8 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
 										<?php do_action('woocommerce_review_order_after_order_total'); ?>
 									</p>
 								</div>
+
+							
 
 								<?php do_action('woocommerce_widget_shopping_cart_before_buttons'); ?>
 								</div>

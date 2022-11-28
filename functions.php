@@ -522,3 +522,42 @@ function my_wc_hide_in_stock_message( $html, $text, $product ) {
 	return $html;
 }
 add_filter( 'woocommerce_stock_html', 'my_wc_hide_in_stock_message', 10, 3 );
+
+add_filter( 'woocommerce_coupons_enabled', 'bbloomer_disable_coupons_cart_page' );
+ 
+function bbloomer_disable_coupons_cart_page() {
+   if ( is_cart() ) return false;
+   return true;
+}
+
+remove_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_coupon_form', 10 );
+
+ 
+add_action( 'woocommerce_review_order_after_submit', 'bbloomer_checkout_coupon_below_payment_button' );
+ 
+function bbloomer_checkout_coupon_below_payment_button() {
+   echo '<hr>';
+   woocommerce_checkout_coupon_form();
+}
+
+// rename the coupon field on the checkout page
+function woocommerce_rename_coupon_field_on_checkout( $translated_text, $text, $text_domain ) {
+
+	// bail if not modifying frontend woocommerce text
+	if ( is_admin() || 'woocommerce' !== $text_domain ) {
+		return $translated_text;
+	}
+
+	if ( 'Coupon code' === $text ) {
+		$translated_text = 'COUPON CODE';
+	
+	} elseif ( 'Apply Coupon' === $text ) {
+		$translated_text = 'APPLY PROMO CODE';
+	}
+
+	return $translated_text;
+}
+add_filter( 'gettext', 'woocommerce_rename_coupon_field_on_checkout', 10, 3 );
+
+
+

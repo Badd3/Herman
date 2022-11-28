@@ -116,3 +116,15 @@ form.invalid .wpcf7-response-output,
 #wpcf7-f301-o2 > form > span.wpcf7-form-control-wrap > input {
   border-bottom: unset;
 }
+
+.page-contact .wpcf7-submit {
+  cursor: pointer;
+  border: 1px solid black;
+  padding: 10px;
+  width: 20%;
+}
+
+.page-contact .wpcf7-submit:hover {
+  background-color: black;
+  color: white;
+}
