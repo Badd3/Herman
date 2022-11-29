@@ -194,8 +194,8 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
 							<?php if (WC()->cart->needs_shipping() && WC()->cart->show_shipping()) : ?>
 
 								<div class="border-t border-gray-200 py-6">
-									<div class="flex flex-row-reverse justify-between md:flex-row text-base text-black">
-										<p class="hidden md:block">PRODUCTS</p>
+									<div class="flex flex-row justify-between md:flex-row text-base text-black">
+										<p class="block">PRODUCTS</p>
 										<p class="woocommerce-mini-cart__total total">
 											<td class="product-total">
 												<?php do_action('woocommerce_widget_shopping_cart_total'); ?>
@@ -209,8 +209,8 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
 									$discount_total = $discount_excl_tax_total + $discount_tax_total;
 									if( ! empty($discount_total) ): ?>
 						
-									<div class="flex flex-row-reverse justify-between md:flex-row text-base text-black art-discount coupon-<?php echo esc_attr( sanitize_title( $code ) ); ?>">
-										<p class="hidden md:block"><?php _e('COUPON','woocommerce'); ?></p>
+									<div class="flex flex-row justify-between md:flex-row text-base text-black art-discount coupon-<?php echo esc_attr( sanitize_title( $code ) ); ?>">
+										<p class="block"><?php _e('COUPON','woocommerce'); ?></p>
 										<p class="woocommerce_package_rates total">
 										<?php echo wc_price(-$discount_total) ?>
 										</p>
@@ -220,8 +220,8 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
 
 									<?php do_action('woocommerce_review_order_before_shipping'); ?>
 
-									<div class="flex flex-row-reverse justify-between md:flex-row text-base text-black divide-gray-200 border-b border-gray-200">
-										<p class="hidden md:block mb-2">SHIPPING COST</p>
+									<div class="flex flex-row justify-between md:flex-row text-base text-black divide-gray-200 border-b border-gray-200">
+										<p class="block mb-2">SHIPPING COST</p>
 										<p class="woocommerce_package_rates total">
 											<?php
 											$current_shipping_cost = WC()->cart->get_cart_shipping_total();
