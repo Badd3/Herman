@@ -42,7 +42,7 @@ if ($show_downloads) {
 ?>
 <section id="dashboard-order-details">
 	<div class="flex justify-center">
-		<div class="basis-full text-base pb-16 lg:max-w-5xl">
+		<div class="basis-full sm:basis-3/5 text-base pb-16 px-4 sm:px-6 lg:px-8 lg:max-w-5xl thankyou">
 			<section class="woocommerce-order-details">
 				<?php do_action('woocommerce_order_details_before_order_table', $order); ?>
 

@@ -153,10 +153,10 @@ do_action('woocommerce_before_mini_cart'); ?>
 
 			do_action('woocommerce_mini_cart_contents');
 					?>
-					<div class="border-t border-gray-200 py-6 px-4 sm:px-6">
+					<div class="border-t border-gray-200 py-6">
 						<div class="flex flex-row-reverse justify-between md:flex-row text-base text-black">
-							<p class="hidden md:block">SUBTOTAL</p>
-							<p class="woocommerce-mini-cart__total total">
+							<p class="hidden md:block"></p>
+							<p class="woocommerce-mini-cart__total total fontnormal uppercase">
 								<?php
 								/**
 								 * Hook: woocommerce_widget_shopping_cart_total.

@@ -38,17 +38,17 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
 					</div>
 					</div>
 						<p class="text-base">
-							<a href="/my-account/registration/" class="font-base hover:underline text-gray-500 active:text-black">SIGN UP</a>
+							<a href="/my-account/registration/" class="font-base text-grey active:text-black">SIGN UP</a>
 						</p>
 					</div>
 
 					<form class=" woocommerce_form_field login w-full md:w-[24vw]" method="post">
 						<?php do_action( 'woocommerce_login_form_start' ); ?>
 						<div>
-							<input type="text" class="text-base w-full py-1 border-b woocommerce-Input woocommerce-Input--text input-text woocommerce-invalid-required-field" required placeholder="EMAIL" name="username" id="username" autocomplete="username" value="<?php echo ( ! empty( $_POST['username'] ) ) ? esc_attr( wp_unslash( $_POST['username'] ) ) : ''; ?>" /><?php // @codingStandardsIgnoreLine ?>
+							<input type="text" class="text-base w-full py-1 border-b woocommerce-Input woocommerce-Input--text input-text woocommerce-invalid-required-field" required placeholder="EMAIL *" name="username" id="username" autocomplete="username" value="<?php echo ( ! empty( $_POST['username'] ) ) ? esc_attr( wp_unslash( $_POST['username'] ) ) : ''; ?>" /><?php // @codingStandardsIgnoreLine ?>
 						</div>
 						<div>
-							<input class="text-base w-full py-1" type="password" placeholder="PASSWORD" name="password" id="password" required autocomplete="current-password" />
+							<input class="text-base w-full py-1" type="password" placeholder="PASSWORD *" name="password" id="password" required autocomplete="current-password" />
 							<!-- <input type="password" name="password" id="password" placeholder="PASSWORD" class="text-base w-full py-1 woocommerce-Input woocommerce-Input--text input-text" required="" autocomplete="current-password" /> -->
 						</div>		
 						<?php do_action( 'woocommerce_login_form' ); ?>

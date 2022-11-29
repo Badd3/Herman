@@ -21,7 +21,7 @@
 
 .woocommerce-privacy-policy-text,
 .checkbox.woocommerce-form__label.woocommerce-form__label-for-checkbox {
-  @apply text-xs font-light text-gray-500;
+  @apply text-xs font-light text-grey;
 }
 
 .woocommerce-MyAccount-navigation-link

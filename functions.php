@@ -302,14 +302,14 @@ function herman_add_name_woo_account_registration()
 
     <p class="form-row form-row-first">
 
-        <input type="text" class="input-text woocommerce-invalid-required-field" name="billing_first_name" id="reg_billing_first_name" placeholder="NAME" required class="peer border border-slate-400" value="<?php if (!empty($_POST['billing_first_name'])) esc_attr_e($_POST['billing_first_name']); ?>" />
+        <input type="text" class="input-text woocommerce-invalid-required-field" name="billing_first_name" id="reg_billing_first_name" placeholder="NAME *" required class="peer border border-slate-400" value="<?php if (!empty($_POST['billing_first_name'])) esc_attr_e($_POST['billing_first_name']); ?>" />
         <!-- <p class="invisible peer-invalid:visible text-red-700 font-light">
                 Please enter your name
             </p> -->
     </p>
 
     <p class="form-row form-row-last">
-        <input type="text" class="input-text woocommerce-invalid-required-field" name="billing_last_name" id="reg_billing_last_name" required class="peer border border-slate-400" placeholder="SURNAME" value="<?php if (!empty($_POST['billing_last_name'])) esc_attr_e($_POST['billing_last_name']); ?>" />
+        <input type="text" class="input-text woocommerce-invalid-required-field" name="billing_last_name" id="reg_billing_last_name" required class="peer border border-slate-400" placeholder="SURNAME *" value="<?php if (!empty($_POST['billing_last_name'])) esc_attr_e($_POST['billing_last_name']); ?>" />
         <!-- <p class="invisible peer-invalid:visible text-red-700 font-light">
                 Please enter your surname
             </p> -->
@@ -558,6 +558,5 @@ function woocommerce_rename_coupon_field_on_checkout( $translated_text, $text, $
 	return $translated_text;
 }
 add_filter( 'gettext', 'woocommerce_rename_coupon_field_on_checkout', 10, 3 );
-
 
 

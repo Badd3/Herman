@@ -21,7 +21,7 @@ $show_shipping = ! wc_ship_to_billing_address_only() && $order->needs_shipping_a
 ?>
 <section class="woocommerce-customer-details">
 <div class="flex justify-center">
-      <div class="basis-full sm:basis-3/5 text-base pb-16 px-4 sm:px-6 lg:px-8 lg:max-w-5xl">
+      <div class="basis-full sm:basis-3/5 text-base pb-16 px-4 sm:px-6 lg:px-8 lg:max-w-5xl billing-thankyou">
 
 	<?php if ( $show_shipping ) : ?>
 

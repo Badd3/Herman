@@ -21,7 +21,7 @@ do_action( 'woocommerce_before_edit_account_form' ); ?>
 
 <section id="dashboard-edit-account">
 	<div class="flex justify-center">
-      <div class="basis-full sm:basis-3/5 text-base pb-16 px-4 sm:px-6 lg:px-8 lg:max-w-5xl">
+      <div class="basis-full sm:basis-3/5 text-base pb-16 px-4 sm:px-6 lg:max-w-5xl">
 		<form class="woocommerce-EditAccountForm edit-account" action="" method="post" <?php do_action( 'woocommerce_edit_account_form_tag' ); ?> >
 
 			<?php do_action( 'woocommerce_edit_account_form_start' ); ?>

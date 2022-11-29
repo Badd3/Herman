@@ -25,7 +25,7 @@ function herman_separate_registration_form() {
 				<div class="flex items-start">
 					<div class="flex items-center h-5">
 						<p class="text-base">
-							<a href="/my-account/" class="font-base hover:underline text-gray-500 active:text-black">SIGN IN</a>
+							<a href="/my-account/" class="font-base text-grey active:text-black">SIGN IN</a>
 						</p>	 
 					</div>
 					</div>
@@ -55,14 +55,14 @@ function herman_separate_registration_form() {
 
           <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
               
-              <input type="email" class="woocommerce-Input woocommerce-Input--text input-text" required name="email" id="reg_email" placeholder="EMAIL" autocomplete="email" value="<?php echo ( ! empty( $_POST['email'] ) ) ? esc_attr( wp_unslash( $_POST['email'] ) ) : ''; ?>" /><?php // @codingStandardsIgnoreLine ?>
+              <input type="email" class="woocommerce-Input woocommerce-Input--text input-text" required name="email" id="reg_email" placeholder="EMAIL *" autocomplete="email" value="<?php echo ( ! empty( $_POST['email'] ) ) ? esc_attr( wp_unslash( $_POST['email'] ) ) : ''; ?>" /><?php // @codingStandardsIgnoreLine ?>
           </p>
 
           <?php if ( 'no' === get_option( 'woocommerce_registration_generate_password' ) ) : ?>
 
               <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                 
-                <input type="password" class="woocommerce-Input woocommerce-Input--text input-text mb-2" required name="password" id="reg_password" placeholder="PASSWORD" autocomplete="new-password" />
+                <input type="password" class="woocommerce-Input woocommerce-Input--text input-text mb-2" required name="password" id="reg_password" placeholder="PASSWORD *" autocomplete="new-password" />
               </p>
 
           <?php else : ?>

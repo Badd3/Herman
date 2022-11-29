@@ -23,13 +23,13 @@ do_action( 'woocommerce_before_lost_password_form' );
 <section id="lost-password" class="bg-white-bg">
   <div class="flex flex-col items-center justify-center px-6 py-16 lg:py-28 mx-auto">
       <div class="w-full  md:mt-0 sm:max-w-md xl:p-0 ">
-          <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-              <h1 class="text-md font-base ">
+          <div class="space-y-4 md:space-y-6">
+              <h1 class="text-base">
 			  <?php echo apply_filters( 'woocommerce_lost_password_message', esc_html__( 'Lost your password? Please enter your username or email address. You will receive a link to create a new password via email.', 'woocommerce' ) ); ?><?php // @codingStandardsIgnoreLine ?>
               </h1>
               <form method="post" class="woocommerce-ResetPassword lost_reset_password">
                   <div>
-                      <input type="text" name="user_login" id="user_login" autocomplete="username" placeholder="EMAIL" class="text-base w-full py-1 border-b woocommerce-Input woocommerce-Input--text input-text" required="" value="<?php echo ( ! empty( $_POST['username'] ) ) ? esc_attr( wp_unslash( $_POST['username'] ) ) : ''; ?>" /><?php // @codingStandardsIgnoreLine ?>
+                      <input type="text" name="user_login" id="user_login" autocomplete="username" placeholder="EMAIL *" class="text-base w-full py-1 border-b woocommerce-Input woocommerce-Input--text input-text" required="" value="<?php echo ( ! empty( $_POST['username'] ) ) ? esc_attr( wp_unslash( $_POST['username'] ) ) : ''; ?>" /><?php // @codingStandardsIgnoreLine ?>
                   </div>
                 
 				  
