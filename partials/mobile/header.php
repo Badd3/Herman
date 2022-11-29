@@ -1,11 +1,15 @@
 <?php
-// Voor nu op mobiel altijd zwarte header
 
-$logo_url = '/images/herman-logo-black.svg';
-$text_color = 'text-black border-black';
-$bg_color = 'bg-black';
-
-
+if (is_front_page() || is_page('home')) {
+    $logo_url = '/images/herman-logo-white-1.svg';
+    $text_color = 'text-white border-white';
+    $bg_color = 'bg-white';
+} else {
+    // Voor nu op mobiel altijd zwarte header
+    $logo_url = '/images/herman-logo-black.svg';
+    $text_color = 'text-black border-black';
+    $bg_color = 'bg-black';
+};
 ?>
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">

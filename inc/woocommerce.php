@@ -70,7 +70,7 @@ function jk_woocommerce_breadcrumbs()
 {
 	return array(
 		'delimiter'   => ' + ',
-		'wrap_before' => '<nav class="woocommerce-breadcrumb text-base uppercase mb-5 text-grey [&>a:hover]:text-black [&>a:hover]:duration-300" itemprop="breadcrumb">',
+		'wrap_before' => '<nav class="woocommerce-breadcrumb uppercase mb-5 text-grey [&>a:hover]:text-black [&>a:hover]:duration-300 text-[11px]" itemprop="breadcrumb">',
 		'wrap_after'  => '</nav>',
 		'before'      => '',
 		'after'       => '',

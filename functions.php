@@ -206,19 +206,22 @@ function get_breadcrumb()
         the_category('');
         $title = get_the_title();
         if (is_single()) {
-            echo '<a class="uppercase text-xs inline" href="/library" title="LIBRARY">LIBRARY</a> <p class="text-xs inline"> > </p>';
-            echo '<p class="uppercase text-xs inline" title="' . $title . '"> ' . $title . '</p>';
+            echo '<a class="uppercase text-[11px] inline" href="/library" title="LIBRARY">LIBRARY</a> <p class="text-[11px] inline"> + </p>';
+            echo '<p class="uppercase text-[11px] inline" title="' . $title . '"> ' . $title . '</p>';
         }
     } elseif (is_page()) {
         if ($post->post_parent) {
             $anc = get_post_ancestors($post->ID);
             $title = get_the_title();
             foreach ($anc as $ancestor) {
-                $output = '<a class="uppercase text-xs inline" href="' . get_permalink($ancestor) . '" title="' . get_the_title($ancestor) . '">' . get_the_title($ancestor) . '</a> <p class="text-xs inline">></p>';
-                // $output = '<p class="uppercase text-xs inline" title="' . get_the_title($ancestor) . '">' . get_the_title($ancestor) . '</p> <p class="text-xs inline">></p>';
+                if (get_the_title($ancestor) === 'Customer Care') {
+                    $output = '<p class="uppercase text-[11px] inline">' . get_the_title($ancestor) . '</p> <span class="text-[11px] inline">+</span>';
+                } else {
+                    $output = '<a class="uppercase text-[11px] inline" href="' . get_permalink($ancestor) . '" title="' . get_the_title($ancestor) . '">' . get_the_title($ancestor) . '</a> <p class="text-[11px] inline">+</p>';
+                }
             }
             echo $output;
-            echo '<p class="uppercase text-xs inline" title="' . $title . '"> ' . $title . '</p>';
+            echo '<p class="uppercase text-[11px] inline" title="' . $title . '"> ' . $title . '</p>';
         } else {
             echo '<span class="text-[11px] uppercase"> ' . get_the_title() . '</span>';
         }
@@ -514,47 +517,50 @@ function search_products_only($query)
     }
 }
 
-function my_wc_hide_in_stock_message( $html, $text, $product ) {
-	$availability = $product->get_availability();
-	if ( isset( $availability['class'] ) && 'in-stock' === $availability['class'] ) {
-		return '';
-	}
-	return $html;
+function my_wc_hide_in_stock_message($html, $text, $product)
+{
+    $availability = $product->get_availability();
+    if (isset($availability['class']) && 'in-stock' === $availability['class']) {
+        return '';
+    }
+    return $html;
 }
-add_filter( 'woocommerce_stock_html', 'my_wc_hide_in_stock_message', 10, 3 );
+add_filter('woocommerce_stock_html', 'my_wc_hide_in_stock_message', 10, 3);
 
-add_filter( 'woocommerce_coupons_enabled', 'bbloomer_disable_coupons_cart_page' );
- 
-function bbloomer_disable_coupons_cart_page() {
-   if ( is_cart() ) return false;
-   return true;
+add_filter('woocommerce_coupons_enabled', 'bbloomer_disable_coupons_cart_page');
+
+function bbloomer_disable_coupons_cart_page()
+{
+    if (is_cart()) return false;
+    return true;
 }
 
-remove_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_coupon_form', 10 );
+remove_action('woocommerce_before_checkout_form', 'woocommerce_checkout_coupon_form', 10);
 
- 
-add_action( 'woocommerce_review_order_after_submit', 'bbloomer_checkout_coupon_below_payment_button' );
- 
-function bbloomer_checkout_coupon_below_payment_button() {
-   echo '<hr>';
-   woocommerce_checkout_coupon_form();
+
+add_action('woocommerce_review_order_after_submit', 'bbloomer_checkout_coupon_below_payment_button');
+
+function bbloomer_checkout_coupon_below_payment_button()
+{
+    echo '<hr>';
+    woocommerce_checkout_coupon_form();
 }
 
 // rename the coupon field on the checkout page
-function woocommerce_rename_coupon_field_on_checkout( $translated_text, $text, $text_domain ) {
+function woocommerce_rename_coupon_field_on_checkout($translated_text, $text, $text_domain)
+{
 
-	// bail if not modifying frontend woocommerce text
-	if ( is_admin() || 'woocommerce' !== $text_domain ) {
-		return $translated_text;
-	}
+    // bail if not modifying frontend woocommerce text
+    if (is_admin() || 'woocommerce' !== $text_domain) {
+        return $translated_text;
+    }
 
-	if ( 'Coupon code' === $text ) {
-		$translated_text = 'COUPON CODE';
-	
-	} elseif ( 'Apply Coupon' === $text ) {
-		$translated_text = 'APPLY PROMO CODE';
-	}
+    if ('Coupon code' === $text) {
+        $translated_text = 'COUPON CODE';
+    } elseif ('Apply Coupon' === $text) {
+        $translated_text = 'APPLY PROMO CODE';
+    }
 
-	return $translated_text;
+    return $translated_text;
 }
-add_filter( 'gettext', 'woocommerce_rename_coupon_field_on_checkout', 10, 3 );
+add_filter('gettext', 'woocommerce_rename_coupon_field_on_checkout', 10, 3);

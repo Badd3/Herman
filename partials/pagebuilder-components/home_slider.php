@@ -29,7 +29,7 @@ if (have_rows('slider_afbeeldingen')) :
                         }
                 ?>
                         <div class="swiper-slide flex <?php echo $overlay_classes; ?>">
-                            <video autoplay muted loop class="object-center object-cover w-full" <?php echo $video_poster_html; ?>>
+                            <video autoplay muted loop playsinline class="object-center object-cover w-full" <?php echo $video_poster_html; ?>>
                                 <source src="<?php echo $video_url; ?>" type="video/mp4">
                             </video>
                         </div>
