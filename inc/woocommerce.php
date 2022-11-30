@@ -389,3 +389,18 @@ if (!function_exists('herman_woocommerce_flex_wrapper_before')) {
 			'rewrite' => array('slug' => 'product_group'),
 		));
 	}
+
+
+	function move_woocommerce_message()
+	{
+		// remove_action('woocommerce_account_content', 'woocommerce_output_all_notices', 5);
+		// remove_action('woocommerce_before_lost_password_form', 'woocommerce_output_all_notices', 10);
+		// remove_action('before_woocommerce_pay', 'woocommerce_output_all_notices', 10);
+		// remove_action('woocommerce_before_reset_password_form', 'woocommerce_output_all_notices', 10);
+		//Remove the notcies before customer login
+		remove_action('woocommerce_before_customer_login_form', 'woocommerce_output_all_notices', 10);
+
+		//Add the notices at a custom designated location.
+		add_action('herman_before_login', 'woocommerce_output_all_notices', 10);
+	}
+	add_filter('wp', 'move_woocommerce_message');

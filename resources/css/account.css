@@ -140,5 +140,17 @@
   content: "quantity ";
 }
 
-.woocommerce-table.woocommerce-table--order-details.shop_table.order_details {
+.theme-Herman .woocommerce-notices-wrapper {
+  @apply w-full mb-3;
+}
+.theme-Herman.woocommerce-account .woocommerce-error {
+  @apply mt-0 mb-0 ml-0 block leading-5 text-[10px];
+}
+
+.theme-Herman .woocommerce-error {
+  @apply text-[10px];
+}
+
+.theme-Herman.woocommerce-edit-account .woocommerce-notices-wrapper {
+  @apply my-5;
 }
