@@ -196,3 +196,7 @@ input#coupon_code:focus-visible {
 .woocommerce-mini-cart__total.total.fontnormal.uppercase strong {
   font-weight: 400;
 }
+
+#billing_country:focus-visible { 
+  outline: unset; 
+}
