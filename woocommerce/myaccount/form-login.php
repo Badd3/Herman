@@ -34,7 +34,7 @@ do_action('woocommerce_before_customer_login_form'); ?>
 		<div class="px-2.5 mt-4 md:mt-0 sm:px-7 sm:pt-28 sm:basis-2/3 md:basis-2/6 text-gray-900 flex flex-col content-center bg-white-bg coming-soon items-center justify-center">
 
 			<div class="lg:max-w-[400px] lg:mx-auto w-full">
-				<?php do_action('herman_before_login'); ?>
+				<?php do_action('herman_woocommerce_notice'); ?>
 				<div class="flex  justify-between mb-8 w-full">
 
 					<div class="flex h-5">

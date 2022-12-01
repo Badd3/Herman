@@ -23,6 +23,7 @@ do_action( 'woocommerce_before_lost_password_form' );
 <section id="lost-password" class="bg-white-bg">
   <div class="flex flex-col items-center justify-center px-6 py-16 lg:py-28 mx-auto">
       <div class="w-full  md:mt-0 sm:max-w-md xl:p-0 ">
+        <?php do_action('herman_woocommerce_notice'); ?>
           <div class="space-y-4 md:space-y-6">
               <h1 class="text-base">
 			  <?php echo apply_filters( 'woocommerce_lost_password_message', esc_html__( 'Lost your password? Please enter your username or email address. You will receive a link to create a new password via email.', 'woocommerce' ) ); ?><?php // @codingStandardsIgnoreLine ?>

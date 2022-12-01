@@ -25,7 +25,7 @@ defined( 'ABSPATH' ) || exit;
 			<h3><?php esc_html_e( 'Billing &amp; Shipping', 'woocommerce' ); ?></h3>
 
 		<?php else : ?>
-
+			<?php do_action('herman_woocommerce_notice'); ?>
 			<h3><?php esc_html_e( 'DELIVERY DETAILS', 'woocommerce' ); ?></h3>
 
 		<?php endif; ?>

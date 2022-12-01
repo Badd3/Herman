@@ -70,7 +70,7 @@ function jk_woocommerce_breadcrumbs()
 {
 	return array(
 		'delimiter'   => ' + ',
-		'wrap_before' => '<nav class="woocommerce-breadcrumb uppercase mb-5 text-grey [&>a:hover]:text-black [&>a:hover]:duration-300 text-[11px]" itemprop="breadcrumb">',
+		'wrap_before' => '<nav class="woocommerce-breadcrumb uppercase mb-5 text-grey [&>a:hover]:text-black [&>a:hover]:duration-300 text-[11px] md:text-base" itemprop="breadcrumb">',
 		'wrap_after'  => '</nav>',
 		'before'      => '',
 		'after'       => '',
@@ -393,14 +393,16 @@ if (!function_exists('herman_woocommerce_flex_wrapper_before')) {
 
 	function move_woocommerce_message()
 	{
-		// remove_action('woocommerce_account_content', 'woocommerce_output_all_notices', 5);
-		// remove_action('woocommerce_before_lost_password_form', 'woocommerce_output_all_notices', 10);
-		// remove_action('before_woocommerce_pay', 'woocommerce_output_all_notices', 10);
-		// remove_action('woocommerce_before_reset_password_form', 'woocommerce_output_all_notices', 10);
+		remove_action('woocommerce_account_content', 'woocommerce_output_all_notices', 5);
+		remove_action('woocommerce_before_lost_password_form', 'woocommerce_output_all_notices', 10);
+		remove_action('before_woocommerce_pay', 'woocommerce_output_all_notices', 10);
+		remove_action( 'woocommerce_before_checkout_form', 'woocommerce_output_all_notices', 10 );
+		remove_action( 'woocommerce_checkout_before_customer_details', 'woocommerce_output_all_notices', 10 );
+		remove_action('woocommerce_before_reset_password_form', 'woocommerce_output_all_notices', 10);
 		//Remove the notcies before customer login
 		remove_action('woocommerce_before_customer_login_form', 'woocommerce_output_all_notices', 10);
 
 		//Add the notices at a custom designated location.
-		add_action('herman_before_login', 'woocommerce_output_all_notices', 10);
+		add_action('herman_woocommerce_notice', 'woocommerce_output_all_notices', 10);
 	}
 	add_filter('wp', 'move_woocommerce_message');

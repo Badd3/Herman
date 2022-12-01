@@ -23,7 +23,7 @@ function herman_separate_registration_form()
       </div>
       <div class="px-2.5 mt-4 md:mt-0 sm:px-7 sm:pt-28 sm:basis-2/3 md:basis-3/6 xl:basis-2/6 text-gray-900 flex flex-col content-center bg-white-bg coming-soon items-center justify-center">
         <div class="lg:max-w-[400px] lg:mx-auto w-full">
-          <?php do_action('herman_before_login'); ?>
+          <?php do_action('herman_woocommerce_notice'); ?>
           <div class="flex w-full justify-between mb-8">
             <div class="flex items-start">
               <div class="flex items-center h-5">
@@ -58,7 +58,7 @@ function herman_separate_registration_form()
 
             <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
 
-              <input type="email" class="woocommerce-Input woocommerce-Input--text input-text" required name="email" id="reg_email" placeholder="EMAIL *" autocomplete="email" value="<?php echo (!empty($_POST['email'])) ? esc_attr(wp_unslash($_POST['email'])) : ''; ?>" /><?php // @codingStandardsIgnoreLine 
+              <input type="email" class="woocommerce-Input woocommerce-Input--text input-text" name="email" id="reg_email" placeholder="EMAIL *" autocomplete="email" value="<?php echo (!empty($_POST['email'])) ? esc_attr(wp_unslash($_POST['email'])) : ''; ?>" /><?php // @codingStandardsIgnoreLine 
                                                                                                                                                                                                                                                                                 ?>
             </p>
 
@@ -66,7 +66,7 @@ function herman_separate_registration_form()
 
               <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
 
-                <input type="password" class="woocommerce-Input woocommerce-Input--text input-text mb-2" required name="password" id="reg_password" placeholder="PASSWORD *" autocomplete="new-password" />
+                <input type="password" class="woocommerce-Input woocommerce-Input--text input-text mb-2" name="password" id="reg_password" placeholder="PASSWORD *" autocomplete="new-password" />
               </p>
 
             <?php else : ?>

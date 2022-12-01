@@ -15,7 +15,7 @@
 }
 
 .wpcf7-textarea {
-  @apply text-base w-9/12 py-3 outline-0 focus-visible:outline-0 resize-none bg-white-bg;
+  @apply text-base w-full py-3 outline-0 focus-visible:outline-0 resize-none bg-white-bg;
 }
 
 .wpcf7-submit {
@@ -119,9 +119,15 @@ form.invalid .wpcf7-response-output,
 
 .page-contact .wpcf7-submit {
   cursor: pointer;
-  border: 1px solid black;
-  padding: 10px;
-  width: 20%;
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(0 0 0 / var(--tw-border-opacity));
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  text-transform: uppercase;
+  float: right;
 }
 
 .page-contact .wpcf7-submit:hover {

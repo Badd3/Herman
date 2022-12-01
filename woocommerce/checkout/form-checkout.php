@@ -33,6 +33,7 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
 
 <section class="bg-white-bg flex flex-col md:flex-row mt-10 lg:mt-0">
 	<div class="basis-full sm:basis-2/4 text-base pb-4 px-2.5 sm:pt-28 lg:px-7.5 order-last md:order-first">
+	 <?php do_action('herman_woocommerce_notice'); ?>
 		<form id="order_review" name="checkout" method="post" class="checkout woocommerce-checkout" action="<?php echo esc_url(wc_get_checkout_url()); ?>" enctype="multipart/form-data">
 
 

@@ -193,14 +193,6 @@ input#coupon_code:focus-visible {
   display: none;
 }
 
-.page-checkout .woocommerce-error {
-  font-size: 10px;
-  line-height: 16px;
-  font-weight: 400;
-  padding-top: 2.5rem;
-  text-align: center;
-}
-
 .woocommerce-mini-cart__total.total.fontnormal.uppercase strong {
   font-weight: 400;
 }
