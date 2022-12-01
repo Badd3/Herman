@@ -81,16 +81,9 @@ if ($show_downloads) {
 						?>
 					</tbody>
 					<tfoot class="order-footer">
-						<?php 
-						$gran_total = (float) $order->get_total();
-						$total_rows['order_total']['value'] = is_wc_endpoint_url() ? $total_html : strip_tags( $total_html );
-					
-						$total_tax_amount = wc_price(  $gran_total - $gran_total / 1.21 );
-						$total_tax_amount = is_wc_endpoint_url() ? $total_tax_amount : strip_tags( $total_tax_amount );
-						?>
 							<tr>
-								<th scope="row">Prices inc. tax</th>
-								<td><?php echo $total_tax_amount; ?></td>
+								<th scope="row"></th>
+								<td>Prices Inc. VAT</td>
 							</tr>
 						<?php
 						foreach ($order->get_order_item_totals() as $key => $total) {

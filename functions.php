@@ -527,9 +527,9 @@ function my_wc_hide_in_stock_message($html, $text, $product)
 }
 add_filter('woocommerce_stock_html', 'my_wc_hide_in_stock_message', 10, 3);
 
-add_filter('woocommerce_coupons_enabled', 'bbloomer_disable_coupons_cart_page');
+add_filter('woocommerce_coupons_enabled', 'herman_disable_coupons_cart_page');
 
-function bbloomer_disable_coupons_cart_page()
+function herman_disable_coupons_cart_page()
 {
     if (is_cart()) return false;
     return true;
