@@ -321,18 +321,18 @@ if (!function_exists('herman_woocommerce_flex_wrapper_before')) {
 	add_filter('woocommerce_checkout_fields', 'custom_override_checkout_fields');
 	function custom_override_checkout_fields($fields)
 	{
-		$fields['billing']['billing_first_name']['placeholder'] = 'NAME';
-		$fields['billing']['billing_last_name']['placeholder'] = 'SURNAME';
-		$fields['billing']['billing_email']['placeholder'] = 'EMAIL';
-		$fields['billing']['billing_postcode']['placeholder'] = 'POSTCODE';
-		$fields['billing']['billing_city']['placeholder'] = 'CITY';
+		$fields['billing']['billing_first_name']['placeholder'] = 'NAME*';
+		$fields['billing']['billing_last_name']['placeholder'] = 'SURNAME*';
+		$fields['billing']['billing_email']['placeholder'] = 'EMAIL*';
+		$fields['billing']['billing_postcode']['placeholder'] = 'POSTCODE*';
+		$fields['billing']['billing_city']['placeholder'] = 'CITY*';
 
-		$fields['shipping']['shipping_first_name']['placeholder'] = 'NAME';
-		$fields['shipping']['shipping_last_name']['placeholder'] = 'SURNAME';
-		$fields['shipping']['shipping_email']['placeholder'] = 'EMAIL';
-		$fields['shipping']['shipping_address_1']['placeholder'] = 'ADDRESS';
-		$fields['shipping']['shipping_postcode']['placeholder'] = 'POSTCODE';
-		$fields['shipping']['shipping_city']['placeholder'] = 'CITY';
+		$fields['shipping']['shipping_first_name']['placeholder'] = 'NAME*';
+		$fields['shipping']['shipping_last_name']['placeholder'] = 'SURNAME*';
+		$fields['shipping']['shipping_email']['placeholder'] = 'EMAIL*';
+		$fields['shipping']['shipping_address_1']['placeholder'] = 'ADDRESS*';
+		$fields['shipping']['shipping_postcode']['placeholder'] = 'POSTCODE*';
+		$fields['shipping']['shipping_city']['placeholder'] = 'CITY*';
 
 		return $fields;
 	}
@@ -340,7 +340,7 @@ if (!function_exists('herman_woocommerce_flex_wrapper_before')) {
 	add_filter('woocommerce_default_address_fields', 'wc_override_address_fields');
 	function wc_override_address_fields($fields)
 	{
-		$fields['address_1']['placeholder'] = 'ADDRESS AND HOUSENUMBER';
+		$fields['address_1']['placeholder'] = 'ADDRESS AND HOUSENUMBER*';
 		return $fields;
 	}
 
@@ -396,8 +396,8 @@ if (!function_exists('herman_woocommerce_flex_wrapper_before')) {
 		remove_action('woocommerce_account_content', 'woocommerce_output_all_notices', 5);
 		remove_action('woocommerce_before_lost_password_form', 'woocommerce_output_all_notices', 10);
 		remove_action('before_woocommerce_pay', 'woocommerce_output_all_notices', 10);
-		remove_action( 'woocommerce_before_checkout_form', 'woocommerce_output_all_notices', 10 );
-		remove_action( 'woocommerce_checkout_before_customer_details', 'woocommerce_output_all_notices', 10 );
+		remove_action('woocommerce_before_checkout_form', 'woocommerce_output_all_notices', 10);
+		remove_action('woocommerce_checkout_before_customer_details', 'woocommerce_output_all_notices', 10);
 		remove_action('woocommerce_before_reset_password_form', 'woocommerce_output_all_notices', 10);
 		//Remove the notcies before customer login
 		remove_action('woocommerce_before_customer_login_form', 'woocommerce_output_all_notices', 10);
