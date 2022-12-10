@@ -35,7 +35,7 @@
 			<?php do_action('tailpress_content_start'); ?>
 			<?php if (!is_front_page() && !is_page(77) && !is_woocommerce() && !is_cart() && !is_checkout()) {
 			?>
-				<div class="px-2.5 text-grey lg:hidden mt-14 mb-5">
+				<div class="px-2.5 text-grey lg:hidden mt-14 mb-5 uppercase">
 					<?php get_breadcrumb(); ?>
 				</div>
 			<?php

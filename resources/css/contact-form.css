@@ -83,6 +83,9 @@ form.invalid .wpcf7-response-output,
   font-family: "Gotham", "sans-serif";
   text-transform: uppercase;
   padding: unset;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
 }
 
 .wpcf7-not-valid-tip {
@@ -106,7 +109,8 @@ form.invalid .wpcf7-response-output,
   @apply flex;
 }
 
-.coming-soon .wpcf7-form-control.wpcf7-text.wpcf7-email.wpcf7-validates-as-required.wpcf7-validates-as-email {
+.coming-soon
+  .wpcf7-form-control.wpcf7-text.wpcf7-email.wpcf7-validates-as-required.wpcf7-validates-as-email {
   @apply border-black text-base outline-0 border-b w-11/12 py-3 bg-white-bg;
 }
 .coming-soon input.wpcf7-form-control:nth-child(1) {
