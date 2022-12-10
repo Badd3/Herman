@@ -52,6 +52,9 @@ module.exports = {
         grey: {
           DEFAULT: "#b2b2b2",
         },
+        error: {
+          DEFAULT: "#dc3232",
+        },
       },
 
       // fontSize: tailpress.fontSizeMapper(

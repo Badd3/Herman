@@ -148,7 +148,7 @@
 }
 
 .theme-Herman .woocommerce-error {
-  @apply text-[10px];
+  @apply text-[10px] text-error font-light;
 }
 
 .theme-Herman.woocommerce-edit-account .woocommerce-notices-wrapper {
