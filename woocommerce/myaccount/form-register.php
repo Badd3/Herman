@@ -56,7 +56,7 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
 				  <?php wp_nonce_field( 'woocommerce-login', 'woocommerce-login-nonce' ); ?>
 
                   <button type="submit" class="hover:bg-black hover:text-white flex items-center justify-center border border-black  px-6 py-3 text-base font-base text-black shadow-sm w-full">SIGN IN</button>
-                  <p class="text-sm font-light text-gray-500 dark:text-gray-400">
+                  <p class="text-sm font-light text-grey dark:text-grey">
                       DON'T HAVE AN ACCOUNT YET? <a href="#" class="font-medium text-primary-600 hover:underline dark:text-primary-500">SIGN UP</a>
                   </p>
               </form>

@@ -33,6 +33,7 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
 
 <section class="bg-white-bg flex flex-col md:flex-row mt-10 lg:mt-0">
 	<div class="basis-full sm:basis-2/4 text-base pb-4 px-2.5 sm:pt-28 lg:px-7.5 order-last md:order-first">
+	 <?php do_action('herman_woocommerce_notice'); ?>
 		<form id="order_review" name="checkout" method="post" class="checkout woocommerce-checkout" action="<?php echo esc_url(wc_get_checkout_url()); ?>" enctype="multipart/form-data">
 
 
@@ -167,7 +168,7 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
 															'woocommerce_cart_item_remove_link',
 															sprintf(
 																'<div class="flex">
-																<button type="button" class="text-xs text-grey items-center justify-center border border-grey hover:bg-black hover:text-white hover:border-black  px-4 py-1 ">
+																<button type="button" class="text-xs text-black items-center justify-center border border-black hover:bg-black hover:text-white hover:border-black  px-4 py-1 ">
 																<a href="%s" class="remove" aria-label="%s" data-product_id="%s" data-product_sku="%s">REMOVE</a></button></div>',
 
 																esc_url(wc_get_cart_remove_url($cart_item_key)),
@@ -194,8 +195,8 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
 							<?php if (WC()->cart->needs_shipping() && WC()->cart->show_shipping()) : ?>
 
 								<div class="border-t border-gray-200 py-6">
-									<div class="flex flex-row-reverse justify-between md:flex-row text-base text-black">
-										<p class="hidden md:block">PRODUCTS</p>
+									<div class="flex flex-row justify-between md:flex-row text-base text-black">
+										<p class="block">PRODUCTS</p>
 										<p class="woocommerce-mini-cart__total total">
 											<td class="product-total">
 												<?php do_action('woocommerce_widget_shopping_cart_total'); ?>
@@ -203,11 +204,25 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
 										</p>
 									</div>
 
+									<?php
+									$discount_excl_tax_total = WC()->cart->get_cart_discount_total();
+									$discount_tax_total = WC()->cart->get_cart_discount_tax_total();
+									$discount_total = $discount_excl_tax_total + $discount_tax_total;
+									if( ! empty($discount_total) ): ?>
+						
+									<div class="flex flex-row justify-between md:flex-row text-base text-black art-discount coupon-<?php echo esc_attr( sanitize_title( $code ) ); ?>">
+										<p class="block"><?php _e('COUPON','woocommerce'); ?></p>
+										<p class="woocommerce_package_rates total">
+										<?php echo wc_price(-$discount_total) ?>
+										</p>
+									</div>
+									<?php endif; ?>
+
 
 									<?php do_action('woocommerce_review_order_before_shipping'); ?>
 
-									<div class="flex flex-row-reverse justify-between md:flex-row text-base text-black divide-gray-200 border-b border-gray-200">
-										<p class="hidden md:block mb-2">SHIPPING COST</p>
+									<div class="flex flex-row justify-between md:flex-row text-base text-black divide-gray-200 border-b border-gray-200">
+										<p class="block mb-2">SHIPPING COST</p>
 										<p class="woocommerce_package_rates total">
 											<?php
 											$current_shipping_cost = WC()->cart->get_cart_shipping_total();
@@ -233,6 +248,8 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
 										<?php do_action('woocommerce_review_order_after_order_total'); ?>
 									</p>
 								</div>
+
+							
 
 								<?php do_action('woocommerce_widget_shopping_cart_before_buttons'); ?>
 								</div>

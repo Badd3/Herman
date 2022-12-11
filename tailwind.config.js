@@ -50,7 +50,10 @@ module.exports = {
         },
 
         grey: {
-          DEFAULT: "#B2B2B0",
+          DEFAULT: "#b2b2b2",
+        },
+        error: {
+          DEFAULT: "#dc3232",
         },
       },
 

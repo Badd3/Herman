@@ -129,7 +129,7 @@ do_action('woocommerce_before_mini_cart'); ?>
 												'woocommerce_cart_item_remove_link',
 												sprintf(
 													'<div class="flex">
-								<button type="button" class="text-xs text-grey items-center justify-center border border-grey hover:border-black  px-4 py-1 hover:bg-black hover:text-white"><a href="%s" class="remove remove_from_cart_button" aria-label="%s" data-product_id="%s" data-cart_item_key="%s" data-product_sku="%s">REMOVE</a></button>
+								<button type="button" class="text-xs text-black items-center justify-center border border-black hover:border-black  px-4 py-1 hover:bg-black hover:text-white"><a href="%s" class="remove remove_from_cart_button" aria-label="%s" data-product_id="%s" data-cart_item_key="%s" data-product_sku="%s">REMOVE</a></button>
 							  	</div>',
 													esc_url(wc_get_cart_remove_url($cart_item_key)),
 													esc_attr__('Remove this item', 'woocommerce'),
@@ -153,10 +153,10 @@ do_action('woocommerce_before_mini_cart'); ?>
 
 			do_action('woocommerce_mini_cart_contents');
 					?>
-					<div class="border-t border-gray-200 py-6 px-4 sm:px-6">
+					<div class="border-t border-gray-200 py-6">
 						<div class="flex flex-row-reverse justify-between md:flex-row text-base text-black">
-							<p class="hidden md:block">SUBTOTAL</p>
-							<p class="woocommerce-mini-cart__total total">
+							<p class="hidden md:block"></p>
+							<p class="woocommerce-mini-cart__total total fontnormal uppercase">
 								<?php
 								/**
 								 * Hook: woocommerce_widget_shopping_cart_total.

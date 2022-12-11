@@ -1,5 +1,5 @@
 <?php
-if (is_front_page()) {
+if (is_front_page() || is_page('home')) {
     $color = 'text-white';
 } else {
     $color = 'text-black';

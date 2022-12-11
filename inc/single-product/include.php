@@ -29,21 +29,21 @@ function single_product_images()
     global $product;
     $attachment_ids = $product->get_gallery_attachment_ids();
     $thumbnail_url = get_the_post_thumbnail_url(get_the_id(), 'full');
-    echo '<div class="product-images flex-col gap-y-5 hidden md:flex  h-fit">';
-    echo '<a class="chocolat-image zoom-cursor border border-black" href="' . $thumbnail_url . '" class="aspect-w-[54] aspect-h-[73] [&>*]:object-cover">';
+    echo '<div class="product-images flex-col gap-y-5 hidden md:flex h-fit">';
+    echo '<a class="chocolat-image zoom-cursor border border-black [&_>img]:w-full" href="' . $thumbnail_url . '" class="aspect-w-[54] aspect-h-[73] [&>*]:object-cover">';
     the_post_thumbnail();
     echo '</a>';
 
 
     foreach ($attachment_ids as $attachment_id) {
         $attachment_url = wp_get_attachment_url($attachment_id, 'full');
-        echo '<a class="chocolat-image zoom-cursor border border-black" href="' . $attachment_url . '" class="aspect-w-[54] aspect-h-[73] [&>*]:object-cover">';
-        echo wp_get_attachment_image($attachment_id, 'full');
+        echo '<a class="chocolat-image zoom-cursor border border-black [&_>img]:w-full" href="' . $attachment_url . '" class="aspect-w-[54] aspect-h-[73] [&>*]:object-cover">';
+        echo wp_get_attachment_image($attachment_id, 'full w-full');
         echo '</a>';
     }
     echo '</div>';
 
-    echo '<div class="swiper-single-product overflow-hidden relative md:hidden">';
+    echo '<div class="swiper-single-product overflow-hidden relative md:hidden  border border-black">';
     echo '<div class="swiper-wrapper">';
     echo '<div class="aspect-w-[54] aspect-h-[73] [&>*]:object-cover swiper-slide">';
     the_post_thumbnail();

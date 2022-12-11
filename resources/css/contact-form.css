@@ -15,7 +15,7 @@
 }
 
 .wpcf7-textarea {
-  @apply text-base w-9/12 py-3 outline-0 focus-visible:outline-0 resize-none bg-white-bg;
+  @apply text-base w-full py-3 outline-0 focus-visible:outline-0 resize-none bg-white-bg;
 }
 
 .wpcf7-submit {
@@ -83,6 +83,9 @@ form.invalid .wpcf7-response-output,
   font-family: "Gotham", "sans-serif";
   text-transform: uppercase;
   padding: unset;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
 }
 
 .wpcf7-not-valid-tip {
@@ -106,7 +109,8 @@ form.invalid .wpcf7-response-output,
   @apply flex;
 }
 
-.coming-soon .wpcf7-form-control.wpcf7-text.wpcf7-email.wpcf7-validates-as-required.wpcf7-validates-as-email {
+.coming-soon
+  .wpcf7-form-control.wpcf7-text.wpcf7-email.wpcf7-validates-as-required.wpcf7-validates-as-email {
   @apply border-black text-base outline-0 border-b w-11/12 py-3 bg-white-bg;
 }
 .coming-soon input.wpcf7-form-control:nth-child(1) {
@@ -115,4 +119,22 @@ form.invalid .wpcf7-response-output,
 
 #wpcf7-f301-o2 > form > span.wpcf7-form-control-wrap > input {
   border-bottom: unset;
+}
+
+.page-contact .wpcf7-submit {
+  cursor: pointer;
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(0 0 0 / var(--tw-border-opacity));
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  text-transform: uppercase;
+  float: right;
+}
+
+.page-contact .wpcf7-submit:hover {
+  background-color: black;
+  color: white;
 }

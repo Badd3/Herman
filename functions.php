@@ -206,19 +206,22 @@ function get_breadcrumb()
         the_category('');
         $title = get_the_title();
         if (is_single()) {
-            echo '<a class="uppercase text-xs inline" href="/library" title="LIBRARY">LIBRARY</a> <p class="text-xs inline"> > </p>';
-            echo '<p class="uppercase text-xs inline" title="' . $title . '"> ' . $title . '</p>';
+            echo '<a class="uppercase text-[11px] inline" href="/library" title="LIBRARY">LIBRARY</a> <p class="text-[11px] inline"> + </p>';
+            echo '<p class="uppercase text-[11px] inline" title="' . $title . '"> ' . $title . '</p>';
         }
     } elseif (is_page()) {
         if ($post->post_parent) {
             $anc = get_post_ancestors($post->ID);
             $title = get_the_title();
             foreach ($anc as $ancestor) {
-                $output = '<a class="uppercase text-xs inline" href="' . get_permalink($ancestor) . '" title="' . get_the_title($ancestor) . '">' . get_the_title($ancestor) . '</a> <p class="text-xs inline">></p>';
-                // $output = '<p class="uppercase text-xs inline" title="' . get_the_title($ancestor) . '">' . get_the_title($ancestor) . '</p> <p class="text-xs inline">></p>';
+                if (get_the_title($ancestor) === 'Customer Care') {
+                    $output = '<p class="uppercase text-[11px] inline">' . get_the_title($ancestor) . '</p> <span class="text-[11px] inline">+</span>';
+                } else {
+                    $output = '<a class="uppercase text-[11px] inline" href="' . get_permalink($ancestor) . '" title="' . get_the_title($ancestor) . '">' . get_the_title($ancestor) . '</a> <p class="text-[11px] inline">+</p>';
+                }
             }
             echo $output;
-            echo '<p class="uppercase text-xs inline" title="' . $title . '"> ' . $title . '</p>';
+            echo '<p class="uppercase text-[11px] inline" title="' . $title . '"> ' . $title . '</p>';
         } else {
             echo '<span class="text-[11px] uppercase"> ' . get_the_title() . '</span>';
         }
@@ -302,14 +305,14 @@ function herman_add_name_woo_account_registration()
 
     <p class="form-row form-row-first">
 
-        <input type="text" class="input-text woocommerce-invalid-required-field" name="billing_first_name" id="reg_billing_first_name" placeholder="NAME" required class="peer border border-slate-400" value="<?php if (!empty($_POST['billing_first_name'])) esc_attr_e($_POST['billing_first_name']); ?>" />
+        <input type="text" class="input-text woocommerce-invalid-required-field" name="billing_first_name" id="reg_billing_first_name" placeholder="NAME *" class="peer border border-slate-400" value="<?php if (!empty($_POST['billing_first_name'])) esc_attr_e($_POST['billing_first_name']); ?>" />
         <!-- <p class="invisible peer-invalid:visible text-red-700 font-light">
                 Please enter your name
             </p> -->
     </p>
 
     <p class="form-row form-row-last">
-        <input type="text" class="input-text woocommerce-invalid-required-field" name="billing_last_name" id="reg_billing_last_name" required class="peer border border-slate-400" placeholder="SURNAME" value="<?php if (!empty($_POST['billing_last_name'])) esc_attr_e($_POST['billing_last_name']); ?>" />
+        <input type="text" class="input-text woocommerce-invalid-required-field" name="billing_last_name" id="reg_billing_last_name" class="peer border border-slate-400" placeholder="SURNAME *" value="<?php if (!empty($_POST['billing_last_name'])) esc_attr_e($_POST['billing_last_name']); ?>" />
         <!-- <p class="invisible peer-invalid:visible text-red-700 font-light">
                 Please enter your surname
             </p> -->
@@ -469,26 +472,26 @@ function teleport_container()
 }
 
 
-function redirect_to_holding()
-{
-    if (!is_user_logged_in()) {
-        $holding_page = get_page_by_path('coming-soon');
-        if (($holding_page != NULL) && ($holding_page->post_status == 'publish')) {
-            /* We have a holding page */
-            $current_page = get_post();
+// function redirect_to_holding()
+// {
+//     if (!is_user_logged_in()) {
+//         $holding_page = get_page_by_path('coming-soon');
+//         if (($holding_page != NULL) && ($holding_page->post_status == 'publish')) {
+//             /* We have a holding page */
+//             $current_page = get_post();
 
-            if ($holding_page != $current_page) {
-                /* not trying to display the holding page so ok to redirect to holding page */
-                if (current_user_can('delete_users') == false) {
-                    /* we are not logged on to an admin account */
-                    wp_redirect(get_permalink($holding_page));
-                    exit;
-                }
-            }
-        }
-    }
-}
-add_action('get_header', 'redirect_to_holding');
+//             if ($holding_page != $current_page) {
+//                 /* not trying to display the holding page so ok to redirect to holding page */
+//                 if (current_user_can('delete_users') == false) {
+//                     /* we are not logged on to an admin account */
+//                     wp_redirect(get_permalink($holding_page));
+//                     exit;
+//                 }
+//             }
+//         }
+//     }
+// }
+// add_action('get_header', 'redirect_to_holding');
 
 
 add_action('woocommerce_after_order_itemmeta', 'add_item_color', 10, 3);
@@ -513,3 +516,51 @@ function search_products_only($query)
         $query->set('post_type', 'product');
     }
 }
+
+function my_wc_hide_in_stock_message($html, $text, $product)
+{
+    $availability = $product->get_availability();
+    if (isset($availability['class']) && 'in-stock' === $availability['class']) {
+        return '';
+    }
+    return $html;
+}
+add_filter('woocommerce_stock_html', 'my_wc_hide_in_stock_message', 10, 3);
+
+add_filter('woocommerce_coupons_enabled', 'herman_disable_coupons_cart_page');
+
+function herman_disable_coupons_cart_page()
+{
+    if (is_cart()) return false;
+    return true;
+}
+
+remove_action('woocommerce_before_checkout_form', 'woocommerce_checkout_coupon_form', 10);
+
+
+add_action('woocommerce_review_order_after_submit', 'bbloomer_checkout_coupon_below_payment_button');
+
+function bbloomer_checkout_coupon_below_payment_button()
+{
+    echo '<hr>';
+    woocommerce_checkout_coupon_form();
+}
+
+// rename the coupon field on the checkout page
+function woocommerce_rename_coupon_field_on_checkout($translated_text, $text, $text_domain)
+{
+
+    // bail if not modifying frontend woocommerce text
+    if (is_admin() || 'woocommerce' !== $text_domain) {
+        return $translated_text;
+    }
+
+    if ('Coupon code' === $text) {
+        $translated_text = 'COUPON CODE';
+    } elseif ('Apply Coupon' === $text) {
+        $translated_text = 'APPLY PROMO CODE';
+    }
+
+    return $translated_text;
+}
+add_filter('gettext', 'woocommerce_rename_coupon_field_on_checkout', 10, 3);

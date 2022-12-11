@@ -18,15 +18,32 @@ if (have_rows('slider_afbeeldingen')) :
                 <?php
                 // Loop through rows.
                 while (have_rows('slider_afbeeldingen')) : the_row();
-
+                    // error_log(print_r(get_sub_field('media_type'), true));
+                    $media_type = get_sub_field('media_type');
                     // Load sub field value.
-                    $image_url = get_sub_field('afbeelding')['url'];
-                    $image_alt = get_sub_field('afbeelding')['alt'];
-
-                    // Do something...
+                    if ($media_type === 'video') {
+                        $video_url = get_sub_field('video');
+                        if (get_sub_field('video_poster')) {
+                            $video_poster = get_sub_field('video_poster');
+                            $video_poster_html = 'poster=' . $video_poster;
+                        }
                 ?>
-                    <div class="swiper-slide flex <?php echo $overlay_classes; ?>"><img class="object-center object-cover w-full" src="<?php echo $image_url; ?>" alt="<?php echo $image_alt; ?>" srcset=""></div>
+                        <div class="swiper-slide flex <?php echo $overlay_classes; ?>">
+                            <video autoplay muted loop playsinline class="object-center object-cover w-full" <?php echo $video_poster_html; ?>>
+                                <source src="<?php echo $video_url; ?>" type="video/mp4">
+                            </video>
+                        </div>
+                    <?php
+                    }
+                    if ($media_type === 'image') {
+                        $image_url = get_sub_field('afbeelding')['url'];
+                        $image_alt = get_sub_field('afbeelding')['alt'];
+
+                    ?>
+                        <div class="swiper-slide flex <?php echo $overlay_classes; ?>"><img class="object-center object-cover w-full" src="<?php echo $image_url; ?>" alt="<?php echo $image_alt; ?>" srcset=""></div>
                 <?php
+                    }
+
                 // End loop.
                 endwhile;
 
