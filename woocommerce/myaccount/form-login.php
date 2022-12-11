@@ -43,7 +43,7 @@ do_action('woocommerce_before_customer_login_form'); ?>
 					</div>
 
 					<p class="text-base">
-						<a href="/my-account/registration/" class="font-base text-grey active:text-black">SIGN UP</a>
+						<a href="/my-account/sign-up/" class="font-base text-grey active:text-black">SIGN UP</a>
 					</p>
 				</div>
 
