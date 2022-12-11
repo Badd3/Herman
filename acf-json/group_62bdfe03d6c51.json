@@ -612,6 +612,15 @@
                     ],
                     "min": "",
                     "max": ""
+                },
+                "layout_6396418a6b407": {
+                    "key": "layout_6396418a6b407",
+                    "name": "customer_care_navigation",
+                    "label": "Customer Care Navigation",
+                    "display": "block",
+                    "sub_fields": [],
+                    "min": "",
+                    "max": ""
                 }
             },
             "button_label": "Add Row",
@@ -637,5 +646,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1669552107
+    "modified": 1670791629
 }
