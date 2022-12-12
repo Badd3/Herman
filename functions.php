@@ -570,3 +570,13 @@ function remove_subtotal_from_orders_total_lines( $totals ) {
     unset($totals['cart_subtotal']  );
     return $totals;
 }
+
+function iconic_variation_is_active( $active, $variation ) {
+	if( ! $variation->is_in_stock() ) {
+		return false;
+	}
+
+	return $active;
+}
+
+add_filter( 'woocommerce_variation_is_active', 'iconic_variation_is_active', 10, 2 );
