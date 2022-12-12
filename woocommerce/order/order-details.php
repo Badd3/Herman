@@ -81,10 +81,6 @@ if ($show_downloads) {
 						?>
 					</tbody>
 					<tfoot class="order-footer">
-							<tr>
-								<th scope="row"></th>
-								<td>Prices Inc. VAT</td>
-							</tr>
 						<?php
 						foreach ($order->get_order_item_totals() as $key => $total) {
 						?>

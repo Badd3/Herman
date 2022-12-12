@@ -564,3 +564,9 @@ function woocommerce_rename_coupon_field_on_checkout($translated_text, $text, $t
     return $translated_text;
 }
 add_filter('gettext', 'woocommerce_rename_coupon_field_on_checkout', 10, 3);
+
+add_filter( 'woocommerce_get_order_item_totals', 'remove_subtotal_from_orders_total_lines', 100, 1 );
+function remove_subtotal_from_orders_total_lines( $totals ) {
+    unset($totals['cart_subtotal']  );
+    return $totals;
+}

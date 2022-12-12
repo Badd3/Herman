@@ -265,3 +265,7 @@ li.wc_payment_method.payment_method_mollie_wc_gateway_creditcard {
 .payment_box.payment_method_mollie_wc_gateway_ideal {
   margin-bottom: -0.5rem;
 }
+
+.woocommerce-table__product-total.product-total {
+  @apply pt-4 align-top;
+}
