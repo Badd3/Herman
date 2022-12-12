@@ -19,7 +19,7 @@ $children = get_children($child_args);
 ?>
 <section>
   <div class="flex justify-center">
-    <div class="basis-full sm:basis-2/5 text-base px-2.5 lg:max-w-5xl mx-auto ">
+    <div class="basis-full sm:basis-2/5 text-base px-2.5 lg:max-w-5xl mx-auto mb-8">
       <ul class="flex-col flex">
         <h2 class="mb-3">MORE CUSTOMER CARE</h2>
         <?php
