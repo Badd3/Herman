@@ -17,7 +17,7 @@ if (is_shop() || is_product_category() || is_product()) {
     {
         $badges = get_field('badges');
         if ($badges) {
-            echo '<div class="block"><span class="bg-white-bg h-fit w-fit px-1 border border-black text-base mt-2 mr-2 float-right relative pointer-events-none z-[1]">'. $badges;
+            echo '<div class="block"><span class="bg-white-bg h-fit w-fit px-1 border border-black text-[8px] md:text-base mt-2 mr-2 float-right relative pointer-events-none z-[1]">'. $badges;
         }
     }
 
