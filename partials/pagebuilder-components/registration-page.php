@@ -19,7 +19,7 @@ function herman_separate_registration_form()
   <section id="registration" class="bg-white-bg">
     <div class="flex flex-col sm:flex-row lg:h-screen">
       <div class="basis-full sm:basis-1/3 md:basis-2/6">
-        <img class="accountImage sm:h-screen w-full object-cover grayscale sm:sticky sm:top-0 sm:mt-[-2rem]" src="<?php echo $image_url; ?>" alt="<?php echo $image_alt; ?>">
+        <img class="accountImage sm:h-screen w-full object-cover sm:sticky sm:top-0 sm:mt-[-2rem]" src="<?php echo $image_url; ?>" alt="<?php echo $image_alt; ?>">
       </div>
       <div class="px-2.5 mt-4 md:mt-0 sm:px-7 sm:pt-28 sm:basis-2/3 md:basis-3/6 xl:basis-2/6 text-gray-900 flex flex-col content-center bg-white-bg coming-soon items-center justify-center">
         <div class="lg:max-w-[400px] lg:mx-auto w-full">
@@ -59,7 +59,7 @@ function herman_separate_registration_form()
             <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
 
               <input type="email" class="woocommerce-Input woocommerce-Input--text input-text" name="email" id="reg_email" placeholder="EMAIL *" autocomplete="email" value="<?php echo (!empty($_POST['email'])) ? esc_attr(wp_unslash($_POST['email'])) : ''; ?>" /><?php // @codingStandardsIgnoreLine 
-                                                                                                                                                                                                                                                                                ?>
+                                                                                                                                                                                                                                                                      ?>
             </p>
 
             <?php if ('no' === get_option('woocommerce_registration_generate_password')) : ?>

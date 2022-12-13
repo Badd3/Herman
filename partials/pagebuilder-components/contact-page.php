@@ -58,7 +58,7 @@ $phone_display = get_sub_field('phone_display');
       ?>
     </div>
     <div class="sm:order-first basis-full sm:basis-3/5 mt-4 md:mt-0">
-      <img class="sm:h-screen sm:w-full object-cover grayscale sm:sticky sm:top-0" src="<?php echo $image_url; ?>" alt="<?php echo $image_alt; ?>">
+      <img class="sm:h-screen sm:w-full object-cover sm:sticky sm:top-0" src="<?php echo $image_url; ?>" alt="<?php echo $image_alt; ?>">
     </div>
   </div>
 </section>
