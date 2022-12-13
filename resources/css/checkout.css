@@ -41,10 +41,12 @@
   @apply text-base outline-0 focus-visible:outline-0 border-b w-full border-black py-3 bg-white-bg;
 }
 
-#account_password,
 #billing_country,
 #search-field {
   @apply text-base outline-0 focus-visible:outline-0 w-full bg-white-bg uppercase;
+}
+#account_password {
+  @apply text-base outline-0 focus-visible:outline-0 w-full bg-white-bg;
 }
 
 select#billing_country {
@@ -52,7 +54,7 @@ select#billing_country {
 }
 
 .woocommerce-account-fields {
-  @apply pt-4 text-md uppercase;
+  @apply pt-4 text-md;
 }
 
 #billing_first_name:focus-visible,
