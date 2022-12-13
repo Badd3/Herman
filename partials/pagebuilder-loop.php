@@ -23,15 +23,15 @@ if (have_rows('herman_builder')) :
 
         elseif (get_row_layout() == 'post_overview') :
 
-            get_template_part('partials/pagebuilder-components/post-overview');
+            get_template_part('partials/pagebuilder-components/post-overview-v2');
 
         elseif (get_row_layout() == 'account_page') :
 
             get_template_part('partials/pagebuilder-components/registration-page');
 
-        elseif (get_row_layout() == 'post_overview_v2') :
+        // elseif (get_row_layout() == 'post_overview_v2') :
 
-            get_template_part('partials/pagebuilder-components/post-overview-v2');
+        //     get_template_part('partials/pagebuilder-components/post-overview-v2');
 
         endif;
 
