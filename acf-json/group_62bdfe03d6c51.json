@@ -98,6 +98,65 @@
                                     "mime_types": ""
                                 },
                                 {
+                                    "key": "field_6398d46d62034",
+                                    "label": "Mobiele afbeelding",
+                                    "name": "mobiele_afbeelding",
+                                    "type": "true_false",
+                                    "instructions": "Wil je op mobiel een andere afbeelding tonen?\r\nVink dit dan aan en upload een mobiele afmeting.",
+                                    "required": 0,
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_63821efaeed5d",
+                                                "operator": "==",
+                                                "value": "image"
+                                            }
+                                        ]
+                                    ],
+                                    "wrapper": {
+                                        "width": "20",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "message": "",
+                                    "default_value": 0,
+                                    "ui": 1,
+                                    "ui_on_text": "",
+                                    "ui_off_text": ""
+                                },
+                                {
+                                    "key": "field_6398d4a462035",
+                                    "label": "Afbeelding Mobiel",
+                                    "name": "afbeelding_mobiel",
+                                    "type": "image",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_6398d46d62034",
+                                                "operator": "==",
+                                                "value": "1"
+                                            }
+                                        ]
+                                    ],
+                                    "wrapper": {
+                                        "width": "80",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "return_format": "url",
+                                    "preview_size": "medium",
+                                    "library": "all",
+                                    "min_width": "",
+                                    "min_height": "",
+                                    "min_size": "",
+                                    "max_width": "",
+                                    "max_height": "",
+                                    "max_size": "",
+                                    "mime_types": ""
+                                },
+                                {
                                     "key": "field_63821f44eed5e",
                                     "label": "Video",
                                     "name": "video",
@@ -618,7 +677,25 @@
                     "name": "customer_care_navigation",
                     "label": "Customer Care Navigation",
                     "display": "block",
-                    "sub_fields": [],
+                    "sub_fields": [
+                        {
+                            "key": "field_639641976b409",
+                            "label": "Message",
+                            "name": "",
+                            "type": "message",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "message": "Dit blok zal automatisch alle elementen die onder 'Customer Care' vallen tonen in een lijstweergave.",
+                            "new_lines": "wpautop",
+                            "esc_html": 0
+                        }
+                    ],
                     "min": "",
                     "max": ""
                 }
@@ -646,5 +723,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1670791629
+    "modified": 1670960455
 }

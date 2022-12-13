@@ -38,12 +38,20 @@ if (have_rows('slider_afbeeldingen')) :
                     if ($media_type === 'image') {
                         $image_url = get_sub_field('afbeelding')['url'];
                         $image_alt = get_sub_field('afbeelding')['alt'];
-
+                        $different_image_mobile = get_sub_field('mobiele_afbeelding');
+                        $mobile_img = get_sub_field('afbeelding_mobiel');
+                        if ($different_image_mobile && $mobile_img) {
+                            $desktop_class = 'hidden lg:block';
+                            $mobile_img_html = '<img src="' . $mobile_img . '" class="object-center object-cover w-full block lg:hidden">';
+                        }
                     ?>
-                        <div class="swiper-slide flex <?php echo $overlay_classes; ?>"><img class="object-center object-cover w-full" src="<?php echo $image_url; ?>" alt="<?php echo $image_alt; ?>" srcset=""></div>
+                        <div class="swiper-slide flex <?php echo $overlay_classes; ?> ">
+                            <img class="object-center object-cover w-full <?php echo $desktop_class; ?>" src="<?php echo $image_url; ?>" alt="<?php echo $image_alt; ?>">
+                            <?php echo $mobile_img_html; ?>
+                        </div>
                 <?php
                     }
-
+                    unset($mobile_img, $different_image_mobile, $mobile_img_html, $desktop_class);
                 // End loop.
                 endwhile;
 
