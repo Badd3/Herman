@@ -1,5 +1,5 @@
 document.addEventListener(
-  "wpcf7submit",
+  "wpcf7mailsent",
   function (event) {
     const elements = document.querySelectorAll("[data-name]");
     for (const element of elements) {

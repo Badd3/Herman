@@ -2,7 +2,7 @@ import Alpine from "alpinejs";
 import collapse from "@alpinejs/collapse";
 import "./swiper.js";
 import "./lightbox.js";
-import "./contactForm.js";
+// import "./contactForm.js";
 
 Alpine.plugin(collapse);
 
