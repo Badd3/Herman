@@ -580,3 +580,21 @@ function iconic_variation_is_active( $active, $variation ) {
 }
 
 add_filter( 'woocommerce_variation_is_active', 'iconic_variation_is_active', 10, 2 );
+
+add_action( 'wp_footer', 'fww_add_jscript_checkout', 9999 );
+function fww_add_jscript_checkout() {
+   global $wp;
+   if ( is_checkout() && empty( $wp->query_vars['order-pay'] ) && ! isset( $wp->query_vars['order-received'] ) ) {
+      ?>
+		<script type="text/javascript">
+			jQuery(".woocommerce-checkout").on( 'click', 'a.woocommerce-terms-and-conditions-link', function(event) {
+				event.stopPropagation();
+				let TermsPageLink = jQuery('a.woocommerce-terms-and-conditions-link').attr('href');
+				window.open(TermsPageLink, '_blank');
+				return false;
+			});
+			
+		</script>
+		<?php
+   }
+}
