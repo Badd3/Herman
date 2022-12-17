@@ -33,14 +33,14 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
 
 <section class="bg-white-bg flex flex-col md:flex-row mt-10 lg:mt-0">
 	<div class="basis-full sm:basis-2/4 text-base pb-4 px-2.5 sm:pt-28 lg:px-7.5 order-last md:order-first">
-	 <?php do_action('herman_woocommerce_notice'); ?>
+		<?php do_action('herman_woocommerce_notice'); ?>
 		<form id="order_review" name="checkout" method="post" class="checkout woocommerce-checkout" action="<?php echo esc_url(wc_get_checkout_url()); ?>" enctype="multipart/form-data">
-
-
+		
 			<?php if ($checkout->get_checkout_fields()) : ?>
+				
 
 				<?php do_action('woocommerce_checkout_before_customer_details'); ?>
-
+			
 				<div class="col2-set" id="customer_details">
 					<div class="col-1">
 						<?php do_action('woocommerce_checkout_billing'); ?>
@@ -150,7 +150,7 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
 													if ($attribute_length != "" && $attribute_length != NULL) {
 													?>
 														<div class="flex justify-between py-1 border-b border-black text-black">
-															<p class="text-xs py-1">LENGHT: </p>
+															<p class="text-xs py-1">LENGTH: </p>
 															<p class="text-xs py-1"><?php echo $attribute_length; ?></p>
 														</div>
 													<?php

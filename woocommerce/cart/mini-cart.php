@@ -106,7 +106,7 @@ do_action('woocommerce_before_mini_cart'); ?>
 											if ($attribute_length != "" && $attribute_length != NULL) {
 											?>
 												<div class="flex justify-between py-1 border-b border-black text-black">
-													<p class="text-xs py-1">LENGHT: </p>
+													<p class="text-xs py-1">LENGTH: </p>
 													<p class="text-xs py-1"><?php echo $attribute_length; ?></p>
 												</div>
 											<?php
