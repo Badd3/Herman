@@ -109,7 +109,7 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
 											<div class="ml-4 flex flex-1 flex-col">
 												<div>
 													<div class="flex justify-between text-base text-black">
-														<h3>
+														<h3 class="uppercase">
 															<a href="<?php echo esc_url($product_permalink); ?>"> <?php echo $product_name ?> </a>
 														</h3>
 														<p class="ml-4">

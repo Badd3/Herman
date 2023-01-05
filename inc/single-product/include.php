@@ -101,7 +101,7 @@ function single_product_description()
         <div class="flex flex-col border-b border-black pb-3">
             <div class="w-full flex flex-row justify-between">
                 <div>
-                    <h1 class="text-base"><?php the_title(); ?></h1>
+                    <h1 class="text-base uppercase"><?php the_title(); ?></h1>
                 </div>
                 <div><?php woocommerce_template_single_price(); ?></div>
             </div>
