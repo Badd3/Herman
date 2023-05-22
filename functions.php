@@ -598,3 +598,11 @@ function fww_add_jscript_checkout() {
 		<?php
    }
 }
+
+if (get_field('enable_b2b', 'options')) {
+    get_template_part('inc/b2b-options');
+}
+
+if (!get_field('enable_b2b', 'options')) {
+    get_template_part('inc/b2c-options');
+}
