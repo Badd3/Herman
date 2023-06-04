@@ -11,7 +11,7 @@ function herman_separate_registration_form()
   $image = get_sub_field('image_left_login');
   $image_url = get_sub_field('image_left_login')['url'];
   $image_alt = get_sub_field('image_left_login')['alt'];
-
+  $intro_text = get_sub_field('intro_text');
   do_action('woocommerce_before_customer_login_form');
 
 ?>
@@ -24,6 +24,13 @@ function herman_separate_registration_form()
       <div class="px-2.5 mt-4 md:mt-0 sm:px-7 sm:pt-28 sm:basis-2/3 md:basis-3/6 xl:basis-2/6 text-gray-900 flex flex-col content-center bg-white-bg coming-soon items-center justify-center">
         <div class="lg:max-w-[400px] lg:mx-auto w-full">
           <?php do_action('herman_woocommerce_notice'); ?>
+          <?php 
+          if($intro_text){
+            echo '<div>'; 
+            echo $intro_text;
+            echo '</div>'; 
+          }; ?>
+          <?php the_sub_field(''); ?>
           <div class="flex w-full justify-between mb-8">
             <div class="flex items-start">
               <div class="flex items-center h-5">
@@ -46,8 +53,7 @@ function herman_separate_registration_form()
 
               <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                 <label for="reg_username"><?php esc_html_e('Username', 'woocommerce'); ?> <span class="required">*</span></label>
-                <input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="username" id="reg_username" autocomplete="username" value="<?php echo (!empty($_POST['username'])) ? esc_attr(wp_unslash($_POST['username'])) : ''; ?>" /><?php // @codingStandardsIgnoreLine 
-                                                                                                                                                                                                                                                                ?>
+                <input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="username" id="reg_username" autocomplete="username" value="<?php echo (!empty($_POST['username'])) ? esc_attr(wp_unslash($_POST['username'])) : ''; ?>" /><?php // @codingStandardsIgnoreLine                                                                                                                                                                                                                                       ?>
               </p>
 
             <?php endif; ?>
