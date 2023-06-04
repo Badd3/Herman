@@ -19,7 +19,7 @@
 $image = get_sub_field('image_left_login');
 $image_url = get_sub_field('image_left_login')['url'];
 $image_alt = get_sub_field('image_left_login')['alt'];
-
+$intro_text = get_sub_field('intro_text');
 if (!defined('ABSPATH')) {
 	exit; // Exit if accessed directly.
 }
@@ -35,6 +35,12 @@ do_action('woocommerce_before_customer_login_form'); ?>
 
 			<div class="lg:max-w-[400px] lg:mx-auto w-full">
 				<?php do_action('herman_woocommerce_notice'); ?>
+				<?php 
+				if($intro_text){
+					echo '<div class="mb-8">'; 
+					echo $intro_text;
+					echo '</div>'; 
+				}; ?>
 				<div class="flex  justify-between mb-8 w-full">
 
 					<div class="flex h-5">

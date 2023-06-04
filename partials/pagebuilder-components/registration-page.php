@@ -11,12 +11,11 @@ function herman_separate_registration_form()
   $image = get_sub_field('image_left_login');
   $image_url = get_sub_field('image_left_login')['url'];
   $image_alt = get_sub_field('image_left_login')['alt'];
-  $intro_text = get_sub_field('intro_text');
-  do_action('woocommerce_before_customer_login_form');
 
+  do_action('woocommerce_before_customer_login_form');
 ?>
 
-  <section id="registration" class="bg-white-bg">
+  <section id="registration" class="bg-white-bgssss">
     <div class="flex flex-col sm:flex-row lg:h-screen">
       <div class="basis-full sm:basis-1/3 md:basis-2/6">
         <img class="accountImage sm:h-screen w-full object-cover sm:sticky sm:top-0 sm:mt-[-2rem]" src="<?php echo $image_url; ?>" alt="<?php echo $image_alt; ?>">
@@ -26,7 +25,7 @@ function herman_separate_registration_form()
           <?php do_action('herman_woocommerce_notice'); ?>
           <?php 
           if($intro_text){
-            echo '<div>'; 
+            echo '<div class="mb-8">'; 
             echo $intro_text;
             echo '</div>'; 
           }; ?>
