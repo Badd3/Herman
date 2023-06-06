@@ -47,10 +47,6 @@ do_action('woocommerce_before_customer_login_form'); ?>
 						<p class="text-base text-black">SIGN IN
 						</p>
 					</div>
-
-					<p class="text-base">
-						<a href="/my-account/sign-up/" class="font-base text-grey active:text-black">SIGN UP</a>
-					</p>
 				</div>
 
 				<form class=" woocommerce_form_field login w-full " method="post">

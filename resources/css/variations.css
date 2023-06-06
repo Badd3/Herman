@@ -1,5 +1,5 @@
 .single_add_to_cart_button {
-  @apply uppercase border border-black py-1 px-4 hover:bg-black hover:text-white;
+  @apply border border-black py-1 px-4 uppercase hover:bg-black hover:text-white;
 }
 
 .variations {
@@ -11,14 +11,14 @@
   border-left: 1px solid black;
 }
 .variations tbody tr {
-  @apply flex flex-row items-center border-b border-black divide-x-[1px] divide-black;
+  @apply flex flex-row items-center divide-x-[1px] divide-black border-b border-black;
 }
 
 html .woo-variation-swatches.wvs-show-label .variations th {
   @apply !min-w-[94px] !shrink-0 !px-3;
 }
 .variations > tbody > tr > th {
-  @apply lg:!basis-1/5 text-left;
+  @apply text-left lg:!basis-1/5;
 }
 .variations .reset_variations {
   @apply !hidden;
@@ -29,7 +29,7 @@ html .woo-variation-swatches.wvs-show-label .variations th {
 }
 
 .variations li {
-  @apply !rounded-none !my-0;
+  @apply !my-0 !rounded-none;
 }
 
 .variations li span {
@@ -53,7 +53,11 @@ html .woo-variation-swatches.wvs-show-label .variations th {
 }
 
 .variable-item-contents {
-  @apply !flex !flex-row !items-center;
+  @apply !flex !flex-row-reverse !items-center;
+}
+
+li.variable-item:first-child {
+  @apply !ml-[9px];
 }
 
 .variable-item-contents > span {

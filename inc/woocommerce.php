@@ -406,3 +406,5 @@ if (!function_exists('herman_woocommerce_flex_wrapper_before')) {
 		add_action('herman_woocommerce_notice', 'woocommerce_output_all_notices', 10);
 	}
 	add_filter('wp', 'move_woocommerce_message');
+
+	
