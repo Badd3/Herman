@@ -38,15 +38,15 @@
 #reg_password-2,
 #reg_country,
 #billing_country_field {
-  @apply text-base outline-0 focus-visible:outline-0 border-b w-full border-black py-3 bg-white-bg;
+  @apply w-full border-b border-black bg-white-bg py-3 text-base outline-0 focus-visible:outline-0;
 }
 
 #billing_country,
 #search-field {
-  @apply text-base outline-0 focus-visible:outline-0 w-full bg-white-bg uppercase;
+  @apply w-full bg-white-bg text-base uppercase outline-0 focus-visible:outline-0;
 }
 #account_password {
-  @apply text-base outline-0 focus-visible:outline-0 w-full bg-white-bg;
+  @apply w-full bg-white-bg text-base outline-0 focus-visible:outline-0;
 }
 
 select#billing_country {
@@ -127,23 +127,23 @@ select#billing_country {
 }
 
 .woocommerce-form.woocommerce-form-login.login {
-  @apply text-base px-2.5 lg:px-7.5 hover:bg-black hover:text-white;
+  @apply px-2.5 text-base hover:bg-black hover:text-white lg:px-7.5;
 }
 
 .woocommerce-form-login__submit {
-  @apply text-base uppercase flex items-center justify-center border border-black px-4 py-1 w-fit mt-4 text-black shadow-sm hover:bg-black hover:text-white;
+  @apply mt-4 flex w-fit items-center justify-center border border-black px-4 py-1 text-base uppercase text-black shadow-sm hover:bg-black hover:text-white;
 }
 
 .dashboardBtn {
-  @apply text-base uppercase flex items-center justify-center border border-black px-4 py-1 w-fit mt-4 text-black shadow-sm hover:bg-black hover:text-white;
+  @apply mt-4 flex w-fit items-center justify-center border border-black px-4 py-1 text-base uppercase text-black shadow-sm hover:bg-black hover:text-white;
 }
 
 .dashboardBtnBig {
-  @apply text-base uppercase flex items-center justify-center border border-black px-4 py-1 w-fit mt-4 text-black shadow-sm hover:bg-black hover:text-white;
+  @apply mt-4 flex w-fit items-center justify-center border border-black px-4 py-1 text-base uppercase text-black shadow-sm hover:bg-black hover:text-white;
 }
 
 .dashboardOrderBtn {
-  @apply text-base uppercase flex items-center justify-center border border-black px-4 py-1 w-20 text-black shadow-sm hover:bg-black hover:text-white;
+  @apply flex w-20 items-center justify-center border border-black px-4 py-1 text-base uppercase text-black shadow-sm hover:bg-black hover:text-white;
 }
 
 #dashboard-edit-account .woocommerce-message {
@@ -152,15 +152,15 @@ select#billing_country {
 
 .lost_password,
 .woocommerce-form-login__rememberme {
-  @apply text-base uppercase mt-4;
+  @apply mt-4 text-base uppercase;
 }
 
 .select2-container--default .select2-selection--single {
-  @apply text-base rounded-none uppercase mt-1 border-0 border-grey bg-white-bg;
+  @apply mt-1 rounded-none border-0 border-grey bg-white-bg text-base uppercase;
 }
 
 .select2-container .select2-selection--single .select2-selection__rendered {
-  @apply text-base pl-0;
+  @apply pl-0 text-base;
 }
 
 #customer_details#billing_address_1_field {
@@ -168,7 +168,7 @@ select#billing_country {
 }
 
 .cart-empty.woocommerce-info {
-  @apply justify-center flex text-center uppercase mt-8 md:mt-28;
+  @apply mt-8 flex justify-center text-center uppercase md:mt-28;
 }
 
 .woocommerce-error {
@@ -176,7 +176,7 @@ select#billing_country {
 }
 
 #thank-you {
-  @apply mt-12 sm:mt-28 text-base;
+  @apply mt-12 text-base sm:mt-28;
 }
 
 #thank-you
@@ -203,11 +203,11 @@ select#billing_country {
 }
 
 .hermanBtn {
-  @apply text-base uppercase flex items-center justify-center border border-black px-4 py-1 w-fit mt-4 text-black shadow-sm;
+  @apply mt-4 flex w-fit items-center justify-center border border-black px-4 py-1 text-base uppercase text-black shadow-sm;
 }
 
 .wc_payment_methods.payment_methods.methods {
-  @apply mt-8;
+  @apply mt-4;
 }
 
 .mollie-gateway-icon {
@@ -219,11 +219,11 @@ select#billing_country {
 }
 
 .payment_method_mollie_wc_gateway_ideal select {
-  @apply text-base rounded-none uppercase my-4 h-8 border-0 border-b w-full border-grey bg-white-bg;
+  @apply my-4 h-8 w-full rounded-none border-0 border-b border-grey bg-white-bg text-base uppercase;
 }
 
 .woocommerce-form.woocommerce-form-login.login {
-  @apply w-full md:w-1/2 mt-4;
+  @apply mt-4 w-full md:w-1/2;
 }
 
 .page-checkout .woocommerce-error {
@@ -232,6 +232,10 @@ select#billing_country {
 
 .page-checkout strong {
   @apply font-normal;
+}
+
+.payment_box.payment_method_igfw_invoice_gateway {
+  @apply my-2;
 }
 
 input {

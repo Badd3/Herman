@@ -28,6 +28,19 @@ if (have_rows('navigation_items', $selected_navigation)) :
             $current_page_id = get_the_id();
             $expanded = get_sub_field('expanded');
 
+            //Change MY ACCOUNT to HI NAME
+            if ($nav_item_label === 'Account') {
+                if (is_user_logged_in()) {
+                    $current_user = wp_get_current_user();
+                    $first_name = $current_user->first_name;
+                    $display_name = substr($first_name, 0, 7);
+                    if (strlen($first_name) > 7) {
+                        $display_name .= '..';
+                    }
+                    $nav_item_label = 'Hi, ' . $display_name;
+                }
+            }
+
             //Vraag me niet de logica hierachter. Het werkt iig.
             if ($nav_post_id ===  $current_page_id || ((is_shop() || is_product_category() || is_product()) && $nav_item_label === 'Shop') || (str_contains(strtolower($nav_item_label), strtolower('Library')) && get_post_type() === 'post')) {
                 $navigation_item_active = 'text-black';
