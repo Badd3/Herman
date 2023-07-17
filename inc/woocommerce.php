@@ -347,10 +347,15 @@ function validate_billing_address($data)
 {
     $billingAddress1 = isset($data['billing_address_1']) ? trim($data['billing_address_1']) : '';
 
-    if (empty($billingAddress1) || !preg_match('/^\d+\s+[a-zA-Z0-9\s]+$/', $billingAddress1)) {
+    $addressParts = explode(' ', $billingAddress1);
+    $streetName = implode(' ', array_slice($addressParts, 0, -1));
+    $houseNumber = end($addressParts);
+
+    if (empty($billingAddress1) || !is_numeric($houseNumber)) {
         wc_add_notice(__('Please enter a valid street address and house number for the billing address.', 'text-domain'), 'error');
     }
 }
+
 
 
 // Remove order review section
