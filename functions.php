@@ -599,17 +599,6 @@ function fww_add_jscript_checkout() {
    }
 }
 
-// Voeg CSS-klasse toe aan uitgeschakelde variatieopties
-function add_disabled_class_to_variation_options($args, $product, $variation) {
-    // Controleer of de variatie niet op voorraad is
-    if (!$variation->is_in_stock()) {
-        $args['class'][] = 'disabled';
-    }
-    return $args;
-}
-add_filter('woocommerce_dropdown_variation_attribute_options_args', 'add_disabled_class_to_variation_options', 10, 3);
-
-
 if (get_field('enable_b2b', 'options')) {
     get_template_part('inc/b2b-options');
 }
