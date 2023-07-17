@@ -345,8 +345,13 @@ function custom_override_checkout_fields($fields)
 add_action('woocommerce_after_checkout_validation', 'validate_checkout_address');
 function validate_checkout_address($data)
 {
-    if (isset($data['billing_address_1']) && !preg_match('/^\d+\s[A-Za-z\s]+$/', $data['billing_address_1'])) {
-        wc_add_notice(__('Please enter a valid house number for the billing address.', 'text-domain'), 'error');
+    if (isset($data['billing_address_1'])) {
+        $houseNumber = trim($data['billing_address_1']);
+        $pattern = '/^\d+[A-Za-z\d\s]*$/';
+
+        if (!preg_match($pattern, $houseNumber)) {
+            wc_add_notice(__('Please enter a valid house number for the billing address.', 'text-domain'), 'error');
+        }
     }
 }
 
