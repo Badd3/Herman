@@ -319,32 +319,43 @@ if (!function_exists('herman_woocommerce_flex_wrapper_before')) {
 	add_filter('woocommerce_checkout_fields', 'wc_remove_checkout_fields');
 
 	add_filter('woocommerce_checkout_fields', 'custom_override_checkout_fields');
-	function custom_override_checkout_fields($fields)
-	{
-		$fields['billing']['billing_first_name']['placeholder'] = 'NAME*';
-		$fields['billing']['billing_last_name']['placeholder'] = 'SURNAME*';
-		$fields['billing']['billing_email']['placeholder'] = 'EMAIL*';
-		$fields['billing']['billing_postcode']['placeholder'] = 'POSTCODE*';
-		$fields['billing']['billing_city']['placeholder'] = 'CITY*';
+function custom_override_checkout_fields($fields)
+{
+    $fields['billing']['billing_first_name']['placeholder'] = 'NAME*';
+    $fields['billing']['billing_last_name']['placeholder'] = 'SURNAME*';
+    $fields['billing']['billing_email']['placeholder'] = 'EMAIL*';
+    $fields['billing']['billing_postcode']['placeholder'] = 'POSTCODE*';
+    $fields['billing']['billing_city']['placeholder'] = 'CITY*';
 
-		$fields['shipping']['shipping_first_name']['placeholder'] = 'NAME*';
-		$fields['shipping']['shipping_last_name']['placeholder'] = 'SURNAME*';
-		$fields['shipping']['shipping_email']['placeholder'] = 'EMAIL*';
-		$fields['shipping']['shipping_address_1']['placeholder'] = 'ADDRESS*';
-		$fields['shipping']['shipping_postcode']['placeholder'] = 'POSTCODE*';
-		$fields['shipping']['shipping_city']['placeholder'] = 'CITY*';
+    $fields['shipping']['shipping_first_name']['placeholder'] = 'NAME*';
+    $fields['shipping']['shipping_last_name']['placeholder'] = 'SURNAME*';
+    $fields['shipping']['shipping_email']['placeholder'] = 'EMAIL*';
+    $fields['shipping']['shipping_address_1']['placeholder'] = 'ADDRESS*';
+    $fields['shipping']['shipping_postcode']['placeholder'] = 'POSTCODE*';
+    $fields['shipping']['shipping_city']['placeholder'] = 'CITY*';
 
-		return $fields;
-	}
+    // Make 'address_1' field required
+    $fields['billing']['billing_address_1']['required'] = true;
+    $fields['shipping']['shipping_address_1']['required'] = true;
 
-	add_filter('woocommerce_default_address_fields', 'wc_override_address_fields');
-	function wc_override_address_fields($fields)
-	{
-		$fields['address_1']['placeholder'] = 'ADDRESS AND HOUSENUMBER*';
-		return $fields;
-	}
+    return $fields;
+}
 
-	remove_action('woocommerce_checkout_order_review', 'woocommerce_order_review', 10);
+// Add validation for 'address_1' field
+add_action('woocommerce_after_checkout_validation', 'validate_checkout_address');
+function validate_checkout_address($data)
+{
+    if (isset($data['billing_address_1']) && !is_numeric($data['billing_address_1'])) {
+        wc_add_notice(__('Please enter a valid house number for the billing address.', 'text-domain'), 'error');
+    }
+
+    if (isset($data['shipping_address_1']) && !is_numeric($data['shipping_address_1'])) {
+        wc_add_notice(__('Please enter a valid house number for the shipping address.', 'text-domain'), 'error');
+    }
+}
+
+// Remove order review section
+remove_action('woocommerce_checkout_order_review', 'woocommerce_order_review', 10);
 
 
 
