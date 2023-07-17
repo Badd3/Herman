@@ -341,19 +341,17 @@ function custom_override_checkout_fields($fields)
     return $fields;
 }
 
-// Add validation for 'address_1' field
-add_action('woocommerce_after_checkout_validation', 'validate_checkout_address');
-function validate_checkout_address($data)
+// Add validation for 'billing_address_1' field
+add_action('woocommerce_after_checkout_validation', 'validate_billing_address');
+function validate_billing_address($data)
 {
-    if (isset($data['billing_address_1'])) {
-        $houseNumber = trim($data['billing_address_1']);
-        $pattern = '/^\d+[A-Za-z\d\s]*$/';
+    $billingAddress1 = isset($data['billing_address_1']) ? trim($data['billing_address_1']) : '';
 
-        if (!preg_match($pattern, $houseNumber)) {
-            wc_add_notice(__('Please enter a valid house number for the billing address.', 'text-domain'), 'error');
-        }
+    if (empty($billingAddress1) || !preg_match('/^\d+\s+[a-zA-Z0-9\s]+$/', $billingAddress1)) {
+        wc_add_notice(__('Please enter a valid street address and house number for the billing address.', 'text-domain'), 'error');
     }
 }
+
 
 // Remove order review section
 remove_action('woocommerce_checkout_order_review', 'woocommerce_order_review', 10);
