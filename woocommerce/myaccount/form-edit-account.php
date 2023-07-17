@@ -28,27 +28,38 @@ do_action( 'woocommerce_before_edit_account_form' ); ?>
 			<?php do_action( 'woocommerce_edit_account_form_start' ); ?>
 
 			<h1 class="mb-4">EDIT ACCOUNT DETAILS</h1>
-			<p class="woocommerce-form-row woocommerce-form-row--first form-row form-row-first">
-				<label for="account_first_name"><?php esc_html_e( 'FIRST NAME', 'woocommerce' ); ?>&nbsp;<span class="required">*</span></label>
-				<input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="account_first_name" id="account_first_name" autocomplete="given-name" value="<?php echo esc_attr( $user->first_name ); ?>" />
-			</p>
-			<p class="woocommerce-form-row woocommerce-form-row--last form-row form-row-last mt-2">
-				<label for="account_last_name"><?php esc_html_e( 'SURNAME', 'woocommerce' ); ?>&nbsp;<span class="required">*</span></label>
-				<input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="account_last_name" id="account_last_name" autocomplete="family-name" value="<?php echo esc_attr( $user->last_name ); ?>" />
-			</p>
-			<div class="clear"></div>
-
 			<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide mt-2">
-				<label for="account_display_name"><?php esc_html_e( 'DISPLAY NAME', 'woocommerce' ); ?>&nbsp;<span class="required">*</span></label>
-				<input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="account_display_name" id="account_display_name" value="<?php echo esc_attr( $user->display_name ); ?>" /> <span><em class="text-xs"><?php esc_html_e( 'This will be how your name will be displayed in the account section and in reviews', 'woocommerce' ); ?></em></span>
+				<label for="contact_person"><?php _e('CONTACT PERSON', 'text-domain'); ?>&nbsp;<span class="required">*</span></label>
+				<input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="contact_person" id="contact_person" value="<?php echo esc_attr(get_user_meta(get_current_user_id(), 'contact_person', true)); ?>" />
 			</p>
-			<div class="clear"></div>
-
 			<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide mt-2">
+				<label for="store_name"><?php _e('STORE NAME', 'text-domain'); ?>&nbsp;<span class="required">*</span></label>
+				<input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="store_name" id="store_name" value="<?php echo esc_attr(get_user_meta(get_current_user_id(), 'store_name', true)); ?>" />
+			</p>
+			<p class="woocommerce-form-row woocommerce-form-row--first form-row form-row-first mt-2">
 				<label for="account_email"><?php esc_html_e( 'EMAIL ADDRESS', 'woocommerce' ); ?>&nbsp;<span class="required">*</span></label>
 				<input type="email" class="woocommerce-Input woocommerce-Input--email input-text" name="account_email" id="account_email" autocomplete="email" value="<?php echo esc_attr( $user->user_email ); ?>" />
 			</p>
-
+			<p class="woocommerce-form-row woocommerce-form-row--last form-row form-row-last mt-2">
+				<label for="phone_number"><?php _e('PHONE NUMBER', 'text-domain'); ?>&nbsp;<span class="required">*</span></label>
+				<input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="phone_number" id="phone_number" value="<?php echo esc_attr(get_user_meta(get_current_user_id(), 'phone_number', true)); ?>" />
+			</p>
+			<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide mt-2">
+				<label for="delivery_address"><?php _e('DELIVERY ADDRESS', 'text-domain'); ?>&nbsp;<span class="required">*</span></label>
+				<input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="delivery_address" id="delivery_address" value="<?php echo esc_attr(get_user_meta(get_current_user_id(), 'delivery_address', true)); ?>" />
+			</p>
+			<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide mt-2">
+				<label for="invoice_address"><?php _e('INVOICE ADDRESS', 'text-domain'); ?>&nbsp;<span class="required">*</span></label>
+				<input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="invoice_address" id="invoice_address" value="<?php echo esc_attr(get_user_meta(get_current_user_id(), 'invoice_address', true)); ?>" />
+			</p>
+			<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide mt-2">
+				<label for="kvk"><?php _e('CHAMBER OF COMMERCE (KvK) NUMBER', 'text-domain'); ?>&nbsp;<span class="required">*</span></label>
+				<input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="kvk" id="kvk" value="<?php echo esc_attr(get_user_meta(get_current_user_id(), 'kvk', true)); ?>" />
+			</p>
+			<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide mt-2">
+				<label for="btw"><?php _e('VAT NUMBER', 'text-domain'); ?>&nbsp;<span class="required">*</span></label>
+				<input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="btw" id="btw" value="<?php echo esc_attr(get_user_meta(get_current_user_id(), 'btw', true)); ?>" />
+			</p>
 			<fieldset>
 				<legend class="mt-6"><?php esc_html_e( 'CHANGE PASSWORD', 'woocommerce' ); ?></legend>
 
