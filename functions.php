@@ -599,6 +599,15 @@ function fww_add_jscript_checkout() {
    }
 }
 
+function add_disabled_class_to_out_of_stock_variations($args, $product, $variation) {
+    if (!$variation->is_in_stock()) {
+        $args['class'] .= ' disabled';
+    }
+    return $args;
+}
+add_filter('woocommerce_dropdown_variation_attribute_options_args', 'add_disabled_class_to_out_of_stock_variations', 10, 3);
+
+
 if (get_field('enable_b2b', 'options')) {
     get_template_part('inc/b2b-options');
 }
