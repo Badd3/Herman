@@ -599,6 +599,32 @@ function fww_add_jscript_checkout() {
    }
 }
 
+function connect_variations($variation_data, $product, $variation) {
+    $variation_attributes = $variation_data['attributes'];
+  
+    // Voeg hier de attributen toe die je wilt verbinden
+    $connected_attributes = array('attribute_length', 'attribute_size','attribute_color');
+  
+    // Loop door de variatie-attributen en verwijder de niet-verbonden attributen
+    foreach ($variation_attributes as $attribute => $value) {
+        if (!in_array($attribute, $connected_attributes)) {
+            unset($variation_attributes[$attribute]);
+        }
+    }
+  
+    // Verkrijg de overeenkomende variaties op basis van de verbonden attributen
+    $connected_variations = $product->get_matching_variation($variation_attributes);
+  
+    // Loop door de overeenkomende variaties en voeg ze toe aan de selectie
+    foreach ($connected_variations as $connected_variation) {
+        $connected_variation_id = $connected_variation['variation_id'];
+        $connected_variation_data = new WC_Product_Variation($connected_variation_id);
+        $variation->add_variation($connected_variation_data);
+    }
+}
+add_action('woocommerce_variation_loaded', 'connect_variations', 10, 3);
+
+
 if (get_field('enable_b2b', 'options')) {
     get_template_part('inc/b2b-options');
 }
