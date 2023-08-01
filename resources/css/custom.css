@@ -209,3 +209,7 @@ input#coupon_code:focus-visible {
 .woocommerce-loop-product__title {
   @apply uppercase;
 }
+
+.grecaptcha-badge {
+  display: none !important;
+}
