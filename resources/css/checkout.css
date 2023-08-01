@@ -37,7 +37,14 @@
 #reg_password,
 #reg_password-2,
 #reg_country,
-#billing_country_field {
+#billing_country_field,
+#store_name,
+#contact_person,
+#phone_number,
+#delivery_address,
+#invoice_address,
+#kvk,
+#btw {
   @apply w-full border-b border-black bg-white-bg py-3 text-base outline-0 focus-visible:outline-0;
 }
 
