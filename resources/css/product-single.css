@@ -31,27 +31,27 @@
 }
 
 .chocolat-wrapper .chocolat-right {
-  background: url("/wp-content/themes/Herman/images/arrow-right.svg") 50% 50% /
+  background: url('/wp-content/themes/Herman/images/arrow-right.svg') 50% 50% /
     2rem auto no-repeat !important;
 }
 
 .chocolat-wrapper .chocolat-left {
-  background: url("/wp-content/themes/Herman/images/arrow-left.svg") 50% 50% /
+  background: url('/wp-content/themes/Herman/images/arrow-left.svg') 50% 50% /
     2rem auto no-repeat !important;
 }
 
 .chocolat-wrapper .chocolat-left {
-  background: url("/wp-content/themes/Herman/images/arrow-left.svg") 50% 50% /
+  background: url('/wp-content/themes/Herman/images/arrow-left.svg') 50% 50% /
     2rem auto no-repeat !important;
 }
 
 .chocolat-fullscreen {
-  background: url("/wp-content/themes/Herman/images/fullscreen.svg") 50% 50% /
+  background: url('/wp-content/themes/Herman/images/fullscreen.svg') 50% 50% /
     1rem auto no-repeat !important;
 }
 
 .chocolat-close {
-  background: url("/wp-content/themes/Herman/images/close.svg") 50% 50% / 2rem
+  background: url('/wp-content/themes/Herman/images/close.svg') 50% 50% / 2rem
     auto no-repeat !important;
 }
 .chocolat-bottom {
@@ -60,4 +60,29 @@
   > span {
     color: black;
   }
+}
+
+.quantity input {
+  border: 1px solid black;
+  /* height: 30px; */
+  padding: 5px;
+}
+.quantity input:focus-visible {
+  outline: none;
+}
+/* Chrome, Safari, Edge, Opera */
+.quantity input::-webkit-outer-spin-button,
+.quantity input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.quantity input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+.woocommerce-variation-add-to-cart {
+  display: flex;
+  justify-content: space-between;
 }
