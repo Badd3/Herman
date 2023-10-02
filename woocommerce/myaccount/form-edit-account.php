@@ -54,7 +54,7 @@ do_action( 'woocommerce_before_edit_account_form' ); ?>
                         <input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="invoice_address" id="invoice_address" value="<?php echo esc_attr(get_user_meta(get_current_user_id(), 'invoice_address', true)); ?>" />
                     </p>
                     <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide mt-2">
-                        <label for="kvk"><?php _e('CHAMBER OF COMMERCE (KvK) NUMBER', 'text-domain'); ?>&nbsp;<span class="required">*</span></label>
+                        <label for="kvk"><?php _e('CHAMBER OF COMMERCE NUMBER', 'text-domain'); ?>&nbsp;</label>
                         <input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="kvk" id="kvk" value="<?php echo esc_attr(get_user_meta(get_current_user_id(), 'kvk', true)); ?>" />
                     </p>
                     <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide mt-2">
