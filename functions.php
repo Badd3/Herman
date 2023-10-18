@@ -633,3 +633,19 @@ if (!get_field('enable_b2b', 'options')) {
     get_template_part('inc/b2c-options');
 }
 
+function custom_wc_coupon_message( $err, $err_code=null, $this_obj=null ) {
+    if ( $err_code == 105 ){
+        set_transient('custom_wc_coupon_message', $err, 5); // temporarily store $err for 60 seconds
+        return '';
+    }
+    return $err;
+}
+add_filter( 'woocommerce_coupon_error', 'custom_wc_coupon_message', 10, 3 );
+
+function display_custom_wc_coupon_message() {
+    // fetch our stored $err from earlier and then delete the transient
+    if ($err = get_transient('custom_wc_coupon_message')) {
+        echo '<p class="woocommerce-error mb-[-1.5rem] mt-5">'.$err.'</p>';
+    }
+}
+add_action( 'show_custom_wc_coupon_message', 'display_custom_wc_coupon_message' );

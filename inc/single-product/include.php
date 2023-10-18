@@ -64,10 +64,6 @@ function single_product_images()
 <?php
 }
 
-function wc_remove_all_quantity_fields($return, $product)
-{
-    return true;
-}
 add_filter('woocommerce_is_sold_individually', 'wc_remove_all_quantity_fields', 10, 2);
 
 add_action('woocommerce_single_product_summary', 'single_product_description', 20);
@@ -91,11 +87,8 @@ function single_product_description()
         <?php
         if ($badges) {
             echo '<div class="w-full flex flex-row-reverse mb-2">
-
-                        
                         <span class="bg-white-bg h-fit w-fit px-1 border border-black text-base pointer-events-none">' . $badges;
-            echo '
-                        </span></div>';
+            echo '</span></div>';
         }; ?>
 
         <div class="flex flex-col border-b border-black pb-3">
@@ -126,12 +119,8 @@ function single_product_description()
                     'orderby' => 'title',
                 );
                 $query = new WP_Query($args);
-
                 ?>
-
-
                 <div class=" py-1 flex flex-row flex-wrap gap-x-4 px-3">
-
                     <?php
 
                     if ($query->have_posts()) : while ($query->have_posts()) : $query->the_post();
@@ -151,18 +140,13 @@ function single_product_description()
                                 <div class="block w-[10px] h-[10px] border-black border <?php echo $fill_box_classes; ?> hoverBlack"></div>
                             </a>
                     <?php
-
-
                         endwhile;
                     endif;
                     wp_reset_query();
                     ?>
-
                 </div>
-
             </div>
         <?php }; ?>
-
         <?php woocommerce_template_single_add_to_cart(); ?>
     </section>
     <?php if ($description_content || $care_guide_content || $size_guide_content || $history_content) { ?>

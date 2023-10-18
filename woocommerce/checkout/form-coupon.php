@@ -22,6 +22,7 @@ if ( ! wc_coupons_enabled() ) { // @codingStandardsIgnoreLine.
 }
 
 ?>
+<?php do_action( 'show_custom_wc_coupon_message' ); ?>
 <div class="woocommerce-form-coupon-toggle">
 	<?php wc_print_notice( apply_filters( 'woocommerce_checkout_coupon_message', esc_html__( 'Have a coupon?', 'woocommerce' ) . ' <a href="#" class="showcoupon">' . esc_html__( 'Click here to enter your code', 'woocommerce' ) . '</a>' ), 'notice' ); ?>
 </div>

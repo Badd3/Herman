@@ -18,7 +18,7 @@ function quantity_field(){
       <span class="uppercase">QTY</span>
     </div>
     
-      <div>
+      <div class="w-full [&_input]:w-full">
     <?php woocommerce_quantity_input(
       array(
         'min_value'   => apply_filters( 'woocommerce_quantity_input_min', $product->get_min_purchase_quantity(), $product ),
