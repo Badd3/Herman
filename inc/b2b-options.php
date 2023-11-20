@@ -31,3 +31,10 @@ function quantity_field(){
   <?php
 }
 add_action('woocommerce_after_variations_table', 'quantity_field');
+
+function hide_signup_b2b_for_b2b_users() {
+  if (is_page('my-account')) {
+          echo '<style>.signup-b2b { display: none; }</style>';
+  }
+}
+add_action('wp_head', 'hide_signup_b2b_for_b2b_users');
