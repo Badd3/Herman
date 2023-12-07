@@ -48,6 +48,10 @@
   @apply w-full border-b border-black bg-white-bg py-3 text-base outline-0 focus-visible:outline-0;
 }
 
+.screen-reader-text {
+  display: none;
+}
+
 #billing_country,
 #search-field {
   @apply w-full bg-white-bg text-base uppercase outline-0 focus-visible:outline-0;
