@@ -1,12 +1,20 @@
 <?php
-//Redirect user to my-account page if not logged in (WHOLESALE)
-function redirect_location(){
-
-    if(   ! is_user_logged_in() && !is_page('my-account') && !is_page('sign-up')  )  {
-		wp_redirect( '/my-account' );
-		exit;
-    }
-
+//Redirect user to login page if not logged in (WHOLESALE)
+function redirect_location() {
+  // Check if the user is on the login page
+  if (is_page('login')) {
+      // If the user is logged in, redirect to the shop page
+      if (is_user_logged_in()) {
+          wp_redirect('/shop'); // Replace '/shop' with the actual URL of your shop page
+          exit;
+      }
+  } else {
+      // Redirect to the login page if the user is not logged in and is not on the login page
+      if (!is_user_logged_in()) {
+          wp_redirect('/login');
+          exit;
+      }
+  }
 }
 add_action('template_redirect', 'redirect_location');
 
@@ -38,3 +46,4 @@ function hide_signup_b2b_for_b2b_users() {
   }
 }
 add_action('wp_head', 'hide_signup_b2b_for_b2b_users');
+
