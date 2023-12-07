@@ -16,6 +16,9 @@ get_header('minimal'); ?>
 
     <?php do_action('woocommerce_before_customer_login_form'); ?>
 
+    <!-- Display WooCommerce error messages -->
+    <?php wc_print_notices(); ?>
+
     <form class="woocommerce_form_field login w-full " method="post">
       <?php do_action('woocommerce_login_form_start'); ?>
 
