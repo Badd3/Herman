@@ -37,7 +37,7 @@ if (have_rows('navigation_items', $selected_navigation)) :
                     if (strlen($first_name) > 7) {
                         $display_name .= '..';
                     }
-                    $nav_item_label = 'Hi, ' . $display_name;
+                    $nav_item_label = $display_name;
                 }
             }
 
