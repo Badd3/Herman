@@ -28,10 +28,6 @@ get_header('minimal'); ?>
 
       <?php do_action('woocommerce_login_form'); ?>
 
-      <div class="flex">
-        <a href="<?php echo esc_url(wp_lostpassword_url()); ?>" class="text-xs text-grey hover:underline hover:text-black mt-2">FORGOT PASSWORD?</a>
-      </div>
-
       <?php wp_nonce_field('woocommerce-login', 'woocommerce-login-nonce'); ?>
 
       <button type="submit" class="woocommerce-button button woocommerce-form-login__submit flex items-center justify-center border border-black px-4 py-1 text-base font-base text-black shadow-sm" name="login" value="<?php esc_attr_e('Log in', 'woocommerce'); ?>"><?php esc_html_e('LOGIN', 'woocommerce'); ?></button>

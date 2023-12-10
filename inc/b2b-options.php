@@ -1,22 +1,21 @@
 <?php
 //Redirect user to login page if not logged in (WHOLESALE)
 function redirect_location() {
-  // Check if the user is on the login page
-  if (is_page('login')) {
-      // If the user is logged in, redirect to the shop page
-      if (is_user_logged_in()) {
-          wp_redirect('/shop'); // Replace '/shop' with the actual URL of your shop page
-          exit;
-      }
-  } else {
-      // Redirect to the login page if the user is not logged in and is not on the login page
-      if (!is_user_logged_in()) {
-          wp_redirect('/login');
-          exit;
-      }
+  
+  // Check if the current page is the 'Login' page and the user is logged in
+  if (is_page('login') && is_user_logged_in()) {
+      wp_redirect('/shop');
+      exit;
+  }
+
+  // If the user is not logged in and not on the 'Login' page, redirect to the 'Login' page
+  if (!is_user_logged_in() && !is_page('login')) {
+      wp_redirect('/login');
+      exit;
   }
 }
 add_action('template_redirect', 'redirect_location');
+
 
 
 function quantity_field(){
