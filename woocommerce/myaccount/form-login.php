@@ -67,6 +67,12 @@ do_action('woocommerce_before_customer_login_form'); ?>
 					<div class="flex">
 						<a href="<?php echo esc_url(wp_lostpassword_url()); ?>" class="text-xs text-grey hover:underline hover:text-black mt-2">FORGOT PASSWORD?</a>
 					</div>
+					<div class="flex items-center justify-between mt-2 text-grey uppercase">
+						<label for="rememberme" class="text-xs">
+							<input type="checkbox" name="rememberme" id="rememberme" value="forever" />
+							<?php esc_html_e('Remember Me', 'woocommerce'); ?>
+						</label>
+					</div>
 
 					<?php wp_nonce_field('woocommerce-login', 'woocommerce-login-nonce'); ?>
 
