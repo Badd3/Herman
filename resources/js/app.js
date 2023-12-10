@@ -29,3 +29,19 @@ if (document.querySelector("#trigger-side")) {
 }
 
 Alpine.start();
+
+//Tab text change
+window.onload = function () {
+  var pageTitle = document.title;
+  var attentionMessage = "HERE TO STAY";
+
+  document.addEventListener("visibilitychange", function (e) {
+    var isPageActive = !document.hidden;
+
+    if (!isPageActive) {
+      document.title = attentionMessage;
+    } else {
+      document.title = pageTitle;
+    }
+  });
+};
