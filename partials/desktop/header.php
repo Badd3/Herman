@@ -19,7 +19,7 @@ if (get_field('header_kleur') == 'light') {
         </div>
         <?php if (!is_page('checkout')) { ?>
             <div class="absolute right-8 gotham-book <?php echo $text_color; ?>">
-                <button @click="$store.bagOpen = !$store.bagOpen" class="uppercase text-base">bag [<?php echo WC()->cart->get_cart_contents_count() ?>]</button>
+                <button @click="$store.bagOpen = !$store.bagOpen" class="uppercase text-base">bag [<span class="my-cart-count"><?php echo WC()->cart->get_cart_contents_count();?></span>]</button>
             </div>
         <?php } ?>
     </div>

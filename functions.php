@@ -649,3 +649,27 @@ function display_custom_wc_coupon_message() {
     }
 }
 add_action( 'show_custom_wc_coupon_message', 'display_custom_wc_coupon_message' );
+
+
+add_action( 'wp_ajax_update_cart_item_qty', 'ajax_update_cart_item_qty' );
+add_action( 'wp_ajax_nopriv_update_cart_item_qty', 'ajax_update_cart_item_qty' );
+
+function ajax_update_cart_item_qty() {
+    $cart = WC()->instance()->cart;
+    $item_key = sanitize_text_field( $_POST['item_key'] );
+    $quantity = intval( $_POST['quantity'] );
+    $cart->set_quantity( $item_key, $quantity, true );
+    $cart->calculate_totals();
+    wp_die();
+}
+
+function ajax_cart_count_fragments( $fragments ) {
+    ob_start();
+    ?>
+    <span class="my-cart-count"><?php echo WC()->cart->get_cart_contents_count(); ?></span>
+    <?php
+
+    $fragments['span.my-cart-count'] = ob_get_clean();
+    return $fragments;
+}
+add_filter( 'woocommerce_add_to_cart_fragments', 'ajax_cart_count_fragments' );

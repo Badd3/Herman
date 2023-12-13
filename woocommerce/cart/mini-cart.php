@@ -121,7 +121,9 @@ do_action('woocommerce_before_mini_cart'); ?>
 										<?php }; ?>
 										<div class="flex justify-between py-1 border-b border-black text-black">
 											<p class="text-xs py-1">QUANTITY: </p>
-											<p class="text-xs py-1"><?php echo $cart_item['quantity'] ?></p>
+											<div class="py-1">
+												<input dir="rtl" type="number" step="1" min="1" class="text-xs py-1 cart_quantity text-right outline-none max-w-[50px]" data-cart-item-key="<?php echo $cart_item_key; ?>" value="<?php echo $cart_item['quantity'] ?>">
+											</div>
 										</div>
 										<div class="flex flex-row-reverse mt-2">
 											<?php

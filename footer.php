@@ -17,6 +17,29 @@
 
 <?php wp_footer(); ?>
 
+<script>
+jQuery(function($){
+    $(document).on('change', '.cart_quantity', function(){
+        var item_key = $(this).data('cart-item-key');
+        var quantity = $(this).val();
+
+        $.ajax({
+            url: wc_cart_fragments_params.ajax_url,
+            type: 'POST',
+            data: {
+                action : "update_cart_item_qty",
+                item_key: item_key,
+                quantity: quantity
+            },
+            success: function( response ) {
+                $('body').trigger( 'wc_fragment_refresh' );
+            }
+        });
+    });
+});
+</script>
+
+
 </body>
 
 </html>
