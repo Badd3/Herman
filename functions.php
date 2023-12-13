@@ -658,10 +658,25 @@ function ajax_update_cart_item_qty() {
     $cart = WC()->instance()->cart;
     $item_key = sanitize_text_field( $_POST['item_key'] );
     $quantity = intval( $_POST['quantity'] );
-    $cart->set_quantity( $item_key, $quantity, true );
+
+    $cart_item = $cart->get_cart_item( $item_key );
+    if ( ! $cart_item ) {
+        wp_die();
+    }
+
+    $product = $cart_item['data'];
+    if ( ! $product->managing_stock() || $product->backorders_allowed() ) {
+        $cart->set_quantity( $item_key, $quantity, true );
+    } else {
+        $stock_quantity = $product->get_stock_quantity();
+        $final_quantity = min($quantity, $stock_quantity);
+        $cart->set_quantity( $item_key, $final_quantity, true );
+    }
+
     $cart->calculate_totals();
     wp_die();
 }
+
 
 function ajax_cart_count_fragments( $fragments ) {
     ob_start();
