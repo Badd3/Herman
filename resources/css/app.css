@@ -23,7 +23,7 @@
 
 @import "offcanvas-mobile.css";
 
-@font-face {
+/* @font-face {
   font-family: "gotham";
   src: url("/wp-content/themes/Herman/fonts/Gotham.woff2") format("woff2"),
     url("/wp-content/themes/Herman/fonts/Gotham.woff") format("woff");
@@ -34,5 +34,11 @@
   font-family: "Gotham-Book";
   src: url("/wp-content/themes/Herman/fonts/Gotham-Book.woff2") format("woff2"),
     url("/wp-content/themes/Herman/fonts/Gotham-Book.woff") format("woff");
+  font-display: auto;
+} */
+
+@font-face {
+  font-family: "Hidden Font";
+  src: url("/wp-content/themes/Herman/fonts/HERMAN-Book.ttf") format("truetype");
   font-display: auto;
 }

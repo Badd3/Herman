@@ -62,8 +62,8 @@ module.exports = {
       // ),
     },
     fontFamily: {
-      book: ["Gotham-Book", "sans-serif"],
-      light: ["Gotham", "sans-serif"],
+      book: ["Hidden Font", "sans-serif"],
+      light: ["Hidden Font", "sans-serif"],
     },
     screens: {
       xx: "375px",
@@ -78,7 +78,7 @@ module.exports = {
   plugins: [require("@tailwindcss/aspect-ratio"), tailpress.tailwind],
   variants: {
     extend: {
-        display: ["group-hover"],
+      display: ["group-hover"],
     },
-},
+  },
 };
