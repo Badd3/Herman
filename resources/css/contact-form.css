@@ -80,7 +80,7 @@
 form.invalid .wpcf7-response-output,
 .wpcf7 form.sent .wpcf7-response-output {
   border: none;
-  font-family: 'Gotham', 'sans-serif';
+  font-family: "Gotham", "sans-serif";
   text-transform: uppercase;
   padding: unset;
   margin-left: 0;
@@ -89,7 +89,7 @@ form.invalid .wpcf7-response-output,
 }
 
 .wpcf7-not-valid-tip {
-  font-family: 'Gotham', 'sans-serif';
+  font-family: "Gotham", "sans-serif";
   text-transform: uppercase;
 }
 
@@ -121,7 +121,8 @@ form.invalid .wpcf7-response-output,
   border-bottom: unset;
 }
 
-.page-contact .wpcf7-submit {
+.page-contact .wpcf7-submit,
+.page-subscribe .wpcf7-submit {
   cursor: pointer;
   border-width: 1px;
   --tw-border-opacity: 1;
@@ -134,7 +135,12 @@ form.invalid .wpcf7-response-output,
   float: right;
 }
 
-.page-contact .wpcf7-submit:hover {
+.page-subscribe .wpcf7-submit {
+  margin-top: 1rem;
+}
+
+.page-contact .wpcf7-submit:hover,
+.page-subscribe .wpcf7-submit:hover {
   background-color: black;
   color: white;
 }

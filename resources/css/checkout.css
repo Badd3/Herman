@@ -52,6 +52,10 @@
   display: none;
 }
 
+.cart_quantity {
+  max-width: 50px;
+}
+
 #billing_country,
 #search-field {
   @apply w-full bg-white-bg text-base uppercase outline-0 focus-visible:outline-0;
