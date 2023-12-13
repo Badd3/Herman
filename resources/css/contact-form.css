@@ -121,6 +121,10 @@ form.invalid .wpcf7-response-output,
   border-bottom: unset;
 }
 
+.page-subscribe .wpcf7-text {
+  background-color: unset;
+}
+
 .page-contact .wpcf7-submit,
 .page-subscribe .wpcf7-submit {
   cursor: pointer;
