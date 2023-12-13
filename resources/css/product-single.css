@@ -31,27 +31,27 @@
 }
 
 .chocolat-wrapper .chocolat-right {
-  background: url('/wp-content/themes/Herman/images/arrow-right.svg') 50% 50% /
+  background: url("/wp-content/themes/Herman/images/arrow-right.svg") 50% 50% /
     2rem auto no-repeat !important;
 }
 
 .chocolat-wrapper .chocolat-left {
-  background: url('/wp-content/themes/Herman/images/arrow-left.svg') 50% 50% /
+  background: url("/wp-content/themes/Herman/images/arrow-left.svg") 50% 50% /
     2rem auto no-repeat !important;
 }
 
 .chocolat-wrapper .chocolat-left {
-  background: url('/wp-content/themes/Herman/images/arrow-left.svg') 50% 50% /
+  background: url("/wp-content/themes/Herman/images/arrow-left.svg") 50% 50% /
     2rem auto no-repeat !important;
 }
 
 .chocolat-fullscreen {
-  background: url('/wp-content/themes/Herman/images/fullscreen.svg') 50% 50% /
+  background: url("/wp-content/themes/Herman/images/fullscreen.svg") 50% 50% /
     1rem auto no-repeat !important;
 }
 
 .chocolat-close {
-  background: url('/wp-content/themes/Herman/images/close.svg') 50% 50% / 2rem
+  background: url("/wp-content/themes/Herman/images/close.svg") 50% 50% / 2rem
     auto no-repeat !important;
 }
 .chocolat-bottom {
@@ -82,3 +82,37 @@
 /* .quantity input[type='number'] {
   -moz-appearance: textfield;
 } */
+
+.cwginstock-subscribe-form .panel-primary {
+  border-color: black !important;
+  margin-bottom: unset !important;
+  box-shadow: none !important;
+}
+
+.cwginstock-subscribe-form .panel-primary > .panel-heading {
+  background-color: #e5e7eb !important;
+  color: black !important;
+  border-color: black !important;
+}
+
+.cwginstock-panel-heading h4 {
+  color: black !important;
+}
+
+.cwginstock-subscribe-form .panel-heading {
+  border-top-right-radius: 0 !important;
+  border-top-left-radius: 0 !important;
+}
+
+.cwginstock-subscribe-form .panel {
+  border-radius: 0 !important;
+}
+
+.cwginstock-panel-body input[type="text"],
+.cwginstock-panel-body input[type="email"] {
+  background-color: unset !important;
+}
+
+p.stock.out-of-stock {
+  padding: 1rem 0 !important;
+}

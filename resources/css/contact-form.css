@@ -121,8 +121,11 @@ form.invalid .wpcf7-response-output,
   border-bottom: unset;
 }
 
-.page-subscribe .wpcf7-text {
-  background-color: unset;
+.page-subscribe .wpcf7-text,
+.cwgstock_button {
+  background-color: unset !important;
+  color: black !important;
+  cursor: pointer !important;
 }
 
 .page-contact .wpcf7-submit,
