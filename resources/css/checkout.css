@@ -54,6 +54,7 @@
 
 .cart_quantity {
   max-width: 50px;
+  background-color: #fdfdfb;
 }
 
 #billing_country,
