@@ -3,8 +3,8 @@
     "title": "Coming soon page",
     "fields": [
         {
-            "key": "field_63360d9e73812",
-            "label": "Achtergrond Afbeelding",
+            "key": "field_633b30f94982d",
+            "label": "Achtergrond afbeelding",
             "name": "bg_image",
             "type": "image",
             "instructions": "",
@@ -25,44 +25,6 @@
             "max_height": "",
             "max_size": "",
             "mime_types": ""
-        },
-        {
-            "key": "field_62cdad96f1e92",
-            "label": "Titel",
-            "name": "titel",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        },
-        {
-            "key": "field_63360dffe905d",
-            "label": "Subtitel",
-            "name": "subtitel",
-            "type": "textarea",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "maxlength": "",
-            "rows": "",
-            "new_lines": ""
         },
         {
             "key": "field_62cdad9ff1e93",
@@ -91,6 +53,13 @@
                 "operator": "==",
                 "value": "page-coming-soon.php"
             }
+        ],
+        [
+            {
+                "param": "post_template",
+                "operator": "==",
+                "value": "page-login.php"
+            }
         ]
     ],
     "menu_order": 0,
@@ -102,5 +71,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1664486933
+    "modified": 1705249196
 }
