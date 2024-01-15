@@ -37,7 +37,7 @@ $the_query = new WP_Query($args);
             <div class="overflow-hidden">
               <img class="h-auto" src="<?php the_post_thumbnail_url(); ?>">
             </div>
-            <span class="uppercase "><?php the_title(); ?></span>
+            <span class="uppercase"><?php the_title(); ?></span>
           </div>
         </div>
 
@@ -50,13 +50,12 @@ $the_query = new WP_Query($args);
       $i++;
     endwhile;
 
-    ?>
-
-
-    <div class="flex justify-center [&_button]:uppercase  [&_button]:mt-10">
-      <?php echo do_shortcode('[facetwp facet="load_more"]'); ?>
-    </div>
-  <?php
   endif;
   ?>
+
+</section>
+<section>
+  <div class="flex justify-center [&_button]:uppercase [&_button]:mt-10">
+    <?php echo do_shortcode('[facetwp facet="load_morer"]'); ?>
+  </div>
 </section>
