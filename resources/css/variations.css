@@ -34,7 +34,7 @@ html .woo-variation-swatches.wvs-show-label .variations th {
 }
 
 .variations li span {
-  @apply !text-base;
+  @apply !text-base uppercase;
 }
 
 .woocommerce-variation-add-to-cart {
@@ -80,5 +80,9 @@ li.variable-item:first-child {
 }
 
 .variations .label {
-  @apply pl-3 font-normal;
+  @apply pl-3 font-normal uppercase;
+}
+
+.wc-variation-is-unavailable {
+  display: none;
 }

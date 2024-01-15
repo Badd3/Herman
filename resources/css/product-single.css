@@ -87,6 +87,7 @@
   border-color: black !important;
   margin-bottom: unset !important;
   box-shadow: none !important;
+  margin-top: 1rem;
 }
 
 .cwginstock-subscribe-form .panel-primary > .panel-heading {
@@ -114,5 +115,5 @@
 }
 
 p.stock.out-of-stock {
-  padding: 1rem 0 !important;
+  display: none;
 }
