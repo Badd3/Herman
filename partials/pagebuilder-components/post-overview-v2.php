@@ -56,6 +56,6 @@ $the_query = new WP_Query($args);
 </section>
 <section>
   <div class="flex justify-center [&_button]:uppercase [&_button]:mt-10">
-    <?php echo do_shortcode('[facetwp facet="load_morer"]'); ?>
+    <?php echo do_shortcode('[facetwp facet="load_more"]'); ?>
   </div>
 </section>
