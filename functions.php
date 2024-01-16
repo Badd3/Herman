@@ -688,3 +688,10 @@ function ajax_cart_count_fragments( $fragments ) {
     return $fragments;
 }
 add_filter( 'woocommerce_add_to_cart_fragments', 'ajax_cart_count_fragments' );
+
+
+add_filter( 'wpo_wcpdf_packing_slip_title', 'wpo_wcpdf_packing_slip_title', 10, 2 );
+function wpo_wcpdf_packing_slip_title ( $title, $document ) {
+    $title = 'Packing list';
+    return $title;
+}
