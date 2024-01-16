@@ -77,7 +77,7 @@ if (is_shop() || is_product_category() || is_product()) {
         } else {
             $hover_classes = "object-cover";
         }
-        echo the_post_thumbnail('thumbnail', array('class' => $hover_classes));
+        echo the_post_thumbnail('full', array('class' => $hover_classes));
 ?>
         <img class="hidden group-hover:block object-cover" src="<?php echo $thumbnail_url[0]; ?>">
 <?php
