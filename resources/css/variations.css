@@ -1,4 +1,5 @@
 .single_add_to_cart_button,
+.button-notify,
 .cwgstock_button {
   @apply border border-black py-1 px-4 uppercase hover:bg-black hover:text-white !important;
 }

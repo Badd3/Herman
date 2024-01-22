@@ -695,3 +695,33 @@ function wpo_wcpdf_packing_slip_title ( $title, $document ) {
     $title = 'Packing list';
     return $title;
 }
+
+function custom_notify_button_js() {
+    ?>
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            $('.custom-notify-button').on('click', function(e) {
+                e.preventDefault(); // Prevent the default behavior of the button (page refresh)
+
+                // Check if a variant (size or length) is selected
+                if (!$('.variations_form select').val()) {
+                    // Show a JavaScript alert
+                    alert('Please select some product options before adding this product to your notify.');
+                } else {
+                    // Hide the "Notify Me" button when a variant is selected
+                    $(this).hide();
+                    // Add your logic for "Notify Me" button (if a variant is selected)
+                }
+            });
+
+            // Watch for changes in the variant selection
+            $('.variations_form select').on('change', function() {
+                // Show the "Notify Me" button when a variant is selected
+                $('.custom-notify-button').hide();
+            });
+        });
+    </script>
+    <?php
+}
+add_action( 'wp_footer', 'custom_notify_button_js' );
+

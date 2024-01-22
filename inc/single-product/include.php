@@ -70,6 +70,7 @@ add_action('woocommerce_single_product_summary', 'single_product_description', 2
 
 function single_product_description()
 {
+    global $product;
     $description_content = get_the_content();
     $badges = get_field('badges');
     $care_guide_content = get_field('care_guide_content');
@@ -147,7 +148,23 @@ function single_product_description()
                 </div>
             </div>
         <?php }; ?>
-        <?php woocommerce_template_single_add_to_cart(); ?>
+
+    <?php 
+    woocommerce_template_single_add_to_cart();
+
+    // Check if the badge is 'Coming soon'
+    if ($badges == 'AVAILABLE SOON') {
+        // Hide the original add to cart button (you might need to adjust the selector)
+        echo '<style>.single_add_to_cart_button { display: none; }</style>';
+
+        // Add a custom "Notify Me" button
+        echo '<button class="custom-notify-button button-notify float-right">Notify Me</button>';
+
+        // Add custom JavaScript
+        add_action('wp_footer', 'custom_notify_button_js');
+    }
+    ?>
+
     </section>
     <?php if ($description_content || $care_guide_content || $size_guide_content || $history_content) { ?>
         <section x-data="{selected: null}" class="space-y-5 text-base">
