@@ -700,28 +700,46 @@ function custom_notify_button_js() {
     ?>
     <script type="text/javascript">
         jQuery(document).ready(function($) {
+            // Function to check if all variations are selected
+            function areAllVariationsSelected() {
+                var allSelected = true;
+                $('.variations_form .variations select').each(function() {
+                    if (!$(this).val()) {
+                        allSelected = false;
+                        return false; // break the loop
+                    }
+                });
+                return allSelected;
+            }
+
+            // Bind a click event to the "Notify Me" button
             $('.custom-notify-button').on('click', function(e) {
                 e.preventDefault(); // Prevent the default behavior of the button (page refresh)
 
-                // Check if a variant (size or length) is selected
-                if (!$('.variations_form select').val()) {
+                // Check if all variants are selected
+                if (!areAllVariationsSelected()) {
                     // Show a JavaScript alert
-                    alert('Please select some product options before adding this product to your notify.');
+                    alert('Please select all product options before adding this product to your notify.');
                 } else {
-                    // Hide the "Notify Me" button when a variant is selected
-                    $(this).hide();
-                    // Add your logic for "Notify Me" button (if a variant is selected)
+                    // Your logic for "Notify Me" when all variants are selected
+                    // Likely an AJAX call to handle the notification subscription
                 }
             });
 
-            // Watch for changes in the variant selection
-            $('.variations_form select').on('change', function() {
-                // Show the "Notify Me" button when a variant is selected
-                $('.custom-notify-button').hide();
+            // Watch for changes in the variant selections
+            $('.variations_form .variations select').on('change', function() {
+                if (areAllVariationsSelected()) {
+                    // Hide the "Notify Me" button if all variants are selected
+                    $('.custom-notify-button').hide();
+                } else {
+                    // Show the "Notify Me" button if not all selections are made
+                    $('.custom-notify-button').show();
+                }
             });
         });
     </script>
     <?php
 }
 add_action( 'wp_footer', 'custom_notify_button_js' );
+
 
