@@ -13,7 +13,7 @@ $logo_url = '/images/herman_sign.svg';
                 <img class="w-[90px] h-auto" src="<?php echo esc_url(get_template_directory_uri() . $logo_url); ?>" alt="">
             </div>
 
-            <span class="uppercase text-[11px]">© Herman 2023</span>
+            <span class="uppercase text-[11px]">© Herman <?php echo date("Y"); ?></span>
         </div>
     </div>
 </section>

@@ -625,11 +625,11 @@ function connect_variations($variation_data, $product, $variation) {
 add_action('woocommerce_variation_loaded', 'connect_variations', 10, 3);
 
 
-if (get_field('enable_b2b', 'options')) {
-    get_template_part('inc/b2b-options');
-}
+$enable_b2b = get_field('enable_b2b', 'options');
 
-if (!get_field('enable_b2b', 'options')) {
+if ($enable_b2b) {
+    get_template_part('inc/b2b-options');
+} else {
     get_template_part('inc/b2c-options');
 }
 
