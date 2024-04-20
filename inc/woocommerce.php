@@ -342,19 +342,19 @@ function custom_override_checkout_fields($fields)
 }
 
 // Add validation for 'billing_address_1' field
-add_action('woocommerce_after_checkout_validation', 'validate_billing_address');
-function validate_billing_address($data)
-{
-    $billingAddress1 = isset($data['billing_address_1']) ? trim($data['billing_address_1']) : '';
+// add_action('woocommerce_after_checkout_validation', 'validate_billing_address');
+// function validate_billing_address($data)
+// {
+//     $billingAddress1 = isset($data['billing_address_1']) ? trim($data['billing_address_1']) : '';
 
-    $addressParts = explode(' ', $billingAddress1);
-    $streetName = implode(' ', array_slice($addressParts, 0, -1));
-    $houseNumber = end($addressParts);
+//     $addressParts = explode(' ', $billingAddress1);
+//     $streetName = implode(' ', array_slice($addressParts, 0, -1));
+//     $houseNumber = end($addressParts);
 
-    if (empty($billingAddress1) || !is_numeric($houseNumber)) {
-        wc_add_notice(__('Please enter a valid street address and house number for the billing address.', 'text-domain'), 'error');
-    }
-}
+//     if (empty($billingAddress1) || !is_numeric($houseNumber)) {
+//         wc_add_notice(__('Please enter a valid street address and house number for the billing address.', 'text-domain'), 'error');
+//     }
+// }
 
 
 
