@@ -143,7 +143,7 @@ select#billing_country {
 }
 
 .woocommerce-form.woocommerce-form-login.login {
-  @apply px-2.5 text-base hover:bg-black hover:text-white lg:px-7.5;
+  @apply px-2.5 text-base lg:px-7.5;
 }
 
 .woocommerce-form-login__submit {
@@ -261,7 +261,7 @@ textarea {
   border-radius: 0 !important;
 }
 
-input[type="search"] {
+input[type='search'] {
   -webkit-appearance: none;
 }
 
