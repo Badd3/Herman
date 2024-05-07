@@ -31,7 +31,7 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
 ?>
 
 
-<section class="bg-white-bg flex flex-col md:flex-row mt-10 lg:mt-0">
+<section class="bg-white-bg flex flex-col md:flex-row mt-10 lg:mt-0 w-full">
 	<div class="basis-full sm:basis-2/4 text-base pb-4 px-2.5 sm:pt-28 lg:px-7.5 order-last md:order-first">
 		<?php do_action('herman_woocommerce_notice'); ?>
 		<form id="order_review" name="checkout" method="post" class="checkout woocommerce-checkout" action="<?php echo esc_url(wc_get_checkout_url()); ?>" enctype="multipart/form-data">
@@ -44,12 +44,23 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
 				<div class="col2-set" id="customer_details">
 					<div class="col-1">
 						<?php do_action('woocommerce_checkout_billing'); ?>
+						<div class="checkout-order-notes">
+							<?php
+							//show order_comments field
+								$checkout = WC()->checkout();
+								if ( $checkout->get_checkout_fields( 'order' ) ) {
+									foreach ( $checkout->get_checkout_fields( 'order' ) as $key => $field ) {
+										if($key == 'order_comments') {
+											woocommerce_form_field( $key, $field, $checkout->get_value( $key ) );
+										}
+									}
+								}
+							?>
+						</div>
 					</div>
 				</div>
 
 				<?php do_action('woocommerce_checkout_order_review'); ?>
-
-
 
 
 			<?php endif; ?>
@@ -250,7 +261,6 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
 								</div>
 
 							
-
 								<?php do_action('woocommerce_widget_shopping_cart_before_buttons'); ?>
 								</div>
 

@@ -302,7 +302,7 @@ if (!function_exists('herman_woocommerce_flex_wrapper_before')) {
 		unset($fields['billing']['billing_company']);
 		unset($fields['billing']['billing_phone']);
 		unset($fields['billing']['billing_state']);
-		unset($fields['billing']['billing_address_1_field']);
+		// unset($fields['billing']['billing_address_1_field']);
 		unset($fields['billing']['billing_address_2']);
 
 		// Shipping fields
@@ -312,7 +312,7 @@ if (!function_exists('herman_woocommerce_flex_wrapper_before')) {
 		unset($fields['shipping']['shipping_address_2']);
 
 		// Order fields
-		unset($fields['order']['order_comments']);
+		// unset($fields['order']['order_comments']);
 
 		return $fields;
 	}
@@ -333,28 +333,46 @@ function custom_override_checkout_fields($fields)
     $fields['shipping']['shipping_address_1']['placeholder'] = 'ADDRESS*';
     $fields['shipping']['shipping_postcode']['placeholder'] = 'POSTCODE*';
     $fields['shipping']['shipping_city']['placeholder'] = 'CITY*';
-
     // Make 'address_1' field required
     $fields['billing']['billing_address_1']['required'] = true;
+    $fields['billing']['billing_email']['required'] = true;
     $fields['shipping']['shipping_address_1']['required'] = true;
 
     return $fields;
 }
 
-// Add validation for 'billing_address_1' field
-add_action('woocommerce_after_checkout_validation', 'validate_billing_address');
-function validate_billing_address($data)
-{
-    $billingAddress1 = isset($data['billing_address_1']) ? trim($data['billing_address_1']) : '';
 
-    $addressParts = explode(' ', $billingAddress1);
-    $streetName = implode(' ', array_slice($addressParts, 0, -1));
-    $houseNumber = end($addressParts);
 
-    if (empty($billingAddress1) || !is_numeric($houseNumber)) {
-        wc_add_notice(__('Please enter a valid street address and house number for the billing address.', 'text-domain'), 'error');
-    }
+add_action( 'woocommerce_after_order_notes', 'my_custom_checkout_field' );
+
+function my_custom_checkout_field( $checkout ) {
+
+    echo '<div id="my_custom_checkout_field"><h2>' . __('Delivery Instructions') . '</h2>';
+
+    woocommerce_form_field( 'order_comments', array(
+        'type'          => 'textarea',
+        'class'         => array('my-field-class form-row-wide'),
+        'label'         => __('Add notes for Delivery'),
+        'placeholder'   => __('Add delivery instructions here.'),
+        ), $checkout->get_value( 'order_comments' ));
+
+    echo '</div>';
 }
+
+// Add validation for 'billing_address_1' field
+// add_action('woocommerce_after_checkout_validation', 'validate_billing_address');
+// function validate_billing_address($data)
+// {
+//     $billingAddress1 = isset($data['billing_address_1']) ? trim($data['billing_address_1']) : '';
+
+//     $addressParts = explode(' ', $billingAddress1);
+//     $streetName = implode(' ', array_slice($addressParts, 0, -1));
+//     $houseNumber = end($addressParts);
+
+//     if (empty($billingAddress1) || !is_numeric($houseNumber)) {
+//         wc_add_notice(__('Please enter a valid street address and house number for the billing address.', 'text-domain'), 'error');
+//     }
+// }
 
 
 

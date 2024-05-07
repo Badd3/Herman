@@ -143,7 +143,7 @@ select#billing_country {
 }
 
 .woocommerce-form.woocommerce-form-login.login {
-  @apply px-2.5 text-base hover:bg-black hover:text-white lg:px-7.5;
+  @apply px-2.5 text-base lg:px-7.5;
 }
 
 .woocommerce-form-login__submit {
@@ -261,7 +261,7 @@ textarea {
   border-radius: 0 !important;
 }
 
-input[type="search"] {
+input[type='search'] {
   -webkit-appearance: none;
 }
 
@@ -290,4 +290,8 @@ li.wc_payment_method.payment_method_mollie_wc_gateway_creditcard {
 
 .woocommerce-table__product-total.product-total {
   @apply pt-4 align-top;
+}
+
+#order_comments {
+  @apply w-full focus:outline-0 bg-white-bg border-b border-black pb-2 mt-4;
 }
