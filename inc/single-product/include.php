@@ -103,7 +103,7 @@ function single_product_description()
         <?php if ($color) { ?>
             <div class="flex flex-row border-x border-black border-b border-b-black">
                 <div class="border-r-black border-r w-[95px] shrink-0 lg:basis-[95px] py-1.5 px-3 flex flex-col justify-center">
-                    <span class="uppercase">Color</span>
+                    <span class="uppercase">Colour</span>
                 </div>
                 <?php
 
