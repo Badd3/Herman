@@ -44,7 +44,7 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
 				<div class="col2-set" id="customer_details">
 					<div class="col-1">
 						<?php do_action('woocommerce_checkout_billing'); ?>
-						<div class="checkout-order-notes">
+						<!-- <div class="checkout-order-notes">
 							<?php
 							//show order_comments field
 								$checkout = WC()->checkout();
@@ -56,7 +56,7 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
 									}
 								}
 							?>
-						</div>
+						</div> -->
 					</div>
 				</div>
 
