@@ -49,7 +49,7 @@ if (is_shop() || is_product_category() || is_product()) {
         echo '</a>';
 
         //wrapper for the price and title
-        echo '<div class="border-t border-black flex flex-col md:flex-row justify-between md:gap-4 p-2.5 lg:p-5 text-sm lg:text-md font-medium">';
+        echo '<div class="flex flex-col md:flex-row justify-between md:gap-4 py-2.5 text-sm lg:text-md font-medium">';
     }
 
 
