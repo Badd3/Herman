@@ -20,6 +20,7 @@ if (have_rows('slider_afbeeldingen')) :
                 while (have_rows('slider_afbeeldingen')) : the_row();
                     // error_log(print_r(get_sub_field('media_type'), true));
                     $media_type = get_sub_field('media_type');
+
                     // Load sub field value.
                     if ($media_type === 'video') {
                         $video_url = get_sub_field('video');

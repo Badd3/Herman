@@ -295,3 +295,8 @@ li.wc_payment_method.payment_method_mollie_wc_gateway_creditcard {
 #order_comments {
   @apply w-full focus:outline-0 bg-white-bg border-b border-black pb-2 mt-4;
 }
+
+
+.checkout_coupon.woocommerce-form-coupon {
+  display: block !important;
+}

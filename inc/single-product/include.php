@@ -43,7 +43,7 @@ function single_product_images()
     }
     echo '</div>';
 
-    echo '<div class="swiper-single-product overflow-hidden relative md:hidden  border border-black">';
+    echo '<div class="swiper-single-product overflow-hidden relative md:hidden">';
     echo '<div class="swiper-wrapper">';
     echo '<div class="aspect-w-[54] aspect-h-[73] [&>*]:object-cover swiper-slide">';
     the_post_thumbnail();

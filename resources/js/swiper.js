@@ -8,12 +8,14 @@ const swiper = new Swiper(".swiper", {
   speed: 500,
   mousewheel: {
     invert: false,
+    eventsTarget: 'body'
   },
   // If we need pagination
   pagination: {
     el: ".swiper-pagination",
   },
 });
+
 
 //SWIPER SINGLE PRODUCT PAGE
 const swiperSingleProduct = new Swiper(".swiper-single-product", {

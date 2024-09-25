@@ -772,11 +772,48 @@
                     ],
                     "min": "",
                     "max": ""
+                },
+                "layout_66f4390175b84": {
+                    "key": "layout_66f4390175b84",
+                    "name": "herman_grid",
+                    "label": "Herman Grid",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_66f4391275b85",
+                            "label": "Gallery Images",
+                            "name": "gallery_images",
+                            "type": "gallery",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "return_format": "id",
+                            "preview_size": "medium",
+                            "insert": "append",
+                            "library": "all",
+                            "min": "",
+                            "max": "",
+                            "min_width": "",
+                            "min_height": "",
+                            "min_size": "",
+                            "max_width": "",
+                            "max_height": "",
+                            "max_size": "",
+                            "mime_types": ""
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
                 }
             },
+            "button_label": "Add Row",
             "min": "",
-            "max": "",
-            "button_label": "Add Row"
+            "max": ""
         }
     ],
     "location": [
@@ -797,5 +834,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1685901069
+    "modified": 1727281499
 }

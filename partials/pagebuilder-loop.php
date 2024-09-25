@@ -33,10 +33,9 @@ if (have_rows('herman_builder')) :
 
             get_template_part('partials/pagebuilder-components/b2b-registration-form');
 
-        // elseif (get_row_layout() == 'post_overview_v2') :
+        elseif (get_row_layout() == 'herman_grid') :
 
-        //     get_template_part('partials/pagebuilder-components/post-overview-v2');
-
+            get_template_part('partials/pagebuilder-components/herman-grid');
         endif;
 
     // End loop.

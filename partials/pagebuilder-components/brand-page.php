@@ -26,9 +26,9 @@ $herman_sound_file = get_sub_field('sound_file');
       <?php
       }
       ?>
-
-      <p class="mt-4"><?php echo $brand_text; ?></p>
-
+      <div>
+        <?php echo $brand_text; ?>
+      </div>
     </div>
     <div class="basis-full sm:basis-1/3 md:basis-3/5">
       <img class="md:h-screen w-full object-cover sm:sticky sm:top-0" src="<?php echo $image_url; ?>" alt="<?php echo $image_alt; ?>">
